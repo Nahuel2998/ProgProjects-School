@@ -68,7 +68,7 @@ namespace Biblioteca_Musica
                 new Option("This is another test yes", () => Placeholder())
             };
 
-            Menu.BuildMenu("Menu Principal", options, "Exit");
+            Menu.BuildMenu("[Menu Principal]", options, "Exit");
         }
     }
 }
