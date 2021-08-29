@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NarLib;
 
 namespace Biblioteca_Musica
 {
@@ -55,6 +56,18 @@ namespace Biblioteca_Musica
             //     Console.WriteLine("- - - - -");
             //     Console.Write("> ");
             // }
+            void Placeholder()
+            {
+                return;
+            }
+
+            Option[] options = {
+                new Option("This is a test", () => Placeholder()),
+                new Option("This is another test", () => Placeholder()),
+                new Option("This is another test yes", () => Placeholder())
+            };
+
+            Menu.BuildMenu("Menu Principal", options, "Exit");
         }
     }
 }
