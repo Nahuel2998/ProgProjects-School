@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\NarLib\NarLib.csproj" />
-    <ProjectReference Include="..\..\NarExtensions\NarExtensions.csproj" />
+    <ProjectReference Include="..\..\libs\NarLib\NarLib.csproj" />
+    <ProjectReference Include="..\..\libs\NarExtensions\NarExtensions.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
