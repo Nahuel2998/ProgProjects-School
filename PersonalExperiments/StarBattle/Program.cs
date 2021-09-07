@@ -56,11 +56,11 @@ namespace StarBattle
             maxJ = res.GetLength(1) - 1;
 
             // Generate Vertical Borders
-            for (int i = 0; i <= maxI; i++)
+            for (int i = 1; i < maxI; i++)
                 res[i, 0] = res[i, maxJ] = '│';
 
             // Generate Horizontal Borders
-            for (int j = 0; j <= maxJ; j++)
+            for (int j = 1; j < maxJ; j++)
                 res[0, j] = res[maxI, j] = '─';
 
             // Generate Corners
