@@ -1,5 +1,3 @@
-using System;
-
 namespace PracticoIII
 {
     public class Tarea

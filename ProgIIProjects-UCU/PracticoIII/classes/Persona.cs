@@ -17,16 +17,16 @@ namespace PracticoIII
             this.Apellido = xApellido;
             this.Documento = xDocumento;
         }
+        
+        public virtual void Presentarse()
+        {
+            Console.WriteLine($"Hola! Mi nombre es {this.Nombre} {this.Apellido}. Soy una Persona. Un gusto.");
+        }
 
         // No he usado un WriteLine aqui ya que el atributo original solo retorna.
         public override string ToString()
         {
             return $"Nombre: {this.Nombre}\nApellido: {this.Apellido}\nDocumento: {this.Documento}";
-        }
-        
-        public virtual void Presentarse()
-        {
-            Console.WriteLine($"Hola! Mi nombre es {this.Nombre} {this.Apellido}. Soy una Persona. Un gusto.");
         }
     }
 }
