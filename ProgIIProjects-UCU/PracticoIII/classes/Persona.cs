@@ -8,10 +8,10 @@ namespace PracticoIII
         public string Nombre { get; set; }
         // public string apellido;
         public string Apellido { get; set; }
-        // public string documento;
+        // private string documento;
         public string Documento { get; set; }
 
-        public Persona(string xNombre, string xApellido, string xDocumento)
+        public Persona(string xNombre, string xApellido, string xDocumento = "")
         {
             this.Nombre = xNombre;
             this.Apellido = xApellido;
@@ -26,7 +26,7 @@ namespace PracticoIII
         // No he usado un WriteLine aqui ya que el atributo original solo retorna.
         public override string ToString()
         {
-            return $"Nombre: {this.Nombre}\nApellido: {this.Apellido}\nDocumento: {this.Documento}";
+            return $"Nombre: {this.Nombre}\nApellido: {this.Apellido}\nDocumento: {(this.Documento.Length > 0 ? this.Documento : "No especificado.")}";
         }
     }
 }

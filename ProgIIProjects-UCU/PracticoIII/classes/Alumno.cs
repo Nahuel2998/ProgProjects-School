@@ -11,6 +11,13 @@ namespace PracticoIII
         public Alumno(string xNombre, string xApellido, string xDocumento, uint xIdAlumno) :base (xNombre, xApellido, xDocumento)
         {
             this.IdAlumno = xIdAlumno;
+            this.ListaTareasRealizadas = new List<Tarea>();
+        }
+
+        public Alumno(string xNombre, string xApellido, uint xIdAlumno) :base (xNombre, xApellido)
+        {
+            this.IdAlumno = xIdAlumno;
+            this.ListaTareasRealizadas = new List<Tarea>();
         }
 
         public void ResponderTarea(Tarea tarea, string respuestas)
@@ -28,7 +35,7 @@ namespace PracticoIII
         
         public override string ToString()
         {
-            return $"Nombre: {this.Nombre}\nApellido: {this.Apellido}\nDocumento: {this.Documento}\nOcupacion: Alumno";
+            return $"Nombre: {this.Nombre}\nApellido: {this.Apellido}\nDocumento: {(this.Documento.Length > 0 ? this.Documento : "No especificado.")}\nOcupacion: Alumno";
         }
     }
 }

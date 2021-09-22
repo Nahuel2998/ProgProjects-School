@@ -15,13 +15,18 @@ namespace PracticoIII
             this.ListaAlumnos = xListaAlumnos;
         }
 
+        public string ObtenerPersonasString()
+        {
+            return $"Docente: {DocenteTitular.Nombre} {DocenteTitular.Apellido}\n- - - -\nAlumnos: {this.ObtenerAlumnosString()}";
+        }
+
         public string ObtenerAlumnosString()
         {
             string res = "";
 
             foreach (Alumno a in ListaAlumnos)
             {
-                res += "\n" + a.Nombre;
+                res += "\n- - -" + a.ToString();
             }
 
             return res.Length > 0 ? res.Remove(0, 1) : "No hay alumnos.";

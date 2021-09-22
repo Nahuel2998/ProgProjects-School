@@ -14,5 +14,10 @@ namespace PracticoIII
             this.Contenido = xContenido;
             this.Respuestas = xRespuestas;
         }
+
+        public override string ToString()
+        {
+            return $"Nombre: {this.Nombre}\nContenido: {this.Contenido}\nRespuestas: {this.Respuestas}";
+        }
     }
 }
