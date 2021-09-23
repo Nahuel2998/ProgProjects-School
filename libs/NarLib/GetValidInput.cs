@@ -4,9 +4,9 @@ namespace NarLib
 {
     public class GetValidInput
     {
-        static string defaultError = "Valor no valido. Intentelo nuevamente.";
+        private static string defaultError = "Valor no valido. Intentelo nuevamente.";
 
-        static int GetValidIntInput(string prompt, string splitArg = " ", bool clear = true, string parseError = null, Func<int, bool> conditionFunc = null, string conditionError = null)
+        public static int GetValidIntInput(string prompt, string splitArg = " ", bool clear = true, string parseError = null, Func<int, bool> conditionFunc = null, string conditionError = null)
         {
             while (true)
             {
@@ -32,7 +32,7 @@ namespace NarLib
             }
         }
 
-        static double GetValidDoubleInput(string prompt, string splitArg = " ", bool clear = true, string parseError = null, Func<double, bool> conditionFunc = null, string conditionError = null)
+        public static double GetValidDoubleInput(string prompt, string splitArg = " ", bool clear = true, string parseError = null, Func<double, bool> conditionFunc = null, string conditionError = null)
         {
             while (true)
             {
