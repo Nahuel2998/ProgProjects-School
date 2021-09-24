@@ -6,7 +6,7 @@ public class Cliente
     public string Apellido { get; set; }
     public double Peso { get; set; }
     public double Altura { get; set; }
-    public bool[] Pagado { get; set; }
+    public double[] Pagos { get; set; }
     public string EjercicioActual { get; set; }
     // public Tuple<string, TimeSpan> EjercicioActual { get; set; }
 
@@ -17,12 +17,17 @@ public class Cliente
         this.Apellido = xApellido;
         this.Peso = xPeso;
         this.Altura = xAltura;
-        this.Pagado = new bool[12];
+        this.Pagos = new double[12];
     }
 
-    public void PagarCuota (int mes)
+    public void PagarCuota (int mes, double cantidad)
     {
-        this.Pagado[mes - 1] = true;
+        this.Pagos[mes - 1] = cantidad;
+    }
+    
+    public bool Deuda(int mes)
+    {
+        return this.Pagos[mes - 1] == 0;
     }
 
     public void Ejercitarse (string ejercicio)
@@ -63,5 +68,10 @@ public class Cliente
                 break;
         }
         return res;
+    }
+    
+    public override string ToString()
+    {
+        return $"Numero de Socio: {this.NumeroSocio}\nNombre: {this.Nombre}\nApellido: {this.Apellido}";
     }
 }

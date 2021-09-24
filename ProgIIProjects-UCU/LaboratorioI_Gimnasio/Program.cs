@@ -12,16 +12,23 @@ namespace LaboratorioI_Gimnasio
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Ingrese: [Numero de Socio / Nombre / Apellido / Peso / Altura] ('Volver' para volver)");
+                Console.WriteLine("[Ingresar Cliente] ('Volver' para volver)\n- - - -\nIngrese: [Numero de Socio / Nombre / Apellido / Peso / Altura]\n- - - -");
                 Console.Write("> ");
                 string[] input = Console.ReadLine().Split(' ');
+
+                if (input[0].ToLower().Equals("volver"))
+                    return;
+
+                if (input.Length < 5)
+                {
+                    Console.WriteLine("Datos insuficientes.");
+                    Console.ReadLine();
+                    continue;
+                }
 
                 int nSocio;
                 if (!Int32.TryParse(input[0], out nSocio))
                 {
-                    if (input[0].ToLower().Equals("volver"))
-                        return;
-
                     Console.WriteLine("Formato incorrecto. Intentelo nuevamente.");
                     Console.ReadLine();
                     continue;
@@ -31,6 +38,7 @@ namespace LaboratorioI_Gimnasio
                 if (ListaClientes.TryGetValue(nSocio, out cliente))
                 {
                     Console.WriteLine("El cliente ya existe. Intentelo nuevamente.");
+                    Console.ReadLine();
                     continue;
                 }
 
@@ -48,10 +56,15 @@ namespace LaboratorioI_Gimnasio
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("A quien matamo: ");
+                Console.WriteLine("[Eliminar Cliente] ('Volver' para volver)\n- - - -\nA quien matamo: [Numero de Socio]\n- - - -");
                 Console.Write("> ");
+                string input = Console.ReadLine().Split(' ')[0];
+
+                if (input.ToLower().Equals("volver"))
+                    return;
+
                 int victima;
-                if (!Int32.TryParse(Console.ReadLine().Split(' ')[0], out victima))
+                if (!Int32.TryParse(input, out victima))
                 {
                     Console.WriteLine("Formato incorrecto. Intentelo nuevamente.");
                     Console.ReadLine();
@@ -66,7 +79,50 @@ namespace LaboratorioI_Gimnasio
                 }
                 
                 Console.WriteLine("Cliente no encontrado. Intentelo nuevamente.");
-                Console.Read();
+                Console.ReadLine();
+            }
+        }
+
+        public static void ListarClientes()
+        {
+            Console.Clear();
+            string res = "";
+            foreach (Cliente cliente in ListaClientes.Values)
+            {
+                res += "\n- - -\n" + cliente.ToString();
+            }
+            Console.WriteLine($"[Lista de Clientes]\n- - - -{(res.Length > 0 ? res.Remove(0, 6) : "\nNo hay clientes.")}\n- - - -");
+            Console.ReadLine();
+        }
+
+        public static void ListarDeudas()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Ingrese un Mes:");
+                Console.Write("> ");
+                string input = Console.ReadLine().Split(' ')[0];
+
+                int mes;
+                if (!Int32.TryParse(input, out mes))
+                {
+                    Console.WriteLine("Formato incorrecto. Intentelo nuevamente.");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                string res = "";
+                foreach (Cliente cliente in ListaClientes.Values)
+                {
+                    if (cliente.Deuda(mes))
+                    {
+                        res += "\n- - -\n" + cliente.ToString();
+                    }
+                }
+                Console.Clear();
+                Console.WriteLine($"[Lista de Deudas (Mes {mes})]\n- - - -{(res.Length > 0 ? res.Remove(0, 6) : "\nNo hay deuda.")}\n- - - -");
+                Console.ReadLine();
             }
         }
 
@@ -93,8 +149,10 @@ namespace LaboratorioI_Gimnasio
                     case '3':
                         break;
                     case '4':
+                        ListarClientes();
                         break;
                     case '5':
+                        ListarDeudas();
                         break;
                     case '6':
                         break;
