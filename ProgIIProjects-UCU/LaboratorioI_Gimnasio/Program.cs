@@ -100,9 +100,12 @@ namespace LaboratorioI_Gimnasio
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Ingrese un Mes:");
+                Console.WriteLine("Ingrese un Mes: ('Volver' para volver)");
                 Console.Write("> ");
                 string input = Console.ReadLine().Split(' ')[0];
+
+                if (input.ToLower().Equals("volver"))
+                    return;
 
                 int mes;
                 if (!Int32.TryParse(input, out mes))
@@ -123,6 +126,7 @@ namespace LaboratorioI_Gimnasio
                 Console.Clear();
                 Console.WriteLine($"[Lista de Deudas (Mes {mes})]\n- - - -{(res.Length > 0 ? res.Remove(0, 6) : "\nNo hay deuda.")}\n- - - -");
                 Console.ReadLine();
+                return;
             }
         }
 
