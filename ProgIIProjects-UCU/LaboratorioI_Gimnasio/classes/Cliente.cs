@@ -1,3 +1,4 @@
+using System;
 
 public class Cliente 
 {
@@ -6,8 +7,9 @@ public class Cliente
     public string Apellido { get; set; }
     public double Peso { get; set; }
     public double Altura { get; set; }
-    public double[] Pagos { get; set; }
-    public string EjercicioActual { get; set; }
+    public DateTime FechaDeIngreso { get; set; }
+    private double[] Pagos;
+    private string EjercicioActual;
     // public Tuple<string, TimeSpan> EjercicioActual { get; set; }
 
     public Cliente (int xNumeroSocio, string xNombre, string xApellido, double xPeso, double xAltura)
@@ -18,6 +20,8 @@ public class Cliente
         this.Peso = xPeso;
         this.Altura = xAltura;
         this.Pagos = new double[12];
+        this.EjercicioActual = "Ninguno";
+        this.FechaDeIngreso = DateTime.Now;
     }
 
     public void PagarCuota (int mes, double cantidad)
@@ -27,6 +31,8 @@ public class Cliente
     
     public bool Deuda(int mes)
     {
+        if (mes < FechaDeIngreso.Month || mes >= DateTime.Now.Month)
+            return false;
         return this.Pagos[mes - 1] == 0;
     }
 
@@ -69,9 +75,19 @@ public class Cliente
         }
         return res;
     }
+
+    public bool TieneDeuda()
+    {
+        for (int i = FechaDeIngreso.Month; i < DateTime.Now.Month; i++)
+        {
+            if (this.Deuda(i))
+                return true;
+        }
+        return false;
+    }
     
     public override string ToString()
     {
-        return $"Numero de Socio: {this.NumeroSocio}\nNombre: {this.Nombre}\nApellido: {this.Apellido}";
+        return $"Numero de Socio: {this.NumeroSocio}\nNombre: {this.Nombre}\nApellido: {this.Apellido}\nEjercicio Actual: {this.EjercicioActual}\nIMC: {this.getIMC()} | {this.getIMCCategoria()}\nFecha de Ingreso: {this.FechaDeIngreso}\nDeuda: {(this.TieneDeuda() ? "Si" : "No")}";
     }
 }

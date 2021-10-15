@@ -100,7 +100,7 @@ namespace LaboratorioI_Gimnasio
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Ingrese un Mes: ('Volver' para volver)");
+                Console.WriteLine("[Listar Deudas] ('Volver' para volver)\n- - - -\nIngrese un Mes: [Mes]\n- - - -");
                 Console.Write("> ");
                 string input = Console.ReadLine().Split(' ')[0];
 
@@ -130,12 +130,127 @@ namespace LaboratorioI_Gimnasio
             }
         }
 
+        static void VerCliente()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("[Ver Cliente] ('Volver' para volver)\n- - - -\nIngrese ID de cliente: [Numero de Socio]\n- - - -");
+                Console.Write("> ");
+                string input = Console.ReadLine().Split(' ')[0];
+
+                if (input.ToLower().Equals("volver"))
+                    return;
+
+                int victima;
+                if (!Int32.TryParse(input, out victima))
+                {
+                    Console.WriteLine("Formato incorrecto. Intentelo nuevamente.");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                Cliente cliente;
+                if (ListaClientes.TryGetValue(victima, out cliente))
+                {
+                    Console.Clear();
+                    Console.WriteLine($"[Ver Cliente]\n- - - -\n{cliente.ToString()}\n- - - -");
+                    Console.ReadLine();
+                    return;
+                }
+                
+                Console.WriteLine("Cliente no encontrado. Intentelo nuevamente.");
+                Console.ReadLine();
+            }
+        }
+
+        static void PagarCuota()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("[Pagar Cuota] ('Volver' para volver)\n- - - -\nIngrese: [Numero de Socio] [Mes] [Cantidad]\n- - - -");
+                Console.Write("> ");
+                string[] input = Console.ReadLine().Split(' ');
+
+                if (input[0].ToLower().Equals("volver"))
+                    return;
+
+                int nSocio;
+                int mes;
+                int cantidad;
+                if (!Int32.TryParse(input[0], out nSocio) || !Int32.TryParse(input[1], out mes) || !Int32.TryParse(input[2], out cantidad))
+                {
+                    Console.WriteLine("Formato incorrecto. Intentelo nuevamente.");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                if (mes > 12 || mes < 1)
+                {
+                    Console.WriteLine("Mes incorrecto. Intentelo nuevamente.");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                Cliente cliente;
+                if (!ListaClientes.TryGetValue(nSocio, out cliente))
+                {
+                    Console.WriteLine("Cliente no encontrado. Intentelo nuevamente.");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                cliente.PagarCuota(mes, cantidad);
+
+                Console.WriteLine("Cuota pagada correctamente. Gracias.");
+                Console.ReadLine();
+                return;
+            }
+        }
+
+        static void Ejercitar()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("[Ejercitarse] ('Volver' para volver)\n- - - -\nIngrese: [Numero de Socio] [Ejercicio]\n- - - -");
+                Console.Write("> ");
+                string[] input = Console.ReadLine().Split(' ');
+
+                if (input[0].ToLower().Equals("volver"))
+                    return;
+
+                int nSocio;
+                if (!Int32.TryParse(input[0], out nSocio))
+                {
+                    Console.WriteLine("Formato incorrecto. Intentelo nuevamente.");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                Cliente cliente;
+                if (!ListaClientes.TryGetValue(nSocio, out cliente))
+                {
+                    Console.WriteLine("Cliente no encontrado. Intentelo nuevamente.");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                cliente.Ejercitarse(input[1]);
+
+                Console.WriteLine("Ejercicio actualizado correctamente. Gracias.");
+                Console.ReadLine();
+                return;
+            }
+        }
+
         static void Main(string[] args)
         {
             while (true) 
             {
                 Console.Clear();
-                Console.WriteLine("[Menu Principal]\n- - - -\n1) Ingresar Cliente\n2) Eliminar Cliente\n3) Pagar Cuota\n4) Listar Clientes\n5) Lista de Deudas\n6) Ver Cliente\n0) Salir\n- - - -");
+                Console.WriteLine("[Menu Principal]\n- - - -\n1) Ingresar Cliente\n2) Eliminar Cliente\n3) Pagar Cuota\n4) Listar Clientes\n5) Lista de Deudas\n6) Ver Cliente\n7) Ejercitarse\n0) Salir\n- - - -");
                 Console.Write("> ");
                 string input = Console.ReadLine();
 
@@ -151,6 +266,7 @@ namespace LaboratorioI_Gimnasio
                         EliminarCliente();
                         break;
                     case '3':
+                        PagarCuota();
                         break;
                     case '4':
                         ListarClientes();
@@ -159,6 +275,10 @@ namespace LaboratorioI_Gimnasio
                         ListarDeudas();
                         break;
                     case '6':
+                        VerCliente();
+                        break;
+                    case '7':
+                        Ejercitar();
                         break;
                 }
             }
