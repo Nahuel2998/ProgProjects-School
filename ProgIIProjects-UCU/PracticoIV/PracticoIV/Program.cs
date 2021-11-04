@@ -7,25 +7,27 @@ using PracticoIV.Classes;
 
 namespace PracticoIV
 {
-    class Program
+    internal static class Program
     {
-        private static readonly string _fTareas = "../../../Datos/Tareas.dat";
-        private static readonly string _fTienda = "../../../Datos/Tienda.dat";
-        private static readonly string _fUsuarios = "../../../Datos/Usuarios.dat";
-        private static Dictionary<uint, Tarea> ListTareas = new();
-        private static Dictionary<uint, ItemTienda> ListItemsTienda = new();
-        
-        static void Tareas()
+        private const string FTareas = "Datos/Tareas.dat";
+        private const string FTienda = "Datos/Tienda.dat";
+        private const string FUsuarios = "Datos/Usuarios.dat";
+        private static Dictionary<uint, Tarea> _listTareas = new();
+        private static Dictionary<uint, ItemTienda> _listItemsTienda = new();
+
+        private static void Tareas()
         {
-            Menu.BuildMenuGetIndex("[Tareas]", (from tarea in ListTareas.Values select $"{tarea.Nombre} : {tarea.Puntaje}P").ToArray());
+            Menu.BuildMenuGetIndex("[Tareas]", _listTareas.Values
+                .Select(tarea => $"{tarea.Nombre} : {tarea.Puntaje}P").ToArray(), true);
         }
 
-        static void Tienda()
+        private static void Tienda()
         {
-            Menu.BuildMenuGetIndex("[Tienda]", (from item in ListItemsTienda.Values select $"{item.Nombre} : {item.Precio}P").ToArray());
+            Menu.BuildMenuGetIndex("[Tienda]", _listItemsTienda.Values
+                .Select(item => $"{item.Nombre} : {item.Precio}P").ToArray(), true);
         }
-        
-        static void Main(string[] args)
+
+        private static void Main(string[] args)
         {
             Console.WriteLine("Usuario: ");
             string user = Console.ReadLine();
@@ -41,14 +43,14 @@ namespace PracticoIV
             // int puntaje = 0;
             
             // Cargar Tareas.
-            string[][] lTareas = (from i in File.ReadAllLines(_fTareas) select i.Split('|')).ToArray();
+            string[][] lTareas = (from i in File.ReadAllLines(FTareas) select i.Split('|')).ToArray();
             for (uint i = 0; i < lTareas.Length; i++)
-                ListTareas.Add(i, new Tarea(lTareas[i][0], Int32.Parse(lTareas[i][1])));
+                _listTareas.Add(i, new Tarea(lTareas[i][0], int.Parse(lTareas[i][1])));
             
             // Cargar Items de Tienda.
-            string[][] lItemsTienda = (from i in File.ReadAllLines(_fTienda) select i.Split('|')).ToArray();
+            string[][] lItemsTienda = (from i in File.ReadAllLines(FTienda) select i.Split('|')).ToArray();
             for (uint i = 0; i < lItemsTienda.Length; i++)
-                ListItemsTienda.Add(i, new ItemTienda(lItemsTienda[i][0], Int32.Parse(lItemsTienda[i][1]), lItemsTienda[i][2]));
+                _listItemsTienda.Add(i, new ItemTienda(lItemsTienda[i][0], int.Parse(lItemsTienda[i][1]), lItemsTienda[i][2]));
             
             Option[] options = {
                 new("Tareas", Tareas),

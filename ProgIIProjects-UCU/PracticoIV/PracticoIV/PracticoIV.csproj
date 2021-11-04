@@ -14,4 +14,16 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Datos\Tareas.dat">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Datos\Tienda.dat">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Datos\Usuarios.dat">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

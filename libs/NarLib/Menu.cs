@@ -58,13 +58,13 @@ namespace NarLib
                     case ConsoleKey.RightArrow: 
                     case ConsoleKey.Enter:
                         options[index].Selected.Invoke();
-                        break;
+                        return;
                 }
             }
         }
 
-        // Build Menu without Exit Option, returns contained value
-        public static dynamic BuildMenuGetSelected(string title, Option[] options)
+        // Build Menu without Exit Option, returns contained value, null if cancelled
+        public static dynamic BuildMenuGetSelected(string title, Option[] options, bool cancellable = false)
         {
             int index = 0;
 
@@ -84,12 +84,16 @@ namespace NarLib
                     case ConsoleKey.RightArrow: 
                     case ConsoleKey.Enter:
                         return options[index].Obj;
+                    case ConsoleKey.LeftArrow:
+                        if (cancellable)
+                            return null;
+                        break;
                 }
             }
         }
         
-        // Build Menu without Exit Option, takes strings, returns Index
-        public static int BuildMenuGetIndex(string title, string[] options)
+        // Build Menu without Exit Option, takes strings, returns Index, -1 if cancelled
+        public static int BuildMenuGetIndex(string title, string[] options, bool cancellable = false)
         {
             int index = 0;
 
@@ -109,6 +113,10 @@ namespace NarLib
                     case ConsoleKey.RightArrow: 
                     case ConsoleKey.Enter:
                         return index;
+                    case ConsoleKey.LeftArrow:
+                        if (cancellable)
+                            return -1;
+                        break;
                 }
             }
         }
@@ -162,7 +170,7 @@ namespace NarLib
         public string Name { get; }
         public Action Selected { get; }
         public dynamic Obj { get; }
-        public ConsoleKeyInfo Shortcut { get; }
+        // public ConsoleKeyInfo Shortcut { get; }
     
         public Option(string name, Action selected)
         {
