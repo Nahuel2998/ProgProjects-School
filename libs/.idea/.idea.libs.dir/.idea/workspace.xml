@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77c97338-24bb-4752-b873-0f892b205d3a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/Biblioteca-Musica/.idea/.idea.Biblioteca-Musica.dir/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/Biblioteca-Musica/.idea/.idea.Biblioteca-Musica.dir/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/Biblioteca-Musica/.idea/.idea.Biblioteca-Musica.dir/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/Biblioteca-Musica/.idea/.idea.Biblioteca-Musica.dir/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/.idea/.idea.PracticoIV/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/.idea/.idea.PracticoIV/.idea/dictionaries/nahue.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/.idea/.idea.PracticoIV/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/.idea/.idea.PracticoIV/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/.idea/.idea.PracticoIV/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Classes/Usuario.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Datos/Tareas.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Datos/Tienda.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Datos/Usuarios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/PracticoIV.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/PracticoIV.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,13 +39,14 @@
       <option name="presentableId" value="Default" />
       <updated>1635804145025</updated>
       <workItem from="1635804192847" duration="475000" />
+      <workItem from="1636066858399" duration="836000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

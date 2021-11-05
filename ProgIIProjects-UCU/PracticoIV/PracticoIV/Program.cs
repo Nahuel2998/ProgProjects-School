@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NarLib;
+using Newtonsoft.Json;
 using PracticoIV.Classes;
+using YamlDotNet.Serialization;
 
 namespace PracticoIV
 {
     internal static class Program
     {
         private const string FTareas = "Datos/Tareas.dat";
+        private const string FTareasYaml = "Datos/Tareas.yaml";
         private const string FTienda = "Datos/Tienda.dat";
         private const string FUsuarios = "Datos/Usuarios.dat";
         private static Dictionary<uint, Tarea> _listTareas = new();
@@ -46,6 +49,10 @@ namespace PracticoIV
             string[][] lTareas = (from i in File.ReadAllLines(FTareas) select i.Split('|')).ToArray();
             for (uint i = 0; i < lTareas.Length; i++)
                 _listTareas.Add(i, new Tarea(lTareas[i][0], int.Parse(lTareas[i][1])));
+            
+            // _listTareas = new DeserializerBuilder().Build().Deserialize<Dictionary<uint, Tarea>>(File.ReadAllText(FTareasYaml));
+
+            File.WriteAllText(FTareasYaml, new SerializerBuilder().Build().Serialize(_listTareas));
             
             // Cargar Items de Tienda.
             string[][] lItemsTienda = (from i in File.ReadAllLines(FTienda) select i.Split('|')).ToArray();
