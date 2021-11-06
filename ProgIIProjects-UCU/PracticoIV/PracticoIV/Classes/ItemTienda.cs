@@ -8,5 +8,10 @@
         {
             Agregador = agregador;
         }
+
+        public ItemTienda() : base()
+        {
+            Agregador = null;
+        }
     }
 }

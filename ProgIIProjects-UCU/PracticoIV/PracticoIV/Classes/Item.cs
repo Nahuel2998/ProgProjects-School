@@ -10,5 +10,11 @@
             Nombre = nombre;
             Precio = precio;
         }
+
+        public Item()
+        {
+            Nombre = null;
+            Precio = 0;
+        }
     }
 }

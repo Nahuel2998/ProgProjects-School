@@ -10,12 +10,22 @@ namespace PracticoIV.Classes
         // True = Admin
         public bool? Permisos { get; set; }
         public List<string> Inventario { get; set; }
+        public int Puntaje { get; set; }
 
-        public Usuario(string nombre, bool? permisos = null, List<string> inventario = null)
+        public Usuario(string nombre, bool? permisos = null, int puntaje = 0, List<string> inventario = null)
         {
             Nombre = nombre;
             Permisos = permisos;
+            Puntaje = puntaje;
             Inventario = inventario;
+        }
+
+        public Usuario()
+        {
+            Nombre = null;
+            Permisos = null;
+            Puntaje = 0;
+            Inventario = null;
         }
     }
 }

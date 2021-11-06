@@ -7,7 +7,7 @@ namespace NarLib
     {
         #region BuildMenu
         // Build Menu with Exit Option
-        public static void BuildMenu(string title, Option[] options, string exitText)
+        public static void BuildMenu(string title, Option[] options, string exitText, string bottomText = "")
         {
             int index = 0;
             int exitVal = options.Length;
@@ -15,7 +15,7 @@ namespace NarLib
             while (true)
             {
                 Console.Clear();
-                RenderMenu(title, options, index, exitText);
+                RenderMenu(title, options, index, exitText, bottomText: bottomText);
 
                 switch (Console.ReadKey().Key)
                 {
@@ -38,14 +38,14 @@ namespace NarLib
         }
 
         // Build Menu without Exit Option
-        public static void BuildMenu(string title, Option[] options)
+        public static void BuildMenu(string title, Option[] options, string bottomText = "")
         {
             int index = 0;
 
             while (true)
             {
                 Console.Clear();
-                RenderMenu(title, options, index);
+                RenderMenu(title, options, index, bottomText: bottomText);
 
                 switch (Console.ReadKey().Key)
                 {
@@ -64,14 +64,14 @@ namespace NarLib
         }
 
         // Build Menu without Exit Option, returns contained value, null if cancelled
-        public static dynamic BuildMenuGetSelected(string title, Option[] options, bool cancellable = false)
+        public static dynamic BuildMenuGetSelected(string title, Option[] options, bool cancellable = false, string bottomText = "")
         {
             int index = 0;
 
             while (true)
             {
                 Console.Clear();
-                RenderMenu(title, options, index);
+                RenderMenu(title, options, index, bottomText: bottomText);
 
                 switch (Console.ReadKey().Key)
                 {
@@ -93,14 +93,14 @@ namespace NarLib
         }
         
         // Build Menu without Exit Option, takes strings, returns Index, -1 if cancelled
-        public static int BuildMenuGetIndex(string title, string[] options, bool cancellable = false)
+        public static int BuildMenuGetIndex(string title, string[] options, bool cancellable = false, string bottomText = "")
         {
             int index = 0;
 
             while (true)
             {
                 Console.Clear();
-                RenderMenu(title, options, index);
+                RenderMenu(title, options, index, bottomText: bottomText);
 
                 switch (Console.ReadKey().Key)
                 {
@@ -124,7 +124,7 @@ namespace NarLib
 
         #region RenderMenu
         // Render Menu with Exit Option
-        public static void RenderMenu(string title, Option[] options, int selectedIndex, string exitText)
+        public static void RenderMenu(string title, Option[] options, int selectedIndex, string exitText = null, string bottomText = "")
         {
             Console.WriteLine($"  {title}");
             string separator = "- ".Multiply(title.Length/2 + 3);
@@ -132,26 +132,29 @@ namespace NarLib
 
             for (int i = 0; i < options.Length; i++)
                 Console.WriteLine($"{(i == selectedIndex ? "->" : "  ")} {options[i].Name}");
-            Console.WriteLine($"{(selectedIndex == options.Length ? "->" : "  ")} {exitText}");
+            if (exitText != null)
+                Console.WriteLine($"{(selectedIndex == options.Length ? "->" : "  ")} {exitText}");
 
             Console.WriteLine(separator);
+            Console.WriteLine(bottomText);
         }
 
         // Render Menu without Exit Option
-        public static void RenderMenu(string title, Option[] options, int selectedIndex)
-        {
-            Console.WriteLine($"  {title}");
-            string separator = "- ".Multiply(title.Length/2 + 3);
-            Console.WriteLine(separator);
-
-            for (int i = 0; i < options.Length; i++)
-                Console.WriteLine($"{(i == selectedIndex ? "->" : "  ")} {options[i].Name}");
-
-            Console.WriteLine(separator);
-        }
+        // public static void RenderMenu(string title, Option[] options, int selectedIndex, string bottomText = "")
+        // {
+        //     Console.WriteLine($"  {title}");
+        //     string separator = "- ".Multiply(title.Length/2 + 3);
+        //     Console.WriteLine(separator);
+        //
+        //     for (int i = 0; i < options.Length; i++)
+        //         Console.WriteLine($"{(i == selectedIndex ? "->" : "  ")} {options[i].Name}");
+        //
+        //     Console.WriteLine(separator);
+        //     Console.WriteLine(bottomText);
+        // }
 
         // Render Menu without Exit Option, takes string inputs
-        public static void RenderMenu(string title, string[] options, int selectedIndex)
+        public static void RenderMenu(string title, string[] options, int selectedIndex, string bottomText = "")
         {
             Console.WriteLine($"  {title}");
             string separator = "- ".Multiply(title.Length/2 + 3);
@@ -161,6 +164,7 @@ namespace NarLib
                 Console.WriteLine($"{(i == selectedIndex ? "->" : "  ")} {options[i]}");
 
             Console.WriteLine(separator);
+            Console.WriteLine(bottomText);
         }
         #endregion
     }

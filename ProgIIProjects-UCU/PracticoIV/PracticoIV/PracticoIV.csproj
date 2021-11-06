@@ -15,19 +15,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Datos\Tareas.dat">
+      <None Update="Datos\Tienda.yaml">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Datos\Tienda.dat">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Datos\Usuarios.dat">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Datos\Tienda.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Datos\Usuarios.json">
+      <None Update="Datos\Usuarios.yaml">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
       <None Update="Datos\Tareas.yaml">

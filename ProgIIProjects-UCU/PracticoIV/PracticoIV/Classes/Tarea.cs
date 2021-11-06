@@ -10,5 +10,11 @@
             Nombre = nombre;
             Puntaje = puntaje;
         }
+
+        public Tarea()
+        {
+            Nombre = null;
+            Puntaje = 0;
+        }
     }
 }
