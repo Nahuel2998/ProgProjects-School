@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace NarExtensions
 {
@@ -8,10 +7,7 @@ namespace NarExtensions
         public static string Multiply(this string source, int multiplier)
         {
             StringBuilder res = new StringBuilder(multiplier * source.Length);
-            for (int i = 0; i < multiplier; i++)
-            {
-                res.Append(source);
-            }
+            for (int i = 0; i < multiplier; i++) { res.Append(source); }
 
             return res.ToString();
         }

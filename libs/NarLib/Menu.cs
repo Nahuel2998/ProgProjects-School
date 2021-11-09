@@ -82,7 +82,7 @@ namespace NarLib
         }
         
         // Build Menu with (or without) Exit Option, takes strings, returns Index, -1 if cancelled
-        public static int BuildMenuGetIndex(string title, Option[] options, string exitText = null,
+        public static int BuildMenuGetIndex(string title, string[] options, string exitText = null,
             string bottomText = null, bool cancellable = true, bool closeAfter = true)
         {
             static object GetIndex(IReadOnlyList<object> xOptions, int xIndex)
@@ -107,6 +107,7 @@ namespace NarLib
         public static void RenderMenu(string title, string[] options, int selectedIndex, string exitText = null,
             string bottomText = null)
         {
+            if (options == null) throw new ArgumentNullException(nameof(options));
             Console.WriteLine($"  {title}");
             string separator = "- ".Multiply(title.Length/2 + 3);
             Console.WriteLine(separator);
@@ -141,9 +142,7 @@ namespace NarLib
             Obj = obj;
         }
 
-        public static string[] GetNamesFromOptionList(IEnumerable<Option> options)
-        { 
-            return options.Select(option => option.Name) as string[];
-        }
+        public static string[] GetNamesFromOptionList(IEnumerable<Option> options) =>
+            options.Select(option => option.Name).ToArray();
     }
 }

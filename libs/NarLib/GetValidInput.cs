@@ -20,10 +20,10 @@ namespace NarLib
                     if (conditionFunc == null) { return res; }
                     if (conditionFunc(res)) { return res; }
 
-                    Console.WriteLine(string.IsNullOrEmpty(conditionError) ? DefaultError : conditionError);
+                    Console.WriteLine(conditionError ?? DefaultError);
                     Console.ReadLine();
                 }
-                Console.WriteLine(string.IsNullOrEmpty(parseError) ? DefaultError : parseError);
+                Console.WriteLine(parseError ?? DefaultError);
                 Console.ReadLine();
             }
         }
@@ -41,10 +41,10 @@ namespace NarLib
                     if (conditionFunc == null) { return res; }
                     if (conditionFunc(res)) { return res; }
 
-                    Console.WriteLine(string.IsNullOrEmpty(conditionError) ? DefaultError : conditionError);
+                    Console.WriteLine(conditionError ?? DefaultError);
                     Console.ReadLine();
                 }
-                Console.WriteLine(string.IsNullOrEmpty(parseError) ? DefaultError : parseError);
+                Console.WriteLine(parseError ?? DefaultError);
                 Console.ReadLine();
             }
         }
@@ -58,7 +58,7 @@ namespace NarLib
                 string res = GetInput(prompt, cursor).Split(splitArg)[0];
                 if (conditionRegex == null) { return res; } 
                 if (Regex.IsMatch(res, conditionRegex, ignoreCase ? RegexOptions.IgnoreCase : RegexOptions.None)) { return res; }
-                Console.WriteLine(string.IsNullOrEmpty(conditionError) ? DefaultError : conditionError);
+                Console.WriteLine(conditionError ?? DefaultError);
                 Console.ReadLine();
             }
         }

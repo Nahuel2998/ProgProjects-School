@@ -21,8 +21,8 @@ namespace PracticoIV
         private static void Tareas()
         {
             int selected = Menu.BuildMenuGetIndex("[Tareas]", _listTareas.Values
-                .Select(tarea => $"{tarea.Nombre} : {tarea.Puntaje}P").ToArray(), true,
-                $"Usuario: {_usuarioSeleccionado.Nombre}\nPuntaje: {_usuarioSeleccionado.Puntaje}P");
+                .Select(tarea => $"{tarea.Nombre} : {tarea.Puntaje}P").ToArray(), cancellable: true,
+                bottomText: $"Usuario: {_usuarioSeleccionado.Nombre}\nPuntaje: {_usuarioSeleccionado.Puntaje}P");
             
             if (selected == -1)
                 return;
@@ -33,8 +33,8 @@ namespace PracticoIV
         private static void Tienda()
         {
             int selected = Menu.BuildMenuGetIndex("[Tienda]", _listItemsTienda.Values
-                .Select(item => $"{item.Nombre} : {item.Precio}P").ToArray(), true,
-                $"Usuario: {_usuarioSeleccionado.Nombre}\nPuntaje: {_usuarioSeleccionado.Puntaje}P");
+                .Select(item => $"{item.Nombre} : {item.Precio}P").ToArray(), cancellable: true,
+                bottomText: $"Usuario: {_usuarioSeleccionado.Nombre}\nPuntaje: {_usuarioSeleccionado.Puntaje}P");
         }
 
         private static void Main(string[] args)
