@@ -1,0 +1,21 @@
+usuario:
+  Nombre: Usuario
+  Permisos: 
+  Inventario:
+  - Agregador: All me
+    Nombre: Item especial
+    Precio: 31
+  - Agregador: All me
+    Nombre: Otro Item especial
+    Precio: 63
+  Puntaje: 5
+administrador:
+  Nombre: Administrador
+  Permisos: true
+  Inventario: 
+  Puntaje: 0
+coordinador:
+  Nombre: Coordinador
+  Permisos: false
+  Inventario: 
+  Puntaje: 0
