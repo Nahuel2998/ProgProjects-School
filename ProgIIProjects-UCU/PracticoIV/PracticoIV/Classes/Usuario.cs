@@ -9,15 +9,15 @@ namespace PracticoIV.Classes
         // False = Coordinador
         // True = Admin
         public bool? Permisos { get; set; }
-        public List<string> Inventario { get; set; }
+        public List<ItemTienda> Inventario { get; set; }
         public int Puntaje { get; set; }
 
-        public Usuario(string nombre, bool? permisos = null, int puntaje = 0, List<string> inventario = null)
+        public Usuario(string nombre, bool? permisos = null, int puntaje = 0, List<ItemTienda> inventario = null)
         {
             Nombre = nombre;
             Permisos = permisos;
             Puntaje = puntaje;
-            Inventario = inventario;
+            Inventario = inventario ?? new List<ItemTienda>();
         }
 
         public Usuario()
@@ -25,7 +25,7 @@ namespace PracticoIV.Classes
             Nombre = null;
             Permisos = null;
             Puntaje = 0;
-            Inventario = null;
+            Inventario = new List<ItemTienda>();
         }
     }
 }

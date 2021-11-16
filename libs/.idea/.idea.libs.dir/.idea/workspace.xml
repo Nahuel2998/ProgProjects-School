@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77c97338-24bb-4752-b873-0f892b205d3a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Classes/Usuario.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Classes/Usuario.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NarExtensions/StringExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/NarExtensions/StringExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NarLib/GetValidInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/NarLib/GetValidInput.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NarLib/Menu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/NarLib/Menu.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +39,8 @@
       <workItem from="1636066858399" duration="836000" />
       <workItem from="1636154839487" duration="1840000" />
       <workItem from="1636424792539" duration="2695000" />
+      <workItem from="1637013392202" duration="60000" />
+      <workItem from="1637015127400" duration="3185000" />
     </task>
     <servers />
   </component>
