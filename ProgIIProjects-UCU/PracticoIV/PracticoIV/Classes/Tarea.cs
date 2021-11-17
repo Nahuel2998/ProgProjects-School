@@ -16,5 +16,10 @@
             Nombre = null;
             Puntaje = 0;
         }
+
+        public override string ToString()
+        {
+            return $"{Nombre} : {Puntaje}P";
+        }
     }
 }

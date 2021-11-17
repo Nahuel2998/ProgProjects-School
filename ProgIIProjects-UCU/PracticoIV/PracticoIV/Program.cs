@@ -40,7 +40,15 @@ namespace PracticoIV
 
         private static void AgregarItem()
         {
-
+            string prompt = "  [Agregar Item]\n- - - - - - - - -\nIngresar: <Nombre : Precio>\n- - - - - - - - -";
+            // string input = Console.ReadLine();
+            // Console.WriteLine(input);
+            
+            // FIXME: This.
+            _listItemsTienda.Add(ItemTienda.ToItem(
+                $"{GetValidInput.GetValidStringInput(prompt, splitArg: "", conditionRegex: "[^<][^( : )]+ : [\\d]+")} : {_usuarioSeleccionado.Nombre}"));
+            Console.WriteLine("Item aniadido satisfactoriamente.");
+            Console.ReadKey();
         }
 
         private static void AgregarUsuario()
@@ -62,7 +70,7 @@ namespace PracticoIV
         private static void Inventario()
         {
             int selected = Menu.BuildMenuGetIndex("[Inventario]", _usuarioSeleccionado.Inventario
-                .Select(item => $"{item.Nombre} : {item.Precio}P : {item.Agregador}").ToArray(), cancellable: true,
+                .Select(item => item.ToString()).ToArray(), cancellable: true,
                 bottomText: $"Usuario: {_usuarioSeleccionado.Nombre}\nPuntaje: {_usuarioSeleccionado.Puntaje}P");
 
             if (selected == -1)
@@ -80,7 +88,7 @@ namespace PracticoIV
         private static void Tareas()
         {
             int selected = Menu.BuildMenuGetIndex("[Tareas]", _listTareas
-                .Select(tarea => $"{tarea.Nombre} : {tarea.Puntaje}P").ToArray(), cancellable: true,
+                .Select(tarea => tarea.ToString()).ToArray(), cancellable: true,
                 bottomText: $"Usuario: {_usuarioSeleccionado.Nombre}\nPuntaje: {_usuarioSeleccionado.Puntaje}P");
             
             if (selected == -1)
@@ -96,7 +104,7 @@ namespace PracticoIV
         private static void Tienda()
         {
             int selected = Menu.BuildMenuGetIndex("[Tienda]", _listItemsTienda
-                .Select(item => $"{item.Nombre} : {item.Precio}P : {item.Agregador}").ToArray(), cancellable: true,
+                .Select(item => item.ToString()).ToArray(), cancellable: true,
                 bottomText: $"Usuario: {_usuarioSeleccionado.Nombre}\nPuntaje: {_usuarioSeleccionado.Puntaje}P");
             
             if (selected == -1)
@@ -138,7 +146,6 @@ namespace PracticoIV
             _listItemsTienda = new DeserializerBuilder().Build()
                 .Deserialize<List<ItemTienda>>(File.ReadAllText(FTienda));
             
-            // TODO: Check whether it's admin or an existing user.
             /* [Usuarios Pedidos]
              * Admin        | Agregar/Quitar/Modificar Tareas
              * Coordinador  | Agregar/Quitar Objetos (Tienda)

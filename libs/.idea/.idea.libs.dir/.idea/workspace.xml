@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="77c97338-24bb-4752-b873-0f892b205d3a" name="Changes" comment="" />
+    <list default="true" id="77c97338-24bb-4752-b873-0f892b205d3a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Classes/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Classes/Item.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Classes/ItemTienda.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Classes/ItemTienda.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Classes/Tarea.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Classes/Tarea.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ProgIIProjects-UCU/PracticoIV/PracticoIV/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.libs.dir/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +42,7 @@
       <workItem from="1636424792539" duration="2695000" />
       <workItem from="1637013392202" duration="60000" />
       <workItem from="1637015127400" duration="3186000" />
+      <workItem from="1637187506527" duration="1341000" />
     </task>
     <servers />
   </component>

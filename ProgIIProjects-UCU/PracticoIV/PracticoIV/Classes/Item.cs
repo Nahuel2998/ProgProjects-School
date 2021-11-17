@@ -16,5 +16,10 @@
             Nombre = null;
             Precio = 0;
         }
+
+        public override string ToString()
+        {
+            return $"{Nombre} : {Precio}P";
+        }
     }
 }
