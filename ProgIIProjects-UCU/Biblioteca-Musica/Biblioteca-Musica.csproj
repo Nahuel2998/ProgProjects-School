@@ -6,9 +6,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="NarExtensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\libs\NarLib\bin\Debug\net5.0\NarExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="NarLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\libs\NarLib\bin\Debug\net5.0\NarLib.dll</HintPath>
     </Reference>

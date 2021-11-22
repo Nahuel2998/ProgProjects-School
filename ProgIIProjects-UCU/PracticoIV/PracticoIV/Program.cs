@@ -44,16 +44,26 @@ namespace PracticoIV
             // string input = Console.ReadLine();
             // Console.WriteLine(input);
             
-            // FIXME: This.
             _listItemsTienda.Add(ItemTienda.ToItem(
-                $"{GetValidInput.GetValidStringInput(prompt, splitArg: "", conditionRegex: "[^<][^( : )]+ : [\\d]+")} : {_usuarioSeleccionado.Nombre}"));
+                $"{GetValidInput.GetValidStringInput(prompt, splitArg: "", conditionRegex: "[^<][^( : )]+ : [\\d]+", returnMatch: true)} : {_usuarioSeleccionado.Nombre}"));
+            GuardarDatos();
+            
             Console.WriteLine("Item aniadido satisfactoriamente.");
             Console.ReadKey();
         }
 
         private static void AgregarUsuario()
         {
+            string prompt = "  [Agregar Usuario]\n- - - - - - - - -\nIngresar: <Nombre : Rango(a/c/u) : Puntaje>\n- - - - - - - - -";
+            // string input = Console.ReadLine();
+            // Console.WriteLine(input);
+            Usuario nuevoUsuario = Usuario.ToUser(GetValidInput.GetValidStringInput(prompt, splitArg: "",
+                conditionRegex: "[^<][^( : )]+ : [acu][^( : )]* : [\\d]+", returnMatch: true));
+            _listUsuarios.Add(nuevoUsuario.Nombre.ToLower(), nuevoUsuario);
+            GuardarDatos();
             
+            Console.WriteLine("Usuario aniadido satisfactoriamente.");
+            Console.ReadKey();           
         }
 
         private static void ListarUsuarios()
@@ -69,14 +79,23 @@ namespace PracticoIV
 
         private static void Inventario()
         {
+            if (_usuarioSeleccionado.Inventario == null || !_usuarioSeleccionado.Inventario.Any())
+            {
+                Console.Clear();
+                Console.WriteLine("  [Inventario]");
+                Console.WriteLine("- - - - - - - - -");
+                Console.WriteLine("No tiene items en su inventario.");
+                Console.WriteLine("- - - - - - - - -");
+                Console.ReadKey();
+                return;
+            }
+            
             int selected = Menu.BuildMenuGetIndex("[Inventario]", _usuarioSeleccionado.Inventario
                 .Select(item => item.ToString()).ToArray(), cancellable: true,
                 bottomText: $"Usuario: {_usuarioSeleccionado.Nombre}\nPuntaje: {_usuarioSeleccionado.Puntaje}P");
 
             if (selected == -1)
-            {
-                return;
-            }
+            { return; }
 
             _usuarioSeleccionado.Inventario.RemoveAt(selected);
             GuardarDatos();
@@ -108,7 +127,7 @@ namespace PracticoIV
                 bottomText: $"Usuario: {_usuarioSeleccionado.Nombre}\nPuntaje: {_usuarioSeleccionado.Puntaje}P");
             
             if (selected == -1)
-                return;
+            { return; }
 
             if (_usuarioSeleccionado.Puntaje < _listItemsTienda[selected].Precio)
             {

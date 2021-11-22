@@ -36,7 +36,7 @@ namespace Biblioteca_Musica
                 canciones.Add(new Cancion(datosCancion[0], Int32.Parse(datosCancion[1])));
             }
             Album album = new Album("Preparacion", canciones);
-            List<Album> albumes = new List<Album>() {album};
+            List<Album> albumes = new List<Album> {album};
 
             Banda banda = new Banda("ExpiredBread", "Classical", integrantes, albumes);
 
@@ -59,13 +59,12 @@ namespace Biblioteca_Musica
 
             void Placeholder()
             {
-                return;
             }
 
             Option[] options = {
-                new Option("This is a test", () => Placeholder()),
-                new Option("This is another test", () => Placeholder()),
-                new Option("This is another test yes", () => Placeholder())
+                new("This is a test", Placeholder),
+                new("This is another test", Placeholder),
+                new("This is another test yes", Placeholder)
             };
 
             Menu.BuildMenu("[Menu Principal]", options, "Exit");

@@ -50,14 +50,17 @@ namespace NarLib
         }
 
         public static string GetValidStringInput(string prompt, string cursor = "> ", string splitArg = " ",
-            bool clear = true, string conditionRegex = null, string conditionError = null, bool ignoreCase = false)
+            bool clear = true, string conditionRegex = null, string conditionError = null, bool ignoreCase = false,
+            bool returnMatch = false)
         {
             while (true)
             {
                 if (clear) { Console.Clear(); }
                 string res = GetInput(prompt, cursor).Split(splitArg)[0];
                 if (conditionRegex == null) { return res; } 
-                if (Regex.IsMatch(res, conditionRegex, ignoreCase ? RegexOptions.IgnoreCase : RegexOptions.None)) { return res; }
+                Match match = Regex.Match(res, conditionRegex,
+                    ignoreCase ? RegexOptions.IgnoreCase : RegexOptions.None);
+                if (match.Success) { return returnMatch ? match.ToString() : res; }
                 Console.WriteLine(conditionError ?? DefaultError);
                 Console.ReadLine();
             }

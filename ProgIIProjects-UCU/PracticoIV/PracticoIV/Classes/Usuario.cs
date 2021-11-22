@@ -27,5 +27,13 @@ namespace PracticoIV.Classes
             Puntaje = 0;
             Inventario = new List<ItemTienda>();
         }
+
+        public static Usuario ToUser(string s)
+        {
+            string[] param = s.Split(" : ");
+            char param1 = param[1].ToLower()[0];
+            return new Usuario(param[0], param1.Equals('a') ? true : param1.Equals('c') ? false : null,
+                int.Parse(param[2]));
+        }
     }
 }

@@ -77,9 +77,7 @@ namespace NarLib
             Func<string> bottomTextFunc = null)
         {
             static object GetOption(IReadOnlyList<object> xOptions, int xIndex)
-            {
-                return ((Option) xOptions[xIndex]).Obj; 
-            }
+            { return ((Option) xOptions[xIndex]).Obj; }
 
             return BuildMenuFunc(title, options, GetOption, exitText, bottomText, cancellable, closeAfter,
                 stringOptions ?? Option.GetNamesFromOptionList(options), bottomTextFunc);
@@ -90,9 +88,7 @@ namespace NarLib
             string bottomText = null, bool cancellable = true, bool closeAfter = true)
         {
             static object GetIndex(IReadOnlyList<object> xOptions, int xIndex)
-            {
-                return xOptions.Count != 0 ? xIndex : -1; 
-            }
+            { return xOptions.Count != 0 ? xIndex : -1; }
 
             return (int) (BuildMenuFunc(title, options, GetIndex, exitText, bottomText, cancellable, closeAfter) ?? -1);
         }
