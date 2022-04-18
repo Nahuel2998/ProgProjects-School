@@ -6,8 +6,6 @@ public class Lista implements ILista
     private INodo ultimo;
     private int largo;
 
-    // TODO: Obtener elemento en posicion n.
-
     public Lista()
     {
         primero = null;
@@ -44,17 +42,26 @@ public class Lista implements ILista
     {
         if (esVacia())
         { return null; }
-        else
+
+        INodo aux = primero;
+        while (aux != null)
         {
-            INodo aux = primero;
-            while (aux != null)
-            {
-                if (aux.getId().equals(id))
-                { return aux; }
-                aux = aux.getSiguiente();
-            }
+            if (aux.getId().equals(id))
+            { return aux; }
+            aux = aux.getSiguiente();
         }
         return null;
+    }
+
+    public INodo buscarAt(int indice)
+    {
+        if (esVacia() || indice < 0 || indice >= largo)
+        { return null; }
+
+        INodo aux = primero;
+        for (int i = 0; i < indice; i++)
+        { aux = aux.getSiguiente(); }
+        return aux;
     }
 
     public boolean eliminar(String id)
@@ -64,9 +71,9 @@ public class Lista implements ILista
 
         if (primero.getId().equals(id))
         {
-            if (primero.getSiguiente() == null)
+            primero = primero.getSiguiente();
+            if (primero == null)
             { ultimo = null; }
-            primero = null;
             largo--;
             return true;
         }
@@ -76,13 +83,37 @@ public class Lista implements ILista
         {
             if (aux.getSiguiente().getId().equals(id))
             {
-                aux.setSiguiente(aux.getSiguiente());
+                aux.setSiguiente(aux.getSiguiente().getSiguiente());
                 largo--;
                 return true;
             }
             aux = aux.getSiguiente();
         }
         return false;
+    }
+
+    public boolean eliminarAt(int indice)
+    {
+        if (esVacia() || indice < 0 || indice >= largo)
+        { return false; }
+
+        largo--;
+
+        if (indice == 0)
+        {
+            primero = primero.getSiguiente();
+            if (primero == null)
+            { ultimo = null; }
+            return true;
+        }
+
+        INodo aux = primero;
+        for (int i = 0; i < indice - 1; i++)
+        { aux = aux.getSiguiente(); }
+        aux.setSiguiente(aux.getSiguiente().getSiguiente());
+        if (aux.getSiguiente() == null)
+        { ultimo = aux; }
+        return true;
     }
 
     public int length()

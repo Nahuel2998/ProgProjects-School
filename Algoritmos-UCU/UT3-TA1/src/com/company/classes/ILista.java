@@ -22,7 +22,9 @@ interface ILista
      * @param clave - Clave del nodo a buscar.
      * @return El nodo encontrado. En caso de no encontrarlo, retornar null.
      */
-    INodo buscar(Comparable clave);
+    INodo buscar(String clave);
+
+    INodo buscarAt(int indice);
 
     /**
      * M�todo encargado de eliminar un nodo cuya clave es la indicada.
@@ -30,22 +32,9 @@ interface ILista
      * @param clave Clave del nodo a eliminar.
      * @return True en caso de que la eliminaci�n haya sido efectuada con �xito.
      */
-    boolean eliminar(Comparable clave);
+    boolean eliminar(String clave);
 
-    /**
-     * M�todo encargado de imprimir en consola las claves de los nodos
-     * contenidos en la lista.
-     */
-    String imprimir();
-
-    /**
-     * Retorna un String con las claves separadas por el separador pasado por
-     * par�metro.
-     *
-     * @param separador Separa las claves
-     * @return
-     */
-    String imprimir(String separador);
+    boolean eliminarAt(int indice);
 
     /**
      * Retorna la cantidad de elementos de la lista. En caso de que la lista

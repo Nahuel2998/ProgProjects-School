@@ -38,7 +38,7 @@ public class Nodo implements INodo
     public INodo clonar()
     { return new Nodo(this.id, this.nombre, this.precio); }
 
-    // @Override
+    @Override
     public boolean equals(INodo nodo)
     { return this.nombre.equals(nodo.getNombre()) && this.precio == nodo.getPrecio(); }
 
