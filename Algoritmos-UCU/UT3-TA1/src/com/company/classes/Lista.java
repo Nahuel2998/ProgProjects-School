@@ -155,5 +155,30 @@ public class Lista implements ILista
 
     // TODO: Radix Sort?
     public void ordenar()
-    { }
+    {
+        INodo[] buckets = new INodo[37];
+
+        short longestLen = 0;
+        INodo aux = this.primero;
+        while (aux != null)
+        {
+            if (aux.getId().length() > longestLen)
+            { longestLen = (short) aux.getId().length(); }
+            aux = aux.getSiguiente();
+        }
+    }
+
+    private short getIndex(char c)
+    {
+        if (c >= 97)
+        { return (short) (c - 86); }
+
+        if (c >= 65)
+        { return (short) (c - 54); }
+
+        return (short) (c - 47);
+    }
+
+    public static ILista ordenar(ILista lista)
+    { return lista; /* 🎵HopeSort */ }
 }
