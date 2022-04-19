@@ -8,8 +8,8 @@ public class Lista implements ILista
 
     public Lista()
     {
-        primero = null;
-        ultimo = null;
+        this.primero = null;
+        this.ultimo = null;
     }
 
     public Lista(INodo nodo)
@@ -20,30 +20,30 @@ public class Lista implements ILista
 
     public void insertarComienzo(INodo nodo)
     {
-        if (esVacia())
-        { ultimo = nodo; }
+        if (this.esVacia())
+        { this.ultimo = nodo; }
         else
-        { nodo.setSiguiente(primero); }
-        primero = nodo;
-        largo++;
+        { nodo.setSiguiente(this.primero); }
+        this.primero = nodo;
+        this.largo++;
     }
 
     public void insertarFinal(INodo nodo)
     {
-        if (esVacia())
-        { primero = nodo; }
+        if (this.esVacia())
+        { this.primero = nodo; }
         else
-        { ultimo.setSiguiente(nodo); }
-        ultimo = nodo;
-        largo++;
+        { this.ultimo.setSiguiente(nodo); }
+        this.ultimo = nodo;
+        this.largo++;
     }
 
     public INodo buscar(String id)
     {
-        if (esVacia())
+        if (this.esVacia())
         { return null; }
 
-        INodo aux = primero;
+        INodo aux = this.primero;
         while (aux != null)
         {
             if (aux.getId().equals(id))
@@ -53,12 +53,12 @@ public class Lista implements ILista
         return null;
     }
 
-    public INodo buscarAt(int indice)
+    public INodo getAt(int indice)
     {
-        if (esVacia() || indice < 0 || indice >= largo)
+        if (this.esVacia() || indice < 0 || indice >= this.largo)
         { return null; }
 
-        INodo aux = primero;
+        INodo aux = this.primero;
         for (int i = 0; i < indice; i++)
         { aux = aux.getSiguiente(); }
         return aux;
@@ -66,25 +66,27 @@ public class Lista implements ILista
 
     public boolean eliminar(String id)
     {
-        if (esVacia())
+        if (this.esVacia())
         { return false; }
 
-        if (primero.getId().equals(id))
+        if (this.primero.getId().equals(id))
         {
-            primero = primero.getSiguiente();
-            if (primero == null)
-            { ultimo = null; }
-            largo--;
+            this.primero = this.primero.getSiguiente();
+            if (this.primero == null)
+            { this.ultimo = null; }
+            this.largo--;
             return true;
         }
 
-        INodo aux = primero;
+        INodo aux = this.primero;
         while (aux.getSiguiente() != null)
         {
             if (aux.getSiguiente().getId().equals(id))
             {
                 aux.setSiguiente(aux.getSiguiente().getSiguiente());
-                largo--;
+                this.largo--;
+                if (aux.getSiguiente() == null)
+                { this.ultimo = aux; }
                 return true;
             }
             aux = aux.getSiguiente();
@@ -94,41 +96,64 @@ public class Lista implements ILista
 
     public boolean eliminarAt(int indice)
     {
-        if (esVacia() || indice < 0 || indice >= largo)
+        if (this.esVacia() || indice < 0 || indice >= this.largo)
         { return false; }
 
-        largo--;
+        this.largo--;
 
         if (indice == 0)
         {
-            primero = primero.getSiguiente();
-            if (primero == null)
-            { ultimo = null; }
+            this.primero = this.primero.getSiguiente();
+            if (this.primero == null)
+            { this.ultimo = null; }
             return true;
         }
 
-        INodo aux = primero;
+        INodo aux = this.primero;
         for (int i = 0; i < indice - 1; i++)
         { aux = aux.getSiguiente(); }
         aux.setSiguiente(aux.getSiguiente().getSiguiente());
         if (aux.getSiguiente() == null)
-        { ultimo = aux; }
+        { this.ultimo = aux; }
         return true;
     }
 
+    public String imprimir(String separador)
+    {
+        if (this.esVacia())
+        { return ""; }
+
+        StringBuilder res = new StringBuilder(this.primero.getId());
+        INodo aux = this.primero;
+        while (aux != null)
+        {
+            res.append(separador);
+            res.append(aux.getId());
+            aux = aux.getSiguiente();
+        }
+        return res.toString();
+    }
+
+    public String imprimir()
+    { return imprimir(", "); }
+
     public int length()
-    { return largo; }
+    { return this.largo; }
 
     public int cantElementos()
     { return length(); }
 
     @Override
     public boolean esVacia()
-    { return primero == null; }
+    { return this.primero == null; }
 
     public INodo getPrimero()
-    { return primero; }
+    { return this.primero; }
 
     public INodo getUltimo()
-    { return ultimo; }
+    { return this.ultimo; }
+
+    // TODO: Radix Sort?
+    public void ordenar()
+    { }
 }

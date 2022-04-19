@@ -2,10 +2,13 @@ package com.company.classes;
 
 public class Nodo implements INodo
 {
-    private final String id;
-    private String nombre;
+    private final String id; // a-z 0-9 [20]
+    private String nombre; // a-z 0-9 [30]
     private float precio;
     private INodo siguiente = null;
+
+    public Nodo(String id)
+    { this.id = id; }
 
     public Nodo(String id, String nombre, float precio)
     {

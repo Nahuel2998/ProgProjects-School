@@ -24,7 +24,7 @@ interface ILista
      */
     INodo buscar(String clave);
 
-    INodo buscarAt(int indice);
+    INodo getAt(int indice);
 
     /**
      * M�todo encargado de eliminar un nodo cuya clave es la indicada.
@@ -35,6 +35,22 @@ interface ILista
     boolean eliminar(String clave);
 
     boolean eliminarAt(int indice);
+
+    /**
+     * M�todo encargado de imprimir en consola las claves de los nodos
+     * contenidos en la lista.
+     */
+    public String imprimir();
+
+    /**
+     * Retorna un String con las claves separadas por el separador pasado por
+     * par�metro.
+     *
+     * @param separador Separa las claves
+     * @return
+     */
+    public String imprimir(String separador);
+
 
     /**
      * Retorna la cantidad de elementos de la lista. En caso de que la lista
