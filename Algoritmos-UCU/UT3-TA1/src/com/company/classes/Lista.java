@@ -1,5 +1,7 @@
 package com.company.classes;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Lista implements ILista
 {
     private INodo primero;
@@ -28,6 +30,19 @@ public class Lista implements ILista
         this.largo++;
     }
 
+    public void insertarComienzo(@NotNull ILista lista)
+    {
+        if (lista.esVacia())
+        { return; }
+
+        if (this.esVacia())
+        { this.ultimo = lista.getUltimo(); }
+        else
+        { lista.getUltimo().setSiguiente(this.primero); }
+        this.primero = lista.getPrimero();
+        this.largo += lista.cantElementos();
+    }
+
     public void insertarFinal(INodo nodo)
     {
         if (this.esVacia())
@@ -36,6 +51,19 @@ public class Lista implements ILista
         { this.ultimo.setSiguiente(nodo); }
         this.ultimo = nodo;
         this.largo++;
+    }
+
+    public void insertarFinal(@NotNull ILista lista)
+    {
+        if (lista.esVacia())
+        { return; }
+
+        if (this.esVacia())
+        { this.primero = lista.getPrimero(); }
+        else
+        { this.ultimo.setSiguiente(lista.getPrimero()); }
+        this.ultimo = lista.getUltimo();
+        this.largo += lista.cantElementos();
     }
 
     public INodo buscar(String id)
@@ -124,7 +152,7 @@ public class Lista implements ILista
         { return ""; }
 
         StringBuilder res = new StringBuilder(this.primero.getId());
-        INodo aux = this.primero;
+        INodo aux = this.primero.getSiguiente();
         while (aux != null)
         {
             res.append(separador);
@@ -153,11 +181,19 @@ public class Lista implements ILista
     public INodo getUltimo()
     { return this.ultimo; }
 
-    // TODO: Radix Sort?
+    public void vaciar()
+    {
+        this.primero = null;
+        this.ultimo = null;
+        this.largo = 0;
+    }
+
+    // Radix LSD Bucket Sort
     public void ordenar()
     {
-        INodo[] buckets = new INodo[37];
+        ILista[] buckets = new ILista[37];
 
+        // Obtener LSD
         short longestLen = 0;
         INodo aux = this.primero;
         while (aux != null)
@@ -165,6 +201,34 @@ public class Lista implements ILista
             if (aux.getId().length() > longestLen)
             { longestLen = (short) aux.getId().length(); }
             aux = aux.getSiguiente();
+        }
+
+        // i = Lugar actual en el string (de LSD a MSD)
+        for (short i = (short) (longestLen - 1); i >= 0; i--)
+        {
+            // Reiniciar buckets
+            for (short j = 0; j < buckets.length; j++)
+            { buckets[j] = new Lista(); }
+
+            // Insertar en buckets
+            aux = this.primero;
+            while (aux != null)
+            {
+                INodo siguiente = aux.getSiguiente();
+                aux.setSiguiente(null);
+
+                short c = 0;
+                if (aux.getId().length() > i)
+                { c = getIndex(aux.getId().charAt(i)); }
+                buckets[c].insertarFinal(aux);
+
+                aux = siguiente;
+            }
+
+            // Combinar los buckets
+            this.vaciar();
+            for (ILista b : buckets)
+            { this.insertarFinal(b); }
         }
     }
 
@@ -179,6 +243,6 @@ public class Lista implements ILista
         return (short) (c - 47);
     }
 
-    public static ILista ordenar(ILista lista)
-    { return lista; /* 🎵HopeSort */ }
+//    public static ILista ordenar(ILista lista)
+//    { return lista; /* 🎵HopeSort */ }
 }
