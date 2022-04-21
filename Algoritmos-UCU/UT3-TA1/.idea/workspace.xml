@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7b0b986-dc0b-4832-9131-5118b2a66c48" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/company/classes/Almacen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/classes/Producto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UT3-TA1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/UT3-TA1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/classes/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/classes/Lista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../configfiles/colemak-dh-sym.kbd" beforeDir="false" afterPath="$PROJECT_DIR$/../../configfiles/colemak-dh-sym.kbd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,18 +32,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/nahue/Documents/Git/Algoritmos-UCU/UT3-TA1",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
-  }
-}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nahue\Documents\Git\ProgProjects-School\Algoritmos-UCU\UT3-TA1\src\com\company\classes" />
