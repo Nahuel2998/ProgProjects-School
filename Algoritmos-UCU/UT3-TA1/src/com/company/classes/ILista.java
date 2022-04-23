@@ -23,6 +23,7 @@ interface ILista
      * @return El nodo encontrado. En caso de no encontrarlo, retornar null.
      */
     INodo buscar(String clave);
+    boolean existe(String clave);
 
     INodo getAt(int indice);
 
@@ -40,7 +41,7 @@ interface ILista
      * M�todo encargado de imprimir en consola las claves de los nodos
      * contenidos en la lista.
      */
-    public String imprimir();
+    String imprimir();
 
     /**
      * Retorna un String con las claves separadas por el separador pasado por
@@ -49,7 +50,7 @@ interface ILista
      * @param separador Separa las claves
      * @return
      */
-    public String imprimir(String separador);
+    String imprimir(String separador);
 
 
     /**

@@ -1,6 +1,6 @@
 package com.company.classes;
 
-public class Producto extends Nodo
+public class Producto extends Nodo implements IProducto
 {
     private int stock = 0;
 
@@ -24,10 +24,10 @@ public class Producto extends Nodo
     { this.setStock(this.stock + cantidad); }
 
     // Throws IllegalArgumentException if not adding
-    public void aumentarStock(int cantidad)
+    public void aumentarStock(int cantidad) throws IllegalArgumentException
     {
         if (cantidad < 0)
-        { throw new IllegalArgumentException(); }
+        { throw new IllegalArgumentException(String.valueOf(cantidad)); }
 
         this.modificarStock(cantidad);
     }
@@ -37,10 +37,10 @@ public class Producto extends Nodo
 
     // Throws IllegalArgumentException if not subtracting
     // Returns false if stock < cantidad
-    public boolean reducirStock(int cantidad)
+    public boolean reducirStock(int cantidad) throws IllegalArgumentException
     {
         if (cantidad < 0)
-        { throw new IllegalArgumentException(); }
+        { throw new IllegalArgumentException(String.valueOf(cantidad)); }
 
         if (this.stock < cantidad)
         { return false; }

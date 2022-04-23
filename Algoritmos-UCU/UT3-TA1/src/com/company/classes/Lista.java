@@ -4,6 +4,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class Lista implements ILista
 {
+    private static final int ID = 0;
+    private static final int NOMBRE = 1;
+
     private INodo primero;
     private INodo ultimo;
     private int largo;
@@ -80,6 +83,9 @@ public class Lista implements ILista
         }
         return null;
     }
+
+    public boolean existe(String id)
+    { return buscar(id) != null; }
 
     public INodo getAt(int indice)
     {
@@ -189,7 +195,7 @@ public class Lista implements ILista
     }
 
     // Radix LSD Bucket Sort
-    public void ordenar()
+    public void ordenar(short tipo)
     {
         ILista[] buckets = new ILista[37];
 
@@ -199,7 +205,7 @@ public class Lista implements ILista
         while (aux != null)
         {
             if (aux.getId().length() > longestLen)
-            { longestLen = (short) aux.getId().length(); }
+            { longestLen = (short) getLabel(aux, tipo).length(); }
             aux = aux.getSiguiente();
         }
 
@@ -219,7 +225,7 @@ public class Lista implements ILista
 
                 short c = 0;
                 if (aux.getId().length() > i)
-                { c = getIndex(aux.getId().charAt(i)); }
+                { c = getIndex(getLabel(aux, tipo).charAt(i)); }
                 buckets[c].insertarFinal(aux);
 
                 aux = siguiente;
@@ -232,7 +238,7 @@ public class Lista implements ILista
         }
     }
 
-    private short getIndex(char c)
+    private static short getIndex(char c)
     {
         if (c >= 97)
         { return (short) (c - 86); }
@@ -241,6 +247,15 @@ public class Lista implements ILista
         { return (short) (c - 54); }
 
         return (short) (c - 47);
+    }
+
+    private static String getLabel(INodo nodo, short i)
+    {
+        return switch (i) {
+            case ID -> nodo.getId();
+            case NOMBRE -> nodo.getNombre();
+            default -> "";
+        };
     }
 
 //    public static ILista ordenar(ILista lista)
