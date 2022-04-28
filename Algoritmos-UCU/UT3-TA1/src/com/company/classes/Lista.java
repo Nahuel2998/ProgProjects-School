@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class Lista implements ILista
 {
-    private static final int ID = 0;
-    private static final int NOMBRE = 1;
+    public static final short ID = 0;
+    public static final short NOMBRE = 1;
 
     private INodo primero;
     private INodo ultimo;
@@ -152,24 +152,32 @@ public class Lista implements ILista
         return true;
     }
 
-    public String imprimir(String separador)
+    public String imprimir(int labels, String separador)
     {
         if (this.esVacia())
         { return ""; }
 
-        StringBuilder res = new StringBuilder(this.primero.getId());
+//        StringBuilder res = new StringBuilder(getLabel(this.primero, label));
+        StringBuilder res = new StringBuilder(this.primero.imprimir(labels));
         INodo aux = this.primero.getSiguiente();
         while (aux != null)
         {
             res.append(separador);
-            res.append(aux.getId());
+//            res.append(getLabel(aux, label));
+            res.append(aux.imprimir(labels));
             aux = aux.getSiguiente();
         }
         return res.toString();
     }
 
+    public String imprimir(String separador)
+    { return imprimir(Nodo.ID, separador); }
+
+    public String imprimir(int labels)
+    { return imprimir(labels, " | "); }
+
     public String imprimir()
-    { return imprimir(", "); }
+    { return imprimir(" | "); }
 
     public int length()
     { return this.largo; }
@@ -249,7 +257,7 @@ public class Lista implements ILista
         return (short) (c - 47);
     }
 
-    private static String getLabel(INodo nodo, short i)
+    private static String getLabel(@NotNull INodo nodo, short i)
     {
         return switch (i) {
             case ID -> nodo.getId();

@@ -1,5 +1,7 @@
 package com.company.classes;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.naming.NameNotFoundException;
 
 public class Almacen
@@ -10,7 +12,7 @@ public class Almacen
     { this.almacen = new Lista(); }
 
     // Returns false if element was already on the list
-    public boolean agregarProducto(IProducto producto)
+    public boolean agregarProducto(@NotNull IProducto producto)
     {
         if (this.existe(producto.getId()))
         { return false; }

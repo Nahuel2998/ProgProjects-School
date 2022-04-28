@@ -8,17 +8,21 @@ public class Main {
     {
         Lista lista = new Lista();
 
-        lista.insertarFinal(new Nodo("xx14"));
-        lista.insertarFinal(new Nodo("at2"));
-        lista.insertarFinal(new Nodo("093"));
-        lista.insertarFinal(new Nodo("n"));
-        lista.insertarFinal(new Nodo("nu"));
-        lista.insertarFinal(new Nodo("na"));
+        lista.insertarFinal(new Nodo("xx14", "5aw", 0));
+        lista.insertarFinal(new Nodo("at2", "1abbw", 0));
+        lista.insertarFinal(new Nodo("093", "Zrauf", 0));
+        lista.insertarFinal(new Nodo("n", "carT", 0));
+        lista.insertarFinal(new Nodo("nu", "00000", 0));
+        lista.insertarFinal(new Nodo("na", "00", 0));
 
         System.out.println(lista.imprimir());
         System.out.println(lista.cantElementos());
 
-        lista.ordenar();
+        lista.ordenar(Lista.NOMBRE);
+        System.out.println(lista.imprimir(Nodo.NOMBRE));
+        System.out.println(lista.cantElementos());
+
+        lista.ordenar(Lista.ID);
         System.out.println(lista.imprimir());
         System.out.println(lista.cantElementos());
     }

@@ -24,6 +24,9 @@ interface INodo
     void setSiguiente(INodo nodo);
     INodo getSiguiente();
     INodo clonar();
+    String imprimir(int labels, String separador);
+    String imprimir(int labels);
+    String imprimir();
 
     // @Override
     boolean equals(INodo nodo);
