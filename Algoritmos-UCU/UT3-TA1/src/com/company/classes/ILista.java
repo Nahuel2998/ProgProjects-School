@@ -3,23 +3,23 @@ package com.company.classes;
 interface ILista
 {
     /**
-     * M�todo encargado de agregar un nodo al final de la lista.
+     * Metodo encargado de agregar un nodo al final de la lista.
      *
-     * @param nodo - Nodo a agregar
+     * @param nodo Nodo a agregar
      */
     void insertarFinal(INodo nodo);
 
     /**
-     * M�todo encargado de agregar un nodo al comienzo de la lista.
+     * Metodo encargado de agregar un nodo al comienzo de la lista.
      *
-     * @param nodo - Nodo a agregar
+     * @param nodo Nodo a agregar
      */
     void insertarComienzo(INodo nodo);
 
     /**
-     * M�todo encargado de buscar un nodo cuya clave es la indicada.
+     * Metodo encargado de buscar un nodo cuya clave es la indicada.
      *
-     * @param clave - Clave del nodo a buscar.
+     * @param clave Clave del nodo a buscar.
      * @return El nodo encontrado. En caso de no encontrarlo, retornar null.
      */
     INodo buscar(String clave);
@@ -28,7 +28,7 @@ interface ILista
     INodo getAt(int indice);
 
     /**
-     * M�todo encargado de eliminar un nodo cuya clave es la indicada.
+     * Metodo encargado de eliminar un nodo cuya clave es la indicada.
      *
      * @param clave Clave del nodo a eliminar.
      * @return True en caso de que la eliminaci�n haya sido efectuada con �xito.
@@ -38,7 +38,7 @@ interface ILista
     boolean eliminarAt(int indice);
 
     /**
-     * M�todo encargado de imprimir en consola las claves de los nodos
+     * Metodo encargado de imprimir en consola las claves de los nodos
      * contenidos en la lista.
      */
     String imprimir();
