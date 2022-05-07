@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7b0b986-dc0b-4832-9131-5118b2a66c48" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../UTA3-TA10/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UTA3-TA10/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UTA3-TA10/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UTA3-TA10/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UTA3-TA10/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/classes/ILista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/classes/ILista.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +33,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "last_opened_file_path": "C:/Users/nahue/Documents/Git/ProgProjects-School/Algoritmos-UCU/UT3-TA1"
+    "last_opened_file_path": "C:/Users/nahue/Documents/Git/Algoritmos-UCU/UTA3-TA10"
   }
 }]]></component>
   <component name="RecentsManager">
