@@ -59,4 +59,10 @@ public interface ILista<K extends Comparable<K>, T> {
 
     INodo<K, T> getPrimero();
     INodo<K, T> getUltimo();
+
+    boolean existe(K clave);
+
+    INodo<K, T> getAt(int indice);
+
+    boolean eliminarAt(int indice);
 }

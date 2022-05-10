@@ -1,7 +1,8 @@
 package org.classestemp;
 
-import jdk.jshell.spi.ExecutionControl;
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Array;
 
 public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
 {
@@ -88,11 +89,11 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         return null;
     }
 
-//    @Override
+    @Override
     public boolean existe(K clave)
     { return buscar(clave) != null; }
 
-//    @Override
+    @Override
     public INodo<K, T> getAt(int indice)
     {
         if (this.esVacia() || indice < 0 || indice >= this.largo)
@@ -135,7 +136,7 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         return false;
     }
 
-//    @Override
+    @Override
     public boolean eliminarAt(int indice)
     {
         if (this.esVacia() || indice < 0 || indice >= this.largo)
@@ -202,7 +203,8 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
     // FIXME: yeah
     public void ordenar(short tipo)
     {
-        ILista<K, T>[] buckets = new ILista<K, T>[37];
+//        ILista<K, T>[] buckets = new ILista<K, T>[37];
+        ILista<K, T>[] buckets = (ILista<K, T>[]) Array.newInstance(this.getClass(), 37);
 
         // Obtener LSD
         short longestLen = 0;
