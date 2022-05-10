@@ -23,6 +23,7 @@ public class Lista implements ILista
         this.ultimo = nodo;
     }
 
+    @Override
     public void insertarComienzo(INodo nodo)
     {
         if (this.esVacia())

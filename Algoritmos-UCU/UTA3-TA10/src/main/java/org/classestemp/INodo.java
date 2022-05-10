@@ -12,23 +12,23 @@ public interface INodo<K extends Comparable<K>, T>
      * devuelve el siguiente del nodo
      * @return 
      */
-    public Nodo<K, T> getSiguiente();
+    public INodo<K, T> getSiguiente();
     
     /**
      * "engancha" otro nodo a continuacion
      * 
      */
-    public void setSiguiente(Nodo<K, T> nodo);
+    public void setSiguiente(INodo<K, T> nodo);
     
     /**
      * Imprime los datos del nodo
      */
-    String imprimir();
+//    String imprimir();
 
     /**
      * Imprime la etiqueta del nodo
      */
-    String imprimirEtiqueta();
+//    String imprimirEtiqueta();
 
     /**
      * Retorna la etiqueta del nodo
@@ -50,5 +50,5 @@ public interface INodo<K extends Comparable<K>, T>
      * @return devueve -1 si this tiene una etiqueta menor, 0 si son iguales, 1
      * si es mayor
      */
-    int compareTo(K etiqueta);
+//    int compareTo(K etiqueta);
 }

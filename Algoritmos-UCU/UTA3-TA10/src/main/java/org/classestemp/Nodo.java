@@ -6,7 +6,7 @@ public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
 {
     private final K etiqueta;
     private T dato;
-    private Nodo<K, T> siguiente = null;
+    private INodo<K, T> siguiente = null;
 
     public Nodo(K etiqueta, T dato)
     {
@@ -24,29 +24,29 @@ public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
     public K getEtiqueta()
     { return this.etiqueta; }
 
-    @Override
-    public String imprimir()
-    { return this.dato.toString(); }
+//    @Override
+//    public String imprimir()
+//    { return this.dato.toString(); }
 
-    @Override
-    public String imprimirEtiqueta()
-    { return this.etiqueta.toString(); }
+//    @Override
+//    public String imprimirEtiqueta()
+//    { return this.etiqueta.toString(); }
 
-    public Nodo<K, T> clonar()
+    public INodo<K, T> clonar()
     { return new Nodo<>(this.etiqueta, this.dato); }
 
     public boolean equals(@NotNull Nodo<K, T> unNodo)
     { return this.dato.equals(unNodo.getDato()); }
 
-    @Override
-    public int compareTo(K etiqueta)
-    { return this.etiqueta.compareTo(etiqueta); }
+//    @Override
+//    public int compareTo(K etiqueta)
+//    { return this.etiqueta.compareTo(etiqueta); }
 
     @Override
-    public Nodo<K, T> getSiguiente()
+    public INodo<K, T> getSiguiente()
     { return this.siguiente; }
 
     @Override
-    public void setSiguiente(Nodo<K, T> nodo)
+    public void setSiguiente(INodo<K, T> nodo)
     { this.siguiente = nodo; }
 }
