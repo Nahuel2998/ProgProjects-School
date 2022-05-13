@@ -26,9 +26,9 @@ public interface INodo<K extends Comparable<K>, T>
 //    String imprimir();
 
     /**
-     * Imprime la etiqueta del nodo
+     * Retorna la etiqueta del nodo como String
      */
-//    String imprimirEtiqueta();
+    String imprimirEtiqueta();
 
     /**
      * Retorna la etiqueta del nodo

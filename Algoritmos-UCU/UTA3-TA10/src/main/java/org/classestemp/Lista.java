@@ -162,15 +162,33 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
     }
 
 //    @Override
-    public String imprimir()
-    {
+//    public String imprimir()
+//    {
         // TODO: This.
-    }
+//    }
 
-    //    @Override
-    public String imprimir(String separador)
-    {
+//    @Override
+//    public String imprimir(String separador)
+//    {
         // TODO: This.
+//    }
+
+//    @Override
+    public String imprimirEtiquetas(String separador)
+    {
+        // FIXME: Replace with a call to imprimir()
+        if (this.esVacia())
+        { return ""; }
+
+        StringBuilder res = new StringBuilder(this.primero.imprimirEtiqueta());
+        INodo<K, T> aux = this.primero.getSiguiente();
+        while (aux != null)
+        {
+            res.append(separador);
+            res.append(aux.imprimirEtiqueta());
+            aux = aux.getSiguiente();
+        }
+        return res.toString();
     }
 
     public int length()

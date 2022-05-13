@@ -29,8 +29,8 @@ public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
 //    { return this.dato.toString(); }
 
 //    @Override
-//    public String imprimirEtiqueta()
-//    { return this.etiqueta.toString(); }
+    public String imprimirEtiqueta()
+    { return this.getEtiqueta().toString(); }
 
     public INodo<K, T> clonar()
     { return new Nodo<>(this.etiqueta, this.dato); }
