@@ -1,4 +1,4 @@
-package org.classestemp;
+package org.classes;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cef852b7-bc0b-43a7-942a-f3ae037c55cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../ArbolesBinarios/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/ILista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/ILista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/INodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/INodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/Lista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/Nodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/Nodo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/ILista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classestemp/ILista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/INodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classestemp/INodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/IPila.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/IPila.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classestemp/Lista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/ListaOrdenada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/ListaOrdenada.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/Nodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classestemp/Nodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/util/ManejadorArchivosGenerico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/util/ManejadorArchivosGenerico.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +56,31 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nahue\Documents\Git\Algoritmos-UCU\UTA3-TA10\target" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.main.Main" />
+      <module name="UTA3-TA10" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

@@ -2,91 +2,51 @@ package org.classes;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Nodo implements INodo
+public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
 {
-    public static final int ID = 2;
-    public static final int NOMBRE = 3;
-    public static final int PRECIO = 5;
+    private final K etiqueta;
+    private T dato;
+    private INodo<K, T> siguiente = null;
 
-    private final String id; // a-z 0-9 [20]
-    private String nombre; // a-z 0-9 [30]
-    private float precio;
-    private INodo siguiente = null;
-
-    public Nodo(String id)
-    { this.id = id; }
-
-    public Nodo(String id, String nombre, float precio)
+    public Nodo(K etiqueta, T dato)
     {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
+        this.etiqueta = etiqueta;
+        this.dato = dato;
     }
 
-    public float getPrecio()
-    { return this.precio; }
+    public T getDato()
+    { return this.dato; }
 
-    public void setPrecio(float precio)
-    { this.precio = precio; }
-
-    public String getId()
-    { return this.id; }
-
-    public String getNombre()
-    { return nombre; }
-
-    public void setNombre(String nombre)
-    { this.nombre = nombre; }
-
-    public void setSiguiente(INodo nodo)
-    { this.siguiente = nodo; }
-
-    public INodo getSiguiente()
-    { return this.siguiente; }
-
-    public INodo clonar()
-    { return new Nodo(this.id, this.nombre, this.precio); }
+    public void setDato(T dato)
+    { this.dato = dato; }
 
     @Override
-    public boolean equals(@NotNull INodo nodo)
-    { return this.nombre.equals(nodo.getNombre()) && this.precio == nodo.getPrecio(); }
+    public K getEtiqueta()
+    { return this.etiqueta; }
 
-    // labels indicara los labels que se quieren imprimir, usando las constantes
-    // Para indicar mas de un label, multiplicar sus constantes
-    // Ejemplo: imprimir(ID*PRECIO, " : ") -> id : precio
-    public String imprimir(int labels, String separador)
-    {
-        StringBuilder res = new StringBuilder();
+//    @Override
+//    public String imprimir()
+//    { return this.dato.toString(); }
 
-        if (labels % ID == 0)
-        {
-            res.append(this.getId());
-            res.append(separador);
-        }
-        if (labels % NOMBRE == 0)
-        {
-            res.append(this.getNombre());
-            res.append(separador);
-        }
-        if (labels % PRECIO == 0)
-        {
-            res.append(this.getPrecio());
-            res.append(separador);
-        }
+//    @Override
+    public String imprimirEtiqueta()
+    { return this.getEtiqueta().toString(); }
 
-        if (!res.isEmpty())
-        { res.setLength(res.length() - separador.length()); }
+    public INodo<K, T> clonar()
+    { return new Nodo<>(this.etiqueta, this.dato); }
 
-        return res.toString();
-    }
+    public boolean equals(@NotNull Nodo<K, T> unNodo)
+    { return this.dato.equals(unNodo.getDato()); }
 
-    public String imprimir(int labels)
-    { return this.imprimir(labels, " : "); }
-
-    public String imprimir()
-    { return this.imprimir(ID*NOMBRE*PRECIO); }
-
-//    // @Override
-//    public int compareTo(Comparable etiqueta)
+//    @Override
+//    public int compareTo(K etiqueta)
 //    { return this.etiqueta.compareTo(etiqueta); }
+
+    @Override
+    public INodo<K, T> getSiguiente()
+    { return this.siguiente; }
+
+    @Override
+    public void setSiguiente(INodo<K, T> nodo)
+    { this.siguiente = nodo; }
 }

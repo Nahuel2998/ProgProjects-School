@@ -1,54 +1,36 @@
 package org.classestemp;
 
-public interface INodo<K extends Comparable<K>, T>
+//interface INodo
+//{
+//    float getPrecio();
+//    void setDato(Object dato);
+//    void setSiguiente(INodo nodo);
+//    INodo getSiguiente();
+//    void imprimir();
+//    void imprimirEtiqueta();
+//    boolean equals(INodo unNodo);
+//    Comparable getEtiqueta();
+//    int compareTo(Comparable etiqueta);
+//}
+
+
+interface INodo
 {
-    /**
-     * devuelve el dato del nodo
-     * @return 
-     */
-    public T getDato();
+    float getPrecio();
+    void setPrecio(float precio);
+    String getId();
+    String getNombre();
+    void setNombre(String nombre);
+    void setSiguiente(INodo nodo);
+    INodo getSiguiente();
+    INodo clonar();
+    String imprimir(int labels, String separador);
+    String imprimir(int labels);
+    String imprimir();
 
-    /**
-     * devuelve el siguiente del nodo
-     * @return 
-     */
-    public INodo<K, T> getSiguiente();
-    
-    /**
-     * "engancha" otro nodo a continuacion
-     * 
-     */
-    public void setSiguiente(INodo<K, T> nodo);
-    
-    /**
-     * Imprime los datos del nodo
-     */
-//    String imprimir();
+    // @Override
+    boolean equals(INodo nodo);
 
-    /**
-     * Retorna la etiqueta del nodo como String
-     */
-    String imprimirEtiqueta();
-
-    /**
-     * Retorna la etiqueta del nodo
-     *
-     * @return etiqueta del nodo
-     */
-    K getEtiqueta();
-
-//	/**
-//	 *
-//	 * @param unNodo
-//	 * @return devueve -1 si this tiene una clave menor, 0 si son iguales, 1 si es mayor
-//	 */
-//	public int compareTo(INodo<E> unNodo);
-
-    /**
-     *
-     * @param etiqueta
-     * @return devueve -1 si this tiene una etiqueta menor, 0 si son iguales, 1
-     * si es mayor
-     */
-//    int compareTo(K etiqueta);
+//    // @Override
+//    int compareTo(Comparable etiqueta);
 }

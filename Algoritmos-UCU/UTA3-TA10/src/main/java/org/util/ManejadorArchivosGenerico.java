@@ -1,8 +1,7 @@
-package ucu.edu.uy.util;
+package org.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,9 +11,7 @@ public class ManejadorArchivosGenerico
 {
 
     /**
-     * @param nombreCompletoArchivo
-     * @param listaLineasArchivo lista con las lineas del archivo
-     * @throws IOException
+     * @param listaLineasArchivo Lista con las lineas del archivo
      */
     public static void escribirArchivo(String nombreCompletoArchivo,
             String[] listaLineasArchivo)
@@ -24,9 +21,7 @@ public class ManejadorArchivosGenerico
         {
             fw = new FileWriter(nombreCompletoArchivo, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < listaLineasArchivo.length; i++)
-            {
-                String lineaActual = listaLineasArchivo[i];
+            for (String lineaActual : listaLineasArchivo) {
                 bw.write(lineaActual);
                 bw.newLine();
             }
@@ -57,14 +52,7 @@ public class ManejadorArchivosGenerico
             }
             br.close();
             fr.close();
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("Error al leer el archivo "
-                    + nombreCompletoArchivo);
-            e.printStackTrace();
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             System.out.println("Error al leer el archivo "
                     + nombreCompletoArchivo);

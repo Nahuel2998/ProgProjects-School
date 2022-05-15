@@ -2,15 +2,13 @@ package org.classestemp;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Array;
-
-public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
+public class Lista implements ILista
 {
-    public static final short ETIQUETA = 0;
-    public static final short DATO = 1;
+    public static final short ID = 0;
+    public static final short NOMBRE = 1;
 
-    private INodo<K, T> primero;
-    private INodo<K, T> ultimo;
+    private INodo primero;
+    private INodo ultimo;
     private int largo;
 
     public Lista()
@@ -19,14 +17,14 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         this.ultimo = null;
     }
 
-    public Lista(INodo<K, T> nodo)
+    public Lista(INodo nodo)
     {
         this.primero = nodo;
         this.ultimo = nodo;
     }
 
     @Override
-    public void insertarComienzo(INodo<K, T> nodo)
+    public void insertarComienzo(INodo nodo)
     {
         if (this.esVacia())
         { this.ultimo = nodo; }
@@ -36,7 +34,7 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         this.largo++;
     }
 
-    public void insertarComienzo(@NotNull ILista<K, T> lista)
+    public void insertarComienzo(@NotNull ILista lista)
     {
         if (lista.esVacia())
         { return; }
@@ -49,8 +47,7 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         this.largo += lista.cantElementos();
     }
 
-    @Override
-    public void insertarFinal(INodo<K, T> nodo)
+    public void insertarFinal(INodo nodo)
     {
         if (this.esVacia())
         { this.primero = nodo; }
@@ -60,7 +57,7 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         this.largo++;
     }
 
-    public void insertarFinal(@NotNull ILista<K, T> lista)
+    public void insertarFinal(@NotNull ILista lista)
     {
         if (lista.esVacia())
         { return; }
@@ -73,45 +70,41 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         this.largo += lista.cantElementos();
     }
 
-    @Override
-    public INodo<K, T> buscar(K clave)
+    public INodo buscar(String id)
     {
         if (this.esVacia())
         { return null; }
 
-        INodo<K, T> aux = this.primero;
+        INodo aux = this.primero;
         while (aux != null)
         {
-            if (aux.getEtiqueta().equals(clave))
+            if (aux.getId().equals(id))
             { return aux; }
             aux = aux.getSiguiente();
         }
         return null;
     }
 
-    @Override
-    public boolean existe(K clave)
-    { return buscar(clave) != null; }
+    public boolean existe(String id)
+    { return buscar(id) != null; }
 
-    @Override
-    public INodo<K, T> getAt(int indice)
+    public INodo getAt(int indice)
     {
         if (this.esVacia() || indice < 0 || indice >= this.largo)
         { return null; }
 
-        INodo<K, T> aux = this.primero;
+        INodo aux = this.primero;
         for (int i = 0; i < indice; i++)
         { aux = aux.getSiguiente(); }
         return aux;
     }
 
-    @Override
-    public boolean eliminar(K clave)
+    public boolean eliminar(String id)
     {
         if (this.esVacia())
         { return false; }
 
-        if (this.primero.getEtiqueta().equals(clave))
+        if (this.primero.getId().equals(id))
         {
             this.primero = this.primero.getSiguiente();
             if (this.primero == null)
@@ -120,10 +113,10 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
             return true;
         }
 
-        INodo<K, T> aux = this.primero;
+        INodo aux = this.primero;
         while (aux.getSiguiente() != null)
         {
-            if (aux.getSiguiente().getEtiqueta().equals(clave))
+            if (aux.getSiguiente().getId().equals(id))
             {
                 aux.setSiguiente(aux.getSiguiente().getSiguiente());
                 this.largo--;
@@ -136,7 +129,6 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         return false;
     }
 
-    @Override
     public boolean eliminarAt(int indice)
     {
         if (this.esVacia() || indice < 0 || indice >= this.largo)
@@ -152,7 +144,7 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
             return true;
         }
 
-        INodo<K, T> aux = this.primero;
+        INodo aux = this.primero;
         for (int i = 0; i < indice - 1; i++)
         { aux = aux.getSiguiente(); }
         aux.setSiguiente(aux.getSiguiente().getSiguiente());
@@ -161,40 +153,36 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         return true;
     }
 
-//    @Override
-//    public String imprimir()
-//    {
-        // TODO: This.
-//    }
-
-//    @Override
-//    public String imprimir(String separador)
-//    {
-        // TODO: This.
-//    }
-
-//    @Override
-    public String imprimirEtiquetas(String separador)
+    public String imprimir(int labels, String separador)
     {
-        // FIXME: Replace with a call to imprimir()
         if (this.esVacia())
         { return ""; }
 
-        StringBuilder res = new StringBuilder(this.primero.imprimirEtiqueta());
-        INodo<K, T> aux = this.primero.getSiguiente();
+//        StringBuilder res = new StringBuilder(getLabel(this.primero, label));
+        StringBuilder res = new StringBuilder(this.primero.imprimir(labels));
+        INodo aux = this.primero.getSiguiente();
         while (aux != null)
         {
             res.append(separador);
-            res.append(aux.imprimirEtiqueta());
+//            res.append(getLabel(aux, label));
+            res.append(aux.imprimir(labels));
             aux = aux.getSiguiente();
         }
         return res.toString();
     }
 
+    public String imprimir(String separador)
+    { return imprimir(Nodo.ID, separador); }
+
+    public String imprimir(int labels)
+    { return imprimir(labels, " | "); }
+
+    public String imprimir()
+    { return imprimir(" | "); }
+
     public int length()
     { return this.largo; }
 
-    @Override
     public int cantElementos()
     { return length(); }
 
@@ -202,12 +190,10 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
     public boolean esVacia()
     { return this.primero == null; }
 
-    @Override
-    public INodo<K, T> getPrimero()
+    public INodo getPrimero()
     { return this.primero; }
 
-    @Override
-    public INodo<K, T> getUltimo()
+    public INodo getUltimo()
     { return this.ultimo; }
 
     public void vaciar()
@@ -218,18 +204,16 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
     }
 
     // Radix LSD Bucket Sort
-    // FIXME: yeah
     public void ordenar(short tipo)
     {
-//        ILista<K, T>[] buckets = new ILista<K, T>[37];
-        ILista<K, T>[] buckets = (ILista<K, T>[]) Array.newInstance(this.getClass(), 37);
+        ILista[] buckets = new ILista[37];
 
         // Obtener LSD
         short longestLen = 0;
-        INodo<K, T> aux = this.primero;
+        INodo aux = this.primero;
         while (aux != null)
         {
-            if (aux.getEtiqueta().toString().length() > longestLen)
+            if (aux.getId().length() > longestLen)
             { longestLen = (short) getLabel(aux, tipo).length(); }
             aux = aux.getSiguiente();
         }
@@ -239,17 +223,17 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         {
             // Reiniciar buckets
             for (short j = 0; j < buckets.length; j++)
-            { buckets[j] = new Lista<K, T>(); }
+            { buckets[j] = new Lista(); }
 
             // Insertar en buckets
             aux = this.primero;
             while (aux != null)
             {
-                INodo<K, T> siguiente = aux.getSiguiente();
+                INodo siguiente = aux.getSiguiente();
                 aux.setSiguiente(null);
 
                 short c = 0;
-                if (aux.getEtiqueta().toString().length() > i)
+                if (aux.getId().length() > i)
                 { c = getIndex(getLabel(aux, tipo).charAt(i)); }
                 buckets[c].insertarFinal(aux);
 
@@ -258,7 +242,7 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
 
             // Combinar los buckets
             this.vaciar();
-            for (ILista<K, T> b : buckets)
+            for (ILista b : buckets)
             { this.insertarFinal(b); }
         }
     }
@@ -274,11 +258,11 @@ public class Lista<K extends Comparable<K>, T> implements ILista<K, T>
         return (short) (c - 47);
     }
 
-    private String getLabel(@NotNull INodo<K, T> nodo, short i)
+    private static String getLabel(@NotNull INodo nodo, short i)
     {
         return switch (i) {
-            case ETIQUETA -> nodo.getEtiqueta().toString();
-            case DATO -> nodo.getDato().toString();
+            case ID -> nodo.getId();
+            case NOMBRE -> nodo.getNombre();
             default -> "";
         };
     }

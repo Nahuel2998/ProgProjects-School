@@ -1,31 +1,22 @@
 package org.classes;
 
-interface ILista
-{
+public interface ILista<K extends Comparable<K>, T> {
+
     /**
      * Metodo encargado de agregar un nodo al final de la lista.
      *
-     * @param nodo Nodo a agregar
+     * @param nodo - Nodo a agregar
      */
-    void insertarFinal(INodo nodo);
-
-    /**
-     * Metodo encargado de agregar un nodo al comienzo de la lista.
-     *
-     * @param nodo Nodo a agregar
-     */
-    void insertarComienzo(INodo nodo);
+    void insertarComienzo(INodo<K, T> nodo);
+    void insertarFinal(INodo<K, T> nodo);
 
     /**
      * Metodo encargado de buscar un nodo cuya clave es la indicada.
      *
-     * @param clave Clave del nodo a buscar.
+     * @param clave - Clave del nodo a buscar.
      * @return El nodo encontrado. En caso de no encontrarlo, retornar null.
      */
-    INodo buscar(String clave);
-    boolean existe(String clave);
-
-    INodo getAt(int indice);
+    INodo<K, T> buscar(K clave);
 
     /**
      * Metodo encargado de eliminar un nodo cuya clave es la indicada.
@@ -33,15 +24,14 @@ interface ILista
      * @param clave Clave del nodo a eliminar.
      * @return True en caso de que la eliminaci�n haya sido efectuada con �xito.
      */
-    boolean eliminar(String clave);
-
-    boolean eliminarAt(int indice);
+    boolean eliminar(K clave);
 
     /**
      * Metodo encargado de imprimir en consola las claves de los nodos
      * contenidos en la lista.
+     * @return 
      */
-    String imprimir();
+//    String imprimir();
 
     /**
      * Retorna un String con las claves separadas por el separador pasado por
@@ -50,8 +40,7 @@ interface ILista
      * @param separador Separa las claves
      * @return
      */
-    String imprimir(String separador);
-
+//    String imprimir(String separador);
 
     /**
      * Retorna la cantidad de elementos de la lista. En caso de que la lista
@@ -68,18 +57,12 @@ interface ILista
      */
     boolean esVacia();
 
-    /**
-     * Retorna el primer nodo de la lista.
-     *
-     * @return Primer nodo de la lista.
-     */
-    INodo getPrimero();
+    INodo<K, T> getPrimero();
+    INodo<K, T> getUltimo();
 
-    /**
-     * Retorna el ultimo nodo de la lista.
-     *
-     * @return Ultimo nodo de la lista.
-     */
-    INodo getUltimo();
+    boolean existe(K clave);
 
+    INodo<K, T> getAt(int indice);
+
+    boolean eliminarAt(int indice);
 }
