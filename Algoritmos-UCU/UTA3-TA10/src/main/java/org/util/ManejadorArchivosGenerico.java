@@ -1,5 +1,7 @@
 package org.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -13,8 +15,7 @@ public class ManejadorArchivosGenerico
     /**
      * @param listaLineasArchivo Lista con las lineas del archivo
      */
-    public static void escribirArchivo(String nombreCompletoArchivo,
-            String[] listaLineasArchivo)
+    public static void escribirArchivo(String nombreCompletoArchivo, String @NotNull [] listaLineasArchivo)
     {
         FileWriter fw;
         try
@@ -30,13 +31,12 @@ public class ManejadorArchivosGenerico
         }
         catch (IOException e)
         {
-            System.out.println("Error al escribir el archivo "
-                    + nombreCompletoArchivo);
+            System.out.println("Error al escribir el archivo " + nombreCompletoArchivo);
             e.printStackTrace();
         }
     }
 
-    public static String[] leerArchivo(String nombreCompletoArchivo)
+    public static String @NotNull [] leerArchivo(String nombreCompletoArchivo)
     {
         FileReader fr;
         ArrayList<String> listaLineasArchivo = new ArrayList<String>();
@@ -52,13 +52,13 @@ public class ManejadorArchivosGenerico
             }
             br.close();
             fr.close();
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
-            System.out.println("Error al leer el archivo "
-                    + nombreCompletoArchivo);
+            System.out.println("Error al leer el archivo " + nombreCompletoArchivo);
             e.printStackTrace();
         }
-        System.out.println("Archivo leido satisfactoriamente");
+//        System.out.println("Archivo leido satisfactoriamente");
 
         return listaLineasArchivo.toArray(new String[0]);
     }

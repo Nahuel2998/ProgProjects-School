@@ -7,8 +7,7 @@ public interface ILista<K extends Comparable<K>, T> {
      *
      * @param nodo - Nodo a agregar
      */
-    void insertarComienzo(INodo<K, T> nodo);
-    void insertarFinal(INodo<K, T> nodo);
+    void insertar(INodo<K, T> nodo);
 
     /**
      * Metodo encargado de buscar un nodo cuya clave es la indicada.
@@ -17,6 +16,9 @@ public interface ILista<K extends Comparable<K>, T> {
      * @return El nodo encontrado. En caso de no encontrarlo, retornar null.
      */
     INodo<K, T> buscar(K clave);
+    INodo<K, T> buscarDato(T dato);
+    ILista<K, T> buscarCada(K clave);
+//    ListaMejorada<T> buscarCadaMejor(Integer clave);
 
     /**
      * Metodo encargado de eliminar un nodo cuya clave es la indicada.
@@ -61,8 +63,7 @@ public interface ILista<K extends Comparable<K>, T> {
     INodo<K, T> getUltimo();
 
     boolean existe(K clave);
+    boolean existeDato(T dato);
 
-    INodo<K, T> getAt(int indice);
-
-    boolean eliminarAt(int indice);
+    void ordenar(short tipo);
 }
