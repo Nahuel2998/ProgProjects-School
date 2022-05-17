@@ -2,11 +2,11 @@ package org.classes;
 
 import org.jetbrains.annotations.NotNull;
 
+import static org.classes.Nodo.DATO;
+import static org.classes.Nodo.ETIQUETA;
+
 public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
 {
-    public static final short ETIQUETA = 0;
-    public static final short DATO = 1;
-
     private INodo<K, T> primero;
     private INodo<K, T> ultimo;
     private int largo;
@@ -245,35 +245,44 @@ public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
         return true;
     }
 
-//    @Override
-//    public String imprimir()
-//    {
-        // TODO: This.
-//    }
+    @Override
+    public String imprimir()
+    { return this.imprimir(ETIQUETA + DATO); }
 
-//    @Override
-//    public String imprimir(String separador)
-//    {
-        // TODO: This.
-//    }
+    @Override
+    public String imprimir(int labels)
+    { return this.imprimir(labels, " : "); }
 
-//    @Override
-    public String imprimirEtiquetas(String separador)
+    @Override
+    public String imprimir(String separador)
+    { return this.imprimir(ETIQUETA + DATO, separador); }
+
+    @Override
+    public String imprimir(int labels, String separador)
+    { return this.imprimir(ETIQUETA + DATO, separador, ", "); }
+
+    @Override
+    public String imprimir(int labels, String separador, String separadorNodo)
     {
-        // FIXME: Replace with a call to imprimir()
         if (this.esVacia())
         { return ""; }
 
-        StringBuilder res = new StringBuilder(this.primero.imprimirEtiqueta());
+        StringBuilder res = new StringBuilder(this.primero.imprimir(labels, separadorNodo));
         INodo<K, T> aux = this.primero.getSiguiente();
         while (aux != null)
         {
             res.append(separador);
-            res.append(aux.imprimirEtiqueta());
+            res.append(aux.imprimir(labels, separadorNodo));
             aux = aux.getSiguiente();
         }
         return res.toString();
     }
+
+    public String imprimirEtiquetas(String separador)
+    { return imprimir(ETIQUETA, separador); }
+
+    public String imprimirDatos(String separador)
+    { return imprimir(DATO, separador); }
 
     @Override
     public int length()
@@ -363,14 +372,8 @@ public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
         return (short) (c - 47);
     }
 
-    private String getLabel(@NotNull INodo<K, T> nodo, short i)
-    {
-        return switch (i) {
-            case ETIQUETA -> nodo.getEtiqueta().toString();
-            case DATO -> nodo.getDato().toString();
-            default -> "";
-        };
-    }
+    private String getLabel(@NotNull INodo<K, T> nodo, int i)
+    { return nodo.getLabel(i); }
 
 //    public static ILista ordenar(ILista lista)
 //    { return lista; /* 🎵HopeSort */ }

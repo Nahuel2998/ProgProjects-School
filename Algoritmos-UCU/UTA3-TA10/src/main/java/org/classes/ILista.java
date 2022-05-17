@@ -33,7 +33,8 @@ public interface ILista<K extends Comparable<K>, T> {
      * contenidos en la lista.
      * @return 
      */
-//    String imprimir();
+    String imprimir();
+    String imprimir(int labels);
 
     /**
      * Retorna un String con las claves separadas por el separador pasado por
@@ -42,7 +43,9 @@ public interface ILista<K extends Comparable<K>, T> {
      * @param separador Separa las claves
      * @return
      */
-//    String imprimir(String separador);
+    String imprimir(String separador);
+    String imprimir(int labels, String separador);
+    String imprimir(int labels, String separador, String separadorNodo);
 
     /**
      * Retorna la cantidad de elementos de la lista. En caso de que la lista

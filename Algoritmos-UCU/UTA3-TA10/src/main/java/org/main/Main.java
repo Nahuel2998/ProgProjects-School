@@ -3,9 +3,14 @@ package org.main;
 import org.classes.*;
 import org.util.ManejadorArchivosGenerico;
 
+import asg.cliche.Command;
+import asg.cliche.ShellFactory;
+
+import java.io.IOException;
+
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
 //        int cantBuckets = 16;
 
@@ -49,5 +54,7 @@ public class Main
         System.out.println(Farmachop.getInstance().preparadoViable(13, new Integer[]{1, 4})); // false
 //        System.out.println(Farmachop.getInstance().preparadoViable(13, new Integer[]{1, 3}));
         System.out.println(Farmachop.getInstance().preparadoViable(13, new Integer[]{4, 6})); // true
+
+        ShellFactory.createConsoleShell("-", "", Farmachop.getInstance()).commandLoop();
     }
 }

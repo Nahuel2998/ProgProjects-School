@@ -4,6 +4,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
 {
+    public static final int DATO = 1;
+    public static final int ETIQUETA = 1 << 1;
+
     private final K etiqueta;
     private T dato;
     private INodo<K, T> siguiente = null;
@@ -24,13 +27,51 @@ public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
     public K getEtiqueta()
     { return this.etiqueta; }
 
-//    @Override
-//    public String imprimir()
-//    { return this.dato.toString(); }
+    @Override
+    public String imprimir()
+    { return imprimir(ETIQUETA + DATO); }
 
-//    @Override
+    @Override
+    public String imprimir(String separador)
+    { return imprimir(ETIQUETA + DATO, separador); }
+
+    @Override
+    public String imprimir(int labels)
+    { return this.imprimir(labels, ", "); }
+
+    @Override
+    public String imprimir(int labels, String separador)
+    {
+        if (labels > ETIQUETA + DATO || labels < 1)
+        { throw new IllegalArgumentException("Suma de labels incorrecta."); }
+
+        StringBuilder res = new StringBuilder();
+
+        if (labels >= ETIQUETA)
+        {
+            res.append(this.getLabel(ETIQUETA));
+            res.append(separador);
+            labels -= ETIQUETA;
+        }
+
+        if (labels >= DATO)
+        {
+            res.append(this.getLabel(DATO));
+            res.append(separador);
+        }
+
+        if (!res.isEmpty())
+        { res.setLength(res.length() - separador.length()); }
+
+        return res.toString();
+    }
+
+    @Override
     public String imprimirEtiqueta()
-    { return this.getEtiqueta().toString(); }
+    { return this.getLabel(ETIQUETA); }
+
+    public String imprimirDato()
+    { return this.getLabel(DATO); }
 
     public INodo<K, T> clonar()
     { return new Nodo<>(this.etiqueta, this.dato); }
@@ -49,4 +90,14 @@ public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
     @Override
     public void setSiguiente(INodo<K, T> nodo)
     { this.siguiente = nodo; }
+
+    @Override
+    public String getLabel(int label)
+    {
+        return switch (label) {
+            case ETIQUETA -> this.getEtiqueta().toString();
+            case DATO -> this.getDato().toString();
+            default -> throw new IllegalArgumentException("Label invalida.");
+        };
+    }
 }

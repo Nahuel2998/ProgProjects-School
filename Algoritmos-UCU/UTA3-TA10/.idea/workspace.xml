@@ -5,30 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cef852b7-bc0b-43a7-942a-f3ae037c55cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/classes/Farmachop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/classes/IListaIndexada.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/classes/ListaMejorada.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/classes/NodoSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UT3-TA1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../UT3-TA1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/Farmachop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/Farmachop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/ILista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/ILista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/IPila.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/INodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/INodo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/Lista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/ListaOrdenada.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/ILista.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/INodo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/Lista.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/classestemp/Nodo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/ListaMejorada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/ListaMejorada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/Nodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/Nodo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/util/ManejadorArchivosGenerico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/util/ManejadorArchivosGenerico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/classes/ILista.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/ILista.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/classes/INodo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/INodo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/classes/Lista.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/Lista.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/classes/Nodo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/Nodo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/classestemp/ILista.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/classestemp/INodo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/classestemp/IPila.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/classestemp/Lista.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +56,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/nahue/Documents/Git/Algoritmos-UCU/ArbolesBinarios",
+    "last_opened_file_path": "C:/Users/nahue/Documents/Git/Algoritmos-UCU/UT3-TA1",
     "settings.editor.selected.configurable": "Errors"
   }
 }]]></component>

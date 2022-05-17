@@ -23,12 +23,16 @@ public interface INodo<K extends Comparable<K>, T>
     /**
      * Imprime los datos del nodo
      */
-//    String imprimir();
+    String imprimir();
+    String imprimir(String separador);
+    String imprimir(int labels);
+    String imprimir(int labels, String separador);
 
     /**
      * Retorna la etiqueta del nodo como String
      */
     String imprimirEtiqueta();
+    public String getLabel(int label);
 
     /**
      * Retorna la etiqueta del nodo

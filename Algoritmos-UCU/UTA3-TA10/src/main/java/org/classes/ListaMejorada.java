@@ -20,6 +20,21 @@ public class ListaMejorada<T>
     public INodo<Integer, T> buscar(Integer clave)
     { return this.buckets[getIndex(clave)].buscar(clave); }
 
+    public String imprimir(int labels, String separador, String separadorNodo)
+    {
+        StringBuilder res = new StringBuilder();
+        for (ILista<Integer, T> bucket : this.buckets)
+        {
+            res.append(bucket.imprimir(labels, separador, separadorNodo));
+            res.append(separador);
+        }
+
+        if (!res.isEmpty())
+        { res.setLength(res.length() - separador.length()); }
+
+        return res.toString();
+    }
+
     public ILista<Integer, T> buscarCada(Integer clave)
     { return this.buckets[getIndex(clave)].buscarCada(clave); }
 
