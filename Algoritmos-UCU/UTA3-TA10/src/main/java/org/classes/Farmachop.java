@@ -1,6 +1,7 @@
 package org.classes;
 
 import asg.cliche.Command;
+import asg.cliche.Param;
 import org.jetbrains.annotations.NotNull;
 
 public class Farmachop
@@ -16,12 +17,11 @@ public class Farmachop
     public static Farmachop getInstance()
     { return instancia; }
 
-    @Command
-    public boolean preparadoViable(Integer suero, Integer @NotNull [] farmacos)
+    public boolean esPreparadoViable(Integer suero, Integer... farmacos) throws IllegalArgumentException
     {
         // Si el suero no es valido, no
         if (!this.sueros.existe(suero))
-        { return false; }
+        { throw new IllegalArgumentException(String.format("Suero '%d' no encontrado.", suero)); }
 
         for (Integer farmaco : farmacos)
         {
@@ -29,14 +29,14 @@ public class Farmachop
             // (Realmente no seria necesario ya que si no se encuentra en la lista blanca no nos interesa
             // y en dicha lista no deberia haber un preparado invalido, pero por las dudas)
             if (!this.farmacos.existe(farmaco))
-            { return false; }
+            { throw new IllegalArgumentException(String.format("Farmaco '%d' no encontrado.", farmaco)); }
 
             // Obtener lista de incompatibilidades
             ILista<Integer, Integer> listaCompatibilidad = this.lista.buscarCada(farmaco);
 
-            // El primer elemento de la lista representa que esta en la lista blanca
-            // Si la lista es vacia, no esta en la lista blanca, y no se puede usar
-            if (listaCompatibilidad.esVacia())
+            // El primer elemento de la lista representa que este se encuentra en la lista blanca
+            // Si la lista es vacia, no se encuentra en la lista blanca, y no se puede usar
+            if (listaCompatibilidad == null || listaCompatibilidad.esVacia())
             { return false; }
 
             // Si el suero se encuentra en la lista de incompatibles, no es viable
@@ -47,41 +47,73 @@ public class Farmachop
         return true;
     }
 
-    @Command
-    public String imprimirSuero(int etiqueta) throws IllegalArgumentException
-    { return this.imprimirSuero(etiqueta, IDENTIFICADOR + DESCRIPCION); }
-
-    public String imprimirSuero(int etiqueta, int labels) throws IllegalArgumentException
+    @Command(description = "Checkear si un preparado es viable o no viable.")
+    public void PreparadoViable(@Param(name = "Suero", description = "Suero a usar.") Integer suero,
+                                @Param(name = "Farmacos", description = "Farmacos a usar.") Integer... farmacos)
     {
-        INodo<Integer, String> nodo = this.sueros.buscar(etiqueta);
-        if (nodo == null)
-        { throw new IllegalArgumentException("Etiqueta invalida."); }
-        return nodo.imprimir(labels, " : ");
+        try
+        { System.out.println(esPreparadoViable(suero, farmacos) ? "VIABLE" : "NO VIABLE"); }
+        catch (IllegalArgumentException e)
+        { System.out.println(e.getMessage()); }
     }
 
-    @Command
-    public String imprimirFarmaco(int etiqueta) throws IllegalArgumentException
-    { return this.imprimirFarmaco(etiqueta, IDENTIFICADOR + DESCRIPCION); }
-
-    public String imprimirFarmaco(int etiqueta, int labels) throws IllegalArgumentException
+    @Command(description = "Obtener descripcion de un suero.")
+    public void suero(@Param(name = "Identificador", description = "Identificador del suero.") int identificador)
     {
-        INodo<Integer, String> nodo = this.farmacos.buscar(etiqueta);
-        if (nodo == null)
-        { throw new IllegalArgumentException("Etiqueta invalida."); }
-        return nodo.imprimir(labels, " : ");
+        try
+        { System.out.println(imprimirSuero(identificador)); }
+        catch (IllegalArgumentException e)
+        { System.out.println(e.getMessage()); }
     }
 
-    @Command
+    public String imprimirSuero(int identificador) throws IllegalArgumentException
+    { return this.imprimirSuero(identificador, IDENTIFICADOR + DESCRIPCION); }
+
+    public String imprimirSuero(int identificador, int labels) throws IllegalArgumentException
+    {
+        INodo<Integer, String> nodo = this.sueros.buscar(identificador);
+        if (nodo == null)
+        { throw new IllegalArgumentException(String.format("Suero '%d' no encontrado.", identificador)); }
+        return nodo.imprimir(labels, "\t : ");
+    }
+
+    @Command(description = "Obtener descripcion de un farmaco.")
+    public void farmaco(@Param(name = "Identificador", description = "Identificador del farmaco.") int identificador)
+    {
+        try
+        { System.out.println(imprimirFarmaco(identificador)); }
+        catch (IllegalArgumentException e)
+        { System.out.println(e.getMessage()); }
+    }
+
+    public String imprimirFarmaco(int identificador) throws IllegalArgumentException
+    { return this.imprimirFarmaco(identificador, IDENTIFICADOR + DESCRIPCION); }
+
+    public String imprimirFarmaco(int identificador, int labels) throws IllegalArgumentException
+    {
+        INodo<Integer, String> nodo = this.farmacos.buscar(identificador);
+        if (nodo == null)
+        { throw new IllegalArgumentException(String.format("Farmaco '%d' no encontrado.", identificador)); }
+        return nodo.imprimir(labels, "\t : ");
+    }
+
+    @Command(description = "Imprime todos los sueros.")
+    public void sueros()
+    { System.out.println(imprimirSueros()); }
+
     public String imprimirSueros()
     { return this.imprimirSueros(IDENTIFICADOR + DESCRIPCION); }
 
-    @Command
+    @Command(description = "Imprime todos los farmacos.")
+    public void farmacos()
+    { System.out.println(imprimirFarmacos()); }
+
     public String imprimirFarmacos()
     { return this.imprimirFarmacos(IDENTIFICADOR + DESCRIPCION); }
 
     public String imprimirSueros(int labels)
-    { return this.sueros.imprimir(labels, "\n", " : "); }
+    { return this.sueros.imprimir(labels, "\n", "\t : "); }
 
     public String imprimirFarmacos(int labels)
-    { return this.farmacos.imprimir(labels, "\n", " : "); }
+    { return this.farmacos.imprimir(labels, "\n", "\t : "); }
 }
