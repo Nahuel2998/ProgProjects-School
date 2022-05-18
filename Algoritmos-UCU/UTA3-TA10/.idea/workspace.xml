@@ -5,14 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cef852b7-bc0b-43a7-942a-f3ae037c55cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/classes/FarmachopTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/Farmachop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/Farmachop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/ILista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/ILista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/INodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/INodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/Lista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/ListaMejorada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/ListaMejorada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/Nodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/Nodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/classes/NodoSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/classes/NodoSimple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/classes/Farmachop.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/Farmachop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/files/farmacos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/files/farmacos.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/classes/ILista.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/ILista.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/classes/Lista.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/Lista.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/classes/ListaMejorada.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/ListaMejorada.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/classes/Nodo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/Nodo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/classes/NodoSimple.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/classes/NodoSimple.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,19 +55,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "last_opened_file_path": "C:/Users/nahue/Documents/Git/ProgProjects-School/Algoritmos-UCU/UTA3-TA10",
-    "settings.editor.selected.configurable": "Errors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nahue/Documents/Git/ProgProjects-School/Algoritmos-UCU/UTA3-TA10&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nahue\Documents\Git\Algoritmos-UCU\UTA3-TA10\target" />
@@ -73,7 +79,7 @@
       <recent name="org.classes" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.FarmachopTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.main.Main" />
       <module name="UTA3-TA10" />
@@ -104,8 +110,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.FarmachopTest" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>

@@ -1,65 +1,28 @@
 package org.classes;
 
-public interface ILista<K extends Comparable<K>, T> {
+import org.jetbrains.annotations.NotNull;
 
-    /**
-     * Metodo encargado de agregar un nodo al final de la lista.
-     *
-     * @param nodo - Nodo a agregar
-     */
+public interface ILista<K extends Comparable<K>, T>
+{
     void insertar(INodo<K, T> nodo);
+    void insertar(@NotNull ILista<K, T> lista);
 
-    /**
-     * Metodo encargado de buscar un nodo cuya clave es la indicada.
-     *
-     * @param clave - Clave del nodo a buscar.
-     * @return El nodo encontrado. En caso de no encontrarlo, retornar null.
-     */
     INodo<K, T> buscar(K clave);
     INodo<K, T> buscarDato(T dato);
     ILista<K, T> buscarCada(K clave);
 //    ListaMejorada<T> buscarCadaMejor(Integer clave);
 
-    /**
-     * Metodo encargado de eliminar un nodo cuya clave es la indicada.
-     *
-     * @param clave Clave del nodo a eliminar.
-     * @return True en caso de que la eliminaci�n haya sido efectuada con �xito.
-     */
     boolean eliminar(K clave);
 
-    /**
-     * Metodo encargado de imprimir en consola las claves de los nodos
-     * contenidos en la lista.
-     * @return 
-     */
     String imprimir();
     String imprimir(int labels);
 
-    /**
-     * Retorna un String con las claves separadas por el separador pasado por
-     * par�metro.
-     *
-     * @param separador Separa las claves
-     * @return
-     */
     String imprimir(String separador);
     String imprimir(int labels, String separador);
     String imprimir(int labels, String separador, String separadorNodo);
 
-    /**
-     * Retorna la cantidad de elementos de la lista. En caso de que la lista
-     * este vac�a, retornar 0.
-     *
-     * @return Cantidad de elementos de la lista.
-     */
     int cantElementos();
 
-    /**
-     * Indica si la lista contiene o no elementos.
-     *
-     * @return Si tiene elementos o no.
-     */
     boolean esVacia();
 
     INodo<K, T> getPrimero();
@@ -68,5 +31,5 @@ public interface ILista<K extends Comparable<K>, T> {
     boolean existe(K clave);
     boolean existeDato(T dato);
 
-    void ordenar(short tipo);
+//    void ordenar(int tipo);
 }

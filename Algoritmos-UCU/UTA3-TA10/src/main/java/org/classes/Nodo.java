@@ -40,6 +40,8 @@ public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
     { return this.imprimir(labels, ", "); }
 
     @Override
+    // El parametro labels debera ser una suma de constantes indicando las labels que se quieran.
+    // Ejemplo: (ETIQUETA + DATO)
     public String imprimir(int labels, String separador)
     {
         if (labels > ETIQUETA + DATO || labels < 1)

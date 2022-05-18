@@ -17,6 +17,18 @@ public class ListaMejorada<T>
     { this.buckets[getIndex(nodo)].insertar(nodo); }
 
 //    @Override
+    public void insertar(@NotNull ILista<Integer, T> lista)
+    {
+        INodo<Integer, T> aux = lista.getPrimero();
+
+        while (aux != null)
+        {
+            this.insertar(aux);
+            aux = aux.getSiguiente();
+        }
+    }
+
+//    @Override
     public INodo<Integer, T> buscar(Integer clave)
     { return this.buckets[getIndex(clave)].buscar(clave); }
 
@@ -73,11 +85,18 @@ public class ListaMejorada<T>
     { return this.buscar(clave) != null; }
 
 //    @Override
-    public void ordenar(short tipo)
-    {
-        for (ILista<Integer, T> bucket : this.buckets)
-        { bucket.ordenar(tipo); }
-    }
+//    public void ordenar(short tipo)
+//    {
+//        for (ILista<Integer, T> bucket : this.buckets)
+//        { bucket.ordenar(tipo); }
+//    }
+
+//    @Override
+//    public void ordenar()
+//    {
+//        this.vaciar();
+//        this.insertar(this.toLista());
+//    }
 
     public void setCantidadBuckets(int cantidadBuckets)
     {
@@ -86,8 +105,7 @@ public class ListaMejorada<T>
         this.buckets = new ILista[cantidadBuckets];
 
         // Inicializar buckets
-        for (int i = 0; i < this.buckets.length; i++)
-        { this.buckets[i] = new Lista<>(); }
+        this.vaciar();
 
         if (bucketsOld == null)
         { return; }
@@ -102,6 +120,22 @@ public class ListaMejorada<T>
                 aux = aux.getSiguiente();
             }
         }
+    }
+
+    public void vaciar()
+    {
+        for (int i = 0; i < this.buckets.length; i++)
+        { this.buckets[i] = new Lista<>(); }
+    }
+
+    public ILista<Integer, T> toLista()
+    {
+        ILista<Integer, T> res = new Lista<>();
+
+        for (ILista<Integer, T> bucket : this.buckets)
+        { res.insertar(bucket); }
+
+        return res;
     }
 
     private int getIndex(Integer clave)

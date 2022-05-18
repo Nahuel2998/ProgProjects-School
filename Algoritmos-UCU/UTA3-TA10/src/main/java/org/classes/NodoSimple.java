@@ -1,5 +1,8 @@
 package org.classes;
 
+// No usado.
+// El punto era crear un nodo con un solo tipo de dato, para ahorrar memoria.
+// Por restricciones de tiempo, no ha sido usado.
 public class NodoSimple<T>
 {
     private T dato;

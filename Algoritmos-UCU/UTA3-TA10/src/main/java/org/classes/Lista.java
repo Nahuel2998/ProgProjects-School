@@ -80,6 +80,10 @@ public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
     { this.insertarFinal(nodo); }
 
     @Override
+    public void insertar(@NotNull ILista<K, T> lista)
+    { this.insertarFinal(lista); }
+
+    @Override
     public INodo<K, T> buscar(K clave)
     {
         if (this.esVacia())
@@ -311,10 +315,10 @@ public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
         this.largo = 0;
     }
 
+/*
     // Radix LSD Bucket Sort
-    // FIXME: yeah
     @Override
-    public void ordenar(short tipo)
+    public void ordenar(int tipo)
     {
         if (this.largo < 2)
         { return; }
@@ -323,17 +327,17 @@ public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
 //        ILista<K, T>[] buckets = (ILista<K, T>[]) Array.newInstance(this.getClass(), 37);
 
         // Obtener LSD
-        short longestLen = 0;
+        int longestLen = 0;
         INodo<K, T> aux = this.primero;
         while (aux != null)
         {
-            if (aux.getEtiqueta().toString().length() > longestLen)
-            { longestLen = (short) getLabel(aux, tipo).length(); }
+            if (aux.getLabel(ETIQUETA).length() > longestLen)
+            { longestLen = getLabel(aux, tipo).length(); }
             aux = aux.getSiguiente();
         }
 
         // i = Lugar actual en el string (de LSD a MSD)
-        for (short i = (short) (longestLen - 1); i >= 0; i--)
+        for (int i = longestLen - 1; i >= 0; i--)
         {
             // Reiniciar buckets
             for (short j = 0; j < buckets.length; j++)
@@ -347,7 +351,7 @@ public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
                 aux.setSiguiente(null);
 
                 short c = 0;
-                if (aux.getEtiqueta().toString().length() > i)
+                if (aux.getLabel(ETIQUETA).length() > i)
                 { c = getIndex(getLabel(aux, tipo).charAt(i)); }
                 buckets[c].insertar(aux);
 
@@ -371,6 +375,7 @@ public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
 
         return (short) (c - 47);
     }
+*/
 
     private String getLabel(@NotNull INodo<K, T> nodo, int i)
     { return nodo.getLabel(i); }

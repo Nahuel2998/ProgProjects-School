@@ -2,7 +2,6 @@ package org.classes;
 
 import asg.cliche.Command;
 import asg.cliche.Param;
-import org.jetbrains.annotations.NotNull;
 
 public class Farmachop
 {
@@ -47,8 +46,43 @@ public class Farmachop
         return true;
     }
 
+    public String imprimirSuero(int identificador) throws IllegalArgumentException
+    { return this.imprimirSuero(identificador, IDENTIFICADOR + DESCRIPCION); }
+
+    public String imprimirSuero(int identificador, int labels) throws IllegalArgumentException
+    {
+        INodo<Integer, String> nodo = this.sueros.buscar(identificador);
+        if (nodo == null)
+        { throw new IllegalArgumentException(String.format("Suero '%d' no encontrado.", identificador)); }
+        return nodo.imprimir(labels, "\t : ");
+    }
+
+    public String imprimirFarmaco(int identificador) throws IllegalArgumentException
+    { return this.imprimirFarmaco(identificador, IDENTIFICADOR + DESCRIPCION); }
+
+    public String imprimirFarmaco(int identificador, int labels) throws IllegalArgumentException
+    {
+        INodo<Integer, String> nodo = this.farmacos.buscar(identificador);
+        if (nodo == null)
+        { throw new IllegalArgumentException(String.format("Farmaco '%d' no encontrado.", identificador)); }
+        return nodo.imprimir(labels, "\t : ");
+    }
+
+    public String imprimirSueros()
+    { return this.imprimirSueros(IDENTIFICADOR + DESCRIPCION); }
+
+    public String imprimirFarmacos()
+    { return this.imprimirFarmacos(IDENTIFICADOR + DESCRIPCION); }
+
+    public String imprimirSueros(int labels)
+    { return this.sueros.imprimir(labels, "\n", "\t : "); }
+
+    public String imprimirFarmacos(int labels)
+    { return this.farmacos.imprimir(labels, "\n", "\t : "); }
+
+    // <editor-fold desc="[Comandos]">
     @Command(description = "Checkear si un preparado es viable o no viable.")
-    public void PreparadoViable(@Param(name = "Suero", description = "Suero a usar.") Integer suero,
+    public void preparadoViable(@Param(name = "Suero", description = "Suero a usar.") Integer suero,
                                 @Param(name = "Farmacos", description = "Farmacos a usar.") Integer... farmacos)
     {
         try
@@ -66,17 +100,6 @@ public class Farmachop
         { System.out.println(e.getMessage()); }
     }
 
-    public String imprimirSuero(int identificador) throws IllegalArgumentException
-    { return this.imprimirSuero(identificador, IDENTIFICADOR + DESCRIPCION); }
-
-    public String imprimirSuero(int identificador, int labels) throws IllegalArgumentException
-    {
-        INodo<Integer, String> nodo = this.sueros.buscar(identificador);
-        if (nodo == null)
-        { throw new IllegalArgumentException(String.format("Suero '%d' no encontrado.", identificador)); }
-        return nodo.imprimir(labels, "\t : ");
-    }
-
     @Command(description = "Obtener descripcion de un farmaco.")
     public void farmaco(@Param(name = "Identificador", description = "Identificador del farmaco.") int identificador)
     {
@@ -86,34 +109,12 @@ public class Farmachop
         { System.out.println(e.getMessage()); }
     }
 
-    public String imprimirFarmaco(int identificador) throws IllegalArgumentException
-    { return this.imprimirFarmaco(identificador, IDENTIFICADOR + DESCRIPCION); }
-
-    public String imprimirFarmaco(int identificador, int labels) throws IllegalArgumentException
-    {
-        INodo<Integer, String> nodo = this.farmacos.buscar(identificador);
-        if (nodo == null)
-        { throw new IllegalArgumentException(String.format("Farmaco '%d' no encontrado.", identificador)); }
-        return nodo.imprimir(labels, "\t : ");
-    }
-
     @Command(description = "Imprime todos los sueros.")
     public void sueros()
-    { System.out.println(imprimirSueros()); }
-
-    public String imprimirSueros()
-    { return this.imprimirSueros(IDENTIFICADOR + DESCRIPCION); }
+    { System.out.println(this.imprimirSueros()); }
 
     @Command(description = "Imprime todos los farmacos.")
     public void farmacos()
-    { System.out.println(imprimirFarmacos()); }
-
-    public String imprimirFarmacos()
-    { return this.imprimirFarmacos(IDENTIFICADOR + DESCRIPCION); }
-
-    public String imprimirSueros(int labels)
-    { return this.sueros.imprimir(labels, "\n", "\t : "); }
-
-    public String imprimirFarmacos(int labels)
-    { return this.farmacos.imprimir(labels, "\n", "\t : "); }
+    { System.out.println(this.imprimirFarmacos()); }
+    // </editor-fold>
 }
