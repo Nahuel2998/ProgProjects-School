@@ -1,40 +1,41 @@
 package org.classes;
 
-public class ElementoAB<T>
-        implements IElementoAB<T>
-{
-    private final int etiqueta;
-    private T datos;
-    private IElementoAB<T> hijoIzquierdo;
-    private IElementoAB<T> hijoDerecho;
+import org.jetbrains.annotations.NotNull;
 
-    public ElementoAB(int etiqueta)
+public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
+{
+    private final K etiqueta;
+    private T datos;
+    private IElementoAB<K, T> hijoIzquierdo;
+    private IElementoAB<K, T> hijoDerecho;
+
+    public ElementoAB(K etiqueta)
     { this.etiqueta = etiqueta; }
 
-    public ElementoAB(int etiqueta, T datos)
+    public ElementoAB(K etiqueta, T datos)
     {
         this.etiqueta = etiqueta;
         this.datos = datos;
     }
 
     @Override
-    public int getEtiqueta()
+    public K getEtiqueta()
     { return this.etiqueta; }
 
     @Override
-    public IElementoAB<T> getHijoIzq()
+    public IElementoAB<K, T> getHijoIzq()
     { return hijoIzquierdo; }
 
     @Override
-    public void setHijoIzq(IElementoAB<T> hijoIzquierdo)
+    public void setHijoIzq(IElementoAB<K, T> hijoIzquierdo)
     { this.hijoIzquierdo = hijoIzquierdo; }
 
     @Override
-    public IElementoAB<T> getHijoDer()
+    public IElementoAB<K, T> getHijoDer()
     { return hijoDerecho; }
 
     @Override
-    public void setHijoDer(IElementoAB<T> hijoDerecho)
+    public void setHijoDer(IElementoAB<K, T> hijoDerecho)
     { this.hijoDerecho = hijoDerecho; }
 
     @Override
@@ -42,14 +43,14 @@ public class ElementoAB<T>
     { return datos; }
 
     @Override
-    public boolean insertar(IElementoAB<T> elemento)
+    public boolean insertar(IElementoAB<K, T> elemento)
     {
-//        if (this.etiqueta.compareTo(elemento.getEtiqueta()) == 0)
-        if (etiqueta == elemento.getEtiqueta())
+        if (this.etiqueta.compareTo(elemento.getEtiqueta()) == 0)
+//        if (etiqueta == elemento.getEtiqueta())
         { return false; }
 
-//        if (this.etiqueta.compareTo(elemento.getEtiqueta()) > 0)
-        if (etiqueta > elemento.getEtiqueta())
+        if (this.etiqueta.compareTo(elemento.getEtiqueta()) > 0)
+//        if (etiqueta > elemento.getEtiqueta())
         {
             if (this.hijoIzquierdo == null)
             {
@@ -67,28 +68,36 @@ public class ElementoAB<T>
         return this.hijoDerecho.insertar(elemento);
     }
 
+    @Override
+    public IElementoAB<K, T> buscar(@NotNull K etiqueta)
+    {
+//        if (etiqueta.equals(this.etiqueta))
+//        { return this; }
+//        if (etiqueta.compareTo(this.etiqueta) < 0)
+//        { return this.getHijoIzq() != null ? this.getHijoIzq().buscar(etiqueta) : null; }
+//        return this.getHijoDer() != null ? this.getHijoDer().buscar(etiqueta) : null;
+
+        return etiqueta.equals(this.etiqueta) ?
+                this :
+                etiqueta.compareTo(this.etiqueta) < 0 ?
+                        this.getHijoIzq() != null ?
+                                this.getHijoIzq().buscar(etiqueta) :
+                                null :
+                        this.getHijoDer() != null ?
+                                this.getHijoDer().buscar(etiqueta) :
+                                null;
+    }
+
+    @Override
     public String inOrden()
     {
         String separador = ", ";
-//        StringBuilder res = new StringBuilder();
-//
-//        if (this.hijoIzquierdo != null)
-//        { res = new StringBuilder(this.hijoIzquierdo.inOrden()); }
-//
-//        res.append(getEtiqueta());
-//        res.append(separador);
-//
-//        if (this.hijoDerecho != null)
-//        {
-//            res.append(this.hijoDerecho.inOrden());
-//        }
-//
-//        return res.toString();
         StringBuilder res = this.inOrden(separador);
         res.setLength(res.length() - separador.length());
         return res.toString();
     }
 
+    @Override
     public StringBuilder inOrden(String separador)
     {
         StringBuilder res = new StringBuilder();
@@ -96,11 +105,37 @@ public class ElementoAB<T>
         if (this.hijoIzquierdo != null)
         { res = this.hijoIzquierdo.inOrden(separador); }
 
-        res.append(getEtiqueta());
+        res.append(this.getEtiqueta());
         res.append(separador);
 
         if (this.hijoDerecho != null)
         { res.append(this.hijoDerecho.inOrden(separador)); }
+
+        return res;
+    }
+
+    @Override
+    public String preOrden()
+    {
+        String separador = ", ";
+        StringBuilder res = this.preOrden(separador);
+        res.setLength(res.length() - separador.length());
+        return res.toString();
+    }
+
+    @Override
+    public StringBuilder preOrden(String separador)
+    {
+        StringBuilder res = new StringBuilder();
+
+        res.append(this.getEtiqueta());
+        res.append(separador);
+
+        if (this.hijoIzquierdo != null)
+        { res = this.hijoIzquierdo.preOrden(separador); }
+
+        if (this.hijoDerecho != null)
+        { res.append(this.hijoDerecho.preOrden(separador)); }
 
         return res;
     }
