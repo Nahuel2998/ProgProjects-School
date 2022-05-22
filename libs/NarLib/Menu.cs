@@ -11,7 +11,7 @@ namespace NarLib
         // Build Menu Generic
         // Main Build Menu
         private static object BuildMenuFunc(string title, IReadOnlyList<object> options,
-            Func<IReadOnlyList<object>, int, object> action, /* out dynamic result*/ string exitText = null,
+            Func<IReadOnlyList<object>, int, object> action, /* out dynamic result */ string exitText = null,
             string bottomText = null, bool cancellable = true, bool closeAfter = false, string[] stringOptions = null,
             Func<string> bottomTextFunc = null)
         {
@@ -64,13 +64,13 @@ namespace NarLib
             static object InvokeOption(IReadOnlyList<object> xOptions, int xIndex)
             {
                 ((Option) xOptions[xIndex]).Selected.Invoke();
-                return true;
+                return null;
             }
 
             BuildMenuFunc(title, options, InvokeOption, exitText, bottomText, cancellable, closeAfter,
                 stringOptions ?? Option.GetNamesFromOptionList(options), bottomTextFunc);
         }
-
+        
         // Build Menu with (or without) Exit Option, returns contained value, null if cancelled
         public static object BuildMenuGetSelected(string title, Option[] options, string exitText = null,
             string bottomText = null, bool cancellable = true, bool closeAfter = true, string[] stringOptions = null,
@@ -98,10 +98,7 @@ namespace NarLib
         // Render Menu with (or without) Exit Option
         public static void RenderMenu(string title, IEnumerable<Option> options, int selectedIndex,
             string exitText = null, string bottomText = null, Func<string> bottomTextFunc = null)
-        {
-            RenderMenu(title, Option.GetNamesFromOptionList(options), selectedIndex, exitText, bottomText,
-                bottomTextFunc);
-        }
+        { RenderMenu(title, Option.GetNamesFromOptionList(options), selectedIndex, exitText, bottomText, bottomTextFunc); }
 
         // Render Menu with (or without) Exit Option, takes string inputs
         // Main Render Menu method
