@@ -1,41 +1,41 @@
 package org.classes;
 
-public interface IElementoAB<T> {
+public interface IElementoAB<K extends Comparable<K>, T> {
 
     /**
      * Obtiene el valor de la etiqueta del nodo.
      *
      * @return Etiqueta del nodo.
      */
-    public int getEtiqueta();
+    public K getEtiqueta();
 
     /**
      * Obtiene el hijo izquierdo del nodo.
      *
      * @return Hijo Izquierdo del nodo.
      */
-    public IElementoAB<T> getHijoIzq();
+    public IElementoAB<K, T> getHijoIzq();
 
     /**
      * Obtiene el hijo derecho del nodo.
      *
      * @return Hijo derecho del nodo.
      */
-    public IElementoAB<T> getHijoDer();
+    public IElementoAB<K, T> getHijoDer();
 
     /**
      * Asigna el hijo izquierdo del nodo.
      *
      * @return Elemento a ser asignado como hijo izquierdo.
      */
-    public void setHijoIzq(IElementoAB<T> elemento);
+    public void setHijoIzq(IElementoAB<K, T> elemento);
 
     /**
      * Asigna el hijo derecho del nodo.
      *
      * @return Elemento a ser asignado como hijo derecho.
      */
-    public void setHijoDer(IElementoAB<T> elemento);
+    public void setHijoDer(IElementoAB<K, T> elemento);
 
     /**
      * Busca un elemento dentro del arbol con la etiqueta indicada.
@@ -43,7 +43,7 @@ public interface IElementoAB<T> {
      * @param unaEtiqueta del nodo a buscar
      * @return Elemento encontrado. En caso de no encontrarlo, retorna nulo.
      */
-//    public IElementoAB<T> buscar(int unaEtiqueta);
+    public IElementoAB<K, T> buscar(K unaEtiqueta);
 
  
 
@@ -53,14 +53,14 @@ public interface IElementoAB<T> {
      * @param elemento Elemento a insertar.
      * @return Exito de la operaci�n.
      */
-    public boolean insertar(IElementoAB<T> elemento);
+    public boolean insertar(IElementoAB<K, T> elemento);
 
     /**
      * Imprime en preorden el arbol separado por guiones.
      *
      * @return String conteniendo el PreOrden
      */
-//    public String preOrden();
+    public String preOrden();
 
     /**
      * Imprime en inorden el arbol separado por guiones.
@@ -88,9 +88,10 @@ public interface IElementoAB<T> {
      * @param
      * @return 
      */
-//    public IElementoAB eliminar(int unaEtiqueta);
+//    public IElementoAB<K, T> eliminar(K unaEtiqueta);
 
 //    StringBuilder inOrdenBuilder(String separador);
 
     StringBuilder inOrden(String separador);
+    StringBuilder preOrden(String separador);
 }

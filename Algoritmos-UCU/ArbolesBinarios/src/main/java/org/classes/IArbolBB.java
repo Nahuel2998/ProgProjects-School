@@ -1,6 +1,6 @@
 package org.classes;
 
-public interface IArbolBB<T> {
+public interface IArbolBB<K extends Comparable<K>, T> {
 
     /**
      * Inserta un elemento en el arbol. En caso de ya existir un elemento con la
@@ -10,7 +10,7 @@ public interface IArbolBB<T> {
      * @return Exito de la operacián
      */
 
-    public boolean insertar(IElementoAB<T> unElemento);
+    public boolean insertar(IElementoAB<K, T> unElemento);
 
     /**
      * Busca un elemento dentro del árbol.
@@ -20,7 +20,7 @@ public interface IArbolBB<T> {
      * .
      * @return Elemento encontrado. En caso de no encontrarlo, retorna nulo.
      */
-    public IElementoAB<T> buscar(Comparable unaEtiqueta);
+    public IElementoAB<K, T> buscar(K unaEtiqueta);
 
     /**
      * Imprime en PreOrden los elementos del árbol, separados por guiones.
@@ -48,9 +48,6 @@ public interface IArbolBB<T> {
      * Elimina un elemento dada una etiqueta.
      * @param unaEtiqueta 
      */
-    public void eliminar(Comparable unaEtiqueta);
-
-	
-	
+    public void eliminar(K unaEtiqueta);
 }
 
