@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ModSelector.classes
 {
@@ -8,29 +9,32 @@ namespace ModSelector.classes
         public string Id { get; }
         public string Name { get; }
         public bool Enabled { get; set; }
+        public bool InConflict { get; set; }
         
-        public Mod(string name, string id, bool enabled = false, params short[] category)
+        public Mod(string id, string name, params short[] categories)
         {
-            Categories = category;
+            Categories = categories;
             Id = id;
             Name = name;
-            Enabled = enabled;
         }
+        
+        public Mod(string id, string name, params string[] categories)
+            : this(id, name, categories.Select(GetCategoryId).ToArray()) { }
 
         public static short GetCategoryId(string name)
         {
-            return name switch
+            return name.ToLower() switch
             {
-                "Erina" => 0,
-                "Ribbon" => 1,
-                "Carrot" => 2,
-                "VNSprites" => 3,
-                "Menu" => 4,
-                "UI" => 5,
-                "Cicini" => 6,
-                "Cocoa" => 7,
-                "Sounds" => 8,
-                "Map" => 9,
+                "erina" => 0,
+                "ribbon" => 1,
+                "carrot" => 2,
+                "vnsprites" => 3,
+                "menu" => 4,
+                "ui" => 5,
+                "cicini" => 6,
+                "cocoa" => 7,
+                "sounds" => 8,
+                "map" => 9,
                 _ => throw new ArgumentException(name)
             };
         }

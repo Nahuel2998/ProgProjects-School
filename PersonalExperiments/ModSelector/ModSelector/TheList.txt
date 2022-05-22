@@ -1,0 +1,6 @@
+﻿1 : a : erina, ribbon
+2 : b : ribbon
+3 : c : vnsprites
+4 : d : vnsprites
+5 : f : map
+6 : g : map
