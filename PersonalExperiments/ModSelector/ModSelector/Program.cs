@@ -1,19 +1,105 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using ModSelector.classes;
 
 namespace ModSelector
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            if (new Random().Next(21, 63) == 42)
+            {
+                Console.WriteLine("I don't feel like running.");
+                Console.ReadKey();
+                return;
+            }
+            Console.WriteLine(@".°*°...o°**°....°°......°******°°..°°.°****°...° .....°°°°°°°.. ............ ...
+..*°...*°**°....°°......°**°°°*°.......°°°°....° ....°°°°°°°°.. ............ ...
+..*°...*°**°....°°......°*******°  .°°°°°°°....  ....°*°°°°°°.. ............ ... 
+..°°...*°°*°....°°....°..°°°°°°.  *OOOOOOOOoooo*  ....°°°°°°°°. ............ ... 
+..°°...*°°*°..°...    ....°°°°°°°°oooooooooooooO°............     .......... ... 
+..°°...****°..  .**oo***oooOOOOOOOoooOOOOOoooooooOoOOoooooooo*°*o°.  ....... ... 
+..°°...*°°....°*OOOOOOOOOooooooooooOOOOOOOOOOOOOOoooooooooOOOOOOOOOo*.. .... ... 
+..°°.  ..°*ooOOOooooooooooooOOOOOOOO#############OoOoooooooooooooooOOOo°  .. ... 
+.... .°*oOOOoooooOOOOOOOOOOOO####################OOOOOOOOOOOOOOOOooooooO°    ... 
+. .°oOOOoooooooooO########################################Oo*°°**oOOoooO° ...... 
+.*oOOooooooooOOOO###################################O###o°.       .*oOoO° ...... 
+oOoooooooOOOOO####################################O##Oo°    .°°°°°...*oO° ...... 
+ooooOOOOOO#########################################O*.  ..*oO######Oo**O° ...... 
+ooOOOOO###OO#####################################O*.  .*oO###OOOOOOOOOOO° ...... 
+oOo°. .°*O#####################################O*   .*OOO######OOOOOOOOO..°..... 
+O*..°..   °o###########################ooOOOo*°  .°oOOOO#######OOOOOOOOO..°..... 
+ooO###OO*°  .*O########################O*.     °oOOOOO#########OOOOOOOOO..°°.... 
+O#OOOO###OO*. .°o#####OOO################OOoooOOOOOO###########OOOOOOOOO..°°.... 
+OOOOO#######Oo°. ..°°°°oO##################OOOOOOO########OO#####OOOOOOO..°°. .. 
+OOOOO#########OOo**°*oOO####################OOOOOoo**°°°******ooOOOOOOOO..°°. .. 
+OOOO############OOOOOOOO####################OOo***°*************oooOOOOO.°°°. .. 
+OOOO######OOOoooOOOOOOO####################OOOOOOOOOOOOOO##OOOOOoooooOOO.°°°. .. 
+OOOO###OOo**°°°°°°°*oO#####################OOo°.        ...°°°**ooOOOOOO.°°°. .. 
+*OOOOOoooooooo*****°°*o####################O*.   ...               .°*oo.°°°. .. 
+°OOOOOOOOOo*°.    ..°*oO####################o.°ooOO* ......           .o.°°°. .. 
+.OOO##Oo°              *O##################o°oOOOO#°.#o........ °o*.   ..°°°. .. 
+oOOO*.       .....  °..o##################OO#O###@°*@@. ...... °OOO*  *.°°°. .. 
+*OO*   .*o° °...... *Oo*O######################@##°.#o ....... .OOOO.oo.°°°. .. 
+.OO°  *OOO.°@o .... °#OOO#########################° °°o....... °@#O**#o.°°°. .. 
+o°  °OOO#°°@o .... .@#O#######################@@@° °*o... .**.°#@#oOOo.°°°. .. 
+. *oo °O##@* °°°...°°.#########################OO##* ****°.°*oOoO@#oOOOo.°°°. .. 
+. °O#o°O@##o ..°.. *OO@########################Oo**.  °*ooooo*°.O*.oOOO*.°°°. .. 
+. .OO#oO@#@O °°...°*..oO###########################Oo*°...°°°.   °*oOOO*.°°°. .. 
+.. OO##O@@##° ***°°°°*O################################Oo*°°..°*°O#OOOO*.°°°. .. 
+.. *O#O°°#@@O  .°°oO#############################################O#OOOO*.°°°. .. 
+.. °O#OO*.°*° °oO##################################################OOOO*.°°°.... 
+.. .OO##O°* .O#####################################################OOOO*.°°°.... 
+..  O###O##o#######################################################OOOO°.°°° ... 
+... o##############################################################OOOO°.°°° ... 
+... *##############################################################OOOO°°°°° ... 
+... *##############################################################OOOO°°°°° ... 
+... °###############################################################OOO°°°°° ... 
+... °###############################################################OOO.°°°° ... 
+... .O##############################################################OOO.°°°° ... 
+... .O######################o######################################OOOO.°°°° ... 
+...  O#####################O*######################################OOOO.°°°° ... 
+...  O#####################*o######################################OOOO.°°°° ... 
+.... o#####################OO######################################OOOo.°°°. ... 
+.... o#####################OO######################################OOOo.°°°. ... 
+.... o######################O######################################OOOo.°°°. ... 
+.... *#############################################################OOOo.°°°. ... 
+.... *#############################################################OOOo.°°°. ... 
+.... °############################################################OOOO*.°°°. ... 
+.... °############################################################OOOO*.°°°. ... 
+.... .############################################################OOOO*°°°°. ... 
+......O###########################################################OOOO°°°°°. ..° 
+..... o###########################################################OOOO°°°°°....° 
+..... *##########################################################OOOOO°°°°° ...° 
+..... .##########################################################OOOOO°°°°° ...° 
+...... O##########################################OO############OOOOOO°°°°° ...° 
+...... *#########################################O*O############OOOOOO.°°°° ...° 
+...... .########################################o.*############OOOOOOO.°°°° ...° 
+....... o#################OO#######OOOOOOOOOOOo*.*O############OOOOOOO.*°°° ...° 
+....... .#################O*°oOOOOoooooooooo****O#############OOOOOOOo.*°°° ...° 
+........ o#################O°°°*ooOO###OOOOOO#################OOOOOOOo.*°°° ...° 
+........ .O###################################################OOOOOOOo.*°°. ...° 
+......... °##################################################OOOOOOOOo.*°°. ..°° 
+.........  *#################################################OOOOOOOO*.*°°. ..°° 
+......... . o######################O*OOO####################OOOOOOOOO .*°°. ..°° 
+......... .. o#####################O**ooOO#################OOOOOOOOO° °*°°. ..°° 
+......... ... o#####################OOOOO##################OOOOOOOO*°°°*°°....°° 
+......... .... *#####################OOO##################OOOOOOOO*.o.°*°°....°° 
+......... ..... *########################################OOOOOOOO*.*o.°*°° ...°° 
+......... ...... °######################################OOOOOOOO*.*oo.°*°° ...°° 
+......... ....... .O####################################OOOOOOO*.*o*o.**°° ...°° 
+........  ........  O##################################OOOOOOO°.oooo*.**°° ...°° 
+........  .........  *################################OOOOOOO°°ooo*o*.*°°° ..°°° 
+........  ........ .. °##############################OOOOOOo.°oo*°°°*.*°°° ..°°° 
+........  ........  .. .o###########################OOOOOO*.*ooo°*o*..*°°. ..°°° 
+........  ........  ...  *#########################OOOOOO° *o***°ooo..*°°. ..°°°");
+            UiHandler.Instance.TrackDosPlayer.Load();
+            UiHandler.Instance.PureFuriasPlayer.Load();
+            
             string[] paths = {
-                @"TheList.txt", // TheList Path
-                @"unusedMods", // Unused Mods Folder
-                @"mods"  // Used Mods Folder
+                $@"{Environment.CurrentDirectory}\TheList.txt", // TheList Path
+                $@"{Environment.CurrentDirectory}\unusedMods", // Unused Mods Folder
+                $@"{Environment.CurrentDirectory}\mods"  // Used Mods Folder
             };
             ref string theListPath = ref paths[0];
             ref string unusedModsFolder = ref paths[1];
@@ -21,73 +107,31 @@ namespace ModSelector
             
             for (int i = 0; i < args.Length; i++)
             { paths[i] = args[i]; }
-            
-            Dictionary<string, Mod> mods = new();
-            HashSet<Mod>[] usedCategories = new HashSet<Mod>[10];
-            for (int i = 0; i < usedCategories.Length; i++)
-            { usedCategories[i] = new HashSet<Mod>(); }
-            
-            // TheList format: ID : ModName : Tag1, Tag2, Tag3
-            foreach (string modString in File.ReadAllLines(theListPath))
+
+            try
             {
-                string[] modData = modString.Split(":", StringSplitOptions.TrimEntries);
-                mods.Add(modData[0],
-                    new Mod(modData[0], modData[1], modData[2].Split(",", StringSplitOptions.TrimEntries)));
+                string[] arrLine = File.ReadAllLines($@"{usedModsFolder}\..\..\ColdClientLoader.ini");
+                if (!(arrLine[4].EndsWith('l') || arrLine[4].EndsWith('2')))
+                { arrLine[4] += " -bettercontrol"; }
+
+                File.WriteAllLines($@"{usedModsFolder}\..\..\ColdClientLoader.ini", arrLine);
             }
+            catch (Exception)
+            { /* ignored */ }
 
-            // Ensure the number of folders equals the number of mods on TheList
-            if (Directory.GetDirectories(unusedModsFolder).Length + Directory.GetDirectories(usedModsFolder).Length !=
-                mods.Count)
-            { throw new Exception("Mismatching mod counts (folders and TheList lines)."); }
-
-            // Set already enabled mods as enabled
-            // Could throw a KeyNotFoundException
-            foreach (string dir in Directory.GetDirectories(usedModsFolder).Select(d => new DirectoryInfo(d).Name))
-            { ToggleMod(mods[dir], ref usedCategories); }
-            
-            CheckForConflicts(usedCategories);
-
-            // Debug
-            foreach (var mod in mods.Values)
-            { Console.WriteLine($"{mod.Id} : {mod.InConflict}"); }
-
-            // TODO: The main menu GUI
-            // You enable or disable values with certain keys (numbers)
-            // Could be implemented with OrderedDictionary<KeyCode, Mod>
-            // If you have two of the same category, warn about conflicts
-            // Append a !! after a mod to indicate it's in conflict
-            // Show conflicts per category
-            
-            // TODO: The main functionality
-            // Copy the selected mods to the mods folder, delete unselected ones from the folder
-            // no
-            // Move instead
-            // (Maybe compare if they're already there before copying?)
-            // (Use a kind of changes list and do the changes on saveOption)
-
-            // TODO: Make a search function
-            // Regex
-        }
-
-        static void ToggleMod(Mod mod, ref HashSet<Mod>[] usedCategories)
-        {
-            mod.Enabled = !mod.Enabled;
-            foreach (short category in mod.Categories)
+            try
+            { ModSelector.Instance.InitMods(theListPath, unusedModsFolder, usedModsFolder); }
+            catch (Exception e)
             {
-                if (mod.Enabled)
-                { usedCategories[category].Add(mod); }
-                else
-                { usedCategories[category].Remove(mod); }
+                Console.WriteLine(e);
+                Console.ReadKey();
+                return;
             }
-        }
-
-        static void CheckForConflicts(HashSet<Mod>[] usedCategories)
-        {
-            for (int i = 0; i < usedCategories.Length - 1; i++)
-            {
-                foreach (Mod mod in usedCategories[i])
-                { mod.InConflict = usedCategories[i].Count > 1; }
-            }
+            
+            UiHandler.Instance.TrackDosPlayer.PlayLooping();
+            UiHandler.Instance.UnusedModsFolder = unusedModsFolder;
+            UiHandler.Instance.UsedModsFolder = usedModsFolder;
+            UiHandler.Instance.BuildMenu();
         }
     }
 }

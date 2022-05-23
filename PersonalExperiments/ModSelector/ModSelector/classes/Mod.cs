@@ -38,5 +38,26 @@ namespace ModSelector.classes
                 _ => throw new ArgumentException(name)
             };
         }
+
+        public static string GetCategoryName(short id)
+        {
+            return id switch
+            {
+                0 => "Erina",
+                1 => "Ribbon",
+                2 => "Carrot",
+                3 => "VNSprites",
+                4 => "Menu",
+                5 => "UI",
+                6 => "Cicini",
+                7 => "Cocoa",
+                8 => "Sounds",
+                9 => "Map",
+                _ => throw new ArgumentException(id.ToString())
+            };
+        }
+
+        public override string ToString() =>
+            $"[{(Enabled ? "X" : " ")}] | ({Id}) : {Name} : {string.Join(", ", Categories.Select(GetCategoryName))}{(InConflict ? " | [!!]" : "")}";
     }
 }
