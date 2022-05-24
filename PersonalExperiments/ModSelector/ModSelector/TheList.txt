@@ -2,5 +2,5 @@
 2 : b : ribbon
 3 : cb : vnsprites
 4 : d : vnsprites
-5 : f : map
-6 : g : map
+5 : Aru-Ribi : sounds
+6 : Quest of aru : map

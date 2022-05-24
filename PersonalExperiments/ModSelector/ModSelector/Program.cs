@@ -1,5 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Media;
+using System.Reflection;
+using CommandLine;
 
 namespace ModSelector
 {
@@ -7,123 +10,99 @@ namespace ModSelector
     {
         private static void Main(string[] args)
         {
-            if (new Random().Next(21, 63) == 42)
+            OptionsHolder.Instance.Options = Parser.Default.ParseArguments<Options>(args).Value;
+            
+            Random random = new Random();
+            if (random.Next(21, 63) == 42)
             {
                 Console.WriteLine("I don't feel like running.");
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine(@".°*°...o°**°....°°......°******°°..°°.°****°...° .....°°°°°°°.. ............ ...
-..*°...*°**°....°°......°**°°°*°.......°°°°....° ....°°°°°°°°.. ............ ...
-..*°...*°**°....°°......°*******°  .°°°°°°°....  ....°*°°°°°°.. ............ ... 
-..°°...*°°*°....°°....°..°°°°°°.  *OOOOOOOOoooo*  ....°°°°°°°°. ............ ... 
-..°°...*°°*°..°...    ....°°°°°°°°oooooooooooooO°............     .......... ... 
-..°°...****°..  .**oo***oooOOOOOOOoooOOOOOoooooooOoOOoooooooo*°*o°.  ....... ... 
-..°°...*°°....°*OOOOOOOOOooooooooooOOOOOOOOOOOOOOoooooooooOOOOOOOOOo*.. .... ... 
-..°°.  ..°*ooOOOooooooooooooOOOOOOOO#############OoOoooooooooooooooOOOo°  .. ... 
-.... .°*oOOOoooooOOOOOOOOOOOO####################OOOOOOOOOOOOOOOOooooooO°    ... 
-. .°oOOOoooooooooO########################################Oo*°°**oOOoooO° ...... 
-.*oOOooooooooOOOO###################################O###o°.       .*oOoO° ...... 
-oOoooooooOOOOO####################################O##Oo°    .°°°°°...*oO° ...... 
-ooooOOOOOO#########################################O*.  ..*oO######Oo**O° ...... 
-ooOOOOO###OO#####################################O*.  .*oO###OOOOOOOOOOO° ...... 
-oOo°. .°*O#####################################O*   .*OOO######OOOOOOOOO..°..... 
-O*..°..   °o###########################ooOOOo*°  .°oOOOO#######OOOOOOOOO..°..... 
-ooO###OO*°  .*O########################O*.     °oOOOOO#########OOOOOOOOO..°°.... 
-O#OOOO###OO*. .°o#####OOO################OOoooOOOOOO###########OOOOOOOOO..°°.... 
-OOOOO#######Oo°. ..°°°°oO##################OOOOOOO########OO#####OOOOOOO..°°. .. 
-OOOOO#########OOo**°*oOO####################OOOOOoo**°°°******ooOOOOOOOO..°°. .. 
-OOOO############OOOOOOOO####################OOo***°*************oooOOOOO.°°°. .. 
-OOOO######OOOoooOOOOOOO####################OOOOOOOOOOOOOO##OOOOOoooooOOO.°°°. .. 
-OOOO###OOo**°°°°°°°*oO#####################OOo°.        ...°°°**ooOOOOOO.°°°. .. 
-*OOOOOoooooooo*****°°*o####################O*.   ...               .°*oo.°°°. .. 
-°OOOOOOOOOo*°.    ..°*oO####################o.°ooOO* ......           .o.°°°. .. 
-.OOO##Oo°              *O##################o°oOOOO#°.#o........ °o*.   ..°°°. .. 
-oOOO*.       .....  °..o##################OO#O###@°*@@. ...... °OOO*  *.°°°. .. 
-*OO*   .*o° °...... *Oo*O######################@##°.#o ....... .OOOO.oo.°°°. .. 
-.OO°  *OOO.°@o .... °#OOO#########################° °°o....... °@#O**#o.°°°. .. 
-o°  °OOO#°°@o .... .@#O#######################@@@° °*o... .**.°#@#oOOo.°°°. .. 
-. *oo °O##@* °°°...°°.#########################OO##* ****°.°*oOoO@#oOOOo.°°°. .. 
-. °O#o°O@##o ..°.. *OO@########################Oo**.  °*ooooo*°.O*.oOOO*.°°°. .. 
-. .OO#oO@#@O °°...°*..oO###########################Oo*°...°°°.   °*oOOO*.°°°. .. 
-.. OO##O@@##° ***°°°°*O################################Oo*°°..°*°O#OOOO*.°°°. .. 
-.. *O#O°°#@@O  .°°oO#############################################O#OOOO*.°°°. .. 
-.. °O#OO*.°*° °oO##################################################OOOO*.°°°.... 
-.. .OO##O°* .O#####################################################OOOO*.°°°.... 
-..  O###O##o#######################################################OOOO°.°°° ... 
-... o##############################################################OOOO°.°°° ... 
-... *##############################################################OOOO°°°°° ... 
-... *##############################################################OOOO°°°°° ... 
-... °###############################################################OOO°°°°° ... 
-... °###############################################################OOO.°°°° ... 
-... .O##############################################################OOO.°°°° ... 
-... .O######################o######################################OOOO.°°°° ... 
-...  O#####################O*######################################OOOO.°°°° ... 
-...  O#####################*o######################################OOOO.°°°° ... 
-.... o#####################OO######################################OOOo.°°°. ... 
-.... o#####################OO######################################OOOo.°°°. ... 
-.... o######################O######################################OOOo.°°°. ... 
-.... *#############################################################OOOo.°°°. ... 
-.... *#############################################################OOOo.°°°. ... 
-.... °############################################################OOOO*.°°°. ... 
-.... °############################################################OOOO*.°°°. ... 
-.... .############################################################OOOO*°°°°. ... 
-......O###########################################################OOOO°°°°°. ..° 
-..... o###########################################################OOOO°°°°°....° 
-..... *##########################################################OOOOO°°°°° ...° 
-..... .##########################################################OOOOO°°°°° ...° 
-...... O##########################################OO############OOOOOO°°°°° ...° 
-...... *#########################################O*O############OOOOOO.°°°° ...° 
-...... .########################################o.*############OOOOOOO.°°°° ...° 
-....... o#################OO#######OOOOOOOOOOOo*.*O############OOOOOOO.*°°° ...° 
-....... .#################O*°oOOOOoooooooooo****O#############OOOOOOOo.*°°° ...° 
-........ o#################O°°°*ooOO###OOOOOO#################OOOOOOOo.*°°° ...° 
-........ .O###################################################OOOOOOOo.*°°. ...° 
-......... °##################################################OOOOOOOOo.*°°. ..°° 
-.........  *#################################################OOOOOOOO*.*°°. ..°° 
-......... . o######################O*OOO####################OOOOOOOOO .*°°. ..°° 
-......... .. o#####################O**ooOO#################OOOOOOOOO° °*°°. ..°° 
-......... ... o#####################OOOOO##################OOOOOOOO*°°°*°°....°° 
-......... .... *#####################OOO##################OOOOOOOO*.o.°*°°....°° 
-......... ..... *########################################OOOOOOOO*.*o.°*°° ...°° 
-......... ...... °######################################OOOOOOOO*.*oo.°*°° ...°° 
-......... ....... .O####################################OOOOOOO*.*o*o.**°° ...°° 
-........  ........  O##################################OOOOOOO°.oooo*.**°° ...°° 
-........  .........  *################################OOOOOOO°°ooo*o*.*°°° ..°°° 
-........  ........ .. °##############################OOOOOOo.°oo*°°°*.*°°° ..°°° 
-........  ........  .. .o###########################OOOOOO*.*ooo°*o*..*°°. ..°°° 
-........  ........  ...  *#########################OOOOOO° *o***°ooo..*°°. ..°°°");
-            UiHandler.Instance.TrackDosPlayer.Load();
-            UiHandler.Instance.PureFuriasPlayer.Load();
-            
-            string[] paths = {
-                $@"{Environment.CurrentDirectory}\TheList.txt", // TheList Path
-                $@"{Environment.CurrentDirectory}\unusedMods", // Unused Mods Folder
-                $@"{Environment.CurrentDirectory}\mods"  // Used Mods Folder
-            };
-            ref string theListPath = ref paths[0];
-            ref string unusedModsFolder = ref paths[1];
-            ref string usedModsFolder = ref paths[2];
-            
-            for (int i = 0; i < args.Length; i++)
-            { paths[i] = args[i]; }
 
-            try
+            if (DateTime.Now.Minute == 42)
             {
-                string[] arrLine = File.ReadAllLines($@"{usedModsFolder}\..\..\ColdClientLoader.ini");
-                if (!(arrLine[4].EndsWith('l') || arrLine[4].EndsWith('2')))
-                { arrLine[4] += " -bettercontrol"; }
-
-                File.WriteAllLines($@"{usedModsFolder}\..\..\ColdClientLoader.ini", arrLine);
+                Console.WriteLine("nice the time");
+                Console.ReadKey();
+                Console.Clear();
             }
-            catch (Exception)
-            { /* ignored */ }
+
+            Console.SetWindowSize(Console.WindowWidth, 42);
+            Console.WriteLine(@".°*°...*°**°....°°.°..°.°*******°.....°°°°°....° .°..°****°°°°. ............ ...
+..°°...*°**°..°.°°... ...°°°°°°°. °***********°° .....°°°°°°°..  ........... ...
+..°°...**°°°... .°°°°°°°°*********OOOOOOOOOOOOOO**********°°°°.°°°.......... ...
+..°°...°°°°°°***ooOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo**°°.... ...
+...°°**ooooOOOOOoOOOOOOOOOOOOOO#OO###############OOOOO###OOo*****ooOOOOO° . ....
+*oooOOOOoooOOOOOO#############################OO#####Oo*°........°°°*ooO° ......
+OOOOoOOO#########################################Oo*°...°*oOO###OOOOoooO° ......
+Oo*°°°..°°*oO##########################OOOOOOo*°...°*oOO######OOOOOOOOOO..°.....
+OoOOOOOOo*°°.°*oOOO##OOO###############Oo**°°°°*oOO##############OOOOOOO..°°....
+OOOO########Ooo*°°°***oO######################OOOOOooooooooooooOOOOOOOOO..°°. ..
+OOOO#####OOOOOOOOOOOO######################OOOOoo*****ooooooooooooOOOOOO.°°°. ..
+oOOOOOOOOoo****°°°°**oO####################Oo°......   .........°°°**oOO.°°°. ..
+.OOO#OOo*°...       ..°o###################O***ooOO°.**         .°.    °.°°°. ..
+ *OOo°   .°. .....   °*°o##################OO#####@.°#O........ °#OOo °*.°°°. ..
+ .Oo. .oOO#°°#o..... °##OO######################@@@° °**.....°°.°@@Ooo#o.°°°. ..
+. *Oo°°####* °°°...°*°#########################OOOO° .***°°°*o*°oO*oOOOo.°°°. ..
+. .OO#OO#@@#°.°°..°*°*OO##########################OOOoo*****°°..°*oOOOO*.°°°. ..
+.. *O#Oo**oO* .*ooOO###############################################OOOO*.°°°....
+.. .OO##O*o°*O#####################################################OOOO°.°°° ...
+... o##############################################################OOOO°.°°° ...
+... °##############################################################OOOO°°°°° ...
+... .###############################################################OOO.°°°° ...
+... .O#####################Oo######################################OOOO.°°°° ...
+.... O#####################oO######################################OOOO.°°°° ...
+.... o######################O######################################OOOo.°°°. ...
+.... *#############################################################OOOo.°°°. ...
+.... °############################################################OOOO*.°°°. ...
+.... .O###########################################################OOOO*°°°°. ...
+..... o##########################################################OOOOO°°°°° ...°
+..... .O##########################################O#############OOOOOO°°°°° ...°
+...... °########################################O**O############OOOOOO.°°°° ...°
+....... *#################OoooOOOOOOooOOOOOOooo**oO############OOOOOOO.*°°° ...°
+........ °#################OooooOOOO###OOOOOOO################OOOOOOOo.*°°° ...°
+......... .o#################################################OOOOOOOO*.*°°. ..°°
+.........   °O#####################O*oOOOO##################OOOOOOOO*.°*°°. ..°°
+......... ..  °o####################OOOOO##################OOOOOOOo°*°°*°°....°°
+......... ....  °o#######################################OOOOOOOo°°*o.°*°° ...°°
+......... ......  .*O##################################OOOOOOO*°°*ooo.**°° ...°°
+........  ........   °oO#############################OOOOOOo*°°*o****.*°°° ..°°°
+........  ........ ..  .°o#########################OOOOOOo°°**o*°*oo..*°°. ..°°°");
+            if (random.Next(0, 600) == 600 || OptionsHolder.Instance.Options.Beato)
+            { new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("ModSelector.ahaha.wav")).PlaySync(); }
+            if (!OptionsHolder.Instance.Options.NoTrackDos) { UiHandler.Instance.TrackDosPlayer.Load(); }
+            if (!OptionsHolder.Instance.Options.NoJunko) { UiHandler.Instance.PureFuriasPlayer.Load(); }
+            if (!OptionsHolder.Instance.Options.ShutAru) { UiHandler.Instance.AruPlayer.Load(); }
+            
+            string[] defaultPaths = {
+                $@"{Environment.CurrentDirectory}\steam_settings\TheList.txt", // TheList Path
+                $@"{Environment.CurrentDirectory}\steam_settings\unusedMods", // Unused Mods Folder
+                $@"{Environment.CurrentDirectory}\steam_settings\mods"  // Used Mods Folder
+            };
+            string theListPath = OptionsHolder.Instance.Options.TheListPath ?? defaultPaths[0];
+            string unusedModsFolder = OptionsHolder.Instance.Options.UnusedModsFolder ?? defaultPaths[1];
+            string usedModsFolder = OptionsHolder.Instance.Options.UsedModsFolder ?? defaultPaths[2];
+
+            if (!OptionsHolder.Instance.Options.WorseControl)
+            {
+                try
+                {
+                    string[] arrLine = File.ReadAllLines($@"{usedModsFolder}\..\..\ColdClientLoader.ini");
+                    if (!arrLine[4].Contains("-bettercontrol"))
+                    { arrLine[4] += " -bettercontrol"; }
+
+                    File.WriteAllLines($@"{usedModsFolder}\..\..\ColdClientLoader.ini", arrLine);
+                }
+                catch (Exception)
+                { /* Ignored */ }
+            }
 
             try
             { ModSelector.Instance.InitMods(theListPath, unusedModsFolder, usedModsFolder); }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.Clear();
+                Console.WriteLine(e.Message);
                 Console.ReadKey();
                 return;
             }
@@ -133,5 +112,35 @@ o°  °OOO#°°@o .... .@#O#######################@@@° °*o... .**.°#@#oOOo.°
             UiHandler.Instance.UsedModsFolder = usedModsFolder;
             UiHandler.Instance.BuildMenu();
         }
+    }
+
+    public class Options
+    {
+        [Option('m', "modsFolder", HelpText = "Folder where used mods are stored")]
+        public string UsedModsFolder { get; set; }
+        
+        [Option('u', "unusedModsFolder", HelpText = "Folder where unused mods are stored")]
+        public string UnusedModsFolder { get; set; }
+        
+        [Option('l', "listPath", HelpText = "TheList.txt path")]
+        public string TheListPath { get; set; }
+        
+        [Option('b', "beato", HelpText = "ahaha.wav")]
+        public bool Beato { get; set; }
+        
+        [Option("shutAru", HelpText = "Make Aru shut the fuck up")]
+        public bool ShutAru { get; set; }
+        
+        [Option('a', "aruMode", HelpText = "WAAAAA")]
+        public bool AruMode { get; set; }
+        
+        [Option("noJunko", HelpText = "Junko will not show up")]
+        public bool NoJunko { get; set; }
+        
+        [Option("noTrackDos", HelpText = ":(")]
+        public bool NoTrackDos { get; set; }
+        
+        [Option('w', "worseControl")]
+        public bool WorseControl { get; set; }
     }
 }

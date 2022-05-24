@@ -3,23 +3,18 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0-windows</TargetFramework>
-        <PublishSingleFile>true</PublishSingleFile>
         <SelfContained>true</SelfContained>
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+<!--        <PublishTrimmed>true</PublishTrimmed>-->
+        <PublishSingleFile>true</PublishSingleFile>
         <PublishReadyToRun>true</PublishReadyToRun>
+        <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="mods\1\45" />
-      <Folder Include="mods\2" />
-      <Folder Include="mods\4" />
-      <Folder Include="mods\5" />
-      <Folder Include="mods\6" />
-      <Folder Include="unusedMods\3" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
+        <PackageReference Include="CommandLineParser" Version="2.9.1" />
+        <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -27,9 +22,10 @@
       <EmbeddedResource Include="Track_dos.wav" />
       <None Remove="Pure_furias.wav" />
       <EmbeddedResource Include="Pure_furias.wav" />
-      <None Update="TheList.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      <None Remove="ahaha.wav" />
+      <EmbeddedResource Include="ahaha.wav" />
+      <None Remove="Aru.wav" />
+      <EmbeddedResource Include="Aru.wav" />
     </ItemGroup>
 
 </Project>

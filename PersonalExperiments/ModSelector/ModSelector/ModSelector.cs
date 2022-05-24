@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
@@ -31,19 +32,25 @@ namespace ModSelector
                 ClearUsedCategories();
                 ClearChanged();
             }
-            
-            // TheList format: ID : ModName : Tag1, Tag2, Tag3
-            foreach (string modString in File.ReadAllLines(theListPath))
+
+            try
             {
-                string[] modData = modString.Split(":", StringSplitOptions.TrimEntries);
-                Mods.Add(modData[0],
-                    new Mod(modData[0], modData[1], modData[2].Split(",", StringSplitOptions.TrimEntries)));
+                // TheList format: ID : ModName : Tag1, Tag2, Tag3
+                foreach (string modString in File.ReadAllLines(theListPath))
+                {
+                    string[] modData = modString.Split(":", StringSplitOptions.TrimEntries);
+                    Mods.Add(modData[0],
+                        new Mod(modData[0], modData[1], modData[2].Split(",", StringSplitOptions.TrimEntries)));
+                }
+
+                // Ensure the number of folders equals the number of mods on TheList
+                if (Directory.GetDirectories(unusedModsFolder).Length +
+                    Directory.GetDirectories(usedModsFolder).Length !=
+                    Mods.Count)
+                { throw new Exception("Mismatching mod counts (folders and TheList lines)."); }
             }
-            
-            // Ensure the number of folders equals the number of mods on TheList
-            if (Directory.GetDirectories(unusedModsFolder).Length + Directory.GetDirectories(usedModsFolder).Length !=
-                Mods.Count)
-            { throw new Exception("Mismatching mod counts (folders and TheList lines)."); }
+            catch (IOException)
+            { throw new IOException("what where"); }
             
             // Set already enabled mods as enabled
             // Could throw a KeyNotFoundException
@@ -69,7 +76,8 @@ namespace ModSelector
                 else
                 {
                     UsedCategories[category].Remove(mod);
-                    mod.InConflict = false;
+                    // mod.InConflict = false;
+                    mod.ConflictingCategories.Clear();
                 }
             }
 
@@ -90,10 +98,15 @@ namespace ModSelector
         
         public void CheckForConflicts()
         {
-            for (var i = 0; i < UsedCategories.Length - 1; i++)
+            for (short i = 0; i < UsedCategories.Length - 1; i++)
             {
                 foreach (Mod mod in UsedCategories[i])
-                { mod.InConflict = UsedCategories[i].Count > 1; }
+                {
+                    if (UsedCategories[i].Count > 1)
+                    { mod.ConflictingCategories.Add(i); }
+                    else
+                    { mod.ConflictingCategories.Remove(i); }
+                }
             }
         }
 
@@ -105,9 +118,14 @@ namespace ModSelector
             {
                 if (category == mapCategoryId)
                 { continue; }
-                
-                foreach (Mod modInCategories in UsedCategories[category])
-                { modInCategories.InConflict = UsedCategories[category].Count > 1; }
+
+                foreach (Mod modInCategory in UsedCategories[category])
+                {
+                    if (UsedCategories[category].Count > 1)
+                    { modInCategory.ConflictingCategories.Add(category); }
+                    else
+                    { modInCategory.ConflictingCategories.Remove(category); }
+                }
             }
         }
         
@@ -173,9 +191,9 @@ namespace ModSelector
 
         public IEnumerable<Mod> GetMatchingModsWhenSearchingByName(string name) =>
             GetMatchingModsWhenSearchingByName(name, Mods.Values.Cast<Mod>());
-        
+
         public static IEnumerable<Mod> GetMatchingModsWhenSearchingByName(string name, IEnumerable<Mod> mods) =>
-            mods.Where(mod => new Regex(name, RegexOptions.IgnoreCase).Match(mod.Name).Success);
+            mods.Where(mod => mod.NameMatches(name));
 
         public static OrderedDictionary GetMatchingModsWhenSearchingByNameAsOrderedDict(string name,
             OrderedDictionary mods)
@@ -199,7 +217,7 @@ namespace ModSelector
             return res;
         }
 
-        public IEnumerable<Mod> GetConflictingMods() => 
-            UsedCategories.Take(UsedCategories.Length - 1).Where(x => x.Count > 1).SelectMany(y => y);
+        public ImmutableHashSet<Mod> GetConflictingMods() => 
+            UsedCategories.Take(UsedCategories.Length - 1).Where(x => x.Count > 1).SelectMany(y => y).ToImmutableHashSet();
     }
 }

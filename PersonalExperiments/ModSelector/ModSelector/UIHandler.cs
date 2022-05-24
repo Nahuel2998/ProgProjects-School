@@ -22,6 +22,7 @@ namespace ModSelector
         private string _currentCategory = "";
         public readonly SoundPlayer TrackDosPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("ModSelector.Track_dos.wav"));
         public readonly SoundPlayer PureFuriasPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("ModSelector.Pure_furias.wav"));
+        public readonly SoundPlayer AruPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("ModSelector.Aru.wav"));
         
         public static readonly UiHandler Instance = new();
 
@@ -38,7 +39,12 @@ namespace ModSelector
                 if (Char.IsDigit(key))
                 {
                     try
-                    { ModSelector.Instance.ToggleMod(_slots[(key - 49) % 10]); }
+                    {
+                        Mod mod = _slots[((short) key - 9) % 10];
+                        if ((mod.NameContainsAru && !OptionsHolder.Instance.Options.ShutAru) || OptionsHolder.Instance.Options.AruMode)
+                        { AruPlayer.Play(); }
+                        ModSelector.Instance.ToggleMod(mod);
+                    }
                     catch (ArgumentOutOfRangeException)
                     { }
                     continue;
@@ -75,12 +81,12 @@ namespace ModSelector
         private void MainMenu()
         {
             Console.Clear();
-            Console.WriteLine($"[Mod Selector]: {_currentSearch}");
+            Console.WriteLine($"[Mod Selector]: ({ModSelector.Instance.Mods.Count})");
             Console.WriteLine("- - - - - - - -");
             BuildCurrentPage();
             Console.WriteLine(GetCurrentPageInfo());
             Console.Write($"{(_currentPage > 1 ? "h> Previous Page\n" : "")}{(_canGoNext ? "l> Next Page\n" : "")}");
-            Console.WriteLine($"s> Search [\"{_currentSearch}\"]");
+            Console.WriteLine($"\ns> Search [\"{_currentSearch}\"]");
             Console.WriteLine($"c> Filter By Category [{_currentCategory}]");
             Console.WriteLine("- - - - - - - -");
             Console.WriteLine("d> Discard Changes");
@@ -92,7 +98,7 @@ namespace ModSelector
         {
             StringBuilder res = new StringBuilder();
             for (var i = 0; i < _slots.Count; i++)
-            { res.Append($"{i + 1 % 10}> {_slots[i]}\n"); }
+            { res.Append($"{(i + 1) % 10}> {_slots[i]}\n"); }
             
             return res.ToString();
         }
@@ -100,7 +106,7 @@ namespace ModSelector
         private void BuildCurrentPage()
         {
             _slots.Clear();
-            for (var i = (int) Math.Pow(10, _currentPage) - 10; i < (int) Math.Pow(10, _currentPage + 1) - 10; i++)
+            for (var i = 10*_currentPage - 10; i < 10*_currentPage; i++)
             {
                 try
                 { _slots.Add(_source[index: i] as Mod); }
@@ -131,21 +137,21 @@ namespace ModSelector
         {
             if (!ModSelector.Instance.Changed.Any())
             { return true; }
-           
-            TrackDosPlayer.Stop();
-            PureFuriasPlayer.PlayLooping();
+
+            if (!OptionsHolder.Instance.Options.NoJunko)
+            { PureFuriasPlayer.PlayLooping(); }
             Console.Clear();
             Console.WriteLine("] You have changes without saving:");
-            Console.WriteLine("- - - - - - - - - - - - - - -\n");
+            Console.WriteLine("- - - - - - - - - - - - - - - - -\n");
             Console.WriteLine(ModSelector.Instance.GetUnsavedChangesAsString());
-            Console.WriteLine("- - - - - - - - - - - - - - -");
+            Console.WriteLine("- - - - - - - - - - - - - - - - -");
             Console.WriteLine("w> Save and Exit");
             Console.WriteLine("q> Discard and Exit");
             Console.WriteLine("Any other key> Fuck go back");
 
             char key = Console.ReadKey().KeyChar;
-            PureFuriasPlayer.Stop();
-            TrackDosPlayer.PlayLooping();
+            if (!OptionsHolder.Instance.Options.NoTrackDos)
+            { TrackDosPlayer.PlayLooping(); }
             switch (key)
             {
                 case 'w':
@@ -171,7 +177,7 @@ namespace ModSelector
                 Console.WriteLine();
                 Console.WriteLine("- - - - - - - - - - - - - - -");
                 Console.WriteLine("w> I don't care");
-                Console.WriteLine("Any other key> Fuck go back");
+                Console.WriteLine("Any other key> Okay fine do not save then");
 
                 if (Console.ReadKey().KeyChar != 'w')
                 { return; }
@@ -184,12 +190,16 @@ namespace ModSelector
             Console.WriteLine("\b- - - - - - - -");
             Console.Write("Search> ");
             _currentSearch = Console.ReadLine();
-            bool isNull = string.IsNullOrEmpty(_currentSearch);
-            _source = !isNull
-                ? ModSelector.GetMatchingModsWhenSearchingByNameAsOrderedDict(_currentSearch, _source)
-                : ModSelector.Instance.Mods;
-            if (isNull)
-            { _currentCategory = ""; }
+            if (!string.IsNullOrEmpty(_currentSearch))
+            {
+                _source = ModSelector.GetMatchingModsWhenSearchingByNameAsOrderedDict(_currentSearch, _source);
+                _currentPage = 1;
+            }
+            else
+            {
+                _source = ModSelector.Instance.Mods;
+                _currentCategory = "";
+            }
         }
 
         private void Category()
@@ -199,13 +209,17 @@ namespace ModSelector
             try
             {
                 string tempCategory = Console.ReadLine();
-                bool isNull = string.IsNullOrEmpty(tempCategory);
-                _source = !string.IsNullOrEmpty(tempCategory)
-                    ? ModSelector.GetModsInCategoryAsOrderedDict(Mod.GetCategoryId(tempCategory), _source)
-                    : ModSelector.Instance.Mods;
+                if (!string.IsNullOrEmpty(tempCategory))
+                {
+                    _source = ModSelector.GetModsInCategoryAsOrderedDict(Mod.GetCategoryId(tempCategory), _source);
+                    _currentPage = 1;
+                }
+                else
+                {
+                    _source = ModSelector.Instance.Mods;
+                    _currentSearch = "";
+                }
                 _currentCategory = tempCategory;
-                if (isNull)
-                { _currentSearch = ""; }
             }
             catch (Exception)
             {

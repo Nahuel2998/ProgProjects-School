@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ModSelector.classes
 {
@@ -9,13 +11,16 @@ namespace ModSelector.classes
         public string Id { get; }
         public string Name { get; }
         public bool Enabled { get; set; }
-        public bool InConflict { get; set; }
+        // public bool InConflict { get; set; }
+        public bool NameContainsAru { get; }
+        public HashSet<short> ConflictingCategories { get; } = new();
         
         public Mod(string id, string name, params short[] categories)
         {
             Categories = categories;
             Id = id;
             Name = name;
+            NameContainsAru = NameMatches(@"\bAru\b");
         }
         
         public Mod(string id, string name, params string[] categories)
@@ -57,7 +62,14 @@ namespace ModSelector.classes
             };
         }
 
+        public bool NameMatches(string regex)
+        { return NameMatches(regex, this); }
+        
+        public static bool NameMatches(string regex, Mod mod)
+        { return new Regex(regex, RegexOptions.IgnoreCase).Match(mod.Name).Success; }
+
         public override string ToString() =>
-            $"[{(Enabled ? "X" : " ")}] | ({Id}) : {Name} : {string.Join(", ", Categories.Select(GetCategoryName))}{(InConflict ? " | [!!]" : "")}";
+            $"[{(Enabled ? "X" : " ")}] | ({Id}) : {Name} : {string.Join(", ", Categories.Select(GetCategoryName))}{(ConflictingCategories.Any() ? " | [!!]" : "")}";
+            // $"[{(Enabled ? "X" : " ")}] | ({Id}) : {Name} : {string.Join(", ", Categories.Select(GetCategoryName))}{(InConflict ? " | [!!]" : "")}";
     }
 }
