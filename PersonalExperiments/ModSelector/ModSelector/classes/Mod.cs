@@ -8,6 +8,7 @@ namespace ModSelector.classes
     public class Mod
     {
         public short[] Categories { get; }
+        private string CategoriesString { get; }
         public string Id { get; }
         public string Name { get; }
         public bool Enabled { get; set; }
@@ -20,6 +21,7 @@ namespace ModSelector.classes
             Categories = categories;
             Id = id;
             Name = name;
+            CategoriesString = GetCategoriesAsString();
             NameContainsAru = NameMatches(@"\bAru\b");
         }
         
@@ -39,8 +41,10 @@ namespace ModSelector.classes
                 "cicini" => 6,
                 "cocoa" => 7,
                 "sounds" => 8,
-                "map" => 9,
-                _ => throw new ArgumentException(name)
+                "hammer" => 9,
+                "map" => 10,
+                "other" => 11,
+                _ => throw new ArgumentException("Invalid CategoryId: " + name)
             };
         }
 
@@ -57,10 +61,15 @@ namespace ModSelector.classes
                 6 => "Cicini",
                 7 => "Cocoa",
                 8 => "Sounds",
-                9 => "Map",
-                _ => throw new ArgumentException(id.ToString())
+                9 => "Hammer",
+                10 => "Map",
+                11 => "Other",
+                _ => throw new ArgumentException("Invalid CategoryName : " + id)
             };
         }
+
+        public static short GetAmountOfTotalCategories()
+        { return 12; }
 
         public bool NameMatches(string regex)
         { return NameMatches(regex, this); }
@@ -68,8 +77,17 @@ namespace ModSelector.classes
         public static bool NameMatches(string regex, Mod mod)
         { return new Regex(regex, RegexOptions.IgnoreCase).Match(mod.Name).Success; }
 
+        public string GetCategoriesAsString(string separator = ", ")
+        { return string.Join(separator, Categories.Select(GetCategoryName)); }
+        
         public override string ToString() =>
-            $"[{(Enabled ? "X" : " ")}] | ({Id}) : {Name} : {string.Join(", ", Categories.Select(GetCategoryName))}{(ConflictingCategories.Any() ? " | [!!]" : "")}";
+            $"[{(Enabled ? "X" : " ")}] | ({Id}) : {Name} : {CategoriesString}{(ConflictingCategories.Any() ? " | [!!]" : "")}";
             // $"[{(Enabled ? "X" : " ")}] | ({Id}) : {Name} : {string.Join(", ", Categories.Select(GetCategoryName))}{(InConflict ? " | [!!]" : "")}";
+            
+        // public string ToString(int namePadding) =>
+            // $"[{(Enabled ? "X" : " ")}] | ({Id}) : {Name.PadRight(namePadding)} : {GetCategoriesAsString()}{(ConflictingCategories.Any() ? " | [!!]" : "")}";
+        
+        // public string ToString(int namePadding, int categoriesPadding) =>
+            // $"[{(Enabled ? "X" : " ")}] | ({Id}) : {Name.PadRight(namePadding)} : {GetCategoriesAsString().PadRight(categoriesPadding)}{(ConflictingCategories.Any() ? " | [!!]" : "")}";
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Media;
 using System.Reflection;
@@ -18,6 +19,7 @@ namespace ModSelector
         public string UnusedModsFolder { get; set; }
         public string UsedModsFolder { get; set; }
         private OrderedDictionary _source = ModSelector.Instance.Mods;
+        // private int _longestModCategoriesLength;
         private string _currentSearch = "";
         private string _currentCategory = "";
         public readonly SoundPlayer TrackDosPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("ModSelector.Track_dos.wav"));
@@ -31,6 +33,8 @@ namespace ModSelector
 
         public void BuildMenu()
         {
+            // _longestModCategoriesLength =
+                // ModSelector.Instance.Mods.Values.Cast<Mod>().Max(m => m.GetCategoriesAsString().Length);
             while (true)
             {
                 MainMenu();
@@ -74,6 +78,12 @@ namespace ModSelector
                         if (ShouldExit())
                         { return; }
                         break;
+                    case 'ñ':
+                        DeleteSelf();
+                        break;
+                    case 'o':
+                        OrderBy();
+                        break;
                 }
             }
         }
@@ -81,24 +91,25 @@ namespace ModSelector
         private void MainMenu()
         {
             Console.Clear();
-            Console.WriteLine($"[Mod Selector]: ({ModSelector.Instance.Mods.Count})");
-            Console.WriteLine("- - - - - - - -");
+            Console.WriteLine($" [Mod Selector]: ({ModSelector.Instance.Mods.Count})");
+            Console.WriteLine(" - - - - - - - -");
             BuildCurrentPage();
             Console.WriteLine(GetCurrentPageInfo());
-            Console.Write($"{(_currentPage > 1 ? "h> Previous Page\n" : "")}{(_canGoNext ? "l> Next Page\n" : "")}");
-            Console.WriteLine($"\ns> Search [\"{_currentSearch}\"]");
-            Console.WriteLine($"c> Filter By Category [{_currentCategory}]");
-            Console.WriteLine("- - - - - - - -");
-            Console.WriteLine("d> Discard Changes");
-            Console.WriteLine($"w> Save Changes [{ModSelector.Instance.Changed.Count}]");
-            Console.WriteLine("q> Exit");
+            Console.Write($"{(_currentPage > 1 ? " h> Previous Page\n" : "")}{(_canGoNext ? " l> Next Page\n" : "")}");
+            Console.WriteLine($"\n s> Search [\"{_currentSearch}\"]");
+            Console.WriteLine($" c> Filter By Category [{_currentCategory}]");
+            Console.WriteLine(" o> Order By [..]");
+            Console.WriteLine(" - - - - - - - -");
+            Console.WriteLine(" d> Discard Changes");
+            Console.WriteLine($" w> Save Changes [{ModSelector.Instance.Changed.Count}]");
+            Console.WriteLine(" q> Exit");
         }
 
         private string GetCurrentPageInfo()
         {
             StringBuilder res = new StringBuilder();
             for (var i = 0; i < _slots.Count; i++)
-            { res.Append($"{(i + 1) % 10}> {_slots[i]}\n"); }
+            { res.Append($" {(i + 1) % 10}> {_slots[i]/*.ToString(_longestModNameLength/* , _longestModCategoriesLength)*/}\n"); }
             
             return res.ToString();
         }
@@ -141,15 +152,16 @@ namespace ModSelector
             if (!OptionsHolder.Instance.Options.NoJunko)
             { PureFuriasPlayer.PlayLooping(); }
             Console.Clear();
-            Console.WriteLine("] You have changes without saving:");
-            Console.WriteLine("- - - - - - - - - - - - - - - - -\n");
-            Console.WriteLine(ModSelector.Instance.GetUnsavedChangesAsString());
-            Console.WriteLine("- - - - - - - - - - - - - - - - -");
-            Console.WriteLine("w> Save and Exit");
-            Console.WriteLine("q> Discard and Exit");
-            Console.WriteLine("Any other key> Fuck go back");
+            Console.WriteLine(" ] You have changes without saving:");
+            Console.WriteLine(" - - - - - - - - - - - - - - - - -\n");
+            Console.WriteLine(ModSelector.Instance.GetUnsavedChangesAsString(/*_longestModNameLength/*, _longestModCategoriesLength*/));
+            Console.WriteLine(" - - - - - - - - - - - - - - - - -");
+            Console.WriteLine(" w> Save and Exit");
+            Console.WriteLine(" q> Discard and Exit");
+            Console.WriteLine(" Any other key> Fuck go back");
 
             char key = Console.ReadKey().KeyChar;
+            PureFuriasPlayer.Stop();
             if (!OptionsHolder.Instance.Options.NoTrackDos)
             { TrackDosPlayer.PlayLooping(); }
             switch (key)
@@ -159,9 +171,11 @@ namespace ModSelector
                     return true;
                 case 'q':
                     return true;
-                default:
-                    return false;
+                case 'ñ':
+                    DeleteSelf();
+                    break;
             }
+            return false;
         }
 
         private void SaveChanges()
@@ -170,25 +184,33 @@ namespace ModSelector
             if (conflicts.Any())
             {
                 Console.Clear();
-                Console.WriteLine("] There are conflicting mods:");
-                Console.WriteLine("- - - - - - - - - - - - - - -\n");
+                Console.WriteLine(" ] There are conflicting mods:");
+                Console.WriteLine(" - - - - - - - - - - - - - - -\n");
                 foreach (Mod mod in conflicts)
-                { Console.WriteLine(mod); }
+                { Console.WriteLine(" " + mod/*.ToString(_longestModNameLength/*, _longestModCategoriesLength)*/); }
                 Console.WriteLine();
-                Console.WriteLine("- - - - - - - - - - - - - - -");
-                Console.WriteLine("w> I don't care");
-                Console.WriteLine("Any other key> Okay fine do not save then");
+                Console.WriteLine(" - - - - - - - - - - - - - - -");
+                Console.WriteLine(" w> I don't care");
+                Console.WriteLine(" Any other key> Okay fine do not save then");
 
-                if (Console.ReadKey().KeyChar != 'w')
-                { return; }
+                switch (Console.ReadKey().KeyChar)
+                {
+                    case 'w':
+                        break;
+                    case 'ñ':
+                        DeleteSelf();
+                        break;
+                    default:
+                        return;
+                }
             }
             ModSelector.Instance.SaveChanges(UnusedModsFolder, UsedModsFolder);
         }
 
         private void Search()
         {
-            Console.WriteLine("\b- - - - - - - -");
-            Console.Write("Search> ");
+            Console.WriteLine("\b - - - - - - - -");
+            Console.Write(" Search> ");
             _currentSearch = Console.ReadLine();
             if (!string.IsNullOrEmpty(_currentSearch))
             {
@@ -204,8 +226,8 @@ namespace ModSelector
 
         private void Category()
         {
-            Console.WriteLine("\b- - - - - - - -");
-            Console.Write("Category> ");
+            Console.WriteLine("\b - - - - - - - -");
+            Console.Write(" Category> ");
             try
             {
                 string tempCategory = Console.ReadLine();
@@ -223,9 +245,46 @@ namespace ModSelector
             }
             catch (Exception)
             {
-                Console.WriteLine("Invalid Category.");
+                Console.WriteLine(" Invalid Category.");
                 Console.ReadKey();
             }
+        }
+
+        private void DeleteSelf()
+        {
+            if (OptionsHolder.Instance.Options.AllowÑ)
+            { return; }
+            
+            Console.Clear();
+            Console.WriteLine(" what the fuCK\n You can press aNY key EXCePT for thAT onE\n\n fuck you I'm leaving.\n\n\n");
+            TrackDosPlayer.Stop();
+            PureFuriasPlayer.Stop();
+            Console.ReadLine();
+            
+            Process.Start(new ProcessStartInfo
+            {
+                Arguments = "/C choice /C Y /N /D Y /T 2 & Del \"" + Process.GetCurrentProcess().MainModule?.FileName +"\"",
+                WindowStyle = ProcessWindowStyle.Hidden, CreateNoWindow = true, FileName = "cmd.exe"
+            });
+            Environment.Exit('ñ');
+        }
+
+        private void OrderBy()
+        {
+            Console.Clear();
+            Console.WriteLine(" ] Order by what:");
+            Console.WriteLine(" - - - - - - - -");
+            Console.WriteLine(" 1> Id");
+            Console.WriteLine(" 2> Name");
+            Console.WriteLine(" 3> Category");
+            Console.WriteLine(" 4> Enabled");
+            Console.WriteLine(" Any other key> yeah");
+            Console.WriteLine(" - - - - - - - -");
+            Console.Write(" OrderBy> ");
+
+            char key = Console.ReadKey().KeyChar;
+            if (key == 'ñ') { DeleteSelf(); }
+            _source = ModSelector.OrderBy(key, _source) ?? _source;
         }
     }
 }

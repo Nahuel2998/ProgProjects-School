@@ -1,6 +1,0 @@
-﻿1 : a : erina, ribbon
-2 : b : ribbon
-3 : cb : vnsprites
-4 : d : vnsprites
-5 : Aru-Ribi : sounds
-6 : Quest of aru : map

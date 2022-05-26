@@ -10,6 +10,7 @@
         <PublishReadyToRun>true</PublishReadyToRun>
         <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
         <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <ApplicationIcon>Aru.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>

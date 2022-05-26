@@ -12,8 +12,13 @@ namespace ModSelector
 {
     public sealed class ModSelector
     {
-        public readonly OrderedDictionary Mods = new();
-        public readonly HashSet<Mod>[] UsedCategories = new HashSet<Mod>[10];
+        public const char SortById = '1';
+        public const char SortByName = '2';
+        public const char SortByCategory = '3';
+        public const char SortByEnabled = '4';
+        
+        public OrderedDictionary Mods = new();
+        public readonly HashSet<Mod>[] UsedCategories = new HashSet<Mod>[Mod.GetAmountOfTotalCategories() - 2];
         public readonly HashSet<Mod> Changed = new();
 
         public static readonly ModSelector Instance = new();
@@ -36,11 +41,14 @@ namespace ModSelector
             try
             {
                 // TheList format: ID : ModName : Tag1, Tag2, Tag3
-                foreach (string modString in File.ReadAllLines(theListPath))
+                string[] modStrings = File.ReadAllLines(theListPath);
+                IList<string[]> splitModStrings =
+                    modStrings.Select(m => m.Split(':', StringSplitOptions.TrimEntries)).ToList();
+                int longestName = splitModStrings.Max(m=> m[1].Length);
+                foreach (string[] modData in splitModStrings)
                 {
-                    string[] modData = modString.Split(":", StringSplitOptions.TrimEntries);
                     Mods.Add(modData[0],
-                        new Mod(modData[0], modData[1], modData[2].Split(",", StringSplitOptions.TrimEntries)));
+                        new Mod(modData[0], modData[1].PadRight(longestName), modData[2].Split(",", StringSplitOptions.TrimEntries)));
                 }
 
                 // Ensure the number of folders equals the number of mods on TheList
@@ -68,9 +76,15 @@ namespace ModSelector
         
         public void ToggleMod(Mod mod, bool checkForConflicts = true, bool toggleChanged = true)
         {
+            short mapCategoryId = Mod.GetCategoryId("Map");
+            short otherCategoryId = Mod.GetCategoryId("Other");
+            
             mod.Enabled = !mod.Enabled;
             foreach (short category in mod.Categories)
             {
+                if (category == mapCategoryId || category == otherCategoryId)
+                { continue; }
+                
                 if (mod.Enabled)
                 { UsedCategories[category].Add(mod); }
                 else
@@ -98,7 +112,7 @@ namespace ModSelector
         
         public void CheckForConflicts()
         {
-            for (short i = 0; i < UsedCategories.Length - 1; i++)
+            for (short i = 0; i < UsedCategories.Length; i++)
             {
                 foreach (Mod mod in UsedCategories[i])
                 {
@@ -112,13 +126,8 @@ namespace ModSelector
 
         public void CheckForConflicts(Mod mod)
         {
-            short mapCategoryId = Mod.GetCategoryId("Map");
-                
             foreach (short category in mod.Categories)
             {
-                if (category == mapCategoryId)
-                { continue; }
-
                 foreach (Mod modInCategory in UsedCategories[category])
                 {
                     if (UsedCategories[category].Count > 1)
@@ -166,10 +175,19 @@ namespace ModSelector
         {
             StringBuilder res = new StringBuilder();
             foreach (var mod in Changed)
-            { res.Append($"{mod}\n"); }
+            { res.Append($" {mod/*.ToString(namePadding/*, categoriesPadding)*/}\n"); }
 
             return res.ToString();
         }
+        
+        // public string GetUnsavedChangesAsString(int namePadding, int categoriesPadding)
+        // {
+            // StringBuilder res = new StringBuilder();
+            // foreach (var mod in Changed)
+            // { res.Append($" {mod/*.ToString(namePadding, categoriesPadding)*/}\n"); }
+
+            // return res.ToString();
+        // }
 
         public IEnumerable<Mod> GetModsInCategory(short categoryId) =>
             GetModsInCategory(categoryId, Mods.Values.Cast<Mod>());
@@ -218,6 +236,30 @@ namespace ModSelector
         }
 
         public ImmutableHashSet<Mod> GetConflictingMods() => 
-            UsedCategories.Take(UsedCategories.Length - 1).Where(x => x.Count > 1).SelectMany(y => y).ToImmutableHashSet();
+            UsedCategories.Where(x => x.Count > 1).SelectMany(y => y).ToImmutableHashSet();
+
+        public void OrderBy(char byWhat)
+        { Instance.Mods = OrderBy(byWhat, Instance.Mods) ?? Instance.Mods; }
+        
+        public static OrderedDictionary OrderBy(char byWhat, OrderedDictionary dict)
+        {
+            List<Mod> newModsOrder = byWhat switch
+            {
+                SortById => dict.Values.Cast<Mod>().OrderBy(m => m.Id).ToList(),
+                SortByName => dict.Values.Cast<Mod>().OrderBy(m => m.Name).ToList(),
+                SortByCategory => dict.Values.Cast<Mod>().OrderBy(m => m.Categories[0]).ToList(),
+                SortByEnabled => dict.Values.Cast<Mod>().OrderByDescending(m => m.Enabled).ToList(),
+                _ => null
+            };
+            
+            if (newModsOrder == null)
+            { return null; }
+
+            OrderedDictionary res = new(Instance.Mods.Count);
+            foreach (Mod mod in newModsOrder)
+            { res.Add(mod.Id, mod); }
+
+            return res;
+        }
     }
 }
