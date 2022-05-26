@@ -45,8 +45,6 @@ public interface IElementoAB<K extends Comparable<K>, T> {
      */
     public IElementoAB<K, T> buscar(K unaEtiqueta);
 
- 
-
     /**
      * Inserta un elemento dentro del arbol.
      *
@@ -94,4 +92,7 @@ public interface IElementoAB<K extends Comparable<K>, T> {
 
     StringBuilder inOrden(String separador);
     StringBuilder preOrden(String separador);
+
+    IElementoAB<K, T> eliminar(K etiqueta);
+    IElementoAB<K, T> quitarNodo();
 }

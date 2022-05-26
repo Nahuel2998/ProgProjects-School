@@ -89,6 +89,58 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
     }
 
     @Override
+    public IElementoAB<K, T> eliminar(@NotNull K etiqueta)
+    {
+        byte compareRes = (byte) etiqueta.compareTo(this.getEtiqueta());
+        if (compareRes < 0)
+        {
+            if (this.getHijoIzq() != null)
+            { this.setHijoIzq(this.getHijoIzq().eliminar(etiqueta)); }
+            return this;
+        }
+        if (compareRes > 0)
+        {
+            if (this.getHijoDer() != null)
+            { this.setHijoDer(this.getHijoDer().eliminar(etiqueta)); }
+            return this;
+        }
+        return this.quitarNodo();
+    }
+
+    @Override
+    public IElementoAB<K, T> quitarNodo()
+    {
+        if (this.getHijoIzq() == null)
+        { return this.getHijoDer(); }
+
+        if (this.getHijoDer() == null)
+        { return this.getHijoIzq(); }
+
+        IElementoAB<K, T> elPadre = this;
+        IElementoAB<K, T> elHijo = this.getHijoIzq();
+
+        while (elHijo.getHijoDer() != null)
+        {
+            elPadre = elHijo;
+            elHijo = elHijo.getHijoDer();
+        }
+
+        if (elPadre != this)
+        {
+            if (elHijo.getHijoIzq() != null)
+            { elPadre.setHijoDer(elHijo.getHijoIzq()); }
+
+            elHijo.setHijoIzq(this.getHijoIzq());
+        }
+
+        elHijo.setHijoDer(this.getHijoDer());
+        this.setHijoDer(null);
+        this.setHijoIzq(null);
+
+        return elHijo;
+    }
+
+    @Override
     public String inOrden()
     {
         String separador = ", ";
