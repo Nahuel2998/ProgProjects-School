@@ -89,6 +89,36 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
     }
 
     @Override
+    public int obtenerNivel(@NotNull K etiqueta, int nivel)
+    {
+        return etiqueta.equals(this.etiqueta) ?
+                nivel :
+                etiqueta.compareTo(this.etiqueta) < 0 ?
+                        this.getHijoIzq() != null ?
+                                this.getHijoIzq().obtenerNivel(etiqueta, nivel + 1) :
+                                -1 :
+                        this.getHijoDer() != null ?
+                                this.getHijoDer().obtenerNivel(etiqueta, nivel + 1) :
+                                -1;
+    }
+
+    @Override
+    public int obtenerNivel(@NotNull K etiqueta)
+    { return obtenerNivel(etiqueta, 1); }
+
+    @Override
+    public int obtenerAltura()
+    {
+        return this.getHijoIzq() == null && this.getHijoDer() == null ?
+                1 :
+                this.getHijoIzq() == null ?
+                        this.getHijoDer().obtenerAltura() + 1 :
+                        this.getHijoDer() == null ?
+                                this.getHijoIzq().obtenerAltura() + 1 :
+                                Math.max(this.getHijoIzq().obtenerAltura(), this.getHijoDer().obtenerAltura()) + 1;
+    }
+
+    @Override
     public IElementoAB<K, T> eliminar(@NotNull K etiqueta)
     {
         byte compareRes = (byte) etiqueta.compareTo(this.getEtiqueta());

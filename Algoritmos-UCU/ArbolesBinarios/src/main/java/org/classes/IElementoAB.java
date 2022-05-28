@@ -1,5 +1,7 @@
 package org.classes;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface IElementoAB<K extends Comparable<K>, T> {
 
     /**
@@ -86,13 +88,17 @@ public interface IElementoAB<K extends Comparable<K>, T> {
      * @param
      * @return 
      */
-//    public IElementoAB<K, T> eliminar(K unaEtiqueta);
+    IElementoAB<K, T> eliminar(K etiqueta);
+    IElementoAB<K, T> quitarNodo();
 
 //    StringBuilder inOrdenBuilder(String separador);
 
     StringBuilder inOrden(String separador);
     StringBuilder preOrden(String separador);
 
-    IElementoAB<K, T> eliminar(K etiqueta);
-    IElementoAB<K, T> quitarNodo();
+
+    int obtenerNivel(K etiqueta);
+    int obtenerNivel(K etiqueta, int nivel);
+
+    int obtenerAltura();
 }
