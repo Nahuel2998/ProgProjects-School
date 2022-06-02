@@ -126,16 +126,21 @@ namespace ModSelector
 
         public void CheckForConflicts(Mod mod)
         {
-            foreach (short category in mod.Categories)
+            try
             {
-                foreach (Mod modInCategory in UsedCategories[category])
+                foreach (short category in mod.Categories)
                 {
-                    if (UsedCategories[category].Count > 1)
-                    { modInCategory.ConflictingCategories.Add(category); }
-                    else
-                    { modInCategory.ConflictingCategories.Remove(category); }
+                    foreach (Mod modInCategory in UsedCategories[category])
+                    {
+                        if (UsedCategories[category].Count > 1)
+                        { modInCategory.ConflictingCategories.Add(category); }
+                        else
+                        { modInCategory.ConflictingCategories.Remove(category); }
+                    }
                 }
             }
+            catch (IndexOutOfRangeException)
+            { }
         }
         
         public void ClearChanged()
