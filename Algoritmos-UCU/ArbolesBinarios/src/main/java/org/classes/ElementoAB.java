@@ -214,7 +214,7 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
         res.append(separador);
 
         if (this.hijoIzquierdo != null)
-        { res = this.hijoIzquierdo.preOrden(separador); }
+        { res.append(this.hijoIzquierdo.preOrden(separador)); }
 
         if (this.hijoDerecho != null)
         { res.append(this.hijoDerecho.preOrden(separador)); }
