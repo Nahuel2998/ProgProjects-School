@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07151129", "07151129\07151129.csproj", "{D36C23E7-4C56-46FF-B626-F297945B4641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07151129", "07151129\07151129.csproj", "{D36C23E7-4C56-46FF-B626-F297945B4641}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NarExtensions", "..\..\libs\NarExtensions\NarExtensions\NarExtensions.csproj", "{B1539736-38BA-4B72-882E-8D57A9E77A45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D36C23E7-4C56-46FF-B626-F297945B4641}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D36C23E7-4C56-46FF-B626-F297945B4641}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D36C23E7-4C56-46FF-B626-F297945B4641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1539736-38BA-4B72-882E-8D57A9E77A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1539736-38BA-4B72-882E-8D57A9E77A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1539736-38BA-4B72-882E-8D57A9E77A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1539736-38BA-4B72-882E-8D57A9E77A45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

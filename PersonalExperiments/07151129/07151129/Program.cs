@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using NarExtensions;
 
 namespace _07151129
 {
@@ -13,27 +14,25 @@ namespace _07151129
                 with.CaseSensitive = false;
             });
 
-            OptionsHolder.Instance.Options = parser.ParseArguments<Options>(args).Value;
+            ProgramState.Instance.Options = parser.ParseArguments<Options>(args).Value;
 
-            if (!OptionsHolder.Instance.Options.Please)
+            if (ProgramState.Instance.Options.Help)
+            {
+                Console.WriteLine(string.Join(' ', args));
+                return;
+            }
+
+            if (!ProgramState.Instance.Options.Please)
             {
                 Console.WriteLine("no");
                 Console.ReadKey();
                 return;
             }
 
-            if (OptionsHolder.Instance.Options.Help)
-            {
-                Console.WriteLine(string.Join(' ', args));
-                return;
-            }
+            Console.SetWindowSize(Console.WindowWidth, 40);
+            Console.WriteLine(ProgramState.Instance.Options.Culprit?.PadBoth(Console.WindowWidth / 2).PadVertical(40) ?? "Hola.");
 
-            Console.WriteLine(OptionsHolder.Instance.Options.Culprit ?? "Hola.");
-
-            // Microsoft.Win32.RegistryKey key;
-            // key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("YOSANKAEVA").CreateSubKey("07151129");
-            // key.SetValue("Culprit", OptionsHolder.Instance.Options.Culprit);
-            // key.Close();
+            MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
