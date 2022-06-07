@@ -101,4 +101,6 @@ public interface IElementoAB<K extends Comparable<K>, T> {
     int obtenerNivel(K etiqueta, int nivel);
 
     int obtenerAltura();
+
+    boolean esHoja();
 }
