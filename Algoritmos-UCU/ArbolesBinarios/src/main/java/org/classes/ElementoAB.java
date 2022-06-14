@@ -1,5 +1,4 @@
 package org.classes;
-
 import org.jetbrains.annotations.NotNull;
 
 public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
@@ -221,4 +220,8 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
 
         return res;
     }
+
+    @Override
+    public boolean esHoja()
+    { return this.getHijoIzq() == null && this.getHijoDer() == null; }
 }
