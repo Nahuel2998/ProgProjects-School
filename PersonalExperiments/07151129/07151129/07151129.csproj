@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\NarExtensions\NarExtensions\NarExtensions.csproj" />
+    <ProjectReference Include="..\..\..\libs\NarLib\NarLib.csproj" />
   </ItemGroup>
 
 </Project>

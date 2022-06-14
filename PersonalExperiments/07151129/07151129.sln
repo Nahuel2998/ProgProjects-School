@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07151129", "07151129\071511
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NarExtensions", "..\..\libs\NarExtensions\NarExtensions\NarExtensions.csproj", "{B1539736-38BA-4B72-882E-8D57A9E77A45}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NarLib", "..\..\libs\NarLib\NarLib.csproj", "{A91302AE-B8C1-48A7-A6BA-7BAD0A16E78D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B1539736-38BA-4B72-882E-8D57A9E77A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1539736-38BA-4B72-882E-8D57A9E77A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1539736-38BA-4B72-882E-8D57A9E77A45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A91302AE-B8C1-48A7-A6BA-7BAD0A16E78D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A91302AE-B8C1-48A7-A6BA-7BAD0A16E78D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A91302AE-B8C1-48A7-A6BA-7BAD0A16E78D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A91302AE-B8C1-48A7-A6BA-7BAD0A16E78D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

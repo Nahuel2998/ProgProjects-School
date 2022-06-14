@@ -13,19 +13,23 @@ namespace NarExtensions
             return res.ToString();
         }
 
-        public static string PadBoth(this string source, int totalWidth, char paddingChar = ' ')
-        { return source.PadLeft(totalWidth - source.Length / 2 + source.Length, paddingChar).PadRight(totalWidth, paddingChar); }
+        public static string PadCenterHorizontal(this string source, int totalWidth, char paddingChar = ' ')
+        { return source.PadLeft((totalWidth - source.Length) / 2 + source.Length, paddingChar).PadRight(totalWidth, paddingChar); }
 
-        public static string PadVertical(this string source, int totalHeight)
+        public static string PadCenterVertical(this string source, int totalHeight)
         {
             int padHeight = (totalHeight - Regex.Matches(source, @"$", RegexOptions.Multiline).Count);
             int halfPadHeight = padHeight / 2;
 
-            StringBuilder res = new("\n".Multiply(halfPadHeight));
+            StringBuilder res = new("\n".Multiply(halfPadHeight + padHeight % 2));
             res.Append(source);
-            res.Append("\n".Multiply(halfPadHeight + padHeight % 2));
+            res.Append("\n".Multiply(halfPadHeight));
 
             return res.ToString();
         }
+
+        public static string PadCenterBoth(this string source, int totalWidth, int totalHeight)
+        { return source.PadCenterHorizontal(totalWidth).PadCenterVertical(totalHeight); }
     }
 }
+

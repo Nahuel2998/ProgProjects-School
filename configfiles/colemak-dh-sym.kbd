@@ -36,7 +36,7 @@
   _    q    w    f    p    b    j    l    u    y    ;    [    ]    \     
   esc  a    r    s    t    g    m    n    e    i    o    '    _
   _    x    c    d    v    z    k    h    ,    .    /    _               
-  _    _    @sdh           _              @sdh _    _    _               
+  _    _    _              _              @sdh _    _    _               
 )
 
 (deflayer qwerty
@@ -45,7 +45,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     
   esc  _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _               
-  _    _    @sqw           _              @sqw _    _    _               
+  _    _    _              _              @sqw _    _    _               
 )
 
 ;; The Thing
