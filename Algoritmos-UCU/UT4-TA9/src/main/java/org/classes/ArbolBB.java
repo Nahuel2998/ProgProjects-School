@@ -10,38 +10,38 @@ public class ArbolBB<K extends Comparable<K>, T> implements IArbolBB<K, T> {
     public static final String SEPARADOR_ELEMENTOS_IMPRESOS = "-";
 
     public ArbolBB()
-    { raiz = null; }
+    { this.raiz = null; }
+
+    public ArbolBB(IElementoAB<K, T> raiz)
+    { this.raiz = raiz; }
 
     /**
      * @param unElemento
      * @return
      */
-    public boolean insertar(IElementoAB<K, T> unElemento) {
-        if (esVacio()) {
-            raiz = unElemento;
+    public boolean insertar(IElementoAB<K, T> unElemento)
+    {
+        if (this.esVacio())
+        {
+            this.raiz = unElemento;
             return true;
-        } else {
-            return raiz.insertar(unElemento);
         }
+        else
+        { return raiz.insertar(unElemento); }
     }
 
     /**
      * @param unaEtiqueta
      * @return
      */
-    public IElementoAB<K, T> buscar(K unaEtiqueta) {
-        if (esVacio()) {
-            return null;
-        } else {
-            return raiz.buscar(unaEtiqueta);
-        }
-    }
+    public IElementoAB<K, T> buscar(K unaEtiqueta)
+    { return this.esVacio() ? null : this.raiz.buscar(unaEtiqueta); }
 
     /**
      * @return recorrida en inorden del arbol, null en caso de ser vacío
      */
     public String inOrden()
-    { return esVacio() ? null : raiz.inOrden(); }
+    { return esVacio() ? null : this.raiz.inOrden(); }
 
     /**
      * @return recorrida en preOrden del arbol, null en caso de ser vacío
@@ -50,16 +50,16 @@ public class ArbolBB<K extends Comparable<K>, T> implements IArbolBB<K, T> {
      * @return
      */
     public boolean esVacio()
-    { return (raiz == null); }
+    { return (this.raiz == null); }
 
     /**
      * @return True si habían elementos en el árbol, false en caso contrario
      */
     public boolean vaciar()
     {
-        if (!esVacio())
+        if (!this.esVacio())
         {
-            raiz = null;
+            this.raiz = null;
             return true;
         }
         return false;
@@ -69,40 +69,26 @@ public class ArbolBB<K extends Comparable<K>, T> implements IArbolBB<K, T> {
     public ILista<K, T> inorden()
     {
         Lista<K, T> listaInorden = null;
-        if (!esVacio())
+        if (!this.esVacio())
         {
             listaInorden = new Lista<>();
-            raiz.inOrden(listaInorden);
+            this.raiz.inOrden(listaInorden);
         }
         return listaInorden;
     }
 
     @Override
-    public int obtenerAltura() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public int obtenerAltura()
+    { return this.raiz.obtenerAltura(); }
 
     @Override
-    public int obtenerTamanio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public int obtenerNivel(K unaEtiqueta)
+    { return this.raiz.obtenerNivel(unaEtiqueta); }
 
     @Override
-    public int obtenerNivel(K unaEtiqueta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminar(K unaEtiqueta)
+    {
+        if (!this.esVacio())
+        { this.raiz = this.raiz.eliminar(unaEtiqueta); }
     }
-
-    @Override
-    public int obtenerCantidadHojas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  @Override
-    public void eliminar(K unaEtiqueta) {
-        if (!esVacio()) {
-            this.raiz = this.raiz.eliminar(unaEtiqueta);
-        }
-    }
-   
-
 }

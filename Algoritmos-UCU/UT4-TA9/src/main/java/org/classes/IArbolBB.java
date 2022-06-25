@@ -56,7 +56,7 @@ public interface IArbolBB<K extends Comparable<K>, T> {
      *
      * @return Tama�o del arbol.
      */
-    int obtenerTamanio();
+//    int obtenerTamanio();
 
     /**
      * Retorna el nivel del arbol a partir de la etiqueta indicada
@@ -71,7 +71,7 @@ public interface IArbolBB<K extends Comparable<K>, T> {
      *
      * @return Cantidad de hojas del arbol.
      */
-    int obtenerCantidadHojas();
+//    int obtenerCantidadHojas();
 
     /**
      * Elimina un elemento dada una etiqueta.

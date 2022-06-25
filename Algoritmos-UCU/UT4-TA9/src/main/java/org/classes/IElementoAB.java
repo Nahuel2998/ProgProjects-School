@@ -115,5 +115,5 @@ public interface IElementoAB<K extends Comparable<K>, T> {
      * Retorna la cantidad de hojas del arbol cuya raiz es la del nodo actual.
      * @return Cantidad de hojas del subarbol.
      */
-    int obtenerCantidadHojas();
+//    int obtenerCantidadHojas();
 }

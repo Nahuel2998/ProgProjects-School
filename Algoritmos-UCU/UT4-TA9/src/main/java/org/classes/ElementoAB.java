@@ -180,6 +180,20 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
     }
 
     @Override
+    public void inOrden(ILista<K, T> unaLista)
+    {
+        ILista<K, T> res = new Lista<>();
+
+        if (this.hijoIzquierdo != null)
+        { this.hijoIzquierdo.inOrden(unaLista); }
+
+        res.insertar(new Nodo<>(this.etiqueta, this.datos));
+
+        if (this.hijoIzquierdo != null)
+        { this.hijoIzquierdo.inOrden(unaLista); }
+    }
+
+    @Override
     public StringBuilder inOrden(String separador)
     {
         StringBuilder res = new StringBuilder();
