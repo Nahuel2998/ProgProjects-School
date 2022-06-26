@@ -3,7 +3,7 @@ package org.classes;
 import asg.cliche.Command;
 import asg.cliche.Param;
 
-public class Farmachop
+public final class Farmachop
 {
     private static final int IDENTIFICADOR = Nodo.ETIQUETA;
     private static final int DESCRIPCION = Nodo.DATO;

@@ -4,8 +4,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
 {
-    private final K etiqueta;
+    private K etiqueta;
     private T datos;
+    private int altura = 1;
     private IElementoAB<K, T> hijoIzquierdo;
     private IElementoAB<K, T> hijoDerecho;
 
@@ -21,6 +22,9 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
     @Override
     public K getEtiqueta()
     { return this.etiqueta; }
+
+    public void setEtiqueta(K etiqueta)
+    { this.etiqueta = etiqueta; }
 
     @Override
     public IElementoAB<K, T> getHijoIzq()
@@ -43,7 +47,11 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
     { return datos; }
 
     @Override
-    public boolean insertar(IElementoAB<K, T> elemento)
+    public void setDatos(T datos)
+    { this.datos = datos; }
+
+    @Override
+    public boolean insertar(@NotNull IElementoAB<K, T> elemento)
     {
         if (this.etiqueta.compareTo(elemento.getEtiqueta()) == 0)
 //        if (etiqueta == elemento.getEtiqueta())
@@ -65,6 +73,8 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
             this.hijoDerecho = elemento;
             return true;
         }
+
+        this.actualizarAltura();
         return this.hijoDerecho.insertar(elemento);
     }
 
@@ -106,17 +116,36 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
     public int obtenerNivel(@NotNull K etiqueta)
     { return obtenerNivel(etiqueta, 1); }
 
+//    @Override
+//    public int obtenerAltura()
+//    {
+//        return this.getHijoIzq() == null && this.getHijoDer() == null ?
+//                1 :
+//                this.getHijoIzq() == null ?
+//                        this.getHijoDer().obtenerAltura() + 1 :
+//                        this.getHijoDer() == null ?
+//                                this.getHijoIzq().obtenerAltura() + 1 :
+//                                Math.max(this.getHijoIzq().obtenerAltura(), this.getHijoDer().obtenerAltura()) + 1;
+//    }
+
     @Override
     public int obtenerAltura()
-    {
-        return this.getHijoIzq() == null && this.getHijoDer() == null ?
-                1 :
-                this.getHijoIzq() == null ?
-                        this.getHijoDer().obtenerAltura() + 1 :
-                        this.getHijoDer() == null ?
-                                this.getHijoIzq().obtenerAltura() + 1 :
-                                Math.max(this.getHijoIzq().obtenerAltura(), this.getHijoDer().obtenerAltura()) + 1;
-    }
+    { return this.altura; }
+
+    public void actualizarAltura()
+    { this.altura = 1 + Math.max(obtenerAlturaHijoIzq(), obtenerAlturaHijoDer()); }
+
+    @Override
+    public int obtenerAlturaHijoDer()
+    { return this.getHijoDer() == null ? 0 : this.getHijoDer().obtenerAltura(); }
+
+    @Override
+    public int obtenerAlturaHijoIzq()
+    { return this.getHijoIzq() == null ? 0 : this.getHijoIzq().obtenerAltura(); }
+
+    @Override
+    public int obtenerBalance()
+    { return this.obtenerAlturaHijoDer() - this.obtenerAlturaHijoIzq(); }
 
     @Override
     public IElementoAB<K, T> eliminar(@NotNull K etiqueta)
@@ -134,6 +163,7 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
             { this.setHijoDer(this.getHijoDer().eliminar(etiqueta)); }
             return this;
         }
+        this.actualizarAltura();
         return this.quitarNodo();
     }
 
@@ -171,43 +201,47 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
     }
 
     @Override
-    public String inOrden()
+    public IElementoAB<K, T> obtenerHojaIzquierda()
     {
-        String separador = ", ";
-        StringBuilder res = this.inOrden(separador);
-        res.setLength(res.length() - separador.length());
-        return res.toString();
+        IElementoAB<K, T> aux = this;
+
+        while (!aux.esHoja())
+        { aux = aux.getHijoIzq(); }
+
+        return aux;
     }
+
+    @Override
+    public String inOrden()
+    { return inOrden("-"); }
 
     @Override
     public void inOrden(ILista<K, T> unaLista)
     {
-        ILista<K, T> res = new Lista<>();
-
         if (this.hijoIzquierdo != null)
         { this.hijoIzquierdo.inOrden(unaLista); }
 
-        res.insertar(new Nodo<>(this.etiqueta, this.datos));
+        unaLista.insertar(new Nodo<>(this.etiqueta, this.datos));
 
-        if (this.hijoIzquierdo != null)
-        { this.hijoIzquierdo.inOrden(unaLista); }
+        if (this.hijoDerecho != null)
+        { this.hijoDerecho.inOrden(unaLista); }
     }
 
     @Override
-    public StringBuilder inOrden(String separador)
+    public String inOrden(String separador)
     {
-        StringBuilder res = new StringBuilder();
+        String res = "";
 
         if (this.hijoIzquierdo != null)
         { res = this.hijoIzquierdo.inOrden(separador); }
 
-        res.append(this.getEtiqueta());
-        res.append(separador);
+        res += this.getEtiqueta();
+        res += separador;
 
         if (this.hijoDerecho != null)
-        { res.append(this.hijoDerecho.inOrden(separador)); }
+        { res += this.hijoDerecho.inOrden(separador); }
 
-        return res;
+        return res.substring(0, res.length() - separador.length());
     }
 
     @Override

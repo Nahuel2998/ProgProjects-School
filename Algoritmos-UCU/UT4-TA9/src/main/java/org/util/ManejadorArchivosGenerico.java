@@ -34,9 +34,9 @@ public class ManejadorArchivosGenerico
         }
         catch (IOException e)
         {
-            System.out.println("Error al escribir el archivo "
+            System.out.println("Error al escribir el archivo: "
                     + nombreCompletoArchivo);
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 
@@ -62,7 +62,7 @@ public class ManejadorArchivosGenerico
                     + nombreCompletoArchivo);
             e.printStackTrace();
         }
-        System.out.println("Archivo leido satisfactoriamente");
+//        System.out.println("Archivo leido satisfactoriamente.");
 
         return listaLineasArchivo.toArray(new String[0]);
     }

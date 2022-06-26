@@ -1,5 +1,7 @@
 package org.classes;
 
+import javax.naming.NameNotFoundException;
+
 public interface IAlmacen<K extends Comparable<K>, T>
 {
     /**
@@ -7,7 +9,7 @@ public interface IAlmacen<K extends Comparable<K>, T>
      *
      * @param unProducto
      */
-    void insertarProducto(Producto unProducto);
+    void insertarProducto(K etiqueta, Producto<K> unProducto);
 
     /**
      * Eliminar productos que ya no se venden (por no ser comercializados m�s).
@@ -24,6 +26,8 @@ public interface IAlmacen<K extends Comparable<K>, T>
      */
     String imprimirProductos();
 
+    String imprimirProductos(String separador);
+
     Boolean agregarStock(K clave, Integer cantidad);
 
     /**
@@ -34,7 +38,7 @@ public interface IAlmacen<K extends Comparable<K>, T>
      * @param cantidad
      * @return
      */
-    Integer restarStock(K clave, Integer cantidad);
+    Integer restarStock(K clave, Integer cantidad) throws NameNotFoundException;
 
     /**
      * Dado un código de producto, indicar las existencias del mismo en el
@@ -44,4 +48,14 @@ public interface IAlmacen<K extends Comparable<K>, T>
      * @return
      */
     Producto buscarPorCodigo(K clave);
+
+    /**
+     * Dado un código de producto, retorna si existe o no (boolean)
+     *
+     * @param clave
+     * @return
+     */
+    boolean existeProducto(K clave);
+
+    int getValorAgregado();
 }

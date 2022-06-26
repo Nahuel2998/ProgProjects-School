@@ -1,12 +1,19 @@
 package org.classes;
 
-public class Almacen<K extends Comparable<K>> implements IAlmacen<K, Producto>
+import javax.naming.NameNotFoundException;
+import java.util.StringJoiner;
+
+public class Almacen<K extends Comparable<K>> implements IAlmacen<K, Producto<K>>
 {
-    private String nombre;
+    private final String nombre;
     private String direccion;
     private String telefono;
+    private final ArbolBB<K, Producto<K>> productos;
 
-    private ArbolBB<K, Producto> productos;
+    /**
+     * Separador utilizado entre elemento y elemento al imprimir la lista
+     */
+    public static final String SEPARADOR_ELEMENTOS_IMPRESOS = "\n- - - - - - -\n";
 
     public Almacen(String nombre)
     {
@@ -15,38 +22,94 @@ public class Almacen<K extends Comparable<K>> implements IAlmacen<K, Producto>
     }
 
     @Override
-    public void insertarProducto(Producto unProducto)
+    public void insertarProducto(K etiqueta, Producto<K> unProducto)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!this.productos.insertarBalanceado(new ElementoAB<>(etiqueta, unProducto)))
+        { throw new IllegalArgumentException(String.format("Producto %s ya existe.", etiqueta.toString())); }
     }
 
     @Override
     public String imprimirProductos()
+    { return imprimirProductos(SEPARADOR_ELEMENTOS_IMPRESOS); }
+
+    @Override
+    public String imprimirProductos(String separador)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringJoiner res = new StringJoiner(separador);
+
+        for (Producto<K> producto : this.productos.inOrden())
+        { res.add(producto.toString()); }
+
+        return res.toString();
     }
 
     @Override
     public Boolean agregarStock(K clave, Integer cantidad)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IElementoAB<K, Producto<K>> elementoProducto = this.productos.buscar(clave);
+        if (elementoProducto == null)
+        { return false; }
+
+        elementoProducto.getDatos().agregarStock(cantidad);
+        return true;
     }
 
     @Override
-    public Integer restarStock(K clave, Integer cantidad)
+    public Integer restarStock(K clave, Integer cantidad) throws NameNotFoundException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IElementoAB<K, Producto<K>> elementoProducto = this.productos.buscar(clave);
+        if (elementoProducto == null)
+        { throw new NameNotFoundException(String.format("Producto '%s' no encontrado", clave)); }
+
+        return elementoProducto.getDatos().restarStock(cantidad);
     }
 
     @Override
-    public Producto buscarPorCodigo(K clave)
+    public Producto<K> buscarPorCodigo(K clave)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IElementoAB<K, Producto<K>> elementoProducto = this.productos.buscar(clave);
+        if (elementoProducto == null)
+        { return null; }
+
+        return elementoProducto.getDatos();
     }
+
+    @Override
+    public boolean existeProducto(K clave)
+    { return this.productos.existe(clave); }
 
     @Override
     public boolean eliminarProducto(K clave)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!existeProducto(clave))
+        { return false; }
+
+        this.productos.eliminarBalanceado(clave);
+        return true;
+    }
+
+    @Override
+    public int getValorAgregado()
+    {
+        int res = 0;
+
+        Lista<K, Producto<K>> listaProductos = productos.inOrden();
+        if (listaProductos != null)
+        {
+            for (Producto<K> producto : listaProductos)
+            { res += producto.getValorAgregado(); }
+        }
+
+        return res;
+    }
+
+    public ILista<String, Integer> obtenerListaDeProductosOrdenadosPorDescripcion()
+    {
+        ArbolBB<String, Integer> res = new ArbolBB<>();
+
+        for (Producto<K> producto : this.productos.inOrden())
+        { res.insertar(new ElementoAB<>(producto.getNombre(), producto.getPrecio())); }
+
+        return res.inOrden();
     }
 }

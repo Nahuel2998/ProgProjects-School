@@ -1,13 +1,13 @@
 package org.classes;
 
-public interface IProducto// <K extends Comparable<K>>
+public interface IProducto <K extends Comparable<K>>
 {
     /**
      * Retorna el codigo del Producto.
      *
      * @return codigo del Producto.
      */
-//    K getEtiqueta();
+    K getEtiqueta();
 
     /**
      * Retorna el precio unitario del Producto.
@@ -35,4 +35,6 @@ public interface IProducto// <K extends Comparable<K>>
     String getNombre();
 
     void setNombre(String nombre);
+
+    int getValorAgregado();
 }

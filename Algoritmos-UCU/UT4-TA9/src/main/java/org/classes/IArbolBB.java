@@ -12,6 +12,8 @@ public interface IArbolBB<K extends Comparable<K>, T> {
 
     boolean insertar(IElementoAB<K, T> unElemento);
 
+    boolean insertarBalanceado(IElementoAB<K, T> nuevoNodo);
+
     /**
      * Busca un elemento dentro del árbol.
      *
@@ -29,18 +31,20 @@ public interface IArbolBB<K extends Comparable<K>, T> {
      */
 //    String preOrden();
 
+    boolean existe(K unaEtiqueta);
+
     /**
      * Imprime en InOrden los elementos del árbol, separados por guiones.
      *
      * @return String conteniendo el preorden separado por guiones.
      */
-    String inOrden();
+    String inOrdenString();
 
     /**
      * @return una Lista con los elementos del recorrido.
      *
      */
-    ILista<K, T> inorden();
+    ILista<K, T> inOrden();
 
     /**
      * Imprime en PostOrden los elementos del árbol, separados por guiones.
@@ -73,10 +77,14 @@ public interface IArbolBB<K extends Comparable<K>, T> {
      */
 //    int obtenerCantidadHojas();
 
+    IElementoAB<K, T> balancear(IElementoAB<K, T> nodo);
+
     /**
      * Elimina un elemento dada una etiqueta.
      * @param unaEtiqueta
      */
     void eliminar(K unaEtiqueta);
+
+    void eliminarBalanceado(K unaEtiqueta);
 }
 

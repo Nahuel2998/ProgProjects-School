@@ -10,6 +10,7 @@ public interface IElementoAB<K extends Comparable<K>, T> {
      * @return Etiqueta del nodo.
      */
     K getEtiqueta();
+    void setEtiqueta(K unaEtiqueta);
 
     /**
      * Obtiene el hijo izquierdo del nodo.
@@ -46,6 +47,8 @@ public interface IElementoAB<K extends Comparable<K>, T> {
      * @return Elemento encontrado. En caso de no encontrarlo, retorna nulo.
      */
     IElementoAB<K, T> buscar(K unaEtiqueta);
+
+    void setDatos(T datos);
 
     /**
      * Inserta un elemento dentro del arbol.
@@ -89,8 +92,14 @@ public interface IElementoAB<K extends Comparable<K>, T> {
      * @return
      */
     T getDatos();
-	
-	 /**
+
+    int obtenerAlturaHijoDer();
+
+    int obtenerAlturaHijoIzq();
+
+    int obtenerBalance();
+
+    /**
      * Elimina un elemento dada una etiqueta.
      * @param
      * @return 
@@ -98,9 +107,7 @@ public interface IElementoAB<K extends Comparable<K>, T> {
     IElementoAB<K, T> eliminar(K etiqueta);
     IElementoAB<K, T> quitarNodo();
 
-//    StringBuilder inOrdenBuilder(String separador);
-
-    StringBuilder inOrden(String separador);
+    String inOrden(String separador);
     StringBuilder preOrden(String separador);
 
 
@@ -110,6 +117,9 @@ public interface IElementoAB<K extends Comparable<K>, T> {
     int obtenerAltura();
 
     boolean esHoja();
+    IElementoAB<K, T> obtenerHojaIzquierda();
+
+    void actualizarAltura();
 
     /**
      * Retorna la cantidad de hojas del arbol cuya raiz es la del nodo actual.

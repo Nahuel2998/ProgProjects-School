@@ -2,10 +2,12 @@ package org.classes;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
+
 import static org.classes.Nodo.DATO;
 import static org.classes.Nodo.ETIQUETA;
 
-public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
+public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>, Iterable<T>
 {
     private INodo<K, T> primero;
     private INodo<K, T> ultimo;
@@ -382,4 +384,32 @@ public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>
 
 //    public static ILista ordenar(ILista lista)
 //    { return lista; /* 🎵HopeSort */ }
+
+    @NotNull
+    @Override
+    public Iterator<T> iterator()
+    { return new ListaIterator(this.primero); }
+
+    private class ListaIterator implements Iterator<T>
+    {
+        private INodo<K, T> nodo;
+
+        ListaIterator(INodo<K, T> nodo)
+        {
+            INodo<K, T> newNodo = new Nodo<>();
+            newNodo.setSiguiente(nodo);
+            this.nodo = newNodo;
+        }
+
+        @Override
+        public boolean hasNext()
+        { return this.nodo.getSiguiente() != null; }
+
+        @Override
+        public T next()
+        {
+            this.nodo = nodo.getSiguiente();
+            return this.nodo.getDato();
+        }
+    }
 }

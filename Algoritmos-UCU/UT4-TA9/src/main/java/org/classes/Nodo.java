@@ -11,6 +11,9 @@ public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
     private T dato;
     private INodo<K, T> siguiente = null;
 
+    public Nodo()
+    { this.etiqueta = null; }
+
     public Nodo(K etiqueta, T dato)
     {
         this.etiqueta = etiqueta;
