@@ -74,6 +74,9 @@ public class ArbolBB<K extends Comparable<K>, T> implements IArbolBB<K, T>
     public String inOrdenString()
     { return esVacio() ? null : this.raiz.inOrden(SEPARADOR_ELEMENTOS_IMPRESOS); }
 
+    public String inOrdenString(String busqueda)
+    { return esVacio() ? null : this.raiz.inOrden1(busqueda, SEPARADOR_ELEMENTOS_IMPRESOS); }
+
     /**
      * @return recorrida en preOrden del arbol, null en caso de ser vacío
      */

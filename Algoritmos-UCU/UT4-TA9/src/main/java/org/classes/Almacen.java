@@ -1,6 +1,7 @@
 package org.classes;
 
 import javax.naming.NameNotFoundException;
+import java.util.Locale;
 import java.util.StringJoiner;
 
 public class Almacen<K extends Comparable<K>> implements IAlmacen<K, Producto<K>>
@@ -111,5 +112,23 @@ public class Almacen<K extends Comparable<K>> implements IAlmacen<K, Producto<K>
         { res.insertar(new ElementoAB<>(producto.getNombre(), producto.getPrecio())); }
 
         return res.inOrden();
+    }
+
+    public ILista<K, Producto<K>> obtenerDescripcionesSimilares(String busqueda)
+    {
+        ILista<K, Producto<K>> res = new Lista<>();
+
+        for (Producto<K> producto : this.productos.inOrden())
+        {
+            if (producto.getNombre().toLowerCase().contains(busqueda.toLowerCase()))
+            { res.insertar(new Nodo<>(producto.getEtiqueta(), producto)); }
+        }
+
+        return res;
+    }
+
+    public String obtenerDescripcionesSimilares1(String busqueda)
+    {
+        return productos.inOrdenString(busqueda);
     }
 }

@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
 {
-    public static final int DATO = 1;
-    public static final int ETIQUETA = 1 << 1;
+    public static final int DATO = 2;
+    public static final int ETIQUETA = 3;
 
     private final K etiqueta;
     private T dato;
@@ -47,19 +47,18 @@ public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
     // Ejemplo: (ETIQUETA + DATO)
     public String imprimir(int labels, String separador)
     {
-        if (labels > ETIQUETA + DATO || labels < 1)
+        if (labels > ETIQUETA * DATO || labels < 1)
         { throw new IllegalArgumentException("Suma de labels incorrecta."); }
 
         StringBuilder res = new StringBuilder();
 
-        if (labels >= ETIQUETA)
+        if (labels % ETIQUETA == 0)
         {
             res.append(this.getLabel(ETIQUETA));
             res.append(separador);
-            labels -= ETIQUETA;
         }
 
-        if (labels >= DATO)
+        if (labels % DATO == 0)
         {
             res.append(this.getLabel(DATO));
             res.append(separador);

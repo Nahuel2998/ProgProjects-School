@@ -27,6 +27,10 @@ public class Main
         Geant.getInstance().existeProducto(1000088);
         Geant.getInstance().existeProducto(1000096);
         Geant.getInstance().existeProducto(1000097);
+        System.out.println();
+        Geant.getInstance().buscarProducto1("Gelatina");
+        System.out.println();
+        Geant.getInstance().buscarProducto1("Helado");
 
         // TODO: Search for desc.
 

@@ -245,6 +245,28 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
     }
 
     @Override
+    public String inOrden1(String busqueda, String separador)
+    {
+        String res = "";
+
+        Producto<K> p1 = (Producto<K>) this.getDatos();
+
+        if (this.hijoIzquierdo != null)
+        { res = this.hijoIzquierdo.inOrden1(busqueda, separador); }
+
+        if (p1.getNombre().toLowerCase().contains(busqueda.toLowerCase()))
+        {
+            res += this.getEtiqueta();
+            res += separador;
+        }
+
+        if (this.hijoDerecho != null)
+        { res += this.hijoDerecho.inOrden1(busqueda, separador); }
+
+        return res/*.substring(0, res.length() - separador.length())*/;
+    }
+
+    @Override
     public String preOrden()
     {
         String separador = ", ";

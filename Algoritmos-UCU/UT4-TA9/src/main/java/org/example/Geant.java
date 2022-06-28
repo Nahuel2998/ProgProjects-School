@@ -215,4 +215,12 @@ public final class Geant
     @Command
     public void existeProducto(int codigo)
     { System.out.println((this.almacen.existeProducto(codigo) ? "E" : "No e") + "xiste."); }
+
+    @Command
+    public void buscarProducto(String busqueda)
+    { System.out.println(this.almacen.obtenerDescripcionesSimilares(busqueda).imprimir(Nodo.DATO, Almacen.SEPARADOR_ELEMENTOS_IMPRESOS)); }
+
+    @Command
+    public void buscarProducto1(String busqueda)
+    { System.out.println(this.almacen.obtenerDescripcionesSimilares1(busqueda)); }
 }
