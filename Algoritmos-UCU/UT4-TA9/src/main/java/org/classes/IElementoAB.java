@@ -58,8 +58,6 @@ public interface IElementoAB<K extends Comparable<K>, T> {
      */
     boolean insertar(IElementoAB<K, T> elemento);
 
-    String inOrden1(String busqueda, String separador);
-
     /**
      * Imprime en preorden el arbol separado por guiones.
      *

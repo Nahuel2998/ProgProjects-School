@@ -5,12 +5,9 @@ import org.classes.*;
 import org.jetbrains.annotations.NotNull;
 import org.util.ManejadorArchivosGenerico;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.AbstractMap;
 import java.util.Arrays;
-import java.util.Map;
 
 public final class Geant
 {
@@ -219,8 +216,4 @@ public final class Geant
     @Command
     public void buscarProducto(String busqueda)
     { System.out.println(this.almacen.obtenerDescripcionesSimilares(busqueda).imprimir(Nodo.DATO, Almacen.SEPARADOR_ELEMENTOS_IMPRESOS)); }
-
-    @Command
-    public void buscarProducto1(String busqueda)
-    { System.out.println(this.almacen.obtenerDescripcionesSimilares1(busqueda)); }
 }

@@ -28,11 +28,9 @@ public class Main
         Geant.getInstance().existeProducto(1000096);
         Geant.getInstance().existeProducto(1000097);
         System.out.println();
-        Geant.getInstance().buscarProducto1("Gelatina");
+        Geant.getInstance().buscarProducto("Gelatina");
         System.out.println();
-        Geant.getInstance().buscarProducto1("Helado");
-
-        // TODO: Search for desc.
+        Geant.getInstance().buscarProducto("Helado");
 
         // cargar los productos desde el archivo "altasprueba.txt"
         // listar los productos ordenados por codigo, junto con su cantidad existente

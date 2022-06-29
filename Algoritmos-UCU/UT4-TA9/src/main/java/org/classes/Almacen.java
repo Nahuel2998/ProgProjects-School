@@ -126,9 +126,4 @@ public class Almacen<K extends Comparable<K>> implements IAlmacen<K, Producto<K>
 
         return res;
     }
-
-    public String obtenerDescripcionesSimilares1(String busqueda)
-    {
-        return productos.inOrdenString(busqueda);
-    }
 }

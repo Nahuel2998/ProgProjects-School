@@ -2,10 +2,12 @@ package org.classes;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.StringJoiner;
+
 public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
 {
-    public static final int DATO = 2;
-    public static final int ETIQUETA = 3;
+    public static final int DATO = 1;
+    public static final int ETIQUETA = 1 << 1;
 
     private final K etiqueta;
     private T dato;
@@ -47,25 +49,21 @@ public class Nodo<K extends Comparable<K>, T> implements INodo<K, T>
     // Ejemplo: (ETIQUETA + DATO)
     public String imprimir(int labels, String separador)
     {
-        if (labels > ETIQUETA * DATO || labels < 1)
+        if (labels > ETIQUETA + DATO || labels < 1)
         { throw new IllegalArgumentException("Suma de labels incorrecta."); }
 
-        StringBuilder res = new StringBuilder();
+        StringJoiner res = new StringJoiner(separador);
 
-        if (labels % ETIQUETA == 0)
+        if (labels >= ETIQUETA)
         {
-            res.append(this.getLabel(ETIQUETA));
-            res.append(separador);
+            res.add(this.getLabel(ETIQUETA));
+            labels -= ETIQUETA;
         }
 
-        if (labels % DATO == 0)
+        if (labels >= DATO)
         {
-            res.append(this.getLabel(DATO));
-            res.append(separador);
+            res.add(this.getLabel(DATO));
         }
-
-        if (!res.isEmpty())
-        { res.setLength(res.length() - separador.length()); }
 
         return res.toString();
     }

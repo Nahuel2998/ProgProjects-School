@@ -265,7 +265,7 @@ public class Lista<K extends Comparable<K>, T> implements IListaIndexada<K, T>, 
 
     @Override
     public String imprimir(int labels, String separador)
-    { return this.imprimir(ETIQUETA + DATO, separador, ", "); }
+    { return this.imprimir(labels, separador, ", "); }
 
     @Override
     public String imprimir(int labels, String separador, String separadorNodo)
