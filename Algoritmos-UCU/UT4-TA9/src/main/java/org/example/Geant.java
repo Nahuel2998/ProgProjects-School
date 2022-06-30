@@ -115,7 +115,7 @@ public final class Geant
                 producto.agregarStock(stockProducto);
                 valorAgregado += producto.getPrecio() * stockProducto;
             }
-            else { this.almacen.insertarProducto(idProducto, new Producto<>(
+            else { valorAgregado += this.agregarProducto(new Producto<>(
                     idProducto,
                     datosProducto[1],
                     Integer.parseInt(datosProducto[2]),

@@ -1,8 +1,11 @@
 package org.example;
 
+import asg.cliche.ShellFactory;
+import java.io.IOException;
+
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
         Geant.getInstance().agregarProductosDesdeArchivo("altasPrueba.txt");
         System.out.println();
@@ -32,11 +35,6 @@ public class Main
         System.out.println();
         Geant.getInstance().buscarProducto("Helado");
 
-        // cargar los productos desde el archivo "altasprueba.txt"
-        // listar los productos ordenados por codigo, junto con su cantidad existente
-        // emitir el valor del stock
-        // simular las ventas a partir del archivo "ventaspruebas.txt"
-        // simular la eliminación de productos a partir del archivo "elimPrueba.txt"
-        // listar los productos ordenados por codigo, junto con su cantidad existente
+//        ShellFactory.createConsoleShell("-", "Geant", Geant.getInstance()).commandLoop();
     }
 }

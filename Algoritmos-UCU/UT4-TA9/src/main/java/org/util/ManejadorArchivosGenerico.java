@@ -18,7 +18,7 @@ public class ManejadorArchivosGenerico
      * @throws IOException
      */
     public static void escribirArchivo(String nombreCompletoArchivo,
-            String @NotNull [] listaLineasArchivo)
+            String @NotNull ... listaLineasArchivo)
     {
         FileWriter fw;
         try
