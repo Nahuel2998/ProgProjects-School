@@ -2,6 +2,8 @@ package org.classes;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.StringJoiner;
+
 public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
 {
     private K etiqueta;
@@ -230,18 +232,21 @@ public class ElementoAB<K extends Comparable<K>, T> implements IElementoAB<K, T>
     @Override
     public String inOrden(String separador)
     {
-        String res = "";
+        StringJoiner sj = new StringJoiner(separador);
+        this.inOrden(sj);
+        return sj.toString();
+    }
 
+    @Override
+    public void inOrden(StringJoiner stringJoiner)
+    {
         if (this.hijoIzquierdo != null)
-        { res = this.hijoIzquierdo.inOrden(separador); }
+        { this.hijoIzquierdo.inOrden(stringJoiner); }
 
-        res += this.getEtiqueta();
-        res += separador;
+        stringJoiner.add(this.getEtiqueta().toString());
 
         if (this.hijoDerecho != null)
-        { res += this.hijoDerecho.inOrden(separador); }
-
-        return res.substring(0, res.length() - separador.length());
+        { this.hijoDerecho.inOrden(stringJoiner); }
     }
 
     @Override

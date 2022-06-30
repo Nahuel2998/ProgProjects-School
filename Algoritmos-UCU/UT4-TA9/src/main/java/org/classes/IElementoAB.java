@@ -2,6 +2,8 @@ package org.classes;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.StringJoiner;
+
 public interface IElementoAB<K extends Comparable<K>, T> {
 
     /**
@@ -57,6 +59,8 @@ public interface IElementoAB<K extends Comparable<K>, T> {
      * @return Exito de la operaci�n.
      */
     boolean insertar(IElementoAB<K, T> elemento);
+
+    void inOrden(StringJoiner stringJoiner);
 
     /**
      * Imprime en preorden el arbol separado por guiones.
