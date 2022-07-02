@@ -58,4 +58,6 @@ public interface IAlmacen<K extends Comparable<K>, T>
     boolean existeProducto(K clave);
 
     int getValorAgregado();
+
+    boolean vaciar();
 }

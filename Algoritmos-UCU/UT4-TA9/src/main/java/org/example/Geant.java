@@ -143,6 +143,9 @@ public final class Geant
         return valorAgregadoPrevio - this.almacen.getValorAgregado();
     }
 
+    public boolean vaciarAlmacen()
+    { return this.almacen.vaciar(); }
+
     @Command
     public void agregarProductosDesdeArchivo(String nombreDeArchivo)
     {

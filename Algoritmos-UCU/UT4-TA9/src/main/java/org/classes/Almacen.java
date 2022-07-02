@@ -1,7 +1,6 @@
 package org.classes;
 
 import javax.naming.NameNotFoundException;
-import java.util.Locale;
 import java.util.StringJoiner;
 
 public class Almacen<K extends Comparable<K>> implements IAlmacen<K, Producto<K>>
@@ -103,6 +102,10 @@ public class Almacen<K extends Comparable<K>> implements IAlmacen<K, Producto<K>
 
         return res;
     }
+
+    @Override
+    public boolean vaciar()
+    { return this.productos.vaciar(); }
 
     public ILista<String, Integer> obtenerListaDeProductosOrdenadosPorDescripcion()
     {

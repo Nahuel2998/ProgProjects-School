@@ -30,7 +30,7 @@ public class Main
         System.out.println("\nVolcar Descripcion de Productos con su Precio Unitario en un Archivo de Texto y Posteriormente Imprimir en Consola el Valor Monetario del Almacen:");
         Geant.getInstance().volcarDescripcionDeProductosConSuPrecioUnitarioEnUnArchivoDeTextoYPosteriormenteImprimirEnConsolaElValorMonetarioDelAlmacen();
         System.out.println("\nComprar el Stock Entero de Galletita Maria (para la comprobacion de Stock):");
-        Geant.getInstance().comprarDesdeArchivo("ventasPrueba.txt");
+        Geant.getInstance().comprar(1000079, 939);
         System.out.println("\nComprobar Existencia de Stock:");
         Geant.getInstance().existeStock(1000045);
         Geant.getInstance().existeStock(1010084);
