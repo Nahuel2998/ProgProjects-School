@@ -25,7 +25,7 @@ namespace _07151129
 
             if (!ProgramState.Instance.Options.Please)
             {
-                Console.WriteLine("no");
+                Console.WriteLine("que no");
                 Console.ReadKey();
                 return;
             }
@@ -42,7 +42,7 @@ namespace _07151129
             //    i++;
             //}
 
-            Console.WriteLine(Menu.BuildMenuGetIndex("who kil", 
+            Console.WriteLine(Menu.BuildMenuGetIndex("Who is the culprit of Umineko no Naku Koro ni?", 
                 new string[] {
                     "Ushiromiya Kinzo",
                     "Ushiromiya Krauss",
@@ -64,6 +64,9 @@ namespace _07151129
                     "Kumasawa Chiyo" },
                 cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight));
             Console.ReadKey();
+
+            // ProgramState.SaveCulpritRegKey("Kanon");
+            // ProgramState.Instance.ReadCulpritRegKey();
 
             Console.WriteLine(ProgramState.Instance.Options.Culprit?.PadCenterBoth(Console.WindowWidth, Console.WindowHeight) ?? "Hola.");
 
