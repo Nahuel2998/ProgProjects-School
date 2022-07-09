@@ -6,6 +6,27 @@ namespace _07151129
 {
     internal class Program
     {
+        static string[] culpritsList =
+            new string[] {
+                    "Ushiromiya Kinzo",
+                    "Ushiromiya Krauss",
+                    "Ushiromiya Natsuhi",
+                    "Ushiromiya Jessica",
+                    "Ushiromiya Eva",
+                    "Ushiromiya Hideyoshi",
+                    "Ushiromiya George",
+                    "Ushiromiya Rudolf",
+                    "Ushiromiya Kyrie",
+                    "Ushiromiya Battler",
+                    "Ushiromiya Rosa",
+                    "Ushiromiya Maria",
+                    "Nanjo Terumasa",
+                    "Ronoue Genji",
+                    "Shannon",
+                    "Kanon",
+                    "Gohda Toshiro",
+                    "Kumasawa Chiyo" };
+
         static void Main(string[] args)
         {
             Parser parser = new(with =>
