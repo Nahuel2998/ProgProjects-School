@@ -63,26 +63,7 @@ namespace _07151129
             //    i++;
             //}
 
-            Console.WriteLine(Menu.BuildMenuGetIndex("Who is the culprit of Umineko no Naku Koro ni?", 
-                new string[] {
-                    "Ushiromiya Kinzo",
-                    "Ushiromiya Krauss",
-                    "Ushiromiya Natsuhi",
-                    "Ushiromiya Jessica",
-                    "Ushiromiya Eva",
-                    "Ushiromiya Hideyoshi",
-                    "Ushiromiya George",
-                    "Ushiromiya Rudolf",
-                    "Ushiromiya Kyrie",
-                    "Ushiromiya Battler",
-                    "Ushiromiya Rosa",
-                    "Ushiromiya Maria",
-                    "Nanjo Terumasa",
-                    "Ronoue Genji",
-                    "Shannon",
-                    "Kanon",
-                    "Gohda Toshiro",
-                    "Kumasawa Chiyo" },
+            Console.WriteLine(Menu.BuildMenuGetIndex("Who is the culprit?", culpritsList,
                 cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight));
             Console.ReadKey();
 
