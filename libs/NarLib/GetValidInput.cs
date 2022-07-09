@@ -8,8 +8,8 @@ namespace NarLib
         private const string DefaultError = "Valor no valido. Intentelo nuevamente.";
 
         public static int GetValidIntInput(string prompt, string cursor = "> ", string splitArg = " ",
-            bool clear = true, string parseError = null, Func<int, bool> conditionFunc = null,
-            string conditionError = null)
+            bool clear = true, string? parseError = null, Func<int, bool>? conditionFunc = null,
+            string? conditionError = null)
         {
             while (true)
             {
@@ -29,8 +29,8 @@ namespace NarLib
         }
 
         public static double GetValidDoubleInput(string prompt, string cursor = "> ", string splitArg = " ",
-            bool clear = true, string parseError = null, Func<double, bool> conditionFunc = null,
-            string conditionError = null)
+            bool clear = true, string? parseError = null, Func<double, bool>? conditionFunc = null,
+            string? conditionError = null)
         {
             while (true)
             {
@@ -50,7 +50,7 @@ namespace NarLib
         }
 
         public static string GetValidStringInput(string prompt, string cursor = "> ", string splitArg = " ",
-            bool clear = true, string conditionRegex = null, string conditionError = null, bool ignoreCase = false,
+            bool clear = true, string? conditionRegex = null, string? conditionError = null, bool ignoreCase = false,
             bool returnMatch = false)
         {
             while (true)
@@ -66,11 +66,11 @@ namespace NarLib
             }
         }
 
-        public static string GetInput(string prompt = null, string cursor = "> ")
+        public static string GetInput(string? prompt = null, string cursor = "> ")
         {
             if (!string.IsNullOrEmpty(prompt)) { Console.WriteLine(prompt); }
             if (!string.IsNullOrEmpty(cursor)) { Console.Write(cursor); }
-            return Console.ReadLine();
+            return Console.ReadLine() ?? "";
         }
     }
 }
