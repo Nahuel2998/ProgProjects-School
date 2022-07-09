@@ -6,6 +6,27 @@ namespace _07151129
 {
     internal class Program
     {
+        static string[] culpritsList =
+            new string[] {
+                    "Ushiromiya Kinzo",
+                    "Ushiromiya Krauss",
+                    "Ushiromiya Natsuhi",
+                    "Ushiromiya Jessica",
+                    "Ushiromiya Eva",
+                    "Ushiromiya Hideyoshi",
+                    "Ushiromiya George",
+                    "Ushiromiya Rudolf",
+                    "Ushiromiya Kyrie",
+                    "Ushiromiya Battler",
+                    "Ushiromiya Rosa",
+                    "Ushiromiya Maria",
+                    "Nanjo Terumasa",
+                    "Ronoue Genji",
+                    "Shannon",
+                    "Kanon",
+                    "Gohda Toshiro",
+                    "Kumasawa Chiyo" };
+
         static void Main(string[] args)
         {
             Parser parser = new(with =>
@@ -25,7 +46,7 @@ namespace _07151129
 
             if (!ProgramState.Instance.Options.Please)
             {
-                Console.WriteLine("no");
+                Console.WriteLine("que no");
                 Console.ReadKey();
                 return;
             }
@@ -42,28 +63,12 @@ namespace _07151129
             //    i++;
             //}
 
-            Console.WriteLine(Menu.BuildMenuGetIndex("who kil", 
-                new string[] {
-                    "Ushiromiya Kinzo",
-                    "Ushiromiya Krauss",
-                    "Ushiromiya Natsuhi",
-                    "Ushiromiya Jessica",
-                    "Ushiromiya Eva",
-                    "Ushiromiya Hideyoshi",
-                    "Ushiromiya George",
-                    "Ushiromiya Rudolf",
-                    "Ushiromiya Kyrie",
-                    "Ushiromiya Battler",
-                    "Ushiromiya Rosa",
-                    "Ushiromiya Maria",
-                    "Nanjo Terumasa",
-                    "Ronoue Genji",
-                    "Shannon",
-                    "Kanon",
-                    "Gohda Toshiro",
-                    "Kumasawa Chiyo" },
+            Console.WriteLine(Menu.BuildMenuGetIndex("Who is the culprit?", culpritsList,
                 cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight));
             Console.ReadKey();
+
+            // ProgramState.SaveCulpritRegKey("Kanon");
+            // ProgramState.Instance.ReadCulpritRegKey();
 
             Console.WriteLine(ProgramState.Instance.Options.Culprit?.PadCenterBoth(Console.WindowWidth, Console.WindowHeight) ?? "Hola.");
 
