@@ -31,3 +31,13 @@ noremap m h
 
 " Move m to a less good place (Since it got displaced)
 noremap l m
+
+" Graphical movement
+noremap gn gj
+noremap ge gk
+""noremap gm gh
+""noremap gh gl
+
+noremap gj ge
+noremap gk gn
+""noremap gl gm
