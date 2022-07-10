@@ -1,6 +1,5 @@
 ﻿using CommandLine;
 using NarExtensions;
-using NarLib;
 
 namespace _07151129
 {
@@ -65,8 +64,7 @@ namespace _07151129
             //    i++;
             //}
 
-            Console.WriteLine(Menu.BuildMenuGetIndex("Who is the culprit?", culpritsList,
-                cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight));
+            Console.WriteLine(ProgramState.DisplayQuestion("Who is the culprit?", culpritsList));
             Console.ReadKey();
 
 #if WINFAG

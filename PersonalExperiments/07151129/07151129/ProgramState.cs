@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using NarLib;
 #if WINFAG
 using Microsoft.Win32;
 #endif
@@ -56,6 +57,38 @@ namespace _07151129
                 { }
         }
 #endif
+
+        public static bool DisplayQuestion(string title, string[] choices, int answerIndex)
+        { return answerIndex == DisplayQuestion(title, choices); }
+
+        public static int DisplayQuestion(string title, string[] choices)
+        {
+            return Menu.BuildMenuGetIndex(title, choices,
+                cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight);
+        }
+
+        public static int GetCulpritIndex(string culpritName) => culpritName switch
+        {
+            "Ushiromiya Kinzo" => 0,
+            "Ushiromiya Krauss" => 1,
+            "Ushiromiya Natsuhi" => 2,
+            "Ushiromiya Jessica" => 3,
+            "Ushiromiya Eva" => 4,
+            "Ushiromiya Hideyoshi" => 5,
+            "Ushiromiya George" => 6,
+            "Ushiromiya Rudolf" => 7,
+            "Ushiromiya Kyrie" => 8,
+            "Ushiromiya Battler" => 9,
+            "Ushiromiya Rosa" => 10,
+            "Ushiromiya Maria" => 11,
+            "Nanjo Terumasa" => 12,
+            "Ronoue Genji" => 13,
+            "Shannon" => 14,
+            "Kanon" => 15,
+            "Gohda Toshiro" => 16,
+            "Kumasawa Chiyo" => 17,
+            _ => throw new ArgumentException("literally who")
+        };
     }
 
     public class Options
