@@ -2,16 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0<!-- -windows --></TargetFramework>
     <RootNamespace>_07151129</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
+    <!-- <UseWindowsForms>true</UseWindowsForms> -->
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
+    <!-- <PackageReference Include="System.Windows.Extensions" Version="6.0.0" /> -->
   </ItemGroup>
 
   <ItemGroup>

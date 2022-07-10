@@ -18,14 +18,17 @@ namespace _07151129
         // Attempt to save the culprit on the windows registry
         public static void SaveCulpritRegKey(string culprit)
         {
-            try
+            if (OperatingSystem.IsWindows())
             {
-                RegistryKey key = Registry.CurrentUser.CreateSubKey("YOSANKAEVA").CreateSubKey("07151129");
-                key.SetValue("Culprit", culprit);
-                key.Close();
+                try
+                {
+                    RegistryKey key = Registry.CurrentUser.CreateSubKey("YOSANKAEVA").CreateSubKey("07151129");
+                    key.SetValue("Culprit", culprit);
+                    key.Close();
+                }
+                catch (Exception)
+                { PlanB(culprit); }
             }
-            catch (Exception)
-            { PlanB(culprit); }
         }
 
         // If saving a regKey failed, replace the .lnk instead and use the parameter
@@ -37,18 +40,21 @@ namespace _07151129
         // Read the culprit regkey and use it over the parameter if it exists 
         public void ReadCulpritRegKey()
         {
-            try
+            if (OperatingSystem.IsWindows())
             {
-                using RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"YOSANKAEVA\07151129");
-                if (key != null)
+                try
                 {
-                    object? culprit = key.GetValue("Culprit");
-                    if (culprit != null)
-                    { Options.Culprit = culprit.ToString(); }
+                    using RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"YOSANKAEVA\07151129");
+                    if (key != null)
+                    {
+                        object? culprit = key.GetValue("Culprit");
+                        if (culprit != null)
+                        { Options.Culprit = culprit.ToString(); }
+                    }
                 }
+                catch (Exception)
+                { }
             }
-            catch (Exception)
-            { }
         }
     }
 

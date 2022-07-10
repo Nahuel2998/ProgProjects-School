@@ -52,7 +52,8 @@ namespace _07151129
             }
 
             Console.CursorVisible = false;
-            Console.SetWindowSize(Console.WindowWidth, 40);
+            if (OperatingSystem.IsWindows())
+            { Console.SetWindowSize(Console.WindowWidth, 40); }
 
             // Testing console write speed
             //int i = 0;
@@ -72,7 +73,7 @@ namespace _07151129
 
             Console.WriteLine(ProgramState.Instance.Options.Culprit?.PadCenterBoth(Console.WindowWidth, Console.WindowHeight) ?? "Hola.");
 
-            MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            // MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
