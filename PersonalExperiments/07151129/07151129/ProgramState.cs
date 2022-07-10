@@ -9,11 +9,13 @@ namespace _07151129
     public sealed class ProgramState
     {
         public Options Options { get; set; } = new Options();
+        public List<Question> Questions = new List<Question>();
 
         private static readonly ProgramState instance = new();
 
         static ProgramState() { }
-        private ProgramState() { }
+        private ProgramState() 
+        { }
 
         public static ProgramState Instance
         { get { return instance; } }
@@ -43,23 +45,26 @@ namespace _07151129
         // Read the culprit regkey and use it over the parameter if it exists 
         public void ReadCulpritRegKey()
         {
-                try
+            try
+            {
+                using RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"YOSANKAEVA\07151129");
+                if (key != null)
                 {
-                    using RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"YOSANKAEVA\07151129");
-                    if (key != null)
-                    {
-                        object? culprit = key.GetValue("Culprit");
-                        if (culprit != null)
-                        { Options.Culprit = culprit.ToString(); }
-                    }
+                    object? culprit = key.GetValue("Culprit");
+                    if (culprit != null)
+                    { Options.Culprit = culprit.ToString(); }
                 }
-                catch (Exception)
-                { }
+            }
+            catch (Exception)
+            { }
         }
 #endif
 
+        public static bool DisplayQuestion(Question question)
+        { return DisplayQuestion(question.Title, question.Choices, question.AnswerIndex); }
+
         public static bool DisplayQuestion(string title, string[] choices, int answerIndex)
-        { return answerIndex == DisplayQuestion(title, choices); }
+        { return answerIndex == DisplayQuestion(title, choices) || answerIndex == -1; }
 
         public static int DisplayQuestion(string title, string[] choices)
         {
@@ -67,7 +72,7 @@ namespace _07151129
                 cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight);
         }
 
-        public static int GetCulpritIndex(string culpritName) => culpritName switch
+        public static int GetCulpritIndex(string? culpritName) => culpritName switch
         {
             "Ushiromiya Kinzo" => 0,
             "Ushiromiya Krauss" => 1,
@@ -87,6 +92,7 @@ namespace _07151129
             "Kanon" => 15,
             "Gohda Toshiro" => 16,
             "Kumasawa Chiyo" => 17,
+            null => -1,
             _ => throw new ArgumentException("literally who")
         };
     }

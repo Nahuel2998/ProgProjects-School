@@ -55,6 +55,8 @@ namespace _07151129
             Console.SetWindowSize(Console.WindowWidth, 40);
 #endif
 
+            ProgramState.Instance.Questions.Add(new Question("Who is the culprit?", culpritsList, ProgramState.GetCulpritIndex(ProgramState.Instance.Options.Culprit)));
+
             // Testing console write speed
             //int i = 0;
             //while (true)
@@ -64,7 +66,7 @@ namespace _07151129
             //    i++;
             //}
 
-            Console.WriteLine(ProgramState.DisplayQuestion("Who is the culprit?", culpritsList));
+            Console.WriteLine(ProgramState.DisplayQuestion(ProgramState.Instance.Questions[0]));
             Console.ReadKey();
 
 #if WINFAG
@@ -80,4 +82,3 @@ namespace _07151129
         }
     }
 }
-
