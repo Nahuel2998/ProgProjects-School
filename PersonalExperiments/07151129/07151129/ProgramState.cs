@@ -1,5 +1,7 @@
 ﻿using CommandLine;
+#if WINFAG
 using Microsoft.Win32;
+#endif
 
 namespace _07151129
 {
@@ -15,21 +17,20 @@ namespace _07151129
         public static ProgramState Instance
         { get { return instance; } }
 
+#if WINFAG
         // Attempt to save the culprit on the windows registry
         public static void SaveCulpritRegKey(string culprit)
         {
-            if (OperatingSystem.IsWindows())
+            try
             {
-                try
-                {
-                    RegistryKey key = Registry.CurrentUser.CreateSubKey("YOSANKAEVA").CreateSubKey("07151129");
-                    key.SetValue("Culprit", culprit);
-                    key.Close();
-                }
-                catch (Exception)
-                { PlanB(culprit); }
+                RegistryKey key = Registry.CurrentUser.CreateSubKey("YOSANKAEVA").CreateSubKey("07151129");
+                key.SetValue("Culprit", culprit);
+                key.Close();
             }
+            catch (Exception)
+            { PlanB(culprit); }
         }
+#endif
 
         // If saving a regKey failed, replace the .lnk instead and use the parameter
         public static void PlanB(string culprit)
@@ -37,11 +38,10 @@ namespace _07151129
             // TODO: me
         }
 
+#if WINFAG
         // Read the culprit regkey and use it over the parameter if it exists 
         public void ReadCulpritRegKey()
         {
-            if (OperatingSystem.IsWindows())
-            {
                 try
                 {
                     using RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"YOSANKAEVA\07151129");
@@ -54,8 +54,8 @@ namespace _07151129
                 }
                 catch (Exception)
                 { }
-            }
         }
+#endif
     }
 
     public class Options

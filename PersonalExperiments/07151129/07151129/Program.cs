@@ -52,8 +52,9 @@ namespace _07151129
             }
 
             Console.CursorVisible = false;
-            if (OperatingSystem.IsWindows())
-            { Console.SetWindowSize(Console.WindowWidth, 40); }
+#if WINFAG
+            Console.SetWindowSize(Console.WindowWidth, 40);
+#endif
 
             // Testing console write speed
             //int i = 0;
@@ -68,12 +69,16 @@ namespace _07151129
                 cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight));
             Console.ReadKey();
 
+#if WINFAG
             // ProgramState.SaveCulpritRegKey("Kanon");
             // ProgramState.Instance.ReadCulpritRegKey();
+#endif
 
             Console.WriteLine(ProgramState.Instance.Options.Culprit?.PadCenterBoth(Console.WindowWidth, Console.WindowHeight) ?? "Hola.");
 
-            // MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#if WINFAG
+            MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
         }
     }
 }
