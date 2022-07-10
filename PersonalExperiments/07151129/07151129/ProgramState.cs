@@ -105,6 +105,9 @@ namespace _07151129
         [Option("please", HelpText = "Please use please.")]
         public bool Please { get; set; }
 
+        [Option("nome", HelpText = "Do not spoil.")]
+        public bool Nome { get; set; }
+
         [Option('c', "culprit", HelpText = "The Culprit is Hideyoshi eating a donut awkwardly slowly.")]
         public string? Culprit { get; set; }
     }
