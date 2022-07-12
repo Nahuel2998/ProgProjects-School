@@ -55,10 +55,27 @@ namespace _07151129
 #if WINFAG
             Console.SetWindowSize(Console.WindowWidth, 40);
 #endif
+            AddQuestion(new Question("What's the name of the second mansion?",
+            "Rokkenjima : Kuwadorian : Kumasawa : There's only one mansion",
+            1));
+
+            // Hardcoded Maria question
+            // TODO: Change this to something else.
+            Menu.BuildMenuGetIndex("What does Maria love to say?".PadCenterHorizontal(Console.WindowWidth) + "\n"
+                    + "- - - - - - - - - - - - - - - - -".PadCenterHorizontal(Console.WindowWidth),
+                    "uooooooooh!:uu-uu!:auau!:- - - - - - - - - - - - - - - - -: ".Split(':'),
+                cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight,
+                separator: "");
 
             AddQuestion(new Question("Who's the only human (invited by Kinzo)\nthat lives past October 6th 1986 across all episodes?",
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : None",
-            3));
+            3,
+            () =>
+            {
+                Console.Clear();
+                Console.WriteLine("y si".PadCenterBoth());
+                Console.ReadKey();
+            }));
 
             AddQuestion(new Question("Who's the only piece (invited to the conference)\nthat lives past October 6th 1986 across all episodes?",
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : On the 9th Twilight, none shall be left alive",
@@ -126,13 +143,6 @@ namespace _07151129
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.ForegroundColor = ConsoleColor.White;
 #endif
-
-            // Hardcoded Maria question
-            Menu.BuildMenuGetIndex("What does Maria love to say?".PadCenterHorizontal(Console.WindowWidth) + "\n"
-                    + "- - - - - - - - - - - - - - - - -".PadCenterHorizontal(Console.WindowWidth),
-                    "uooooooooh!:uu-uu!:auau!:- - - - - - - - - - - - - - - - -: ".Split(':'),
-                cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight,
-                separator: "");
 
             foreach (Question question in ProgramState.Instance.Questions)
             {
