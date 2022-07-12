@@ -11,7 +11,7 @@ namespace NarLib
         private static object? BuildMenuFunc(string title, IReadOnlyList<object> options,
             Func<IReadOnlyList<object>, int, object?> action, /* out dynamic result */ string? exitText = null,
             string? bottomText = null, bool cancellable = true, bool closeAfter = false, string[]? stringOptions = null,
-            Func<string>? bottomTextFunc = null, bool centered = false, int windowWidth = 0, int windowHeight = 0)
+            Func<string>? bottomTextFunc = null, bool centered = false, int windowWidth = 0, int windowHeight = 0, string? separator = null)
         {
             int index = 0;
             int maxVal = options.Count;
@@ -24,14 +24,17 @@ namespace NarLib
 
             stringOptions ??= (string[]) options;
 
+            // Needed when text is gonna be centered (since whitespace doesn't override other chars.)
+            Console.Clear();
+
             while (true)
             {
                 Console.SetCursorPosition(0, 0);
 
                 if (!centered)
-                { RenderMenu(title, stringOptions, index, exitText, bottomText, bottomTextFunc); }
+                { RenderMenu(title, stringOptions, index, exitText, bottomText, bottomTextFunc, separator); }
                 else
-                { RenderMenuCentered(title, stringOptions, index, windowWidth, windowHeight, exitText, bottomText, bottomTextFunc); }
+                { RenderMenuCentered(title, stringOptions, index, windowWidth, windowHeight, exitText, bottomText, bottomTextFunc, separator); }
 
                 switch (Console.ReadKey().Key)
                 {
@@ -61,7 +64,7 @@ namespace NarLib
         // Build Menu with (or without) Exit Option
         public static void BuildMenu(string title, Option[] options, string? exitText = null, string? bottomText = null,
             bool cancellable = true, bool closeAfter = false, string[]? stringOptions = null,
-            Func<string>? bottomTextFunc = null, bool centered = false, int windowWidth = 0, int windowHeight = 0)
+            Func<string>? bottomTextFunc = null, bool centered = false, int windowWidth = 0, int windowHeight = 0, string? separator = null)
         {
             static object? InvokeOption(IReadOnlyList<object> xOptions, int xIndex)
             {
@@ -70,69 +73,76 @@ namespace NarLib
             }
 
             BuildMenuFunc(title, options, InvokeOption, exitText, bottomText, cancellable, closeAfter,
-                stringOptions ?? Option.GetNamesFromOptionList(options), bottomTextFunc, centered, windowWidth, windowHeight);
+                stringOptions ?? Option.GetNamesFromOptionList(options), bottomTextFunc, centered, windowWidth, windowHeight, separator);
         }
         
         // Build Menu with (or without) Exit Option, returns contained value, null if cancelled
         public static object? BuildMenuGetSelected(string title, Option[] options, string? exitText = null,
             string? bottomText = null, bool cancellable = true, bool closeAfter = true, string[]? stringOptions = null,
-            Func<string>? bottomTextFunc = null, bool centered = false, int windowWidth = 0, int windowHeight = 0)
+            Func<string>? bottomTextFunc = null, bool centered = false, int windowWidth = 0, int windowHeight = 0, string? separator = null)
         {
             static object? GetOption(IReadOnlyList<object> xOptions, int xIndex)
             { return ((Option) xOptions[xIndex]).Obj; }
 
             return BuildMenuFunc(title, options, GetOption, exitText, bottomText, cancellable, closeAfter,
-                stringOptions ?? Option.GetNamesFromOptionList(options), bottomTextFunc, centered, windowWidth, windowHeight);
+                stringOptions ?? Option.GetNamesFromOptionList(options), bottomTextFunc, centered, windowWidth, windowHeight, separator);
         }
         
         // Build Menu with (or without) Exit Option, takes strings, returns Index, -1 if cancelled
         public static int BuildMenuGetIndex(string title, string[] options, string? exitText = null,
-            string? bottomText = null, bool cancellable = true, bool closeAfter = true, bool centered = false, int windowWidth = 0, int windowHeight = 0)
+            string? bottomText = null, bool cancellable = true, bool closeAfter = true, bool centered = false, 
+            int windowWidth = 0, int windowHeight = 0, string? separator = null)
         {
             static object GetIndex(IReadOnlyList<object> xOptions, int xIndex)
             { return xOptions.Count != 0 ? xIndex : -1; }
 
             return (int) (BuildMenuFunc(title, options, GetIndex, exitText, bottomText, cancellable, closeAfter,
-                centered:centered, windowWidth:windowWidth, windowHeight:windowHeight) ?? -1);
+                centered:centered, windowWidth:windowWidth, windowHeight:windowHeight, separator: separator) ?? -1);
         }
         #endregion
 
         #region RenderMenu
         // Render Menu with (or without) Exit Option
         public static void RenderMenu(string title, IEnumerable<Option> options, int selectedIndex,
-            string? exitText = null, string? bottomText = null, Func<string>? bottomTextFunc = null)
-        { RenderMenu(title, Option.GetNamesFromOptionList(options), selectedIndex, exitText, bottomText, bottomTextFunc); }
+            string? exitText = null, string? bottomText = null, Func<string>? bottomTextFunc = null, string? separator = null)
+        { RenderMenu(title, Option.GetNamesFromOptionList(options), selectedIndex, exitText, bottomText, bottomTextFunc, separator); }
 
         // Render Menu with (or without) Exit Option, takes string inputs
         // Main Render Menu method
         public static void RenderMenu(string title, string[] options, int selectedIndex, string? exitText = null,
-            string? bottomText = null, Func<string>? bottomTextFunc = null)
+            string? bottomText = null, Func<string>? bottomTextFunc = null, string? separator = null)
         {
             StringBuilder res = new();
 
             res.AppendLine($"  {title}");
-            string separator = "- ".Multiply(title.Length/2 + 3);
-            res.AppendLine(separator);
+            separator ??= "- ".Multiply(title.Length/2 + 3);
+            if (separator.Length > 0)
+            { res.AppendLine(separator); }
 
             for (int i = 0; i < options.Length; i++)
             { res.AppendLine($"{(i == selectedIndex ? "->" : "  ")} {options[i]}"); }
             if (exitText != null)
             { res.AppendLine($"{(selectedIndex == options.Length ? "->" : "  ")} {exitText}"); }
 
-            res.AppendLine(separator);
+            if (separator.Length > 0)
+            { res.AppendLine(separator); }
             res.AppendLine(bottomText ?? bottomTextFunc?.Invoke());
 
             Console.Write(res.ToString());
         }
 
         public static void RenderMenuCentered(string title, string[] options, int selectedIndex, int windowWidth, int windowHeight,
-            string? exitText = null, string? bottomText = null, Func<string>? bottomTextFunc = null)
+            string? exitText = null, string? bottomText = null, Func<string>? bottomTextFunc = null, string? separator = null)
         {
             StringBuilder res = new();
 
             res.AppendLine(title.PadCenterHorizontal(windowWidth));
-            string separator = (" " + "- ".Multiply(title.Length/2 + 3)).PadCenterHorizontal(windowWidth);
-            res.AppendLine(separator);
+            separator ??= (" " + "- ".Multiply(title.Split('\n').Select(x => x.Length).Max() / 2 + 3));
+            if (separator.Length > 0)
+            {
+                separator = separator.PadCenterHorizontal(windowWidth);
+                res.AppendLine(separator);
+            }
 
             for (int i = 0; i < options.Length; i++)
             {
@@ -140,9 +150,10 @@ namespace NarLib
                 res.AppendLine($"{(isSelected ? "---[" : "  ")} {options[i]} {(isSelected ? "]---" : "  ")}".PadCenterHorizontal(windowWidth));
             }
             if (exitText != null)
-            { res.AppendLine($"{(selectedIndex == options.Length ? "->" : "  ")} {exitText}".PadCenterHorizontal(windowWidth)); }
+            { res.AppendLine($"{(selectedIndex == options.Length ? "---[" : "  ")} {exitText} {(selectedIndex == options.Length ? "]---" : "  ")}".PadCenterHorizontal(windowWidth)); }
 
-            res.AppendLine(separator);
+            if (separator.Length > 0)
+            { res.AppendLine(separator); }
             res.AppendLine((bottomText ?? bottomTextFunc?.Invoke())?.PadCenterHorizontal(windowWidth));
 
             Console.Write(res.ToString().PadCenterVertical(windowHeight));
