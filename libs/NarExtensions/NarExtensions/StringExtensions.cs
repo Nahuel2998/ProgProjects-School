@@ -13,8 +13,14 @@ namespace NarExtensions
             return res.ToString();
         }
 
+        public static string PadCenterHorizontal(this string source, char paddingChar = ' ')
+        { return source.PadCenterHorizontal(Console.WindowWidth, paddingChar); }
+
         public static string PadCenterHorizontal(this string source, int totalWidth, char paddingChar = ' ')
         { return string.Join('\n', source.Split('\n').Select(line => line.PadLeft((totalWidth - line.Length) / 2 + line.Length, paddingChar).PadRight(totalWidth, paddingChar))); }
+
+        public static string PadCenterVertical(this string source)
+        { return source.PadCenterVertical(Console.WindowHeight); }
 
         public static string PadCenterVertical(this string source, int totalHeight)
         {
@@ -27,6 +33,9 @@ namespace NarExtensions
 
             return res.ToString();
         }
+
+        public static string PadCenterBoth(this string source)
+        { return source.PadCenterBoth(Console.WindowWidth, Console.WindowHeight); }
 
         public static string PadCenterBoth(this string source, int totalWidth, int totalHeight)
         { return source.PadCenterHorizontal(totalWidth).PadCenterVertical(totalHeight); }
