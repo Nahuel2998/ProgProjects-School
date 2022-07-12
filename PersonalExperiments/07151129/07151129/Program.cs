@@ -50,6 +50,9 @@ namespace _07151129
                 Console.ReadKey();
                 return;
             }
+            
+            // TODO: Add freno for loading screen.
+            // TODO: Play Hope.
 
             Console.CursorVisible = false;
 #if WINFAG
@@ -127,6 +130,8 @@ namespace _07151129
                 Console.Clear();
                 Console.Write("Correcto.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
                 Console.ReadKey();
+                
+                // TODO: Play ALIVE if not Nome, Final Answer if Nome.
                 Console.ForegroundColor = ConsoleColor.Red;
             }));
 
@@ -163,9 +168,10 @@ namespace _07151129
             // SpookyEffect(captured);
 
             Console.Clear();
-            Console.WriteLine((ProgramState.Instance.Options.Culprit ?? "Hola.").PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
+            Console.WriteLine((ProgramState.Instance.Options.Culprit ?? "Hola.").PadCenterBoth());
 
 #if WINFAG
+            // TODO: Paint screen white, make beato cackle, and throw the error if they miss.
             MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
         }
