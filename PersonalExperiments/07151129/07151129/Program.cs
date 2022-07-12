@@ -96,7 +96,7 @@ namespace _07151129
             {
                 Console.Clear();
                 Console.WriteLine("\n".Multiply(Console.WindowHeight / 2 - 2));
-                Console.WriteLine("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about any game.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
+                Console.WriteLine("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
                 Console.ReadKey();
                 WarnAboutOldPerlModules();
             }));
