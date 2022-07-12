@@ -11,7 +11,7 @@ namespace NarLib
         private static object? BuildMenuFunc(string title, IReadOnlyList<object> options,
             Func<IReadOnlyList<object>, int, object?> action, /* out dynamic result */ string? exitText = null,
             string? bottomText = null, bool cancellable = true, bool closeAfter = false, string[]? stringOptions = null,
-            Func<string>? bottomTextFunc = null, bool centered = false, int windowWidth = 0, int windowHeight = 0, string? separator = null)
+            Func<string>? bottomTextFunc = null, bool centered = false, int? windowWidth = null, int? windowHeight = null, string? separator = null)
         {
             int index = 0;
             int maxVal = options.Count;
@@ -23,6 +23,9 @@ namespace NarLib
             }
 
             stringOptions ??= (string[]) options;
+            
+            int width = windowWidth ?? Console.WindowWidth;
+            int height = windowHeight ?? Console.WindowHeight;
 
             // Needed when text is gonna be centered (since whitespace doesn't override other chars.)
             Console.Clear();
@@ -34,7 +37,7 @@ namespace NarLib
                 if (!centered)
                 { RenderMenu(title, stringOptions, index, exitText, bottomText, bottomTextFunc, separator); }
                 else
-                { RenderMenuCentered(title, stringOptions, index, windowWidth, windowHeight, exitText, bottomText, bottomTextFunc, separator); }
+                { RenderMenuCentered(title, stringOptions, index, width, height, exitText, bottomText, bottomTextFunc, separator); }
 
                 switch (Console.ReadKey().Key)
                 {
