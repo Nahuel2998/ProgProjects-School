@@ -50,7 +50,7 @@ namespace _07151129
                 Console.ReadKey();
                 return;
             }
-            
+
             // TODO: Add freno for loading screen.
             // TODO: Play Hope.
 
@@ -60,29 +60,41 @@ namespace _07151129
 #endif
             AddQuestion(new Question("What's the name of the second mansion?",
             "Rokkenjima : Kuwadorian : Kumasawa : There's only one mansion",
-            1));
+            1, runIfCorrect:
+            () =>
+            {
+                Console.Clear();
+                Console.Write("y si".PadCenterBoth());
+                Console.ReadKey();
+            }));
 
-            // Hardcoded Maria question
             // TODO: Change this to something else.
+            // True identity of the witch of the forest?
             Menu.BuildMenuGetIndex("What does Maria love to say?".PadCenterHorizontal(Console.WindowWidth) + "\n"
                     + "- - - - - - - - - - - - - - - - -".PadCenterHorizontal(Console.WindowWidth),
                     "uooooooooh!:uu-uu!:auau!:- - - - - - - - - - - - - - - - -: ".Split(':'),
                 cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight,
                 separator: "");
 
-            AddQuestion(new Question("Who's the only human (invited by Kinzo)\nthat lives past October 6th 1986 across all episodes?",
-            "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : None",
-            3,
+            AddQuestion(new Question("What does Maria love to say?",
+            "uooooooooh!:uu-uu!:auau!:",
+            1, runIfAnswerIndexIs:
+            new Tuple<int, Action>(3, () =>
+            {
+                Console.Clear();
+                Console.Write("jjjjj\nGet it because she's muted.\nSo ye still wrong.".PadCenterBoth());
+                Console.ReadKey();
+            }), runIfCorrect:
             () =>
             {
                 Console.Clear();
-                Console.WriteLine("y si".PadCenterBoth());
+                Console.Write("uu-uu!".PadCenterBoth());
                 Console.ReadKey();
             }));
 
-            AddQuestion(new Question("Who's the only piece (invited to the conference)\nthat lives past October 6th 1986 across all episodes?",
-            "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : On the 9th Twilight, none shall be left alive",
-            2,
+            AddQuestion(new Question("Who's the only human (invited by Kinzo)\nthat lives past October 6th 1986 across all episodes?",
+            "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : None",
+            3, runIfCorrect:
             () =>
             {
                 Console.Clear();
@@ -91,18 +103,29 @@ namespace _07151129
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Kinzo is dead at the starting time for all games.".PadCenterHorizontal(Console.WindowWidth));
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("So he didn't invite a single human.".PadCenterHorizontal(Console.WindowWidth));
+                Console.Write("So he didn't invite a single human.".PadCenterHorizontal(Console.WindowWidth));
+                Console.ReadKey();
+            }));
+
+            AddQuestion(new Question("Who's the only piece (invited to the conference)\nthat lives past October 6th 1986 across all episodes?",
+            "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : On the 9th Twilight, none shall be left alive",
+            2, runIfCorrect:
+            () =>
+            {
+                Console.Clear();
+                Console.WriteLine("\n".Multiply(Console.WindowHeight / 2 - 2));
+                Console.Write("g\nEven if Ange didn't attend the conference, she was invited.\nShe was just sick that day.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
                 Console.ReadKey();
             }));
 
             AddQuestion(new Question("Who's the only human (who attends the conference)\nthat lives past October 6th 1986 across all episodes?",
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : On the 9th Twilight, none shall be left alive I said",
-            1,
+            1, runIfCorrect:
             () =>
             {
                 Console.Clear();
                 Console.WriteLine("\n".Multiply(Console.WindowHeight / 2 - 2));
-                Console.WriteLine("g\nEven if Ange didn't attend the conference, she was invited.\nShe was just sick that day.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
+                Console.Write("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
                 Console.ReadKey();
             }));
 
@@ -112,13 +135,12 @@ namespace _07151129
             ? "At least 20 : Exactly 19 : Exactly 18 : No more than 17"
             : "At least 19 : Exactly 18 : Exactly 17 : No more than 16",
             3,
+            WarnAboutOldPerlModules,
             () =>
             {
                 Console.Clear();
-                Console.WriteLine("\n".Multiply(Console.WindowHeight / 2 - 2));
-                Console.WriteLine("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
+                Console.Write("Correcto.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
                 Console.ReadKey();
-                WarnAboutOldPerlModules();
             }));
 
             // Culprit question
@@ -127,10 +149,6 @@ namespace _07151129
             ProgramState.GetCulpritIndex(ProgramState.Instance.Options.Culprit),
             () =>
             {
-                Console.Clear();
-                Console.Write("Correcto.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
-                Console.ReadKey();
-                
                 // TODO: Play ALIVE if not Nome, Final Answer if Nome.
                 Console.ForegroundColor = ConsoleColor.Red;
             }));
@@ -155,9 +173,10 @@ namespace _07151129
                 // Console.WriteLine(ProgramState.DisplayQuestion(question));
                 if (!ProgramState.DisplayQuestion(question))
                 {
-                    // TODO: Announce it's wrong here
+                    // TODO: Announce it's wrong here and kill the program
                     break;
                 }
+                question.RunIfCorrect?.Invoke();
             }
             Console.ReadKey();
 

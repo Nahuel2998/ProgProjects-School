@@ -14,7 +14,7 @@ namespace _07151129
         private static readonly ProgramState instance = new();
 
         static ProgramState() { }
-        private ProgramState() 
+        private ProgramState()
         { }
 
         public static ProgramState Instance
@@ -61,10 +61,18 @@ namespace _07151129
 #endif
 
         public static bool DisplayQuestion(Question question)
-        { return DisplayQuestion(question.Title, question.Choices, question.AnswerIndex); }
+        { return DisplayQuestion(question.Title, question.Choices, question.AnswerIndex, question.RunIfAnswerIndexIs, question.CustomDrawFunc); }
 
-        public static bool DisplayQuestion(string title, string[] choices, int answerIndex)
-        { return answerIndex == DisplayQuestion(title, choices) || answerIndex == -1; }
+        public static bool DisplayQuestion(string title, string[] choices, int answerIndex,
+        Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null)
+        {
+            int ans = customDrawFunc?.Invoke(title, choices) ?? DisplayQuestion(title, choices);
+
+            if (ans == runIfAnswerIndexIs?.Item1)
+            { runIfAnswerIndexIs.Item2.Invoke(); }
+
+            return answerIndex == ans || answerIndex == -1;
+        }
 
         public static int DisplayQuestion(string title, string[] choices)
         {
@@ -112,4 +120,3 @@ namespace _07151129
         public string? Culprit { get; set; }
     }
 }
-
