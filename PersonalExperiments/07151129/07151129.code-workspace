@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "07151129"
+		},
+		{
+			"path": "../../libs/NarExtensions/NarExtensions"
+		},
+		{
+			"path": "../../libs/NarLib"
+		}
+	],
+	"settings": {}
+}
