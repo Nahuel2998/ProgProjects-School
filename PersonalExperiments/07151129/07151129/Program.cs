@@ -4,9 +4,9 @@ using NarLib;
 
 namespace _07151129
 {
-    internal class Program
+    internal static class Program
     {
-        static string[] culpritsList =
+        static readonly string[] culpritsList =
             new string[] {
                     "Ushiromiya Kinzo",
                     "Ushiromiya Krauss",
@@ -98,7 +98,7 @@ namespace _07151129
             () =>
             {
                 Console.Clear();
-                Console.WriteLine("\n".Multiply(Console.WindowHeight / 2 - 2));
+                Console.WriteLine("\n".Multiply((Console.WindowHeight / 2) - 2));
                 Console.WriteLine("That's right!".PadCenterHorizontal(Console.WindowWidth));
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Kinzo is dead at the starting time for all games.".PadCenterHorizontal(Console.WindowWidth));
@@ -113,7 +113,7 @@ namespace _07151129
             () =>
             {
                 Console.Clear();
-                Console.WriteLine("\n".Multiply(Console.WindowHeight / 2 - 2));
+                Console.WriteLine("\n".Multiply((Console.WindowHeight / 2) - 2));
                 Console.Write("g\nEven if Ange didn't attend the conference, she was invited.\nShe was just sick that day.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
                 Console.ReadKey();
             }));
@@ -124,7 +124,7 @@ namespace _07151129
             () =>
             {
                 Console.Clear();
-                Console.WriteLine("\n".Multiply(Console.WindowHeight / 2 - 2));
+                Console.WriteLine("\n".Multiply((Console.WindowHeight / 2) - 2));
                 Console.Write("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
                 Console.ReadKey();
             }));

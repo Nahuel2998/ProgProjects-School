@@ -9,16 +9,12 @@ namespace _07151129
     public sealed class ProgramState
     {
         public Options Options { get; set; } = new Options();
-        public List<Question> Questions = new List<Question>();
+        public List<Question> Questions = new();
 
-        private static readonly ProgramState instance = new();
-
+        public static ProgramState Instance { get; } = new();
         static ProgramState() { }
         private ProgramState()
         { }
-
-        public static ProgramState Instance
-        { get { return instance; } }
 
 #if WINFAG
         // Attempt to save the culprit on the windows registry
