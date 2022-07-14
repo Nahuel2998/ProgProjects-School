@@ -17,17 +17,17 @@ namespace NarExtensions
         { return source.PadCenterHorizontal(Console.WindowWidth, paddingChar); }
 
         public static string PadCenterHorizontal(this string source, int totalWidth, char paddingChar = ' ')
-        { return string.Join('\n', source.Split('\n').Select(line => line.PadLeft((totalWidth - line.Length) / 2 + line.Length, paddingChar).PadRight(totalWidth, paddingChar))); }
+        { return string.Join('\n', source.Split('\n').Select(line => line.PadLeft(((totalWidth - line.Length) / 2) + line.Length, paddingChar).PadRight(totalWidth, paddingChar))); }
 
         public static string PadCenterVertical(this string source)
         { return source.PadCenterVertical(Console.WindowHeight); }
 
         public static string PadCenterVertical(this string source, int totalHeight)
         {
-            int padHeight = (totalHeight - Regex.Matches(source, @"$", RegexOptions.Multiline).Count);
+            int padHeight = (totalHeight - Regex.Matches(source, "$", RegexOptions.Multiline).Count);
             int halfPadHeight = padHeight / 2;
 
-            StringBuilder res = new("\n".Multiply(halfPadHeight + padHeight % 2));
+            StringBuilder res = new("\n".Multiply(halfPadHeight + (padHeight % 2)));
             res.Append(source);
             res.Append("\n".Multiply(halfPadHeight));
 
@@ -41,4 +41,3 @@ namespace NarExtensions
         { return source.PadCenterHorizontal(totalWidth).PadCenterVertical(totalHeight); }
     }
 }
-

@@ -23,7 +23,7 @@ namespace NarLib
             }
 
             stringOptions ??= (string[]) options;
-            
+
             int width = windowWidth ?? Console.WindowWidth;
             int height = windowHeight ?? Console.WindowHeight;
 
@@ -47,7 +47,7 @@ namespace NarLib
                     case ConsoleKey.UpArrow:
                         index = index > 0 ? --index : maxVal;
                         break;
-                    case ConsoleKey.RightArrow: 
+                    case ConsoleKey.RightArrow:
                     case ConsoleKey.Enter:
                         if (isThereAnExitOption && index == maxVal)
                             return null;
@@ -63,7 +63,7 @@ namespace NarLib
                 }
             }
         }
-        
+
         // Build Menu with (or without) Exit Option
         public static void BuildMenu(string title, Option[] options, string? exitText = null, string? bottomText = null,
             bool cancellable = true, bool closeAfter = false, string[]? stringOptions = null,
@@ -78,7 +78,7 @@ namespace NarLib
             BuildMenuFunc(title, options, InvokeOption, exitText, bottomText, cancellable, closeAfter,
                 stringOptions ?? Option.GetNamesFromOptionList(options), bottomTextFunc, centered, windowWidth, windowHeight, separator);
         }
-        
+
         // Build Menu with (or without) Exit Option, returns contained value, null if cancelled
         public static object? BuildMenuGetSelected(string title, Option[] options, string? exitText = null,
             string? bottomText = null, bool cancellable = true, bool closeAfter = true, string[]? stringOptions = null,
@@ -90,10 +90,10 @@ namespace NarLib
             return BuildMenuFunc(title, options, GetOption, exitText, bottomText, cancellable, closeAfter,
                 stringOptions ?? Option.GetNamesFromOptionList(options), bottomTextFunc, centered, windowWidth, windowHeight, separator);
         }
-        
+
         // Build Menu with (or without) Exit Option, takes strings, returns Index, -1 if cancelled
         public static int BuildMenuGetIndex(string title, string[] options, string? exitText = null,
-            string? bottomText = null, bool cancellable = true, bool closeAfter = true, bool centered = false, 
+            string? bottomText = null, bool cancellable = true, bool closeAfter = true, bool centered = false,
             int windowWidth = 0, int windowHeight = 0, string? separator = null)
         {
             static object GetIndex(IReadOnlyList<object> xOptions, int xIndex)
@@ -117,15 +117,15 @@ namespace NarLib
         {
             StringBuilder res = new();
 
-            res.AppendLine($"  {title}");
-            separator ??= "- ".Multiply(title.Length/2 + 3);
+            res.Append("  ").AppendLine(title);
+            separator ??= "- ".Multiply((title.Length/2) + 3);
             if (separator.Length > 0)
             { res.AppendLine(separator); }
 
             for (int i = 0; i < options.Length; i++)
-            { res.AppendLine($"{(i == selectedIndex ? "->" : "  ")} {options[i]}"); }
+            { res.Append(i == selectedIndex ? "->" : "  ").Append(' ').AppendLine(options[i]); }
             if (exitText != null)
-            { res.AppendLine($"{(selectedIndex == options.Length ? "->" : "  ")} {exitText}"); }
+            { res.Append(selectedIndex == options.Length ? "->" : "  ").Append(' ').AppendLine(exitText); }
 
             if (separator.Length > 0)
             { res.AppendLine(separator); }
@@ -140,7 +140,7 @@ namespace NarLib
             StringBuilder res = new();
 
             res.AppendLine(title.PadCenterHorizontal(windowWidth));
-            separator ??= (" " + "- ".Multiply(title.Split('\n').Select(x => x.Length).Max() / 2 + 3));
+            separator ??= (" " + "- ".Multiply((title.Split('\n').Max(x => x.Length) / 2) + 3));
             if (separator.Length > 0)
             {
                 separator = separator.PadCenterHorizontal(windowWidth);
@@ -170,7 +170,7 @@ namespace NarLib
         public Action? Selected { get; }
         public object? Obj { get; }
         // public ConsoleKeyInfo Shortcut { get; }
-    
+
         public Option(string name, Action selected)
         {
             Name = name;

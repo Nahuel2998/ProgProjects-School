@@ -17,7 +17,7 @@ namespace _07151129
         { }
 
         public Question(string title, string[] choices, int answerIndex = -1,
-        Action? runBefore = null, Action? runIfCorrect = null, 
+        Action? runBefore = null, Action? runIfCorrect = null,
         Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null)
         {
             this.Title = title;
@@ -30,8 +30,8 @@ namespace _07151129
         }
 
         public Question(string title, string choices, int answerIndex = -1,
-        Action? runBefore = null, Action? runIfCorrect = null, 
-        Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null) 
+        Action? runBefore = null, Action? runIfCorrect = null,
+        Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null)
         : this(title, choices.Split(':', StringSplitOptions.TrimEntries), answerIndex, runBefore, runIfCorrect, runIfAnswerIndexIs, customDrawFunc)
         { }
 

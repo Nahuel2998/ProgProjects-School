@@ -57,7 +57,7 @@ namespace NarLib
             {
                 if (clear) { Console.Clear(); }
                 string res = GetInput(prompt, cursor).Split(splitArg)[0];
-                if (conditionRegex == null) { return res; } 
+                if (conditionRegex == null) { return res; }
                 Match match = Regex.Match(res, conditionRegex,
                     ignoreCase ? RegexOptions.IgnoreCase : RegexOptions.None);
                 if (match.Success) { return returnMatch ? match.ToString() : res; }
