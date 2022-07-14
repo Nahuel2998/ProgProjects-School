@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace NarLib
 {
-    public class GetValidInput
+    public static class GetValidInput
     {
         private const string DefaultError = "Valor no valido. Intentelo nuevamente.";
 
