@@ -61,12 +61,7 @@ namespace _07151129
             AddQuestion(new Question("What's the name of the second mansion?",
             "Rokkenjima : Kuwadorian : Kumasawa : There's only one mansion",
             1, runIfCorrect:
-            () =>
-            {
-                Console.Clear();
-                Console.Write("y si".PadCenterBoth());
-                Console.ReadKey();
-            }));
+            () => ClearSayAndWait("y si".PadCenterBoth())));
 
             // TODO: Change this to something else.
             // True identity of the witch of the forest?
@@ -79,18 +74,9 @@ namespace _07151129
             AddQuestion(new Question("What does Maria love to say?",
             "uooooooooh!:uu-uu!:auau!:",
             1, runIfAnswerIndexIs:
-            new Tuple<int, Action>(3, () =>
-            {
-                Console.Clear();
-                Console.Write("jjjjj\nGet it because she's muted.\nSo ye still wrong.".PadCenterBoth());
-                Console.ReadKey();
-            }), runIfCorrect:
-            () =>
-            {
-                Console.Clear();
-                Console.Write("uu-uu!".PadCenterBoth());
-                Console.ReadKey();
-            }));
+            new Tuple<int, Action>(3,
+            () => ClearSayAndWait("jjjjj\nGet it because she's muted.\nSo ye still wrong.".PadCenterBoth())), runIfCorrect:
+            () => ClearSayAndWait("uu-uu!".PadCenterBoth())));
 
             AddQuestion(new Question("Who's the only human (invited by Kinzo)\nthat lives past October 6th 1986 across all episodes?",
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : None",
@@ -110,24 +96,12 @@ namespace _07151129
             AddQuestion(new Question("Who's the only piece (invited to the conference)\nthat lives past October 6th 1986 across all episodes?",
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : On the 9th Twilight, none shall be left alive",
             2, runIfCorrect:
-            () =>
-            {
-                Console.Clear();
-                Console.WriteLine("\n".Multiply((Console.WindowHeight / 2) - 2));
-                Console.Write("g\nEven if Ange didn't attend the conference, she was invited.\nShe was just sick that day.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
-                Console.ReadKey();
-            }));
+            () => ClearSayAndWait("g\nEven if Ange didn't attend the conference, she was invited.\nShe was just sick that day.".PadCenterBoth())));
 
             AddQuestion(new Question("Who's the only human (who attends the conference)\nthat lives past October 6th 1986 across all episodes?",
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : On the 9th Twilight, none shall be left alive I said",
             1, runIfCorrect:
-            () =>
-            {
-                Console.Clear();
-                Console.WriteLine("\n".Multiply((Console.WindowHeight / 2) - 2));
-                Console.Write("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
-                Console.ReadKey();
-            }));
+            () => ClearSayAndWait("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.".PadCenterBoth())));
 
             // Amount of people on the island question
             AddQuestion(new Question("How many humans exist on the island?",
@@ -136,12 +110,7 @@ namespace _07151129
             : "At least 19 : Exactly 18 : Exactly 17 : No more than 16",
             3,
             WarnAboutOldPerlModules,
-            () =>
-            {
-                Console.Clear();
-                Console.Write("Correcto.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
-                Console.ReadKey();
-            }));
+            () => ClearSayAndWait("Correcto.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight))));
 
             // Culprit question
             AddQuestion(new Question("Who is the culprit?",
@@ -211,6 +180,13 @@ namespace _07151129
 
             while (Console.ReadKey().Key != ConsoleKey.Enter)
             { }
+        }
+
+        private static void ClearSayAndWait(string message)
+        {
+            Console.Clear();
+            Console.Write(message);
+            Console.ReadKey();
         }
 
         // private static void SpookyEffect(OutputCapture captured)
