@@ -174,6 +174,7 @@ namespace _07151129
                     // Paint screen white, make beato cackle, and throw the error if they miss.
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.White;
+                    Console.Clear();
 #if WINFAG
                     ProgramState.Instance.BeatoPlayer.PlaySync();
                     MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
