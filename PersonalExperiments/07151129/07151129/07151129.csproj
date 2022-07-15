@@ -4,6 +4,12 @@
     <DefineConstants>WINFAG</DefineConstants>
     <UseWindowsForms>true</UseWindowsForms>
     <TargetFramework>net6.0-windows</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -12,8 +18,9 @@
     <RootNamespace>_07151129</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- <ApplicationIcon>SomeCoolIcon.ico</ApplicationIcon> -->
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
@@ -25,6 +32,15 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\NarExtensions\NarExtensions\NarExtensions.csproj" />
     <ProjectReference Include="..\..\..\libs\NarLib\NarLib.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="esperanza.wav" />
+    <EmbeddedResource Include="esperanza.wav" />
+    <None Remove="RespuestaFinalCompleta.wav" />
+    <EmbeddedResource Include="RespuestaFinalCompleta.wav" />
+    <None Remove="VIVO.wav" />
+    <EmbeddedResource Include="VIVO.wav" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,10 @@
 ﻿using CommandLine;
 using NarExtensions;
 using NarLib;
+#if WINFAG
+using System.Media;
+using System.Reflection;
+#endif
 
 namespace _07151129
 {
@@ -50,6 +54,14 @@ namespace _07151129
                 Console.ReadKey();
                 return;
             }
+
+#if WINFAG
+            SoundPlayer HopePlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.esperanza.wav"));
+            if (ProgramState.Instance.Options.Nome)
+            { SoundPlayer FinalAnswerPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.RespuestaFinalCompleta.wav")); }
+            else
+            { SoundPlayer AlivePlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.VIVO.wav")); }
+#endif
 
             // TODO: Add freno for loading screen.
             // TODO: Play Hope.
