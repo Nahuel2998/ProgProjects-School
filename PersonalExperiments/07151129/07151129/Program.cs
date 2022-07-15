@@ -3,7 +3,6 @@ using NarExtensions;
 using NarLib;
 #if WINFAG
 using System.Media;
-using System.Reflection;
 #endif
 
 namespace _07151129
@@ -56,21 +55,9 @@ namespace _07151129
             }
 
 #if WINFAG
-            SoundPlayer HopePlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.esperanza.wav"));
-            HopePlayer.Load();
-
-            if (ProgramState.Instance.Options.Nome)
-            { 
-                SoundPlayer FinalAnswerPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.RespuestaFinalCompleta.wav")); 
-                FinalAnswerPlayer.Load();
-            }
-            else
-            { 
-                SoundPlayer EmotionalEP6TrackPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.VIVO.wav")); 
-                EmotionalEP6TrackPlayer.Load();
-            }
-            
-            HopePlayer.Play();
+            ProgramState.Instance.HopePlayer.Load();
+            ProgramState.Instance.FinalPlayer.Load();
+            ProgramState.Instance.HopePlayer.Play();
 #endif
 
             // TODO: Add freno for loading screen.
@@ -139,12 +126,8 @@ namespace _07151129
             ProgramState.GetCulpritIndex(ProgramState.Instance.Options.Culprit),
             () =>
             {
-                // TODO: Play ALIVE if not Nome, Final Answer if Nome.
 #if WINFAG
-                if (ProgramState.Options.Nome)
-                { FinalAnswerPlayer.Play(); }
-                else
-                { EmotionalEP6TrackPlayer.Play();}
+                ProgramState.Instance.FinalPlayer.Play();
 #endif
                 Console.ForegroundColor = ConsoleColor.Red;
             }));
