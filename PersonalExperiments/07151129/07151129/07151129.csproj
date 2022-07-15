@@ -29,6 +29,8 @@
     <EmbeddedResource Include="RespuestaFinalCompleta.wav" />
     <None Remove="VIVO.wav" />
     <EmbeddedResource Include="VIVO.wav" />
+    <None Remove="ahaha.wav" />
+    <EmbeddedResource Include="ahaha.wav" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">

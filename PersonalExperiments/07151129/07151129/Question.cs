@@ -9,6 +9,7 @@ namespace _07151129
         public Action? RunIfCorrect { get; set; }
         public Tuple<int, Action>? RunIfAnswerIndexIs { get; set; }
         public Func<string, string[], int>? CustomDrawFunc { get; set; }
+        public Action<int>? RunWithAnsAsParameter { get; set; }
 
         public Question() : this("")
         { }
@@ -18,7 +19,8 @@ namespace _07151129
 
         public Question(string title, string[] choices, int answerIndex = -1,
         Action? runBefore = null, Action? runIfCorrect = null,
-        Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null)
+        Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null,
+        Action<int>? runWithAnsAsParameter = null)
         {
             this.Title = title;
             this.Choices = choices;
@@ -27,12 +29,14 @@ namespace _07151129
             this.RunIfCorrect = runIfCorrect;
             this.RunIfAnswerIndexIs = runIfAnswerIndexIs;
             this.CustomDrawFunc = customDrawFunc;
+            this.RunWithAnsAsParameter = runWithAnsAsParameter;
         }
 
         public Question(string title, string choices, int answerIndex = -1,
         Action? runBefore = null, Action? runIfCorrect = null,
-        Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null)
-        : this(title, choices.Split(':', StringSplitOptions.TrimEntries), answerIndex, runBefore, runIfCorrect, runIfAnswerIndexIs, customDrawFunc)
+        Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null,
+        Action<int>? runWithAnsAsParameter = null)
+        : this(title, choices.Split(':', StringSplitOptions.TrimEntries), answerIndex, runBefore, runIfCorrect, runIfAnswerIndexIs, customDrawFunc, runWithAnsAsParameter)
         { }
 
         public Question WithTitle(string title)

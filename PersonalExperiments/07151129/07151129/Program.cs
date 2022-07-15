@@ -56,10 +56,15 @@ namespace _07151129
             }
 
 #if WINFAG
+            ProgramState.Instance.ReadCulpritRegKey();
+
             ProgramState.Instance.HopePlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("_07151129.esperanza.wav"));
             ProgramState.Instance.HopePlayer.Load();
             ProgramState.Instance.FinalPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream($"_07151129.{(ProgramState.Instance.Options.Nome ? "RespuestaFinalCompleta" : "VIVO")}.wav"));
             ProgramState.Instance.FinalPlayer.Load();
+            ProgramState.Instance.BeatoPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("_07151129.ahaha.wav"));
+            ProgramState.Instance.BeatoPlayer.Load();
+
             ProgramState.Instance.HopePlayer.Play();
 #endif
 
@@ -133,6 +138,17 @@ namespace _07151129
                 ProgramState.Instance.FinalPlayer.Play();
 #endif
                 Console.ForegroundColor = ConsoleColor.Red;
+            }, runWithAnsAsParameter:
+            (ans) =>
+            {
+                if (ProgramState.Instance.Options.Culprit != null)
+                {
+#if WINFAG
+                    ProgramState.SaveCulpritRegKey(culpritsList[ans]);
+#else
+                    ProgramState.PlanB(culpritsList[ans]);
+#endif
+                }
             }));
 
             // Testing console write speed
@@ -155,25 +171,19 @@ namespace _07151129
                 // Console.WriteLine(ProgramState.DisplayQuestion(question));
                 if (!ProgramState.DisplayQuestion(question))
                 {
-                    // TODO: Announce it's wrong here and kill the program
-                    break;
+                    // Paint screen white, make beato cackle, and throw the error if they miss.
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.White;
+#if WINFAG
+                    ProgramState.Instance.BeatoPlayer.PlaySync();
+                    MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+                    Environment.Exit(-1);
                 }
                 question.RunIfCorrect?.Invoke();
             }
-            Console.ReadKey();
-
 #if WINFAG
             // ProgramState.SaveCulpritRegKey("Kanon");
-            // ProgramState.Instance.ReadCulpritRegKey();
-#endif
-            // SpookyEffect(captured);
-
-            Console.Clear();
-            Console.WriteLine((ProgramState.Instance.Options.Culprit ?? "Hola.").PadCenterBoth());
-
-#if WINFAG
-            // TODO: Paint screen white, make beato cackle, and throw the error if they miss.
-            MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
         }
 

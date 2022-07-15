@@ -15,6 +15,7 @@ namespace _07151129
 #if WINFAG
         public SoundPlayer? HopePlayer { get; set; }
         public SoundPlayer? FinalPlayer { get; set; }
+        public SoundPlayer? BeatoPlayer { get; set; }
 #endif
 
         public static ProgramState Instance { get; } = new();
@@ -63,15 +64,18 @@ namespace _07151129
 #endif
 
         public static bool DisplayQuestion(Question question)
-        { return DisplayQuestion(question.Title, question.Choices, question.AnswerIndex, question.RunIfAnswerIndexIs, question.CustomDrawFunc); }
+        { return DisplayQuestion(question.Title, question.Choices, question.AnswerIndex, question.RunIfAnswerIndexIs, question.CustomDrawFunc, question.RunWithAnsAsParameter); }
 
         public static bool DisplayQuestion(string title, string[] choices, int answerIndex,
-        Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null)
+        Tuple<int, Action>? runIfAnswerIndexIs = null, Func<string, string[], int>? customDrawFunc = null,
+        Action<int>? runWithAnsAsParameter = null)
         {
             int ans = customDrawFunc?.Invoke(title, choices) ?? DisplayQuestion(title, choices);
 
             if (ans == runIfAnswerIndexIs?.Item1)
             { runIfAnswerIndexIs.Item2.Invoke(); }
+
+            runWithAnsAsParameter?.Invoke(ans);
 
             return answerIndex == ans || answerIndex == -1;
         }
