@@ -57,14 +57,23 @@ namespace _07151129
 
 #if WINFAG
             SoundPlayer HopePlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.esperanza.wav"));
+            HopePlayer.Load();
+
             if (ProgramState.Instance.Options.Nome)
-            { SoundPlayer FinalAnswerPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.RespuestaFinalCompleta.wav")); }
+            { 
+                SoundPlayer FinalAnswerPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.RespuestaFinalCompleta.wav")); 
+                FinalAnswerPlayer.Load();
+            }
             else
-            { SoundPlayer AlivePlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.VIVO.wav")); }
+            { 
+                SoundPlayer EmotionalEP6TrackPlayer = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.VIVO.wav")); 
+                EmotionalEP6TrackPlayer.Load();
+            }
+            
+            HopePlayer.Play();
 #endif
 
             // TODO: Add freno for loading screen.
-            // TODO: Play Hope.
 
             Console.CursorVisible = false;
 #if WINFAG
@@ -131,6 +140,12 @@ namespace _07151129
             () =>
             {
                 // TODO: Play ALIVE if not Nome, Final Answer if Nome.
+#if WINFAG
+                if (ProgramState.Options.Nome)
+                { FinalAnswerPlayer.Play(); }
+                else
+                { EmotionalEP6TrackPlayer.Play();}
+#endif
                 Console.ForegroundColor = ConsoleColor.Red;
             }));
 
