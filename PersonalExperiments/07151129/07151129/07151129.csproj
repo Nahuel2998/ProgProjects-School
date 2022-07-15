@@ -23,6 +23,12 @@
   
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <None Remove="esperanza.wav" />
+    <EmbeddedResource Include="esperanza.wav" />
+    <None Remove="RespuestaFinalCompleta.wav" />
+    <EmbeddedResource Include="RespuestaFinalCompleta.wav" />
+    <None Remove="VIVO.wav" />
+    <EmbeddedResource Include="VIVO.wav" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
@@ -32,15 +38,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\NarExtensions\NarExtensions\NarExtensions.csproj" />
     <ProjectReference Include="..\..\..\libs\NarLib\NarLib.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Remove="esperanza.wav" />
-    <EmbeddedResource Include="esperanza.wav" />
-    <None Remove="RespuestaFinalCompleta.wav" />
-    <EmbeddedResource Include="RespuestaFinalCompleta.wav" />
-    <None Remove="VIVO.wav" />
-    <EmbeddedResource Include="VIVO.wav" />
   </ItemGroup>
 
 </Project>

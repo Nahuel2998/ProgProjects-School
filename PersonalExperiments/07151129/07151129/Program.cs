@@ -3,6 +3,7 @@ using NarExtensions;
 using NarLib;
 #if WINFAG
 using System.Media;
+using System.Reflection;
 #endif
 
 namespace _07151129
@@ -55,7 +56,9 @@ namespace _07151129
             }
 
 #if WINFAG
+            ProgramState.Instance.HopePlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("_07151129.esperanza.wav"));
             ProgramState.Instance.HopePlayer.Load();
+            ProgramState.Instance.FinalPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream($"_07151129.{(ProgramState.Instance.Options.Nome ? "RespuestaFinalCompleta" : "VIVO")}.wav"));
             ProgramState.Instance.FinalPlayer.Load();
             ProgramState.Instance.HopePlayer.Play();
 #endif

@@ -13,19 +13,14 @@ namespace _07151129
         public Options Options { get; set; } = new Options();
         public List<Question> Questions = new();
 #if WINFAG
-        public SoundPlayer HopePlayer { get; set; }
-        public SoundPlayer FinalPlayer { get; set; }
+        public SoundPlayer? HopePlayer { get; set; }
+        public SoundPlayer? FinalPlayer { get; set; }
 #endif
 
         public static ProgramState Instance { get; } = new();
         static ProgramState() { }
         private ProgramState()
-        {
-#if WINFAG
-            HopePlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("07151129.esperanza.wav"));
-            FinalPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream($"07151129.{(Instance.Options.Nome ? "RespuestaFinalCompleta" : "VIVO")}.wav"))
-#endif
-        }
+        { }
 
 #if WINFAG
         // Attempt to save the culprit on the windows registry
