@@ -66,6 +66,7 @@ namespace _07151129
             ProgramState.Instance.BeatoPlayer.Load();
 
             ProgramState.Instance.HopePlayer.Play();
+            // TODO: Use toast notifications to show the current track being played
 #endif
 
             // TODO: Add freno for loading screen.
@@ -74,6 +75,21 @@ namespace _07151129
 #if WINFAG
             Console.SetWindowSize(Console.WindowWidth, 40);
 #endif
+            AddQuestion(new Question("What's the name of the red haired dude who argues with the witch?",
+            "Ushiromiya Butter : Ushiromiya Battler : Ushiromiya Batter : Ushiromiya Batler : Ushiromiya Butler",
+            3, runIfCorrect:
+            () => ClearSayAndWait("yeah".PadCenterBoth())));
+
+            AddQuestion(new Question("What's the name of the witch who argues with the red haired dude?",
+            "Ushiromiya George : Ushiromiya Maria : Beatriz : Ushiromiya Hideyoshi : Ushiromiya Batler",
+            2, runIfCorrect:
+            () => ClearSayAndWait("yeah".PadCenterBoth())));
+
+            AddQuestion(new Question("In what episode was the Red Truth introduced?",
+            "Legend of the Golden Witch : Turn of the Golden Witch : Banquet of the Golden Witch : Alliance of the Golden Witch : Checkmate of the Golden Witch",
+            1, runIfCorrect:
+            () => ClearSayAndWait("yeah".PadCenterBoth())));
+
             AddQuestion(new Question("What's the name of the second mansion?",
             "Rokkenjima : Kuwadorian : Kumasawa : There's only one mansion",
             1, runIfCorrect:
@@ -134,21 +150,17 @@ namespace _07151129
             ProgramState.GetCulpritIndex(ProgramState.Instance.Options.Culprit),
             () =>
             {
+                Console.ForegroundColor = ConsoleColor.Red;
 #if WINFAG
                 ProgramState.Instance.FinalPlayer.Play();
-#endif
-                Console.ForegroundColor = ConsoleColor.Red;
             }, runWithAnsAsParameter:
             (ans) =>
             {
                 if (ProgramState.Instance.Options.Culprit != null)
                 {
-#if WINFAG
                     ProgramState.SaveCulpritRegKey(culpritsList[ans]);
-#else
-                    ProgramState.PlanB(culpritsList[ans]);
-#endif
                 }
+#endif
             }));
 
             // Testing console write speed
@@ -178,13 +190,10 @@ namespace _07151129
                     ProgramState.Instance.BeatoPlayer.PlaySync();
                     MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
-                    Environment.Exit(-1);
+                    Environment.Exit(-19);
                 }
                 question.RunIfCorrect?.Invoke();
             }
-#if WINFAG
-            // ProgramState.SaveCulpritRegKey("Kanon");
-#endif
         }
 
         private static void AddQuestion(Question question)
@@ -204,6 +213,9 @@ namespace _07151129
             while (Console.ReadKey().Key != ConsoleKey.Enter)
             { }
         }
+
+        private static void ClearSayAndWaitCentered(string message)
+        { ClearSayAndWait(message.PadCenterBoth()); }
 
         private static void ClearSayAndWait(string message)
         {
