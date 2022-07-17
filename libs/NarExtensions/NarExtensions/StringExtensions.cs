@@ -13,6 +13,12 @@ namespace NarExtensions
             return res.ToString();
         }
 
+        public static string PadLeftMultiline(this string source, int totalWidth, char paddingChar = ' ')
+        { return string.Join('\n', source.Split('\n').Select(line => line.PadLeft(totalWidth, paddingChar))); }
+
+        public static string PadRightMultiline(this string source, int totalWidth, char paddingChar = ' ')
+        { return string.Join('\n', source.Split('\n').Select(line => line.PadRight(totalWidth, paddingChar))); }
+
         public static string PadCenterHorizontal(this string source, char paddingChar = ' ')
         { return source.PadCenterHorizontal(Console.WindowWidth, paddingChar); }
 
