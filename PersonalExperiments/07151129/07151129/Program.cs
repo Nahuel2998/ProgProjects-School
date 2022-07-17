@@ -1,10 +1,10 @@
 ﻿using CommandLine;
-using Microsoft.Toolkit.Uwp.Notifications;
 using NarExtensions;
 using NarLib;
 #if WINFAG
 using System.Media;
 using System.Reflection;
+using Microsoft.Toolkit.Uwp.Notifications;
 #endif
 
 namespace _07151129
@@ -65,10 +65,8 @@ namespace _07151129
             ProgramState.Instance.FinalPlayer.Load();
             ProgramState.Instance.BeatoPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("_07151129.ahaha.wav"));
             ProgramState.Instance.BeatoPlayer.Load();
-
-            ProgramState.Instance.HopePlayer.Play();
-            // TODO: Use toast notifications to show the current track being played
-            new ToastContentBuilder().AddText("𝅘𝅥𝅮 hope").Show();
+            ProgramState.Instance.ChainsPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("_07151129.CadenasEternas.wav"));
+            ProgramState.Instance.ChainsPlayer.Load()
 #endif
 
             // TODO: Add freno for loading screen.
@@ -83,9 +81,43 @@ namespace _07151129
             () => ClearSayAndWait("yeah".PadCenterBoth())));
 
             AddQuestion(new Question("What's the name of the witch who argues with the red haired dude?",
-            "Ushiromiya George : Ushiromiya Maria : Beatriz : Ushiromiya Hideyoshi : Ushiromiya Batler",
-            2, runIfCorrect:
+            "Ushiromiya George : Ushiromiya Maria : Beatrice : Ushiromiya Hideyoshi : Ushiromiya Batler",
+            2, runWithAnsAsParameter:
+            (ans) =>
+            {
+                switch (ans)
+                {
+                    case 0: case 1: case 3: case 4:
+                        ClearSayAndWaitCentered("We don't know that for sure.");
+                        break;
+                }
+            }, runIfCorrect:
             () => ClearSayAndWait("yes".PadCenterBoth())));
+
+            AddQuestion(new Question("What's the name of the annoying little girl who follows Bernkastel?",
+            "Ushiromiya Ange : Lambdadelta : Hanyuu : Furude Rika : Furudo Erika",
+            2, runWithAnsAsParameter:
+            (ans) =>
+            {
+                switch (ans)
+                {
+                    case 0:
+                        ClearSayAndWaitCentered("Not a little girl at the time");
+                        break;
+                    case 1:
+                        ClearSayAndWaitCentered("rude\nShe's not annoying she cute");
+                        break;
+                    case 3: case 4:
+                        ClearSayAndWaitCentered("Same person");
+                        break;
+                }
+            }, runIfCorrect:
+            () => ClearSayAndWaitCentered("auau\n(yeah this was more of a joke question)\n(just wanted to use auau)")));
+
+            AddQuestion(new Question("Who's the only character capable of counting the first twilight sacrifices\nwith just one of their extremities?",
+            "Ushiromiya Kinzo : Ushiromiya Natsuhi : Nanjo Terumasa : Beatrice : Furudo Erika",
+            0, runIfCorrect:
+            () => ClearSayAndWaitCentered("yep\nIf he were alive he could")));
 
             AddQuestion(new Question("In what episode was the Red Truth introduced?",
             "Legend of the Golden Witch : Turn of the Golden Witch : Banquet of the Golden Witch : Alliance of the Golden Witch : Checkmate of the Golden Witch",
@@ -143,14 +175,38 @@ namespace _07151129
             1, runIfCorrect:
             () => ClearSayAndWait("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.".PadCenterBoth())));
 
-            AddQuestion(new Question("But how did the candies leave the cup???\n"
-                    + "- - - - - - - - - - - - - - - - - - - - - - -",
-                    "None of the above : Actually they didn't : It was Ange (with a brick) : There were no candies to begin with : - - - - - - - - - - - - - - - - - - - - - - - :".Split(':', StringSplitOptions.TrimEntries),
-                    5,
-                    runIfCorrect:
-                    () => ClearSayAndWaitCentered("asi mismo"),
-                    customDrawFunc:
-                    (title, options) => Menu.BuildMenuGetIndex(title, options, cancellable: false, centered: true, separator: "")));
+            if (new Random().Next() % 2 == 0)
+            {
+                AddQuestion(new Question("But how did the candy leave the cup???\n- - - - - - - - - - - - - - - - - - - - - -",
+                "None of the above : Actually they didn't : It was Ange (with a brick) : There was no candy to begin with : - - - - - - - - - - - - - - - - - - - - - - :".Split(':', StringSplitOptions.TrimEntries),
+                5, runIfCorrect:
+                () => ClearSayAndWaitCentered("asi mismo"), customDrawFunc:
+                (title, options) => Menu.BuildMenuGetIndex(title, options, cancellable: false, centered: true, separator: "")));
+            }
+            else
+            {
+                AddQuestion(new Question("But how did Kanon leave the cousin room?\n- - - - - - - - - - - - - - - - - - - - - - -",
+                "None of the above : Actually he didn't : It was Ange (with a brick) : He wasn't there to begin with : - - - - - - - - - - - - - - - - - - - - - - - :".Split(':', StringSplitOptions.TrimEntries),
+                5,
+#if WINFAG
+                runBefore:
+                () => 
+                {
+                    ProgramState.Instance.ChainsPlayer.PlayLooping();
+                    new ToastContentBuilder().AddText("𝅘𝅥𝅮 Eternal Chains").Show();
+                },
+#endif
+                runIfCorrect:
+                () =>
+                {
+                    ClearSayAndWaitCentered("just like that\n\n(Also, Nome won't see this version of this (the previous) question)\n(yes there's two versions of this question with a 50% chance each)");
+#if WINFAG
+                    ProgramState.Instance.HopePlayer.PlayLooping();
+                    new ToastContentBuilder().AddText("𝅘𝅥𝅮 hope").Show();
+#endif
+                }, customDrawFunc:
+                (title, options) => Menu.BuildMenuGetIndex(title, options, cancellable: false, centered: true, separator: "")));
+            }
 
             // Amount of people on the island question
             AddQuestion(new Question("How many humans exist on the island?",
@@ -160,6 +216,12 @@ namespace _07151129
             3,
             WarnAboutOldPerlModules,
             () => ClearSayAndWait("Correcto.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight))));
+
+            AddQuestion(new Question("What's the number of humans on the island?",
+            "15 : 14 : 13 : 12",
+            3,
+            () => ClearSayAndWaitCentered("Actually\nLet's get specific"),
+            () => ClearSayAndWaitCentered("Por supuesto\n(The previous question has been presented by Ushiromiya Eva)")));
 
             // Culprit question
             AddQuestion(new Question("Who is the culprit?",
@@ -179,24 +241,22 @@ namespace _07151129
 #endif
             }));
 
-            // Testing console write speed
-            //int i = 0;
-            //while (true)
-            //{
-            //    Console.SetCursorPosition(0, 0);
-            //    Console.Write(i.ToString().PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
-            //    i++;
-            //}
-
 #if !DEBUG
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.ForegroundColor = ConsoleColor.White;
+#endif
+            Console.WriteLine("There are currently {0} questions.", ProgramState.Instance.Questions.Count);
+            Console.ReadKey();
+
+            Introduction();
+#if WINFAG
+            ProgramState.Instance.HopePlayer.PlayLooping();
+            new ToastContentBuilder().AddText("𝅘𝅥𝅮 hope").Show();
 #endif
 
             foreach (Question question in ProgramState.Instance.Questions)
             {
                 question.RunBefore?.Invoke();
-                // Console.WriteLine(ProgramState.DisplayQuestion(question));
                 if (!ProgramState.DisplayQuestion(question))
                 {
                     // Paint screen white, make beato cackle, and throw the error if they miss.
@@ -226,6 +286,41 @@ namespace _07151129
             + "In both cases the correct option will be in the same place.\n"
             + "So if you want to talk with Nome about it, you can use 'the [n]th' option to refer to the answer.\n\n"
             + "[Enter to continue]").PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
+
+            while (Console.ReadKey().Key != ConsoleKey.Enter)
+            { }
+        }
+
+        private static void Introduction()
+        {
+            Console.Clear();
+
+            // Console.Write(("hola!!!\n"
+            // + "Welcome to: 'Umineko no Naku Koro ni: Trivia of the Golden Witch.'\n\n"
+            // // + "Let it be known there is no falsehood in the presented statements for future episodes either.\n"
+            // // + "So there's no falsehood in \n\n"
+            // // + "[Enter to continue]").PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
+
+            int[] laHora = DateTime.Now.ToString("HH:mm", System.Globalization.DateTimeFormatInfo.InvariantInfo).Split(':').Select(x => int.Parse(x)).ToArray();
+
+            Console.Write(("Episode ???\n"
+            + "Trivia of the Golden Witch\n\n"
+            + (laHora[1] == 42 ? "Bonita hora.\n" : string.Format("Good {0}.\n",
+            (laHora[0] >= 6 && laHora[0] < 12)
+            ? "morning"
+            : laHora[0] < 17
+                ? "afternoon"
+                : laHora[0] < 22
+                    ? "evening"
+                    : "night"))
+            + "After countless games, all facts and hints have been fully laid on the board.\n"
+            + "The Golden Witch has prepared a lovely trivia to test that knowledge of yours.\n\n"
+            + "This trivia will test your general knowledge of the story up to Episode 6.\n"
+            + "Let it be known there is absolutely no falsehood in the presented statements.\n"
+            + "They shall remain as absolute truth for future episodes as well.\n\n"
+            + "The difficulty level is only natural. You should know all of this already.\n"
+            + "With love, the answers can be seen.\n\n"
+            + "[Enter to continue]").PadRightMultiline(Console.WindowWidth - 20).PadLeftMultiline(Console.WindowWidth).PadCenterVertical());
 
             while (Console.ReadKey().Key != ConsoleKey.Enter)
             { }

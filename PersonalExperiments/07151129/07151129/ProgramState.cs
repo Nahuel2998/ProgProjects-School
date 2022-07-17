@@ -16,6 +16,7 @@ namespace _07151129
         public SoundPlayer? HopePlayer { get; set; }
         public SoundPlayer? FinalPlayer { get; set; }
         public SoundPlayer? BeatoPlayer { get; set; }
+        public SoundPlayer? ChainsPlayer { get; set; }
 #endif
 
         public static ProgramState Instance { get; } = new();
