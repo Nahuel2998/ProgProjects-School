@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using Microsoft.Toolkit.Uwp.Notifications;
 using NarExtensions;
 using NarLib;
 #if WINFAG
@@ -67,7 +68,7 @@ namespace _07151129
 
             ProgramState.Instance.HopePlayer.Play();
             // TODO: Use toast notifications to show the current track being played
-            new ToastContentBuilder().AddText("𝅘𝅥𝅮"hope).Show();
+            new ToastContentBuilder().AddText("𝅘𝅥𝅮 hope").Show();
 #endif
 
             // TODO: Add freno for loading screen.
@@ -168,14 +169,13 @@ namespace _07151129
             {
                 Console.ForegroundColor = ConsoleColor.Red;
 #if WINFAG
-                ProgramState.Instance.FinalPlayer.Play();
+                ProgramState.Instance.FinalPlayer.PlayLooping();
+                new ToastContentBuilder().AddText($"𝅘𝅥𝅮 {(ProgramState.Instance.Options.Nome ? "Final Answer" : "ALIVE")}").Show();
             }, runWithAnsAsParameter:
             (ans) =>
             {
-                if (ProgramState.Instance.Options.Culprit != null)
-                {
-                    ProgramState.SaveCulpritRegKey(culpritsList[ans]);
-                }
+                if (ProgramState.Instance.Options.Culprit == null)
+                { ProgramState.SaveCulpritRegKey(culpritsList[ans]); }
 #endif
             }));
 
