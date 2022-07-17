@@ -67,7 +67,7 @@ namespace NarLib
         // Build Menu with (or without) Exit Option
         public static void BuildMenu(string title, Option[] options, string? exitText = null, string? bottomText = null,
             bool cancellable = true, bool closeAfter = false, string[]? stringOptions = null,
-            Func<string>? bottomTextFunc = null, bool centered = false, int windowWidth = 0, int windowHeight = 0, string? separator = null)
+            Func<string>? bottomTextFunc = null, bool centered = false, int? windowWidth = null, int? windowHeight = null, string? separator = null)
         {
             static object? InvokeOption(IReadOnlyList<object> xOptions, int xIndex)
             {
@@ -82,7 +82,7 @@ namespace NarLib
         // Build Menu with (or without) Exit Option, returns contained value, null if cancelled
         public static object? BuildMenuGetSelected(string title, Option[] options, string? exitText = null,
             string? bottomText = null, bool cancellable = true, bool closeAfter = true, string[]? stringOptions = null,
-            Func<string>? bottomTextFunc = null, bool centered = false, int windowWidth = 0, int windowHeight = 0, string? separator = null)
+            Func<string>? bottomTextFunc = null, bool centered = false, int? windowWidth = null, int? windowHeight = null, string? separator = null)
         {
             static object? GetOption(IReadOnlyList<object> xOptions, int xIndex)
             { return ((Option) xOptions[xIndex]).Obj; }
@@ -94,7 +94,7 @@ namespace NarLib
         // Build Menu with (or without) Exit Option, takes strings, returns Index, -1 if cancelled
         public static int BuildMenuGetIndex(string title, string[] options, string? exitText = null,
             string? bottomText = null, bool cancellable = true, bool closeAfter = true, bool centered = false,
-            int windowWidth = 0, int windowHeight = 0, string? separator = null)
+            int? windowWidth = null, int? windowHeight = null, string? separator = null)
         {
             static object GetIndex(IReadOnlyList<object> xOptions, int xIndex)
             { return xOptions.Count != 0 ? xIndex : -1; }
