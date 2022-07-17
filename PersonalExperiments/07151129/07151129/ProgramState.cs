@@ -34,17 +34,14 @@ namespace _07151129
                 key.Close();
             }
             catch (Exception)
-            { PlanB(culprit); }
+            { /* PlanB(culprit); */ }
         }
-#endif
 
         // If saving a regKey failed, replace the .lnk instead and use the parameter
-        public static void PlanB(string culprit)
-        {
-            // TODO: me
-        }
+        // You know what I trust it won't fail
+        // public static void PlanB(string culprit)
+        // { }
 
-#if WINFAG
         // Read the culprit regkey and use it over the parameter if it exists 
         public void ReadCulpritRegKey()
         {

@@ -23,6 +23,10 @@
   
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
+    <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
     <None Remove="esperanza.wav" />
     <EmbeddedResource Include="esperanza.wav" />
     <None Remove="RespuestaFinalCompleta.wav" />
@@ -31,10 +35,7 @@
     <EmbeddedResource Include="VIVO.wav" />
     <None Remove="ahaha.wav" />
     <EmbeddedResource Include="ahaha.wav" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
-    <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.2" />
   </ItemGroup>
 
   <ItemGroup>

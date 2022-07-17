@@ -67,6 +67,7 @@ namespace _07151129
 
             ProgramState.Instance.HopePlayer.Play();
             // TODO: Use toast notifications to show the current track being played
+            new ToastContentBuilder().AddText("𝅘𝅥𝅮"hope).Show();
 #endif
 
             // TODO: Add freno for loading screen.
@@ -83,25 +84,25 @@ namespace _07151129
             AddQuestion(new Question("What's the name of the witch who argues with the red haired dude?",
             "Ushiromiya George : Ushiromiya Maria : Beatriz : Ushiromiya Hideyoshi : Ushiromiya Batler",
             2, runIfCorrect:
-            () => ClearSayAndWait("yeah".PadCenterBoth())));
+            () => ClearSayAndWait("yes".PadCenterBoth())));
 
             AddQuestion(new Question("In what episode was the Red Truth introduced?",
             "Legend of the Golden Witch : Turn of the Golden Witch : Banquet of the Golden Witch : Alliance of the Golden Witch : Checkmate of the Golden Witch",
             1, runIfCorrect:
-            () => ClearSayAndWait("yeah".PadCenterBoth())));
+            () =>
+            {
+                Console.Clear();
+                Console.WriteLine("\n".Multiply((Console.WindowHeight / 2) - 1));
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Acknowledged.".PadCenterHorizontal(Console.WindowWidth));
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.ReadKey();
+            }));
 
             AddQuestion(new Question("What's the name of the second mansion?",
             "Rokkenjima : Kuwadorian : Kumasawa : There's only one mansion",
             1, runIfCorrect:
             () => ClearSayAndWait("y si".PadCenterBoth())));
-
-            // TODO: Change this to something else.
-            // True identity of the witch of the forest?
-            Menu.BuildMenuGetIndex("What does Maria love to say?".PadCenterHorizontal(Console.WindowWidth) + "\n"
-                    + "- - - - - - - - - - - - - - - - -".PadCenterHorizontal(Console.WindowWidth),
-                    "uooooooooh!:uu-uu!:auau!:- - - - - - - - - - - - - - - - -: ".Split(':'),
-                cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight,
-                separator: "");
 
             AddQuestion(new Question("What does Maria love to say?",
             "uooooooooh!:uu-uu!:auau!:",
@@ -109,6 +110,12 @@ namespace _07151129
             new Tuple<int, Action>(3,
             () => ClearSayAndWait("jjjjj\nGet it because she's muted.\nSo ye still wrong.".PadCenterBoth())), runIfCorrect:
             () => ClearSayAndWait("uu-uu!".PadCenterBoth())));
+
+            AddQuestion(new Question("What's the witch of the painting true form?",
+            "Butterfly : Teapot : Gold : Deceased",
+            3,
+            runIfCorrect:
+            () => ClearSayAndWaitCentered("Correct\n\nf")));
 
             AddQuestion(new Question("Who's the only human (invited by Kinzo)\nthat lives past October 6th 1986 across all episodes?",
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : None",
@@ -134,6 +141,15 @@ namespace _07151129
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : On the 9th Twilight, none shall be left alive I said",
             1, runIfCorrect:
             () => ClearSayAndWait("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.".PadCenterBoth())));
+
+            AddQuestion(new Question("But how did the candies leave the cup???\n"
+                    + "- - - - - - - - - - - - - - - - - - - - - - -",
+                    "None of the above : Actually they didn't : It was Ange (with a brick) : There were no candies to begin with : - - - - - - - - - - - - - - - - - - - - - - - :".Split(':', StringSplitOptions.TrimEntries),
+                    5,
+                    runIfCorrect:
+                    () => ClearSayAndWaitCentered("asi mismo"),
+                    customDrawFunc:
+                    (title, options) => Menu.BuildMenuGetIndex(title, options, cancellable: false, centered: true, separator: "")));
 
             // Amount of people on the island question
             AddQuestion(new Question("How many humans exist on the island?",
@@ -191,7 +207,7 @@ namespace _07151129
                     ProgramState.Instance.BeatoPlayer.PlaySync();
                     MessageBox.Show("The code execution cannot proceed because love.dll was not found. Reinstalling the program may fix this problem.", "07151129.exe - System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
-                    Environment.Exit(-19);
+                    Environment.Exit(19);
                 }
                 question.RunIfCorrect?.Invoke();
             }
