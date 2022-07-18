@@ -75,6 +75,8 @@ namespace _07151129
 #if WINFAG
             Console.SetWindowSize(Console.WindowWidth, 40);
 #endif
+            TextScroller.ScrollText("hola\n\nbuenas");
+
             AddQuestion(new Question("What's the name of the red haired dude who argues with the witch?",
             "Ushiromiya Butter : Ushiromiya Battler : Ushiromiya Batter : Ushiromiya Batler : Ushiromiya Butler",
             3, runIfCorrect:
