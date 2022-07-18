@@ -35,6 +35,8 @@
     <EmbeddedResource Include="VIVO.wav" />
     <None Remove="ahaha.wav" />
     <EmbeddedResource Include="ahaha.wav" />
+    <None Remove="CadenasEternas.wav" />
+    <EmbeddedResource Include="CadenasEternas.wav" />
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.2" />
   </ItemGroup>
 

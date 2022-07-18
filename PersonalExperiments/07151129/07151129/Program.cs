@@ -66,7 +66,7 @@ namespace _07151129
             ProgramState.Instance.BeatoPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("_07151129.ahaha.wav"));
             ProgramState.Instance.BeatoPlayer.Load();
             ProgramState.Instance.ChainsPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("_07151129.CadenasEternas.wav"));
-            ProgramState.Instance.ChainsPlayer.Load()
+            ProgramState.Instance.ChainsPlayer.Load();
 #endif
 
             // TODO: Add freno for loading screen.
@@ -74,6 +74,7 @@ namespace _07151129
             Console.CursorVisible = false;
 #if WINFAG
             Console.SetWindowSize(Console.WindowWidth, 40);
+            Console.BufferHeight = 40;
 #endif
             TextScroller.ScrollText("hola\n\nbuenas");
 
