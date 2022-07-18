@@ -72,6 +72,7 @@ namespace _07151129
 
             Console.SetWindowSize(Console.WindowWidth, 40);
             Console.BufferHeight = 40;
+            Console.BufferWidth = Console.LargestWindowWidth;
 #endif
             Console.CursorVisible = false;
 
@@ -406,17 +407,17 @@ Trivia of the Golden Witch
 
 [STAFF]
 
-◆ Supervision ◆
++ Supervision +
 Ryukishi07
 
-◆ Original Picture GFX ◆
++ Original Picture GFX +
 Nahuel2998
 
-◆ GFX Supervision ◆
++ GFX Supervision +
 Nahuel2998
 Nomedigas
 
-◆ Graphics ◆
++ Graphics +
 Nahuel2998
 -Sprites-
 Nahuel2998
@@ -425,11 +426,11 @@ Nahuel2998
 -Event CG Assistance-
 Nahuel2998
 
-◆ Background Art ◆
++ Background Art +
 Nahuel2998
 -External Staff-
 
-◆ Development ◆
++ Development +
 -Programming-
 Nahuel2998
 -Script-
@@ -443,7 +444,7 @@ Nahuel2998
 Furudo Erika
 Stackoverflow
 
-◆ Cast ◆
++ Cast +
 Ushiromiya Batler as Incompetent
 Ushiromiya Kinzo as Dead
 Ushiromiya Krauss as Boxer
@@ -494,85 +495,85 @@ Zepar as Prefer Not To Say
 Furfur as Personalizado
 Hachijo Tohya as Ryukishi07
 
-◆ Audio Supervision ◆
++ Audio Supervision +
 Nahuel2998
 
-◆ Audio Production ◆
++ Audio Production +
 Windows
 
-◆ Audio Director ◆
++ Audio Director +
 Nahuel2998
 
-◆ Audio Producers ◆
++ Audio Producers +
 Windows
 
-◆ Casting Manager ◆
++ Casting Manager +
 Nahuel2998
 
-◆ Recording Studio ◆
++ Recording Studio +
 Rokkenjima
 
-◆ Recording ◆
++ Recording +
 Yoshida Ryoko
 
-◆ Sound Editing ◆
++ Sound Editing +
 Yoshida Ryoko
 
 Read Machikado Mazoku
 
-◆ BGM ◆
++ BGM +
 dai
 also dai
 who the fuck made eternal chains
 dai again
 
-◆ BGM Mastering Studio ◆
++ BGM Mastering Studio +
 Kinda got tired of filling these
 
-◆ BGM Mastering Engineer ◆
++ BGM Mastering Engineer +
 still me btw
 
-◆ Sound Effects ◆
++ Sound Effects +
 Windows
 
-◆ Opening Theme Song ◆
++ Opening Theme Song +
 -Lyrics-
 -Composer-
 -Arrangement-
 -Vocal-
 
-◆ Insert Theme ◆
++ Insert Theme +
 We were gonna have Daddy Yankee but f
 
-◆ Opening Movie ◆
++ Opening Movie +
 Nahuel2998
 
-◆ Effect Movies ◆
++ Effect Movies +
 Nahuel2998
 
-◆ Package Design ◆
++ Package Design +
 Nahuel2998
 
-◆ Marketing ◆
++ Marketing +
 Nomedigas
 Ela
 
-◆ Promotional Site Production ◆
++ Promotional Site Production +
 Ela
 
-◆ Promotional Footage ◆
++ Promotional Footage +
 Ela
 
-◆ Sales ◆
++ Sales +
 sale
 
-◆ Special Thanks ◆
++ Special Thanks +
 And You
 
-◆ Producer ◆
++ Producer +
 Nahuel2998
 
-◆ Executive Producer ◆
++ Executive Producer +
 Nahuel2998
 
 
@@ -669,8 +670,8 @@ Nahuel2998
             credits = Regex.Replace(credits, $"(?<={ProgramState.Instance.Options.Culprit} as ).*$", "The Culprit", RegexOptions.Multiline);
 
 #if WINFAG
-            Console.WindowWidth = 200;
-            Console.BufferWidth = 200;
+            Console.WindowWidth = Console.LargestWindowWidth - 2;
+            // Console.BufferWidth = Console.LargestWindowWidth;
             TextScroller.ScrollText1(credits.PadCenterHorizontal(), 100);
 #else
             TextScroller.ScrollText(credits.PadCenterHorizontal(), 100);
