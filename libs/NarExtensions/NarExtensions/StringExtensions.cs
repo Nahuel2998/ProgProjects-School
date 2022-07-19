@@ -22,8 +22,9 @@ namespace NarExtensions
         public static string PadCenterHorizontal(this string source, char paddingChar = ' ')
         { return source.PadCenterHorizontal(Console.WindowWidth, paddingChar); }
 
+        // FIXME: Make this prettier por favor, sometime
         public static string PadCenterHorizontal(this string source, int totalWidth, char paddingChar = ' ')
-        { return string.Join('\n', source.Split('\n').Select(line => line.PadLeft(((totalWidth - line.Length) / 2) + line.Length, paddingChar).PadRight(totalWidth, paddingChar))); }
+        { return string.Join('\n', source.Split('\n').Select(line => line.PadLeft(((totalWidth + ((totalWidth - line.Length) % 2) - line.Length) / 2) + line.Length, paddingChar).PadRight(totalWidth, paddingChar))); }
 
         public static string PadCenterVertical(this string source)
         { return source.PadCenterVertical(Console.WindowHeight); }

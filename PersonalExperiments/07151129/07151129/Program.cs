@@ -72,7 +72,7 @@ namespace _07151129
 
             Console.SetWindowSize(Console.WindowWidth, 40);
             Console.BufferHeight = 40;
-            Console.BufferWidth = Console.LargestWindowWidth;
+            //Console.BufferWidth = Console.LargestWindowWidth;
 #endif
             Console.CursorVisible = false;
 
