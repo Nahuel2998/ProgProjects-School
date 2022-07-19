@@ -1,0 +1,609 @@
+- - - - - - - - - - - - [Epitaph Help] - - - - - - - - - - - -
+In case you're incompetent enough to solve the epitaph, 
+you can use the collection of hints presented in this file.
+Only look at this file if you've stopped thinking.
+- - - - [Hints Below] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Hint #1  ] - - - -
+"Behold the lovely program, running on your beloved computer."
+The program is 07151129.exe.
+"As you travel down it, you will see a trivia."
+The trivia you supposedly already completed.
+This help file is created when you complete the trivia, 
+so there should be no confusion of what the trivia is.
+- - - - [ Next Hint ] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Hint #2  ] - - - -
+"In that trivia, look for the answers of each question."
+"There sleeps the key to the Golden Land."
+'The answers' refers to the position of each correct answer.
+For example:
+    What's the name of the red haired dude who argues with the witch?
+    1) Ushiromiya Butter 
+    2) Ushiromiya Battler 
+    3) Ushiromiya Batter 
+    4) Ushiromiya Batler 
+    5) Ushiromiya Butler
+Here the correct answer was the 4th option, so you get the key starts with '4'.
+- - - - [ Next Hint ] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Hint #3  ] - - - -
+"The one who obtains the key must then travel to the Golden Land in accordance with these rules."
+After going every question and writing down the answer, 
+the twilights are just applying transformations to the results obtained.
+I recommend writing down the result of each answer separated by a space, like so:
+4 3 3 ...
+(Each 'result' will be called 'element' from now on (that is, a number separated by a space))
+(In case you're confused, the answer to the Kanon/Candy question is 6)
+- - - - [ Next Hint ] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Hint #4  ] - - - -
+"On the first twilight, offer the first seven chosen by the key."
+To 'offer' here means to add.
+You have to add up the first seven elements of the key.
+- - - - [ Next Hint ] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [   Check   ] - - - -
+
+Isn't this already too much help?
+
+- - - - [ Next Hint ] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Hint #5  ] - - - -
+You already used up the first seven elements.
+Put the sum aside and keep using the elements you haven't yet.
+(That is, all but the first seven elements)
+
+"On the second twilight, those who remain shall be split in half."
+This asks you to take the elements you haven't used yet and separate them in two groups.
+A 'left' group, and a 'right' group.
+Each group should have 6 elements each.
+- - - - [ Next Hint ] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [   Check   ] - - - -
+
+The further you go down the more disappointed I am.
+
+- - - - [ Next Hint ] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Hint #6  ] - - - -
+"On the third twilight, those on the left shall join the world of offerings."
+The group from the left shall be added up to the result.
+(The result being what you already added up previously)
+- - - - [ Next Hint ] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [   Check   ] - - - -
+
+There are no more hints.
+
+- - - - [ Next Hint ] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [   Check   ] - - - -
+
+From now on, it's just a walkthrough.
+
+- - - - [Walkthrough] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [   Check   ] - - - -
+
+Very disappointed.
+
+- - - - [Walkthrough] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Step #1  ] - - - -
+Write down the results from the trivia.
+(4 3 3 1 2 3 2 5 2 2 4 4 3 2 6 4 4 3 13)
+- - - - [Walkthrough] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Step #2  ] - - - -
+"On the first twilight, offer the first seven chosen by the key."
+(4 3 3 1 2 3 2 5 2 2 4 4 3 2 6 4 4 3 13)
+(4 3 3 1 2 3 2) -> The first seven
+(4 + 3 + 3 + 1 + 2 + 3 + 2 = 18) -> Add them up
+(res = 18)
+- - - - [Walkthrough] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Step #3  ] - - - -
+"On the second twilight, those who remain shall be split in half."
+(4 3 3 1 2 3 2 5 2 2 4 4 3 2 6 4 4 3 13)
+(5 2 2 4 4 3 2 6 4 4 3 13) -> The ones we haven't used
+((5 2 2 4 4 3) (2 6 4 4 3 13)) -> Split in two groups
+- - - - [Walkthrough] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Step #4  ] - - - -
+"On the third twilight, those on the left shall join the world of offerings."
+(4 3 3 1 2 3 2 5 2 2 4 4 3 2 6 4 4 3 13)
+((5 2 2 4 4 3) (2 6 4 4 3 13)) -> The two groups
+(5 2 2 4 4 3) -> 'those on the left' -> The group from the left
+(5 + 2 + 2 + 4 + 4 + 3 = 20) -> Add them up
+(res = 18) -> What we had before
+(res + 20 = 18 + 20 = 38) -> Add what we got to what we had before
+(res = 38) -> What we have now
+- - - - [Walkthrough] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Step #5  ] - - - -
+"On the fourth twilight, gouge the head and subtract."
+(4 3 3 1 2 3 2 5 2 2 4 4 3 2 6 4 4 3 13)
+(2 6 4 4 3 13) -> What we haven't used yet / The right group
+(res = 38) -> What we have now
+(2) -> Take the head
+(res - 2 = 38 - 2 = 36) -> Subtract
+(res = 36) -> What we have now
+
+"On the fifth twilight, gouge the chest and subtract."
+(6) -> Take the chest
+(res - 6 = 36 - 6 = 30) -> Subtract
+
+"On the sixth twilight, gouge the stomach and subtract."
+(4) -> Take the stomach
+(res - 4 = 30 - 4 = 26) -> Subtract
+
+"On the seventh twilight, gouge the knee and subtract."
+(4) -> Take the knee
+(res - 4 = 26 - 4 = 22) -> Subtract
+
+"On the seventh twilight, gouge the leg and subtract."
+(3) -> Take the leg
+(res - 3 = 22 - 3 = 19) -> Subtract
+- - - - [Walkthrough] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Step #6  ] - - - -
+"On the ninth twilight, the witch shall revive, and the culprit shall be the only left unused."
+(4 3 3 1 2 3 2 5 2 2 4 4 3 2 6 4 4 3 13)
+(4 + 3 + 3 + 1 + 2 + 3 + 2 + 5 + 2 + 2 + 4 + 4 + 3 - 2 - 6 - 4 - 4 - 3) -> What we have done so far
+(13) -> What we haven't used
+(13) is the answer from the culprit question, so only the culprit is left unused.
+(res = 19) -> This is the answer
+
+19 is the key to the Golden Land.
+Just like the credits said so.
+- - - - [Walkthrough] - - - -
+|       |           |       |                           
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+                            
+|       |           |       |
+v       v           v       v
+- - - - [  Step #7  ] - - - -
+"On the tenth twilight, the journey shall end, and you shall reach the capital where the gold dwells."
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#@@@@@@@#@@@@@##@@#@@@@@@@@@@#@@#@#@#@@##@##@@#@###@@#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                                                                                                          .      . .. ..           ....  ...°.. ...........  . .  °.           .                        
+ .   ..   ..             .            ..       ...    ... ........   °  .      .      .  . .....°°°°°°....°°.....°.°°..°...........°°°..°°..°...°°°°°.°...°..°..°.°°.....°.....°..°      .. . ..  .. .  
+ .   ..   .°           ...          .........  .       ......  ....  .                 ..  .**oOOoo*o**°°.°°.....°.°°..°.....  .......................°°..°.......°°............ ..      ..   .  .....  
+ .     .  .°   ..   °.....       ..  ... ...   .   .    ......   ..  .                . .°oO#OOOOo#OOOOoo***.....°°°°.... ..   ..   .....  ...........°°°.........°°.. .... ....  .    .... ...  .....  
+ .  ..... .°   .   .°.°..°................... .......     . .. . ..                 ...°o##############OOoooo°....°........ .        ....    .........°..........°°° ....      .  .       ............  
+ ...  ... ..       .°...°°°°.... ........°.....°..... .    .°.   °.    .           ...°o###############OOooo°*. .......°°.. .  .......°..°......................°°°°.....      .  .       ............  
+ . .. ..° ..      .......................°°.°..°.... ..     ...  °.         .    .....o############O#####Ooo°.°.  .. ....   . .......°°.............   ..  ............ .      .  .       .    ..  . .  
+   .  °.°         .................. ....°..°.......  .  .. . .  °° .      ..    .  ..oO##########OO##OOoo*o*°°°   .   ..  .. ... ...°.............    .     ..  .   .      .  .  .  .    .  . .   . .  
+      °°.           . .         ....  . .°°........ ..      . .  °. ..     ..    .    *OooOOOOOoOo*ooo*.**o*o°°**  .   ..      ..... .. ....    ...          .. .......     .  .  .  .    .         .   
+      ...          ..           ......   ......  .          .    °. ..      .       . °OoOo**.*°°oO*°oOoOoOoo°°°*. .  . .      ..    .......    ...        .  .  .   °.     .  .  .  .     ..           
+.     .....     .   .                    ..                 .    ..         .       ..o*O#OO#OOooo#OOOoOO#Ooo.°*°              .                 ..  ..   .. ..      .            .  .      .           
+.    ..°...    .    .                     .                 .    °...             .  ..ooO###OOO#O##O####OOoo°..                      .          .        .  ..      .            .         .           
+.     .°°..    .   ....     .                              ..    ....                .   °O##O#OoOOOoooOO#Oo**                                   .        .   .                   .                     
+.     ....°    .   ......                                  .     . .                 .    *OO#oooo**o****oO*°°                                   .   .                            .       ..            
+.    ......   .  ... ...                                           .                       oO#oooooOooOOOoO*°..                                  .            .                           ..            
+.    .°....   .    . . .                                           .   .                    *oOOOOOooOOOo*°....                                  .            .                      °    .             
+.    .°. .    .    .   .                                           .  ...                    .°OOOO#Oo**°... ...                                                                     .    ..            
+     .°...    .    . .                .                            .  °°.   . ..            ....°*ooo*°°. .. ...                                                                          ..            
+  .. .....    .    . .                .          .                 . ..°.   . ..            ...°...*°°. ... ...       .                          .                                                      
+.  . ... .    .      . ...    ..      .                            . ...    . ..     .      .°.°. .*°°. ..°°°..         .                .       .            .                                         
+   . ... ..   .       .. ..   ....    .          .                    .       .. .   .       .°°   °.. .. ..°. . .         .........     .        .                                        .            
+   . °°°.         .    .      .. ... ..          .                  .     . . .. .   .        .....*°*..... ... .°..° ....°.......       .                                  .              .            
+     .°°°.        .    .     ...     ..          .                  .     . . .. .   .    . .  ...°*°*° ... ..... ..°...°...°. ..  .                                        ..             .            
+     .°°°..       .   ..      .       .  .       .                        .   .. .   .    . .   ..°*°** .. ..    .  .   .                ......                                            .           .
+     .°....       . ...      ..          ..      .       ..     ....°...  .      .        . .    .*°***   ...°                  ..........                          .                     .. .       ...
+     .°..         ...        ..          ...  .  .   ..     ..      ......°.......   .    .      .*°***.         .  ......°.........               .   .            .         .    ..   . ...°     .....
+     .° .         .   .      ..           ..     .   .   .          .          .°°°°°°°°°°*°°.....*°**°  ....°°°°***°°°°°°*.                                        ...         ..... . ...°°°      .  .
+     .. .         .   .   .               ..     .     . .. .       .     .     ***°*.*OOO@OOOo. °°°*°.oOOOOOOO####o°°****o.                                        .        ..    ..     ....      .  .
+     .. .         .   .                   ..     ..    .            .     .     *****°°O#@@@@#@O.°°°.*#@#####@@@#Ooo*°***oo.                           .            ..........      .      ...      .   
+     .. .             .                   ..           .            .           *****°*OOO@#####O...O@#######OoOoO#O*°***oo.  .                                  .  .....                  . .          
+     .. .             .                   .            .                        *****°*####O#O#O@*°#@@####OoooO####O*°****o.  .                                 .....  ..           .                   
+     ..               .                                .                        *****°o@#@@@#OOOOO@#@@#OOOO##@@@##@#o°***oo°  .        .                        ..... ...          ..                   
+     ..                                                                         ......°*****o*°°*****°°°************°......                                                                             
+     ..                                                                                              ...                                                                                                
+     ..                  ...Go.                                                       ......    ....................                                                                                    
+      .                                                                               ....  ........................                                                                                    
+      .                                                                               ..  ..........................                                                                                    
+      .                                                                               .  ................  .........                                                                                    
+      .                                                                               .      ...........    ......                                   ..                                           ..    
+                                                                                        .    ...........    ...                                      ...                                       . .°.    
+      . .                                                                                ..................                 °            .          .....                                      ...°.....
+ ..                                                                                       ..............                    . °     ....°.     ............    .. .              .   .         ..°°.....
+.......                                                                             ... .................                   .°..°.........°. °****.......°° °.  *°  ..... .°..                 .........
+.........                                                                           ... ......................                                °°°°..........      ...° ..   .       .          . ..   ..
+.........                                                                          .... .......................                              . ....°°°°°..               .                     . ..   ..
+  .                                                                                .... ......................                              ....°°°°.°... .. ... ..........                    . ..   ..
+  .                                                                               ..... ..  ..............                                                                                     ...    ..
+  ..                                                                              ..... .    ...........                                                                                       ...      
