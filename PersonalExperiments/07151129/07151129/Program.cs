@@ -80,7 +80,7 @@ namespace _07151129
             AddQuestion(new Question("What's the name of the red haired dude who argues with the witch?",
             "Ushiromiya Butter : Ushiromiya Battler : Ushiromiya Batter : Ushiromiya Batler : Ushiromiya Butler",
             3, runIfCorrect:
-            () => ClearSayAndWait("yeah".PadCenterBoth())));
+            () => ClearSayAndWaitCentered("yeah")));
 
             AddQuestion(new Question("What's the name of the witch who argues with the red haired dude?",
             "Ushiromiya George : Ushiromiya Maria : Beatrice : Ushiromiya Hideyoshi : Ushiromiya Batler",
@@ -94,7 +94,7 @@ namespace _07151129
                         break;
                 }
             }, runIfCorrect:
-            () => ClearSayAndWait("yes".PadCenterBoth())));
+            () => ClearSayAndWaitCentered("yes")));
 
             AddQuestion(new Question("What's the name of the annoying little girl who follows Bernkastel?",
             "Ushiromiya Ange : Lambdadelta : Hanyuu : Furude Rika : Furudo Erika",
@@ -129,7 +129,7 @@ namespace _07151129
                 Console.Clear();
                 Console.WriteLine("\n".Multiply((Console.WindowHeight / 2) - 1));
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Acknowledged.".PadCenterHorizontal(Console.WindowWidth));
+                Console.WriteLine("Acknowledged.".PadCenterHorizontal(Console.WindowWidth - 1));
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.ReadKey();
             }));
@@ -142,7 +142,7 @@ namespace _07151129
             AddQuestion(new Question("What's the name of the second mansion?",
             "Rokkenjima : Kuwadorian : Kumasawa : There's only one mansion",
             1, runIfCorrect:
-            () => ClearSayAndWait("y si".PadCenterBoth())));
+            () => ClearSayAndWaitCentered("y si")));
 
             AddQuestion(new Question("What's the only Knox rule purposely ommited in the story?",
             "Knox's 1st : Knox's 2nd : Knox's 3rd : Knox's 4th : Knox's 5th : Knox's 6th : Knox's 7th : Knox's 8th : None",
@@ -153,8 +153,8 @@ namespace _07151129
             "uooooooooh!:uu-uu!:auau!:",
             1, runIfAnswerIndexIs:
             new Tuple<int, Action>(3,
-            () => ClearSayAndWait("jjjjj\nGet it because she's muted.\nSo ye still wrong.".PadCenterBoth())), runIfCorrect:
-            () => ClearSayAndWait("uu-uu!".PadCenterBoth())));
+            () => ClearSayAndWaitCentered("jjjjj\nGet it because she's muted.\nSo ye still wrong.")), runIfCorrect:
+            () => ClearSayAndWaitCentered("uu-uu!")));
 
             AddQuestion(new Question("According to Episode Introductions, what's the hardest Episode?",
             "Legend of the Golden Witch : Turn of the Golden Witch : Banquet of the Golden Witch : Alliance of the Golden Witch : End of the Golden Witch : Dawn of the Golden Witch : Trivia of the Golden Witch",
@@ -174,23 +174,23 @@ namespace _07151129
             {
                 Console.Clear();
                 Console.WriteLine("\n".Multiply((Console.WindowHeight / 2) - 2));
-                Console.WriteLine("That's right!".PadCenterHorizontal(Console.WindowWidth));
+                Console.WriteLine("That's right!".PadCenterHorizontal(Console.WindowWidth - 1));
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Kinzo is dead at the starting time for all games.".PadCenterHorizontal(Console.WindowWidth));
+                Console.WriteLine("Kinzo is dead at the starting time for all games.".PadCenterHorizontal(Console.WindowWidth - 1));
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("So he didn't invite a single human.".PadCenterHorizontal(Console.WindowWidth));
+                Console.Write("So he didn't invite a single human.".PadCenterHorizontal(Console.WindowWidth - 1));
                 Console.ReadKey();
             }));
 
             AddQuestion(new Question("Who's the only piece (invited to the conference)\nthat lives past October 6th 1986 across all episodes?",
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : On the 9th Twilight, none shall be left alive",
             2, runIfCorrect:
-            () => ClearSayAndWait("g\nEven if Ange didn't attend the conference, she was invited.\nShe was just sick that day.".PadCenterBoth())));
+            () => ClearSayAndWaitCentered("g\nEven if Ange didn't attend the conference, she was invited.\nShe was just sick that day.")));
 
             AddQuestion(new Question("Who's the only human (who attends the conference)\nthat lives past October 6th 1986 across all episodes?",
             "Ushiromiya Battler : Ushiromiya Eva : Ushiromiya Ange : On the 9th Twilight, none shall be left alive I said",
             1, runIfCorrect:
-            () => ClearSayAndWait("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.".PadCenterBoth())));
+            () => ClearSayAndWaitCentered("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.")));
 
             if (new Random().Next() % 2 == 0)
             {
@@ -228,7 +228,7 @@ namespace _07151129
             : "At least 19 : Exactly 18 : Exactly 17 : No more than 16",
             3,
             WarnAboutOldPerlModules,
-            () => ClearSayAndWait("Correcto.".PadCenterBoth(Console.WindowWidth, Console.WindowHeight))));
+            () => ClearSayAndWaitCentered("Correcto.")));
 
             AddQuestion(new Question("What's the number of humans on the island?",
             "15 : 14 : 13 : 12",
@@ -315,7 +315,7 @@ namespace _07151129
             + "This is because he hasn't finished Ep6 yet and this would be a spoiler for him.\n"
             + "In both cases the correct option will be in the same place.\n"
             + "So if you want to talk with Nome about it, you can use 'the [n]th' option to refer to the answer.\n\n"
-            + "[Enter to continue]").PadCenterBoth(Console.WindowWidth, Console.WindowHeight));
+            + "[Enter to continue]").PadCenterBoth(Console.WindowWidth - 1, Console.WindowHeight));
 
             while (Console.ReadKey().Key != ConsoleKey.Enter)
             { }
@@ -389,7 +389,7 @@ One shall be all the gold in the Golden Land.
 Rest in peace,
 My beloved witch,
 Freno.
-".PadCenterBoth());
+".PadCenterBoth(Console.WindowWidth - 1, Console.WindowHeight));
             while(true)
             { }
         }
@@ -624,61 +624,61 @@ Nahuel2998
  ........  ........ ..  .°o#########################OOOOOOo°°**o*°*oo..*°°. ..°°°
 
 
-............°°°°.......                                                                                                                                                            
-    .......°°°°°.......                                                                                                                                                            
-    .......°°°°°°.....                                                                                                                                                             
-     ......°°°°°°.....                                                                                                                                                             
-     .......°°°°...                        ..                                                                                                                                      
-      ............ °°°. ***°   °***       *@o                                                             **** .***°                              °°°.                            
-       ............#@#. °@#.   .*@°        #*      .#°                             .#°                    .##°  *@*.  #°                          o@@*                             
-        ...........##. . Oo      O         O*       *             ..                *                      oO   o°    *.                           O#*                             
-         ........  #O    OO     .O    .    O*                   .. ..                                      o#  o°                                  °@*                      .....  
-                   #*    Oo     .o   **oo  Oo*OO.  *O° .o*°#° .**oO.  *O°*#o.*OO.  *O. oOo .oO° °o#°       oO *°     *O° .oo°O#°  °O**O°  .**OO     #*                     ....... 
-                   #°    Oo     .o  *o  °  Oo  OO  .#°  OO°*  O°  oO  °#* .#o. Oo  .#°  Oo  o* °° *#       oOoO      .#°  OO. o#  *. *#   O°  OO    O*                     .°°°... 
-                   #.    oo     .o  °#*    O°  °O   O°  oo   °O   .#°  #   O*  °O   O.  °#  *     .O.      oO.#*      O°  *o  .#.    #°  *O   .#.   O*                     ..°°... 
-                   O°    oo     .*   °#O.  o*  °O   O.  oo   °O    O° .O.  o*  °O   O.   O°.°   .°*O       *O °#*     O°  *o  .O.   oo   *O   .O.   O°                     ......  
-                   O*    *O     °°  .  oo  o°  °O   O.  **   .O.   O.  O   o*  °o   O.   *o*   *o  O       *o  °#°    O.  *o  .O.  °O  . °O   .O   .O°   ....               ....   
-                   oo     Oo.  °*   *. °o  o*  °O  .O°  oo    oo  °*  .O.  o*  °O  .O°    O°   *o.°O°      oO   °O*  .O°  oo  .O.  O*  *  oo  *°   °O° .......                .    
-                   oO*     *oo*°    .*°°  °**. °*° °** .**°    °*°.   °*° .**. **° °*°    *     **.**     °**°   .**.°** .**. °*° .*°°*°   **°.   .OO° ..°°....                    
-                   ***.                                                                  °°                                                       °**..°°°°°...                    
-                                                                                         o  .....                                                     .°°°°°°...                   
-                                                                                        o° ........                                                 ...°°°°°°...                   
-                                                                                        ° ...°°.....                                                 ..°°°°°....                   
-                                                                                         ..°°°°°°....                                                ....°°....                    
-                                                                                       ...°°°°°°°°...                                                 .........                    
-                                                                                       ...°°°°*°°°°...                                                 .......                     
-            *°.o                        °...       .°.°                                ...°°°***°°°...              .o#°                                 ...         O*°#.         
-           *o O.                       .*@#°   o.  .o#o.                               ...°°°***°°. ..               °@.                                             *O #°         
-           *#.#o                         o#    @o   .O                                 ..°°°°°°°°.°° .               .#.                                             *..o          
-            ° ..                         °@.  °##   **                                    .°°°°°° #*                 .#.                                            .. °           
-                                          #*  o°@°  o.   .*oo.  .*°°Oo .oO°    °*O.  °*.*O* °°°°.°#Oo° **.O°.o° °**  .#. *o* °oo.     *O*   °*.O*  °*O°                            
-                                          OO .* Oo .o   °O. *#. .#O°°OO°°o#   o* *#  *@*°*@°......#*°. O#*o° #*  o#  .#. °#*  O*     o.°#°  o#*o° ** °#.                           
-                                          °# °° *# °°   O°   Oo  o*  °O   O. .#°.°#° .#   O* .... O°   °O    o*  °O  .#.  oO  *         o*  °O    O°..#*                   .....   
-                                          .#°*   #°*.   O°   *o  o*  °O   O° °O°°°.  .O.  o* .    O°   *o    o*  °O  .O.  .O °°       .°O*  °O   .O°°°.                  ........  
-                                           oO°   oO*    O*   *o  o*  °O   O. .O      .O   o*      o°   *o    o*  °o  .O.   o**      .o° o°  °O   .O.                    ...°°°°... 
-                  **  o° .o. .o  °*  **    *O    °#°    *O   o.  o*  °O   O.  oo. .. .O.  o*      o*   *o    *o  *o  .O.   °O°      .O. o*  °O    oO. .. °*  **  *°     ..°°°°°°...
-                  o*  o° .O. °o. *o  o*    .*     o      *o°°.  .o*. *o° °o*   ooo°  *o* .o*.     °o*..*o°   .oo°°o° *o*    o        *o°*o. *o°    *oo°  °o  *o  o*    ...°°**°°°..
-                                                                                                                           °°                                          ..°°°***°°..
-                                                                                                                           o                                           ..°°°**°°°..
-                                                                                                                          o°                                           ...°°°°°°°..
-                                                                                                                         .*                                             ...°°°°°.. 
-                                                                                                                                                                         ......... 
-                                                                                                                                                                          ......   
-                                                                                                                                                                             .     
+........°°°°.......                                                                                                                                                            
+.......°°°°°.......                                                                                                                                                            
+.......°°°°°°.....                                                                                                                                                             
+ ......°°°°°°.....                                                                                                                                                             
+ .......°°°°...                        ..                                                                                                                                      
+  ............ °°°. ***°   °***       *@o                                                             **** .***°                              °°°.                            
+   ............#@#. °@#.   .*@°        #*      .#°                             .#°                    .##°  *@*.  #°                          o@@*                             
+    ...........##. . Oo      O         O*       *             ..                *                      oO   o°    *.                           O#*                             
+     ........  #O    OO     .O    .    O*                   .. ..                                      o#  o°                                  °@*                      .....  
+               #*    Oo     .o   **oo  Oo*OO.  *O° .o*°#° .**oO.  *O°*#o.*OO.  *O. oOo .oO° °o#°       oO *°     *O° .oo°O#°  °O**O°  .**OO     #*                     ....... 
+               #°    Oo     .o  *o  °  Oo  OO  .#°  OO°*  O°  oO  °#* .#o. Oo  .#°  Oo  o* °° *#       oOoO      .#°  OO. o#  *. *#   O°  OO    O*                     .°°°... 
+               #.    oo     .o  °#*    O°  °O   O°  oo   °O   .#°  #   O*  °O   O.  °#  *     .O.      oO.#*      O°  *o  .#.    #°  *O   .#.   O*                     ..°°... 
+               O°    oo     .*   °#O.  o*  °O   O.  oo   °O    O° .O.  o*  °O   O.   O°.°   .°*O       *O °#*     O°  *o  .O.   oo   *O   .O.   O°                     ......  
+               O*    *O     °°  .  oo  o°  °O   O.  **   .O.   O.  O   o*  °o   O.   *o*   *o  O       *o  °#°    O.  *o  .O.  °O  . °O   .O   .O°   ....               ....   
+               oo     Oo.  °*   *. °o  o*  °O  .O°  oo    oo  °*  .O.  o*  °O  .O°    O°   *o.°O°      oO   °O*  .O°  oo  .O.  O*  *  oo  *°   °O° .......                .    
+               oO*     *oo*°    .*°°  °**. °*° °** .**°    °*°.   °*° .**. **° °*°    *     **.**     °**°   .**.°** .**. °*° .*°°*°   **°.   .OO° ..°°....                    
+               ***.                                                                  °°                                                       °**..°°°°°...                    
+                                                                                     o  .....                                                     .°°°°°°...                   
+                                                                                    o° ........                                                 ...°°°°°°...                   
+                                                                                    ° ...°°.....                                                 ..°°°°°....                   
+                                                                                     ..°°°°°°....                                                ....°°....                    
+                                                                                   ...°°°°°°°°...                                                 .........                    
+                                                                                   ...°°°°*°°°°...                                                 .......                     
+        *°.o                        °...       .°.°                                ...°°°***°°°...              .o#°                                 ...         O*°#.         
+       *o O.                       .*@#°   o.  .o#o.                               ...°°°***°°. ..               °@.                                             *O #°         
+       *#.#o                         o#    @o   .O                                 ..°°°°°°°°.°° .               .#.                                             *..o          
+        ° ..                         °@.  °##   **                                    .°°°°°° #*                 .#.                                            .. °           
+                                      #*  o°@°  o.   .*oo.  .*°°Oo .oO°    °*O.  °*.*O* °°°°.°#Oo° **.O°.o° °**  .#. *o* °oo.     *O*   °*.O*  °*O°                            
+                                      OO .* Oo .o   °O. *#. .#O°°OO°°o#   o* *#  *@*°*@°......#*°. O#*o° #*  o#  .#. °#*  O*     o.°#°  o#*o° ** °#.                           
+                                      °# °° *# °°   O°   Oo  o*  °O   O. .#°.°#° .#   O* .... O°   °O    o*  °O  .#.  oO  *         o*  °O    O°..#*                   .....   
+                                      .#°*   #°*.   O°   *o  o*  °O   O° °O°°°.  .O.  o* .    O°   *o    o*  °O  .O.  .O °°       .°O*  °O   .O°°°.                  ........  
+                                       oO°   oO*    O*   *o  o*  °O   O. .O      .O   o*      o°   *o    o*  °o  .O.   o**      .o° o°  °O   .O.                    ...°°°°... 
+              **  o° .o. .o  °*  **    *O    °#°    *O   o.  o*  °O   O.  oo. .. .O.  o*      o*   *o    *o  *o  .O.   °O°      .O. o*  °O    oO. .. °*  **  *°     ..°°°°°°...
+              o*  o° .O. °o. *o  o*    .*     o      *o°°.  .o*. *o° °o*   ooo°  *o* .o*.     °o*..*o°   .oo°°o° *o*    o        *o°*o. *o°    *oo°  °o  *o  o*    ...°°**°°°..
+                                                                                                                       °°                                          ..°°°***°°..
+                                                                                                                       o                                           ..°°°**°°°..
+                                                                                                                      o°                                           ...°°°°°°°..
+                                                                                                                     .*                                             ...°°°°°.. 
+                                                                                                                                                                     ......... 
+                                                                                                                                                                      ......   
+                                                                                                                                                                         .     
 ";
             credits = Regex.Replace(credits, $"(?<={ProgramState.Instance.Options.Culprit} as ).*$", "The Culprit", RegexOptions.Multiline);
 
 #if WINFAG
             Console.WindowWidth = 200;
             Console.BufferWidth = 200;
-            TextScroller.ScrollText1(credits.PadCenterHorizontal(), 100);
+            TextScroller.ScrollText1(credits.PadCenterHorizontal(Console.WindowWidth - 1), 100);
 #else
-            TextScroller.ScrollText(credits.PadCenterHorizontal(), 100);
+            TextScroller.ScrollText(credits.PadCenterHorizontal(Console.WindowWidth - 1), 100);
 #endif
         }
 
         private static void ClearSayAndWaitCentered(string message)
-        { ClearSayAndWait(message.PadCenterBoth()); }
+        { ClearSayAndWait(message.PadCenterBoth(Console.WindowWidth - 1, Console.WindowHeight)); }
 
         private static void ClearSayAndWait(string message)
         {
