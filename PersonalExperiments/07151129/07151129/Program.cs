@@ -301,7 +301,9 @@ namespace _07151129
             }
 
             Credits();
+#if WINFAG
             ProgramState.Instance.FinalPlayer.Stop();
+#endif
             Epitaph();
         }
 
