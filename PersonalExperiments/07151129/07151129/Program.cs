@@ -390,7 +390,7 @@ One shall be all the gold in the Golden Land.
 Rest in peace,
 My beloved witch,
 Freno.
-".PadCenterBoth(Console.WindowWidth - 1, Console.WindowHeight));
+".PadCenterBoth());
             while(true)
             { }
         }
@@ -672,9 +672,9 @@ Nahuel2998
 #if WINFAG
             Console.WindowWidth = Console.LargestWindowWidth - 2;
             // Console.BufferWidth = Console.LargestWindowWidth;
-            TextScroller.ScrollText1(credits.PadCenterHorizontal(Console.WindowWidth - 1), 100);
+            TextScroller.ScrollText1(credits.PadCenterHorizontal(), 100);
 #else
-            TextScroller.ScrollText(credits.PadCenterHorizontal(Console.WindowWidth - 1), 100);
+            TextScroller.ScrollText(credits.PadCenterHorizontal(), 100);
 #endif
         }
 
