@@ -70,7 +70,7 @@ namespace _07151129
             ProgramState.Instance.ChainsPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("_07151129.CadenasEternas.wav"));
             ProgramState.Instance.ChainsPlayer.Load();
 
-            Console.SetWindowSize(Console.WindowWidth, 40);
+            Console.SetWindowSize(Console.WindowWidth + 1, 40);
             Console.BufferHeight = 40;
             // Console.BufferWidth = Console.WindowWidth + 1;
 #endif
@@ -199,7 +199,7 @@ namespace _07151129
                 "None of the above : Actually they didn't : It was Ange (with a brick) : There was no candy to begin with : - - - - - - - - - - - - - - - - - - - - - - :".Split(':', StringSplitOptions.TrimEntries),
                 5, runIfCorrect:
                 () => ClearSayAndWaitCentered("asi mismo"), customDrawFunc:
-                (title, options) => Menu.BuildMenuGetIndex(title, options, cancellable: false, centered: true, separator: "")));
+                (title, options) => Menu.BuildMenuGetIndex(title, options, windowWidth: Console.WindowWidth - 1, cancellable: false, centered: true, separator: "")));
             }
             else
             {
@@ -219,7 +219,7 @@ namespace _07151129
                     new ToastContentBuilder().AddText("𝅘𝅥𝅮 Eternal Chains").Show();
 #endif
                 }, customDrawFunc:
-                (title, options) => Menu.BuildMenuGetIndex(title, options, cancellable: false, centered: true, separator: "")));
+                (title, options) => Menu.BuildMenuGetIndex(title, options, windowWidth: Console.WindowWidth - 1, cancellable: false, centered: true, separator: "")));
             }
 
             // Amount of people on the island question
@@ -301,6 +301,7 @@ namespace _07151129
             }
 
             Credits();
+            ProgramState.Instance.FinalPlayer.Stop();
             Epitaph();
         }
 
@@ -351,7 +352,7 @@ namespace _07151129
             + "They shall remain as absolute truth for future episodes as well.\n\n"
             + "The difficulty level is only natural. You should know all of this already.\n"
             + "With love, the answers can be seen.\n\n"
-            + "[Enter to continue]").PadRightMultiline(Console.WindowWidth - 20).PadLeftMultiline(Console.WindowWidth).PadCenterVertical());
+            + "[Enter to continue]").PadRightMultiline(Console.WindowWidth - 20).PadLeftMultiline(Console.WindowWidth - 1).PadCenterVertical());
 
             while (Console.ReadKey().Key != ConsoleKey.Enter)
             { }
@@ -672,9 +673,9 @@ Nahuel2998
 #if WINFAG
             Console.WindowWidth = Console.LargestWindowWidth - 2;
             // Console.BufferWidth = Console.LargestWindowWidth;
-            TextScroller.ScrollText1(credits.PadCenterHorizontal(), 100);
+            TextScroller.ScrollText1(credits.PadCenterHorizontal(Console.WindowWidth - 1), 100);
 #else
-            TextScroller.ScrollText(credits.PadCenterHorizontal(), 100);
+            TextScroller.ScrollText(credits.PadCenterHorizontal(Console.WindowWidth - 1), 100);
 #endif
         }
 
