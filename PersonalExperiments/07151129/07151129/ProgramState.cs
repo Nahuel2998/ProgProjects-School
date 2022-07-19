@@ -81,7 +81,7 @@ namespace _07151129
         public static int DisplayQuestion(string title, string[] choices)
         {
             return Menu.BuildMenuGetIndex(title, choices,
-                cancellable: false, centered: true, windowWidth: Console.WindowWidth, windowHeight: Console.WindowHeight);
+                cancellable: false, centered: true, windowWidth: Console.WindowWidth - 1, windowHeight: Console.WindowHeight);
         }
 
         public static int GetCulpritIndex(string? culpritName) => culpritName switch
