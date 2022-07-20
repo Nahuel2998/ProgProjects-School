@@ -24,7 +24,7 @@ namespace _07151129
                     "Ushiromiya George",
                     "Ushiromiya Rudolf",
                     "Ushiromiya Kyrie",
-                    "Ushiromiya Batler",
+                    "Ushiromiya Battler",
                     "Ushiromiya Rosa",
                     "Ushiromiya Maria",
                     "Nanjo Terumasa",
@@ -79,12 +79,12 @@ namespace _07151129
 #endif
 
             AddQuestion(new Question("What's the name of the red haired dude who argues with the witch?",
-            "Ushiromiya Butter : Ushiromiya Battler : Ushiromiya Batter : Ushiromiya Batler : Ushiromiya Butler",
+            "Ushiromiya Butter : Ushiromiya Batler : Ushiromiya Batter : Ushiromiya Battler : Ushiromiya Butler",
             3, runIfCorrect:
             () => ClearSayAndWaitCentered("yeah")));
 
             AddQuestion(new Question("What's the name of the witch who argues with the red haired dude?",
-            "Ushiromiya George : Ushiromiya Maria : Beatrice : Ushiromiya Hideyoshi : Ushiromiya Batler",
+            "Ushiromiya George : Ushiromiya Maria : Beatrice : Ushiromiya Hideyoshi : Ushiromiya Battler",
             2, runWithAnsAsParameter:
             (ans) =>
             {
@@ -508,9 +508,9 @@ v       v           v       v
 For example:
     What's the name of the red haired dude who argues with the witch?
     1) Ushiromiya Butter 
-    2) Ushiromiya Battler 
+    2) Ushiromiya Batler 
     3) Ushiromiya Batter 
-    4) Ushiromiya Batler 
+    4) Ushiromiya Battler 
     5) Ushiromiya Butler
 Here the correct answer was the 4th option, so you get the key starts with '4'.
 - - - - [ Next Hint ] - - - -
@@ -1110,7 +1110,7 @@ Furudo Erika
 Stackoverflow
 
 + Cast +
-Ushiromiya Batler as Incompetent
+Ushiromiya Battler as Incompetent
 Ushiromiya Kinzo as Dead
 Ushiromiya Krauss as Boxer
 Ushiromiya Natushi as Cute
