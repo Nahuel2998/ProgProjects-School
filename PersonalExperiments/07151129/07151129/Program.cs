@@ -51,17 +51,17 @@ namespace _07151129
                 return;
             }
 
-            if (!ProgramState.Instance.Options.Please)
-            {
-                Console.WriteLine("rude");
-                Console.ReadKey();
-                return;
-            }
+            // if (!ProgramState.Instance.Options.Please)
+            // {
+            //     Console.WriteLine("rude");
+            //     Console.ReadKey();
+            //     return;
+            // }
 
             Console.CursorVisible = false;
 #if WINFAG
-            Console.SetWindowSize(Console.WindowWidth + 1, 40);
-            Console.BufferHeight = 40;
+            Console.SetWindowSize(Console.WindowWidth + 1, 42);
+            Console.BufferHeight = 42;
             // Console.BufferWidth = Console.WindowWidth + 1;
 #endif
             Freno();
@@ -269,10 +269,10 @@ namespace _07151129
                 ClearSayAndWaitCentered("correct!");
             }));
 
-#if !DEBUG
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.White;
-#endif
+// #if !DEBUG
+//             Console.BackgroundColor = ConsoleColor.DarkGray;
+//             Console.ForegroundColor = ConsoleColor.White;
+// #endif
             Console.Clear();
             Introduction();
 #if WINFAG
@@ -325,7 +325,8 @@ namespace _07151129
 
         private static void Freno()
         {
-            Console.Write(@"***°°*°.°°°°°°.°°°°°° . °            .  ..       °*o .°.*.°  °°.*..          °  
+            Console.Write(@"
+***°°*°.°°°°°°.°°°°°° . °            .  ..       °*o .°.*.°  °°.*..          °  
 *°*.°**°*°°°°.  .°...         .. °  .°.   .°     °Ooo..°°°..*.          .   .*..
 .°°°°°°°...°°°.  .°.  ..  .    *o*. . .  ..*°. .    °°                ..     °  
 *°****°°°.°° ..°..  °°°°..*.°  .               .   °**°               °         
