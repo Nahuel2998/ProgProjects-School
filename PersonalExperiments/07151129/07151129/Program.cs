@@ -58,6 +58,13 @@ namespace _07151129
                 return;
             }
 
+            Console.CursorVisible = false;
+#if WINFAG
+            Console.SetWindowSize(Console.WindowWidth + 1, 40);
+            Console.BufferHeight = 40;
+            // Console.BufferWidth = Console.WindowWidth + 1;
+#endif
+            Freno();
 #if WINFAG
             ProgramState.Instance.ReadCulpritRegKey();
 
@@ -69,14 +76,7 @@ namespace _07151129
             ProgramState.Instance.BeatoPlayer.Load();
             ProgramState.Instance.ChainsPlayer = new SoundPlayer(Assembly.GetExecutingAssembly().GetManifestResourceStream("_07151129.CadenasEternas.wav"));
             ProgramState.Instance.ChainsPlayer.Load();
-
-            Console.SetWindowSize(Console.WindowWidth + 1, 40);
-            Console.BufferHeight = 40;
-            // Console.BufferWidth = Console.WindowWidth + 1;
 #endif
-            Console.CursorVisible = false;
-
-            // TODO: Add freno for loading screen.
 
             AddQuestion(new Question("What's the name of the red haired dude who argues with the witch?",
             "Ushiromiya Butter : Ushiromiya Battler : Ushiromiya Batter : Ushiromiya Batler : Ushiromiya Butler",
@@ -273,9 +273,7 @@ namespace _07151129
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.ForegroundColor = ConsoleColor.White;
 #endif
-            Console.WriteLine("There are currently {0} questions.", ProgramState.Instance.Questions.Count);
-            Console.ReadKey();
-
+            Console.Clear();
             Introduction();
 #if WINFAG
             ProgramState.Instance.HopePlayer.PlayLooping();
@@ -323,6 +321,51 @@ namespace _07151129
 
             while (Console.ReadKey().Key != ConsoleKey.Enter)
             { }
+        }
+
+        private static void Freno()
+        {
+            Console.Write(@"***°°*°.°°°°°°.°°°°°° . °            .  ..       °*o .°.*.°  °°.*..          °  
+*°*.°**°*°°°°.  .°...         .. °  .°.   .°     °Ooo..°°°..*.          .   .*..
+.°°°°°°°...°°°.  .°.  ..  .    *o*. . .  ..*°. .    °°                ..     °  
+*°****°°°.°° ..°..  °°°°..*.°  .               .   °**°               °         
+**°°°*°**°**°.°°°°. °°°.°°.                        .°.   .°°         .          
+°*°°*oo***°*°°. ..**°*.                                  ° °.    ...*°          
+OoooOo*°*..*°...°°*.                                     ..°      .°..          
+*****. .o**O***°°.                                         .    °  °.           
+°*... °**°**°**°.                                            .  ° o° °          
+o*..°°°°°°**o*o°     ..                                              .    .     
+ ...°...°*o*oo*                                                          °@Oo.  
+.*.°*°°*o*ooo*.                                                         O@#@@#  
+*°**oo**o**oo*.                                                  °°.     *O#O°  
+**o**°**°°*o**. .                                                *       .    ..
+oo**°°*°..°**°              .°°°. ..°**ooo**°........                       ....
+*°°. °°.°*°..°           .*O#OOoOOO@@@@@@@@@@@@@@##Oo*.          .         ..   
+*°  .°°°°°°°.*.        °#@@@@@@@@@@@@@@@@@@@@@@@@@#Oo*.                         
+°°°°°°°°.....°*.      .O@@@@@@@@@@@@@@@@@@@@@@@O*°.                             
+****°.  .   .°*@.     o@@@@@@@@@@@@@@@@@@@@#o°        .°..                      
+*°**°...  . .OO@#     O@@@@##O####O#O@@@@#*    ..°****oOOO*°         .°***°°°...
+°.°°°...    .*@##O    *@*°°°°.    ..*#@@@@*°*o#@@@@@@@@@@Oo°       °°**oO###O###
+°°......    oO@@@@O   .@#@#o°°ooO#@@@@@@@@#O##@@@@@@@@@@@#o..     .#@##@@@@####@
+*o**°°°°  °°oO@@@@@#°  o@@@@@@@@@@@@@@@@@@@OOO#@@@@@@@@@#O*..     O@@@@@@@@@@@@@
+**o*****°**oooo@@@@@@*  #@@@@@@@@@@@@@@@@@@@O°*O@@@@@@@#Oo*. . .°@@@@@@@@@@@@@@@
+°°o*°°****°°°o*#@@@@O@@o°@@@@@@@@@@@@@@@@@@@*.° °@@@@@##Oo*.. .@@@@@@@@@@@@@@@@@
+***o*°°°*°.°°o*o@@@@o@@@@O@@@@@@@@@@@@@#@@#o°°°*o@@@@###Oo°.. .@@@@@@@@@@@@@@@@@
+O*oo**°..°**o**°O@@#O@##@@@@@@@@@@@@@@@@@@@@@@@@@###O##Oo*°.. .@@@@@@@@@@@@@@@@@
+oo**°.*.°***°**°O@@O#@#O#O##@@@@@@@@@@@@@@@@@@@#OoooOOOo*°.    o@@@@@@@@@@@@@@@@
+oo*°* .**°**oOooo#@#@@#O#OO##@@@@@@@@@@@@#OOooo***O##Oo*°...    @@@@@@@@@@@@@@@@
+ooooo**oo***ooOoOo###@######@@#@@@@@@@@@@@@@@@#OO#@@#oo*...      o@@@@@@@@@@@@@@
+OoOoo*ooo**o°*ooO#OO@@#O##@#@@O°#@@@@@@@@@@@@####@@#O#O*..         °O##@@@@@@##@
+##OOooooo**°*ooO###OO@oo####@o.  °#@@@@@@@@@@@@@@@@@@#o.                 °o#@##@
+@@@@@##OOOOooo*oOO##OoOo###@°      .o#@@@@@@@@@@@@@#O*                     .°*° 
+@@@@@@@###OOOoooOoOO#Ooo##OO°         .*O@@@@@@@Oo°.                   .*O####O*
+@@@@@@@##OO#O#OOoo**ooooooooOOo°.          ...                     .*oO#@@####OO
+@@@@@@@#@##O#Oooo**o*oooo***ooOoo°.°°.                          .*o#######OO###*
+@@@@@@@@@@@@@@###OOo**oOOooo*°. .o#@@@#°.°***°.               °O########OOO###° 
+@@@@@@@@@@@@@@@@@@@@@@@#O*°.  °O#####@@@#O#@@@@#O*°..    .°*o##########OO####*  
+@@@@@@@@@@@@@@@@@@@@@o*°. . °#@####@@@@@@@############################@OOOO#O   
+@@@@@@@@@@@@@@@#Oo°°... ... O@###@@@@@@@@@@@@@###@##########@###O####@#OOOO#°   ".PadCenterBoth());
+            Thread.Sleep(2000);
         }
 
         private static void Introduction()
@@ -384,11 +427,12 @@ On the eighth twilight, gouge the leg and subtract.
 On the ninth twilight, the witch shall revive, and the culprit shall be the only left unused.
 On the tenth twilight, the journey shall end, and you shall reach the capital where the gold dwells.
 
-The witch will praise the wise and bestow four treasures.
+The witch will praise the wise and bestow five treasures.
 One shall be all the gold in the Golden Land.
-One shall be all the gold in the Golden Land.
-One shall be all the gold in the Golden Land.
-One shall be all the gold in the Golden Land.
+One shall be the resurrection of the dead soul.
+One shall be the confession of the love that was.
+One shall be Microsoft Office Word 2013.
+One shall be to put the witch to sleep for all time. 
 
 Rest in peace,
 My beloved witch,
