@@ -193,7 +193,7 @@ namespace _07151129
             1, runIfCorrect:
             () => ClearSayAndWaitCentered("yed\nEva is the sole human (not piece) survivor of the Rokkenjima incident.\nThis is true for every game. Since we're not talking about pieces.")));
 
-            if (new Random().Next() % 2 == 0)
+            if (new Random().Next() % 2 == 0 || ProgramState.Instance.Options.Nome)
             {
                 AddQuestion(new Question("But how did the candy leave the cup???\n- - - - - - - - - - - - - - - - - - - - - -",
                 "None of the above : Actually they didn't : It was Ange (with a brick) : There was no candy to begin with : - - - - - - - - - - - - - - - - - - - - - - :".Split(':', StringSplitOptions.TrimEntries),
