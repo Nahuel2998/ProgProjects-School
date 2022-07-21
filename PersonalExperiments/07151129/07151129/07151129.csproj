@@ -18,7 +18,7 @@
     <RootNamespace>_07151129</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <!-- <ApplicationIcon>SomeCoolIcon.ico</ApplicationIcon> -->
+    <ApplicationIcon>mastermind.ico</ApplicationIcon>
   </PropertyGroup>
   
   <ItemGroup>
