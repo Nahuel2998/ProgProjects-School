@@ -437,7 +437,7 @@ One shall be to put the witch to sleep for all time.
 
 Rest in peace,
 My beloved witch,
-Freno.
+Marina.
 ".PadCenterBoth());
 
             int culpritIndex = ProgramState.GetCulpritIndex(ProgramState.Instance.Options.Culprit) + 1;
