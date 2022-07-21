@@ -310,6 +310,9 @@ namespace _07151129
 
         private static void WarnAboutOldPerlModules()
         {
+            if (ProgramState.Instance.Options.Nome)
+            { return; }
+
             Console.Clear();
 
             Console.Write(("hola\n\n"
