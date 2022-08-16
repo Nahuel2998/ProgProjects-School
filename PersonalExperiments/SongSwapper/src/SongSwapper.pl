@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use feature qw(say signatures);
+use feature 'say';
 use Data::Dumper;
 use List::Util 'shuffle';
 use File::Path 'remove_tree';
@@ -220,7 +220,7 @@ sub CreateResults
       if (/youtu\.?be/)
       { 
         if ($WINFAG)
-        { qx|..\\..\\libs\\yt-dlp.exe -f ba -x --audio-format mp3 --audio-quality 0 --ffmpeg-location ..\\..\\libs\\ $_ -o "$participants[$i]_$index.%(ext)s"|; }
+        { qx|..\\..\\libs\\yt-dlp.exe -f ba -x --audio-format mp3 --audio-quality 0 --ffmpeg-location ..\\..\\libs\\ $_ -o "$_[$i]_$index.%(ext)s"|; }
         else
         { qx|yt-dlp -f ba -x --audio-format mp3 --audio-quality 0 $_ -o "$_[$i]_$index.%(ext)s"|; }
       }
@@ -234,7 +234,7 @@ sub CreateResults
         unless ($?)
         {
           if ($WINFAG)
-          { qx|..\\..\\libs\\ffmpeg.exe -hide_banner -loglevel panic -i temp.mp3 -map 0:a -c:a copy -map_metadata -1 "$participants[$i]_$index.mp3"| }
+          { qx|..\\..\\libs\\ffmpeg.exe -hide_banner -loglevel panic -i temp.mp3 -map 0:a -c:a copy -map_metadata -1 "$_[$i]_$index.mp3"| }
           else
           { qx|ffmpeg -hide_banner -loglevel panic -i temp.mp3 -map 0:a -c:a copy -map_metadata -1 "$_[$i]_$index.mp3"| }
         }
@@ -263,8 +263,9 @@ sub CreateResults
 }
 
 # Does @$a - @b
-sub Difference ($a, @b)
+sub Difference
 {
+  my ($a, @b) = @_;
   my %in_b = map { $_ => 1 } @b;
   return grep { not $in_b{$_} } @{ $a };
 }
