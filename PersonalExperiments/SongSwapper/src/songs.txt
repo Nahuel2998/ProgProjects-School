@@ -1,5 +1,6 @@
 Restrictions:
 Pairs
+Nome <-> Star
 
 
 Nar

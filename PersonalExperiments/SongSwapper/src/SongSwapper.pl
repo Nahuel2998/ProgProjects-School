@@ -211,6 +211,8 @@ say "done.";
 
 sub CreateResults
 { 
+  local $| = 1;
+
   ## Download files and save in individual folders
   for my $i (reverse 0 .. $#_)
   {
