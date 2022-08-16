@@ -7,6 +7,7 @@ use List::Util 'shuffle';
 use File::Path 'remove_tree';
 use File::Fetch;
 
+$File::Fetch::WARN = 0;
 my $WINFAG = $^O eq 'MSWin32';
 my $ONLY_PAIRS;
 my %allSongs;
@@ -83,6 +84,10 @@ if ($ONLY_PAIRS && @tempParticipants % 2 != 0)
 
 if (%rigged || %do_not)
 {
+  # Fix a bug
+  if ($ONLY_PAIRS && %rigged)
+  { say "dude I told you to not use ' -> ' if you want only pairs go fix that shit I ain't handling this" and readline and die ":("; }
+
   ## Remove invalid riggings
   while (my ($key, $value) = each %rigged)
   {
@@ -227,6 +232,7 @@ sub CreateResults
       else
       { 
         s/listen/download/ if /newgrounds/; 
+
         my $ff = File::Fetch->new(uri => "$_");
         $? = ($ff->fetch()) ? 0 : 1;
         rename $ff->output_file, 'temp.mp3';
