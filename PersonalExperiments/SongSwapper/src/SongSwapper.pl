@@ -22,9 +22,9 @@ while (<>)
   last unless (/Restrict/i .. /^$/);
   chomp;
 
-  if (/( <!> )/) 
+  if (/(.*) <!> (.*)/)
   {
-    my @pair = split $1, $_, 2;
+    my @pair = ( $1, $2 );
     # @do_not{$pair[0], $pair[1]} = ($pair[1], $pair[0]); 
 
     for (0..1)
@@ -36,23 +36,24 @@ while (<>)
     }
   }
 
-  elsif (/( !> )/) 
+  elsif (/(.*) !> (.*)/)
   { 
-    my ($key, @bans) = split /$1| \| /; 
-    if (defined $do_not{$key})
-    { push @{ $do_not{$key} }, @bans; }
-    else
-    { $do_not{$key} = [ @bans ]; }
+    for my $key (split ' | ', $1)
+    {
+      my @bans = split ' | ', $2;
+
+      if (defined $do_not{$key})
+      { push @{ $do_not{$key} }, @bans; }
+      else
+      { $do_not{$key} = [ @bans ]; }
+    }
   }
 
-  elsif (/( <-> )/) 
-  { push @pairs, (split $1, $_, 2); }
+  elsif (/(.*) <-> (.*)/)
+  { push @pairs, ( $1, $2 ); }
 
-  elsif (/( -> )/) 
-  {
-    my @pair = split $1, $_, 2;
-    $rigged{$pair[0]} = $pair[1]; 
-  }
+  elsif (/(.*) -> (.*)/)
+  { $rigged{$1} = $2; }
 
   elsif (/pairs/i)
   { $ONLY_PAIRS = 1; }
@@ -91,7 +92,7 @@ if (%rigged || %do_not)
   ## Remove invalid riggings
   while (my ($key, $value) = each %rigged)
   {
-    unless (grep { $key eq $_ } @tempParticipants || grep { $value eq $_ } @tempParticipants)
+    unless ((grep { $key eq $_ } @tempParticipants) || (grep { $value eq $_ } @tempParticipants))
     { delete $rigged{$key}; }
   }
   ## end
@@ -114,7 +115,7 @@ if (%rigged || %do_not)
     next if exists $rigged{$key};
 
     my @possible = Difference(\@tempParticipants, $do_not{$key}->@*, $key) or say "No one can get $key\'s songs" and readline and die ":(";
-    my $res = $possible[int rand @possible ];
+    my $res = $possible[int rand @possible];
 
     $rigged{$key} = $res;
 
@@ -236,8 +237,13 @@ sub CreateResults
         s/listen/download/ if /newgrounds/; 
 
         my $ff = File::Fetch->new(uri => "$_");
-        $? = ($ff->fetch()) ? 0 : 1;
-        rename $ff->output_file, 'temp.mp3';
+        if (defined $ff)
+        {
+          $? = ($ff->fetch()) ? 0 : 1;
+          rename $ff->output_file, 'temp.mp3';
+        }
+        else
+        { $? = 1; }
 
         unless ($?)
         {

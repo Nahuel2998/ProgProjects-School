@@ -1,6 +1,5 @@
 Restrictions:
-Pairs
-Nome <-> Star
+Nome | Nar !> Star
 
 
 Nar
