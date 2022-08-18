@@ -179,7 +179,7 @@ If it fails again, then your restrictions are the problem, check your logic
 (I probably tested over 100 times and it only failed once (and never on the final version, so it might be fixed))
 
 - - [ FAQ ] - -
->How do I know this works?
+>How do I know this will work?
 dude trust me
 
 - - [ Final Note ] - -
