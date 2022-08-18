@@ -10,7 +10,7 @@ yeah
 - - [ Actually How ] - -
 It first checks if there's any restrictions for this round
 For example, if a participant can't get another's songs because they'd guess each other too easily
-Or something like a forced pair
+Or something like a forced pair or a forced circle
 
 After that it makes a list with everyone's names and shuffles it (with the restrictions in mind)
 And that's basically the order for the round
@@ -22,7 +22,7 @@ The program downloads each song, strips the metadata, and renames them to a "Rec
 For youtube songs, it uses yt-dlp to download the vid and take out the audio only (these don't ever have metadata)
 For newgrounds links and direct links, it downloads them directly then strips the metadata
 If either downloading or stripping the metadata fails, it instead creates a text file with the link inside
-(Stripping the metadata only ever fails if the downloaded file wasn't an audio file, so it works as a verification)
+(Stripping the metadata only ever fails if the downloaded file wasn't an mp3 file, so it works as a verification)
 
 It also creates a who_got_who.txt file inside of Result/ detailing, well, who got who
 
@@ -36,8 +36,13 @@ who_got_who.txt contains the order/pairings for this round
 
 For Example:
 Nar -> Nome -> Star -> Hyper
-Here Hyper gets Star's songs, Star gets Nome's, Nome gets Nar's, and Nar gets Hyper's
+Here Hyper gets Star's songs, Star gets Nome's, Nome gets Nar's, and Nar gets Hyper's (note how it loops)
 This notation has already been used by Olli so I'll trust you get it
+
+If there's more than one circle they'll appear in separate lines
+Nar -> Nome -> Star
+Hyper -> Bio -> Olli
+These are two trios
 
 If there was any pair in that round they'll be listed in individual lines below (since they're not part of the main circle)
 Strophox#2091 <-> Olli
@@ -77,13 +82,22 @@ haha
 It should kinda be self-explanatory
 
 If there's any obvious problem with the restrictions the program tells you that and dies
-It also tells you the amount of participants on the round and the amount of pairs
-(Unless there are too many restrictions it shouldn't make pairs itself)
+
+It also tells you the amount of participants on the round, the amount of circles (with their size), and the amount of pairs
+Unless there's too many restrictions and bad rng, it won't make circles or pairs by itself (It only does so if there's no other way)
+(In my tests with 17 participants and 16 restrictions, it had about a 1/10 chance of making a second circle by itself)
+(If different participants have different number of restrictions, the chances should be lower (It orders from most restricted to least))
+(If you get more than one circle and don't want that, try running it again)
+(If you get multiple circles consecutively, your restrictions are the problem and you suck)
+If you don't have a single restriction it won't even consider doing multiple circles
+
 It then says hola
-When it gets the songs it says doing...
+
+While it gets the songs it says doing...
 If it succeeds it says did
 If it doesn't it says fuck
 It purposely doesn't say what went wrong with what song so the host doesn't get spoiled yeah
+
 After it's done it says done.
 
 - - [ The Text File ] - -
@@ -107,7 +121,7 @@ Example in the example_songs.txt file
 You can define restrictions at the start of the file
 
 Simply start the file with something like "Restrictions" (It really just checks if the line contains 'restrict' so while it contains that it's fine)
-It has to be the first line though or otherwise they'll be taken as a participant
+It has to be the first line though or otherwise they'll be taken as a participant (unless the first line is a comment (see below))
 
 After that you can place a few lines defining restrictions (without empty lines between them)
 There should be at least two empty lines (preferably just two) between the restrictions and the first participant
@@ -117,10 +131,8 @@ This line is here to make the spacing look prettier
 
 Nar -> Nome
 This says Nome must get Nar's songs (rigged)
-Do not try to make a chain with this like Nar -> Nome -> Star since I didn't support that yeah
-If you do want to do that just put them in separate lines:
-Nar -> Nome
-Nome -> Star
+You can also keep adding arrows to make a chain (Nar -> Nome -> Star) but do note this is not a closed circle
+To make a closed circle add the first participant at the end (Nar -> Nome -> Star -> Nar)
 
 Nar <-> Nome
 This forms a pair between Nar and Nome, Nar gets Nome's songs and Nome gets Nar's songs
@@ -130,7 +142,7 @@ This means Nome can't get Nar's songs
 
 Nar !> Nome | Star
 You can also use this syntax to say neither Nome or Star can get Nar's songs
-Supports as many participants as you want after the arrow (Nar !> Nome | Star | Hyper | Elte)
+Supports as many participants as you want after the arrow (Nar !> Nome | Star | Hyper)
 
 Nar | Nome !> Star
 And this is a thing as well, meaning Star can't get Nar or Nome's songs
@@ -152,23 +164,26 @@ The number of participants has to be even, otherwise there can't be pairs
 You can't use -> if you use this option, use <-> instead to define forced pairs
 Both <!> and !> work well with this option
 
+# This is a comment
+You an add comments by starting your line with #
+Only works in the restriction section specifically
+I added this so you can comment out some restrictions without deleting the line
+
 - - [ That's ] - -
 that's
+
+- - [ Known Bugs ] - - 
+If there are too many participants with the same amount of restrictions, there's a chance the rng is so bad it fails to even make multiple circles
+If something like that happens, try running it again
+If it fails again, then your restrictions are the problem, check your logic
+(I tested this with 17 participants and 16 of them with exactly one rectriction) 
+(After running it over 20 times it failed once, so this is very rare)
+
+- - [ FAQ ] - -
+>How do I know this works?
+dude trust me
 
 - - [ Final Note ] - -
 If you try to break it, it probably will
 kinda don't
 
-- - [ Known Things That Kinda Break It ] - -
-Your restrictions are the only thing that can break it (I think)
-
-If you try to make a closed circle yourself, it'll repeat a participant in the list
-Nar -> Nome
-Nome -> Star
-Star -> Nar
-If these were the only participants in the round, you suck because you're just rigging everything
-But yeah because of the way it's implemented, one of the three will be repeated in the final thing
-Which means two participants will get songs from the same participant, and some participant won't have their songs shared
-I know what causes this so I might fix this in the future
-but for now kinda don't
-I don't think anyone wants two circles either
