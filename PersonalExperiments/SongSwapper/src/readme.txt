@@ -176,8 +176,7 @@ that's
 If there are too many participants with the same amount of restrictions, there's a chance the rng is so bad it fails to even make multiple circles
 If something like that happens, try running it again
 If it fails again, then your restrictions are the problem, check your logic
-(I tested this with 17 participants and 16 of them with exactly one rectriction) 
-(After running it over 20 times it failed once, so this is very rare)
+(I probably tested over 100 times and it only failed once (and never on the final version, so it might be fixed))
 
 - - [ FAQ ] - -
 >How do I know this works?
