@@ -294,6 +294,17 @@ sub CreateResults
 {
   local $| = 1;
 
+  my $ffmpeg = "ffmpeg";
+  my $yt_dlp = "yt-dlp";
+  my $ffmpeg_location = "";
+
+  if ($WINFAG)
+  {
+    $ffmpeg = '..\\..\\libs\\ffmpeg.exe';
+    $yt_dlp = '..\\..\\libs\\yt-dlp.exe';
+    $ffmpeg_location = '--ffmpeg-location ..\\..\\libs\\';
+  }
+
   ## Download files and save in individual folders
   for my $i (reverse 0 .. $#_)
   {
@@ -301,43 +312,54 @@ sub CreateResults
     chdir $_[$i];
 
     my $index++;
-    my $keep_metadata;
+    my $keep_filetype;
+    my $re_encode;
     for ($allSongs{$_[$i - 1]}->@*)
     {
       print 'doing... ';
 
-      if (/ .*!\s*$/)
+      if (/ (.*)$/)
       {
+        if ($1 =~ /!/)
+        { $keep_filetype++; }
+        elsif ($1 =~ /re/)
+        { $re_encode++; }
+
         s/ .*//;
-        $keep_metadata++; 
       }
 
       if (/youtu\.?be/)
-      {
-        if ($WINFAG)
-        { qx|..\\..\\libs\\yt-dlp.exe -q --no-warnings -f ba -x --audio-format mp3 --audio-quality 0 --ffmpeg-location ..\\..\\libs\\ $_ -o "$_[$i]_$index.%(ext)s"|; }
-        else
-        { qx|yt-dlp -q --no-warnings -f ba -x --audio-format mp3 --audio-quality 0 $_ -o "$_[$i]_$index.%(ext)s"|; }
-      }
+      { qx|$yt_dlp -q --no-warnings -f ba -x --audio-format mp3 --audio-quality 0 $ffmpeg_location $_ -o "$_[$i]_$index.%(ext)s"|; }
       else
       {
         s/listen/download/ if /newgrounds/;
 
+        my $extension = "mp3";
         my $ff = File::Fetch->new(uri => "$_");
         if (defined $ff)
         {
           $? = ($ff->fetch()) ? 0 : 1;
-          rename $ff->output_file, 'temp.mp3' unless $keep_metadata;
+          ( $extension ) = $ff->output_file =~ /.*\.([^\.]*)/ if $keep_filetype;
+          rename $ff->output_file, "temp.$extension";
         }
         else
         { $? = 1; }
 
-        unless ($? || $keep_metadata)
-        {
-          if ($WINFAG)
-          { qx|..\\..\\libs\\ffmpeg.exe -hide_banner -loglevel panic -i temp.mp3 -map 0:a -c:a copy -map_metadata -1 "$_[$i]_$index.mp3"| }
+        unless ($?)
+        { 
+          my $args; 
+          my $target_extension; 
+          if ($re_encode)
+          {
+            $args = '-q:a 0 -map 0:a -map_metadata -1';
+            $target_extension = 'mp3';
+          }
           else
-          { qx|ffmpeg -hide_banner -loglevel panic -i temp.mp3 -map 0:a -c:a copy -map_metadata -1 "$_[$i]_$index.mp3"| }
+          {
+            $args = '-map 0:a -c:a copy -map_metadata -1 -fflags +bitexact -flags:a +bitexact';
+            $target_extension = $extension;
+          }
+          qx|$ffmpeg -hide_banner -loglevel panic -i temp.$extension $args "$_[$i]_$index.$target_extension"| 
         }
 
         if ($?)
@@ -347,14 +369,8 @@ sub CreateResults
           print $file "$_";
           close $file;
         }
-        elsif ($keep_metadata)
-        {
-          my $new_name = $ff->output_file;
-          $new_name =~ s/(.*)(\.[^\.]*)/$_[$i]_$index$2/;
-          rename $ff->output_file, $new_name;
-        }
 
-        unlink "temp.mp3";
+        unlink "temp.$extension";
       }
 
       say $? ? 'fuck' : 'did';
@@ -362,7 +378,8 @@ sub CreateResults
     continue
     { 
       $index++; 
-      $keep_metadata = 0;
+      $keep_filetype = 0;
+      $re_encode = 0;
     }
 
     print "\n";

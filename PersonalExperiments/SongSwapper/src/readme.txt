@@ -22,7 +22,7 @@ The program downloads each song, strips the metadata, and renames them to a "Rec
 For youtube songs, it uses yt-dlp to download the vid and take out the audio only (these don't ever have metadata)
 For newgrounds links and direct links, it downloads them directly then strips the metadata
 If either downloading or stripping the metadata fails, it instead creates a text file with the link inside
-(Stripping the metadata only ever fails if the downloaded file wasn't an mp3 file, so it works as a verification)
+(Stripping the metadata only ever fails if the downloaded file wasn't an mp3 file and you didn't tell it it wasn't an mp3 file, so it works as a verification)
 
 It also creates a who_got_who.txt file inside of Result/ detailing, well, who got who
 
@@ -116,6 +116,37 @@ The first line will be the participant's name, and the following lines will be t
 Participants are separated by empty lines
 Leave exactly one empty line between each participant if you don't want to try and break it
 Example in the example_songs.txt file
+
+If any of the links is a direct link to something that isn't an mp3 file, it'll fail unless you tell it to keep the format
+To tell it to keep the format, add a space and an exclamation mark at the end of the line:
+
+Name
+link
+link !
+link !
+
+Here the last two songs won't be treated as mp3 files (and their extension will be kept, which could spoil the host a bit)
+If any of the files is a video, it'll only keep the audio, but will still be a video (If you want it to keep the video though, then fuck you this is not VideoSwap)
+Technically I could just make this the default behaviour, but yeah, in that case if you didn't give it a direct link then it'd just download index.html and think everything is daijobu
+So the default behaviour expects mp3 files
+Also exclamation marks are cool
+
+If you want it to turn the video/audio into an mp3 file though, add a space and re at the end of the line:
+
+Name
+link 
+link !
+link re
+
+Here the first link will fail if it's not an mp3 file
+The second link will keep its original file format
+The third file will be turned into an mp3 file
+
+Notes:
+You can't use both ! and re at the same time for reasons I shouldn't have to explain
+If you do, ! will take priority
+If you use ! on an mp3 file it won't change anything
+If you use re on an mp3 file it might lose quality
 
 (( Restrictions ))
 You can define restrictions at the start of the file
