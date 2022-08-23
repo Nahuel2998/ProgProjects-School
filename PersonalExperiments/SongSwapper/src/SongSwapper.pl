@@ -24,9 +24,9 @@ while (<>)
   last unless (/Restrict/i .. /^$/);
   chomp;
 
-  if (/(.*) <!> (.*)/)
+  if (/ <!> /)
   {
-    my @pair = ( $1, $2 );
+    my @pair = ( $`, $' );
     # @do_not{$pair[0], $pair[1]} = ($pair[1], $pair[0]);
 
     for (0..1)
@@ -38,11 +38,11 @@ while (<>)
     }
   }
 
-  elsif (/(.*) !> (.*)/)
+  elsif (/ !> /)
   {
-    for my $key (split ' | ', $1)
+    for my $key (split ' | ', $`)
     {
-      my @bans = split ' | ', $2;
+      my @bans = split ' | ', $';
 
       if (defined $do_not{$key})
       { push @{ $do_not{$key} }, @bans; }
@@ -51,8 +51,8 @@ while (<>)
     }
   }
 
-  elsif (/(.*) <-> (.*)/)
-  { push @pairs, ( $1, $2 ); }
+  elsif (/ <-> /)
+  { push @pairs, ( $`, $' ); }
 
   elsif (/ -> /)
   {
@@ -301,9 +301,16 @@ sub CreateResults
     chdir $_[$i];
 
     my $index++;
+    my $keep_metadata;
     for ($allSongs{$_[$i - 1]}->@*)
     {
       print 'doing... ';
+
+      if (/ .*!\s*$/)
+      {
+        s/ .*//;
+        $keep_metadata++; 
+      }
 
       if (/youtu\.?be/)
       {
@@ -320,12 +327,12 @@ sub CreateResults
         if (defined $ff)
         {
           $? = ($ff->fetch()) ? 0 : 1;
-          rename $ff->output_file, 'temp.mp3';
+          rename $ff->output_file, 'temp.mp3' unless $keep_metadata;
         }
         else
         { $? = 1; }
 
-        unless ($?)
+        unless ($? || $keep_metadata)
         {
           if ($WINFAG)
           { qx|..\\..\\libs\\ffmpeg.exe -hide_banner -loglevel panic -i temp.mp3 -map 0:a -c:a copy -map_metadata -1 "$_[$i]_$index.mp3"| }
@@ -340,6 +347,12 @@ sub CreateResults
           print $file "$_";
           close $file;
         }
+        elsif ($keep_metadata)
+        {
+          my $new_name = $ff->output_file;
+          $new_name =~ s/(.*)(\.[^\.]*)/$_[$i]_$index$2/;
+          rename $ff->output_file, $new_name;
+        }
 
         unlink "temp.mp3";
       }
@@ -347,7 +360,10 @@ sub CreateResults
       say $? ? 'fuck' : 'did';
     }
     continue
-    { $index++; }
+    { 
+      $index++; 
+      $keep_metadata = 0;
+    }
 
     print "\n";
 
