@@ -1,0 +1,45 @@
+#+title:  PersonalExperiments
+#+author: Na_P
+
+** Description
+Behold, the land of ... yeah I couldn't think of a good intro.
+
+My general playground. 
+
+I test stuff and put way too much effort on dumb things.
+
+** Projects
+*** 07151129
+A birthday present for a friend's friend.
+(Contains Umineko spoilers)
+
+A half-serious trivia about Umineko.
+
+The main culprit of NarLibs' ugliness.
+
+Contains some slightly interesting RegKey usage.
+
+*** ModSelector
+Since moving folders is too hard. 
+(Same)
+
+It moves folders to simulate a mod selector.
+
+Has some interesting parameters.
+And some extremely hilarious behaviour.
+
+*** SongSwapper
+My second Perl script.
+(You do not want to see the first one)
+
+So there's this made-up discord game between friends where we send each other songs and have to guess who we got. 
+It aims to do that without spoiling whoever hosts each round.
+
+Contains a readme.txt with more info.
+
+*** StarBattle
+genial I had forgotten about this.
+
+Unfinished thing that probably doesn't do much.
+
+Wanted to do a Star-Battle game for console but learnt monospaced fonts are a lie.

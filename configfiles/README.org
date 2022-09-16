@@ -1,0 +1,18 @@
+#+title:  configfiles
+#+author: Na_P
+
+** Description
+My config files.
+
+** Files
+*** .vimrc
+My vimrc, optimized for Colemak-DH (the keyboard layout I use).
+
+*** config.lua
+My lvim config file.
+Doesn't have much different from the default config, but changing two lines takes too long.
+
+*** colemak-dh-sym.kbd
+KMonad config file for a Colemak-DH layout, doesn't have much fancy stuff. 
+
+I use it when I don't have my usual keyboard.

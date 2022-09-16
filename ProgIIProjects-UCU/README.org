@@ -1,0 +1,12 @@
+#+title:  ProgIIProjects-UCU
+#+author: Na_P
+
+** Description
+Projects for Programacion II. 
+It has projects related to Programacion II.
+
+This was when I first met C#, I hated it. 
+Things have really changed.
+
+** Projects
+yeah I won't really explain what each project here is, just assignments.

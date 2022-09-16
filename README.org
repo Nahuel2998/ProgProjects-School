@@ -1,0 +1,30 @@
+#+title:  ProgProjects-School
+#+author: Na_P
+
+** Introduction
+This is a general repo for all my school projects. 
+And well, for things that are also not school projects.
+
+This is probably not how you should use Git, but oh well.
+It's just easier for me to have everything in one repo.
+
+** Folders
+*** libs
+Here are my libraries. 
+(Mostly C#)
+
+*** configfiles
+My general configfiles.
+(Vim and Colemak config)
+
+*** ProgIIProjects-UCU
+My university's Programacion II projects.
+(First experiences with C#)
+
+*** Algoritmos-UCU
+My university's Algoritmos y Estructuras de Datos projects.
+(Java, yeah)
+
+*** PersonalExperiments
+My own personal projects.
+(Varied, mostly unnecessarily elaborate jokes)

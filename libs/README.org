@@ -1,0 +1,22 @@
+#+title:  libs
+#+author: Na_P
+
+** Description
+My libraries.
+
+They're used in my C# PersonalExperiments projects.
+
+They aren't that polished, I was still finding out about C# when I wrote them.
+
+** Projects
+*** NarLib
+General project with uhhh classes and uhhhhhhhhh yeah.
+
++ Menu.cs: Create and render Menus. Dumb and complicated.
++ GetValidInput.cs: A terrible idea. Not used anywhere.
++ TextScroller.cs: Scrolls text. Actually pretty cool.
+
+*** NarExtensions
+Extension methods.
+
+That should be self-explanatory.

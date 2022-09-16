@@ -1,0 +1,12 @@
+#+title:  Algoritmos-UCU
+#+author: Na_P
+
+** Description
+Projects for Algoritmos y Estructuras de Datos. 
+It has projects related to Algoritmos and Estructuras de Datos.
+
+Due to the way the asignments worked, there's some terrible code in here written by my teacher.
+Sorry about that.
+
+** Projects
+yeah I won't really explain what each project here is, just assignments.
