@@ -209,6 +209,9 @@ If something like that happens, try running it again
 If it fails again, then your restrictions are the problem, check your logic
 (I probably tested over 100 times and it only failed once (and never on the final version, so it might be fixed))
 
+It seems the participants section always needs an empty line above it (hence the double empty line requirement to separate it from restrictions)
+It's easier to fix than to write this but yeah I'll do it later
+
 - - [ FAQ ] - -
 >How do I know this will work?
 dude trust me
