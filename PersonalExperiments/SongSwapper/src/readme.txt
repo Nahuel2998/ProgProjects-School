@@ -62,6 +62,11 @@ In case you don't trust me not deleting your system32
 Kinda only useful if you can somehow read Perl code
 free spaghetti
 
+( ErrorFinder.ps1 )
+Searches for links that didn't get downloaded and tells you who was the culprit
+Very simple but it saves you from doing it yourself
+Should be used after you get errors, not before, obviously
+
 - - [ But Why ] - -
 I was bored
 This was made to let the host also participate in the round
