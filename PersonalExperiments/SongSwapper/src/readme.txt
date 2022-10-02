@@ -67,6 +67,11 @@ Searches for links that didn't get downloaded and tells you who was the culprit
 Very simple but it saves you from doing it yourself
 Should be used after you get errors, not before, obviously
 
+( SubmittedSongsChecker.pl )
+Perl oneliner to check the already submitted songs
+You can supply it a text file with multiple playlists/songs or just run it and paste links there
+The filename is longer than the oneliner itself (perl -ne 'print qx|yt-dlp -e $_|')
+
 - - [ But Why ] - -
 I was bored
 This was made to let the host also participate in the round
