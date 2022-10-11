@@ -254,6 +254,7 @@ say "Pairs: ", @pairs / 2, "\n";
 
 say "hola\ngonna do\n";
 
+chdir +( File::Spec->splitpath( __FILE__ ) )[1];
 mkdir 'Result' or remove_tree 'Result', {keep_root => 1};
 chdir 'Result';
 

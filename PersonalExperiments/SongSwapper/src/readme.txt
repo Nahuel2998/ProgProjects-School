@@ -239,8 +239,6 @@ If something like that happens, try running it again
 If it fails again, then your restrictions are the problem, check your logic
 (I probably tested over 100 times and it only failed once (and never on the final version, so it might be fixed))
 
-The input text file has to be in the same folder as the script, and I didn't plan this.
-
 It seems the participants section always needs an empty line above it (hence the double empty line requirement to separate it from restrictions)
 It's easier to fix than to write this but yeah I'll do it later
 (You know, I think the empty line looks pretty, this is a feature now)
