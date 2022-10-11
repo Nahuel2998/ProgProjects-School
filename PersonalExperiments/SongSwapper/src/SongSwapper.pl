@@ -122,6 +122,7 @@ if (%rigged || %do_not)
   # hola
   # The following is the most complex loop in this thing
   # yeah it's not so smart and I'll be trying to fix it in the future
+  # Me from the future: lma
   ## Handle prohibited pairings
   HANDLE_PROHIBITED:
   for my $key (sort { $do_not{$b}->@* <=> $do_not{$a}->@* } keys %do_not)
@@ -312,24 +313,31 @@ sub CreateResults
     chdir $_[$i];
 
     my $index++;
-    my $keep_filetype;
-    my $re_encode;
+    my %flags;
     for ($allSongs{$_[$i - 1]}->@*)
     {
       print 'doing... ';
 
-      if (/ (.*)$/)
+      if (/\s(.*)$/)
       {
-        if ($1 =~ /!/)
-        { $keep_filetype++; }
-        elsif ($1 =~ /re/)
-        { $re_encode++; }
+        my $flags_str = $1;
 
-        s/ .*//;
+        if ($flags_str =~ /(!|re)/)
+        { $flags{$1}++; }
+
+        if ($flags_str =~ /\[\s*(\S*)\s*[~-]\s*(\S*)\s*\]/)
+        { $flags{'trim'} = join (' ', grep { /\S/ } (($1 ? "-ss $1" : ""), ($2 ? "-to $2" : ""))); }
+
+        s/\s.*//;
       }
 
       if (/youtu\.?be/)
-      { qx|$yt_dlp -q --no-warnings -f ba -x --audio-format mp3 --audio-quality 0 $ffmpeg_location $_ -o "$_[$i]_$index.%(ext)s"|; }
+      { 
+        my $args = "-f ba -x --audio-format mp3 --audio-quality 0 $ffmpeg_location";
+        $args .= qq| --downloader ffmpeg --downloader-args "ffmpeg_i:$flags{'trim'}"| if $flags{'trim'};
+
+        qx|$yt_dlp -q --no-warnings $args $_ -o "$_[$i]_$index.%(ext)s"|; 
+      }
       else
       {
         s/listen/download/ if /newgrounds/;
@@ -339,7 +347,7 @@ sub CreateResults
         if (defined $ff)
         {
           $? = ($ff->fetch()) ? 0 : 1;
-          ( $extension ) = $ff->output_file =~ /.*\.([^\.]*)/ if $keep_filetype;
+          ( $extension ) = $ff->output_file =~ /.*\.([^\.]*)/ if $flags{'!'};
           rename $ff->output_file, "temp.$extension";
         }
         else
@@ -349,7 +357,7 @@ sub CreateResults
         { 
           my $args; 
           my $target_extension; 
-          if ($re_encode)
+          if ($flags{'re'})
           {
             $args = '-q:a 0 -map 0:a -map_metadata -1';
             $target_extension = 'mp3';
@@ -359,6 +367,8 @@ sub CreateResults
             $args = '-map 0:a -c:a copy -map_metadata -1 -fflags +bitexact -flags:a +bitexact';
             $target_extension = $extension;
           }
+          $args .= qq| $flags{'trim'}| if exists $flags{'trim'};
+
           qx|$ffmpeg -hide_banner -loglevel panic -i temp.$extension $args "$_[$i]_$index.$target_extension"| 
         }
 
@@ -378,8 +388,7 @@ sub CreateResults
     continue
     { 
       $index++; 
-      $keep_filetype = 0;
-      $re_encode = 0;
+      %flags = ();
     }
 
     print "\n";

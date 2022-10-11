@@ -127,6 +127,7 @@ Participants are separated by empty lines
 Leave exactly one empty line between each participant if you don't want to try and break it
 Example in the example_songs.txt file
 
+( Keeping Format )
 If any of the links is a direct link to something that isn't an mp3 file, it'll fail unless you tell it to keep the format
 To tell it to keep the format, add a space and an exclamation mark at the end of the line:
 
@@ -141,6 +142,7 @@ Technically I could just make this the default behaviour, but yeah, in that case
 So the default behaviour expects mp3 files
 Also exclamation marks are cool
 
+( Re-Encoding )
 If you want it to turn the video/audio into an mp3 file though, add a space and re at the end of the line:
 
 Name
@@ -154,9 +156,27 @@ The third file will be turned into an mp3 file
 
 Notes:
 You can't use both ! and re at the same time for reasons I shouldn't have to explain
-If you do, ! will take priority
+If you do, the one you put last will take priority
 If you use ! on an mp3 file it won't change anything
 If you use re on an mp3 file it might lose quality
+
+( Trimming )
+You can set a start and end timestamp after a link to trim it
+The general format is [start_time - end_time]
+
+Name
+link [0:42~]
+link [1:02 - 3:12]
+link [~7:27]
+
+The first example crops from 0:42 to the end
+The second example crops from 1:02 to 3:12
+The third example crops from the start to 7:27
+Spaces are optional and both ~ and - are accepted, but ~ looks fancier
+You can also specify milliseconds (with something like 0:42.119) but lma
+
+Notes:
+I have no idea why but it will refuse to crop the start if start_time is less than 0:11 (literally who coded this)
 
 (( Restrictions ))
 You can define restrictions at the start of the file
@@ -219,8 +239,11 @@ If something like that happens, try running it again
 If it fails again, then your restrictions are the problem, check your logic
 (I probably tested over 100 times and it only failed once (and never on the final version, so it might be fixed))
 
+The input text file has to be in the same folder as the script, and I didn't plan this.
+
 It seems the participants section always needs an empty line above it (hence the double empty line requirement to separate it from restrictions)
 It's easier to fix than to write this but yeah I'll do it later
+(You know, I think the empty line looks pretty, this is a feature now)
 
 - - [ FAQ ] - -
 >How do I know this will work?
