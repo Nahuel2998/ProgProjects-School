@@ -5,6 +5,7 @@ use feature 'say';
 use Data::Dumper;
 use List::Util 'shuffle';
 use File::Path 'remove_tree';
+use File::Spec;
 use File::Fetch;
 
 $File::Fetch::WARN = 0;
