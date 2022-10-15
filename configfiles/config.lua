@@ -25,7 +25,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
-vim.cmd("source /home/nar/.config/nvim/init.vim")
+vim.cmd("source /home/nar/.vimrc")
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.

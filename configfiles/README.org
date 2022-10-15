@@ -16,3 +16,6 @@ Doesn't have much different from the default config, but changing two lines take
 KMonad config file for a Colemak-DH layout, doesn't have much fancy stuff. 
 
 I use it when I don't have my usual keyboard.
+
+*** nvim
+My nvim config, only ever used when I'm on vscode with the Neovim Extension.
