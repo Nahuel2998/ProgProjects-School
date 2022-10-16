@@ -3,4 +3,7 @@ use strict;
 use warnings;
 
 while (<>)
-{ print qx|yt-dlp -e $_|; }
+{ 
+  next if /^#|^$/;
+  print qx|yt-dlp -q --no-warnings -e $_|; 
+}
