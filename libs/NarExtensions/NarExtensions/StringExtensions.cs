@@ -31,7 +31,7 @@ namespace NarExtensions
 
         public static string PadCenterVertical(this string source, int totalHeight)
         {
-            int padHeight = (totalHeight - Regex.Matches(source, "$", RegexOptions.Multiline).Count);
+            int padHeight = totalHeight - Regex.Matches(source, "$", RegexOptions.Multiline).Count;
             int halfPadHeight = padHeight / 2;
 
             StringBuilder res = new("\n".Multiply(halfPadHeight + (padHeight % 2)));

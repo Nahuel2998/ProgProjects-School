@@ -37,6 +37,13 @@ It aims to do that without spoiling whoever hosts each round.
 
 Contains a readme.txt with more info.
 
+*** AsciiRenderer
+A project started for fun as a personal challenge.
+
+Trying to make some kind of drawing engine with ascii.
+
+Not using other renderers as practice so it might be terribly slow, but I can say I came up with all of its bad ideas.
+
 *** StarBattle
 genial I had forgotten about this.
 
