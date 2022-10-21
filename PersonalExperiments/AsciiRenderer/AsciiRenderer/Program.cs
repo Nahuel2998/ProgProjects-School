@@ -1,6 +1,4 @@
-﻿using AsciiRenderer.Classes;
-
-namespace AsciiRenderer
+﻿namespace AsciiRenderer.Main
 {
     internal static class Program
     {

@@ -1,11 +1,11 @@
 using System;
 using NarExtensions;
 
-namespace AsciiRenderer.Classes
+namespace AsciiRenderer
 {
     public class Board
     {
-        public char[,] BoardMatrix { get; }
+        public readonly char[,] BoardMatrix;
 
         // Props returning each corner's coordinates?
         public int XLength => BoardMatrix.GetLength(1);
@@ -42,6 +42,40 @@ namespace AsciiRenderer.Classes
 
         public void DrawVerticalLine(string data, int x, int y)
         { DrawVerticalLine(data.ToCharArray(), x, y); }
+
+        public bool Occupied(params int[] paramsArr)
+        {
+            if (paramsArr.Length > 2)
+            { return Occupied(paramsArr[0], paramsArr[1], paramsArr[2], paramsArr[3]); }
+            else
+            { return Occupied(paramsArr[0], paramsArr[1]); }
+        }
+
+        public bool Occupied(int x, int y)
+        { return BoardMatrix[y, x] != ' '; }
+
+        public bool Occupied(int fromX, int fromY, int toX, int toY)
+        {
+            for (int x = fromX; x <= toX; x++)
+            {
+                for (int y = fromY; y <= toY; y++)
+                {
+                    if (!Occupied(x, y))
+                    { return true; }
+                }
+            }
+
+            return false;
+        }
+
+        public void EditAt(int[] xy, char character)
+        { EditAt(xy[0], xy[1], character); }
+
+        public void EditAt(int x, int y, char character)
+        { BoardMatrix[y, x] = character; }
+
+        public char GetAt(int x, int y)
+        { return BoardMatrix[y, x]; }
 
         public void Print()
         {

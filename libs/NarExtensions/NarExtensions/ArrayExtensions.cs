@@ -68,5 +68,16 @@ namespace NarExtensions
 
             return res.ToString();
         }
+
+        // TODO: Make this more generic?
+        public static int[] AsIntArray(this float[] array)
+        {
+            int[] res = new int[array.Length];
+
+            for (int i = 0; i < array.Length; i++)
+            { res[i] = (int)array[i]; }
+
+            return res;
+        }
     }
 }

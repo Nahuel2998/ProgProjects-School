@@ -1,7 +1,7 @@
 using System;
 using NarExtensions;
 
-namespace AsciiRenderer.Classes
+namespace AsciiRenderer
 {
     public static class Shape
     {
