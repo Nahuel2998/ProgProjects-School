@@ -1,5 +1,4 @@
 using AsciiRenderer;
-using NarExtensions;
 
 namespace Pong
 {
