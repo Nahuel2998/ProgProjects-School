@@ -1,4 +1,6 @@
-﻿using AsciiRenderer;
+﻿using System;
+using System.Threading;
+using AsciiRenderer;
 
 namespace Pong
 {
@@ -17,7 +19,7 @@ namespace Pong
             // );
 
             FrameBall ball = new(
-                x: 10,
+                x: 20,
                 y: 5,
                 directionX: -1,
                 directionY: -1,
