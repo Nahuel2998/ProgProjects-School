@@ -23,7 +23,7 @@ namespace Pong
         public float GetNewY()
         { return Y + VelocityY; }
 
-        public float[] GetNewXY()
-        { return new float[2] { GetNewX(), GetNewY() }; }
+        public (float, float) GetNewXY()
+        { return (GetNewX(), GetNewY()); }
     }
 }

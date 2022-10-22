@@ -19,7 +19,7 @@ namespace Pong
         public void FondleBall()
         {
             Console.WriteLine($"{Ball.CountX}, {Ball.CountY}");
-            int[] previousPos = new int[2] { Ball.X, Ball.Y };
+            (int, int) previousPos = (Ball.X, Ball.Y);
 
             if (Ball.CountX-- == 0)
             {
@@ -28,7 +28,7 @@ namespace Pong
                 if (Board.Occupied(Ball.X + Ball.DirectionX, Ball.Y))
                 { Ball.DirectionX *= -1; }
 
-                previousPos[0] = Ball.X;
+                previousPos.Item1 = Ball.X;
                 Ball.X += Ball.DirectionX;
             }
 
@@ -39,7 +39,7 @@ namespace Pong
                 if (Board.Occupied(Ball.X, Ball.Y + Ball.DirectionY))
                 { Ball.DirectionY = -Ball.DirectionY; }
 
-                previousPos[1] = Ball.Y;
+                previousPos.Item2 = Ball.Y;
                 Ball.Y += Ball.DirectionY;
             }
 

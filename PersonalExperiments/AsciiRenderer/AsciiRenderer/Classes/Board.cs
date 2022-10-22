@@ -43,13 +43,11 @@ namespace AsciiRenderer
         public void DrawVerticalLine(string data, int x, int y)
         { DrawVerticalLine(data.ToCharArray(), x, y); }
 
-        public bool Occupied(params int[] paramsArr)
-        {
-            if (paramsArr.Length > 2)
-            { return Occupied(paramsArr[0], paramsArr[1], paramsArr[2], paramsArr[3]); }
-            else
-            { return Occupied(paramsArr[0], paramsArr[1]); }
-        }
+        public bool Occupied((int, int) xy)
+        { return Occupied(xy.Item1, xy.Item2); }
+
+        public bool Occupied((int, int, int, int) fXfYtXtY)
+        { return Occupied(fXfYtXtY.Item1, fXfYtXtY.Item2, fXfYtXtY.Item3, fXfYtXtY.Item4); }
 
         public bool Occupied(int x, int y)
         { return BoardMatrix[y, x] != ' '; }
@@ -68,8 +66,8 @@ namespace AsciiRenderer
             return false;
         }
 
-        public void EditAt(int[] xy, char character)
-        { EditAt(xy[0], xy[1], character); }
+        public void EditAt((int, int) xy, char character)
+        { EditAt(xy.Item1, xy.Item2, character); }
 
         public void EditAt(int x, int y, char character)
         { BoardMatrix[y, x] = character; }

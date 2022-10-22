@@ -79,5 +79,8 @@ namespace NarExtensions
 
             return res;
         }
+
+        public static (int, int) AsIntTuple(this (float, float) tuple)
+        { return ((int)tuple.Item1, (int)tuple.Item2); }
     }
 }

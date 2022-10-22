@@ -19,30 +19,30 @@ namespace Pong
         // FIXME: This doesn't work well
         public void FondleBall()
         {
-            float[] prevPos = new float[2] { Ball.X, Ball.Y };
-            float[] newPos = new float[2] { Ball.GetNewX(), Ball.GetNewY() };
-            int[] realPrevPos = prevPos.AsIntArray();
-            int[] realNewPos = newPos.AsIntArray();
+            (float, float) prevPos = (Ball.X, Ball.Y);
+            (float, float) newPos = (Ball.GetNewX(), Ball.GetNewY());
+            (int, int) realPrevPos = prevPos.AsIntTuple();
+            (int, int) realNewPos = newPos.AsIntTuple();
 
-            if (realPrevPos[0] != realNewPos[0] || realPrevPos[1] != realNewPos[1])
+            if (realPrevPos.Item1 != realNewPos.Item1 || realPrevPos.Item2 != realNewPos.Item2)
             {
                 if (Board.Occupied(realNewPos))
                 {
-                    if (Board.Occupied(realNewPos[0], realPrevPos[1]))
+                    if (Board.Occupied(realNewPos.Item1, realPrevPos.Item2))
                     { Ball.VelocityX = -Ball.VelocityX; }
-                    if (Board.Occupied(realPrevPos[0], realNewPos[1]))
+                    if (Board.Occupied(realPrevPos.Item1, realNewPos.Item2))
                     { Ball.VelocityY = -Ball.VelocityY; }
 
                     newPos = Ball.GetNewXY();
-                    realNewPos = newPos.AsIntArray();
+                    realNewPos = newPos.AsIntTuple();
                 }
 
                 Board.EditAt(realPrevPos, ' ');
                 Board.EditAt(realNewPos, Ball.Texture);
             }
 
-            Ball.X = newPos[0];
-            Ball.Y = newPos[1];
+            Ball.X = newPos.Item1;
+            Ball.Y = newPos.Item2;
 
             Console.WriteLine($"{Ball.X}, {Ball.Y}");
         }
