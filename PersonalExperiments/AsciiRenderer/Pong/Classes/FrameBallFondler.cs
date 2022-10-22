@@ -18,7 +18,6 @@ namespace Pong
 
         public void FondleBall()
         {
-            Console.WriteLine($"{Ball.CountX}, {Ball.CountY}");
             (int, int) previousPos = (Ball.X, Ball.Y);
 
             if (Ball.CountX-- == 0)

@@ -6,7 +6,9 @@ namespace Pong
     {
         static void Main()
         {
-            Board board = new(41, 11);
+            QueueBoard board = new(41, 11);
+            // Board board = new(41, 11);
+
             // Ball ball = new(
             //     x: 10,
             //     y: 5,
@@ -20,7 +22,7 @@ namespace Pong
                 directionX: -1,
                 directionY: -1,
                 moveEveryX: 0,
-                moveEveryY: 6
+                moveEveryY: 8
             );
 
             board.DrawHorizontalLine(Shape.Line(board.XLength, '=', '#'), 0, 0);
@@ -42,12 +44,16 @@ namespace Pong
             //     Thread.Sleep(10);
             // }
 
+            Console.SetCursorPosition(0, 0);
+            board.Print();
+
             while (true)
             {
-                Console.SetCursorPosition(0, 0);
+                // Console.SetCursorPosition(0, 0);
                 frameBallFondler.FondleBall();
 
-                board.Print();
+                board.PrintUpdated();
+                // board.Print();
 
                 Thread.Sleep(17);
             }

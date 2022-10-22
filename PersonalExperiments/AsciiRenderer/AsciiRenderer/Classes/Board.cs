@@ -69,7 +69,7 @@ namespace AsciiRenderer
         public void EditAt((int, int) xy, char character)
         { EditAt(xy.Item1, xy.Item2, character); }
 
-        public void EditAt(int x, int y, char character)
+        public virtual void EditAt(int x, int y, char character)
         { BoardMatrix[y, x] = character; }
 
         public char GetAt(int x, int y)
