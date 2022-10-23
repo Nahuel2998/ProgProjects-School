@@ -27,13 +27,29 @@ namespace Pong
                 moveEveryY: 8
             );
 
+            Paddle paddleLeft = new(
+                texture: ']',
+                x: 0,
+                y: 5,
+                direction: 1
+            );
+
+            Paddle paddleRight = new(
+                texture: '[',
+                x: 40,
+                y: 5,
+                direction: -1
+            );
+
             board.DrawHorizontalLine(Shape.Line(board.XLength, '=', '#'), 0, 0);
             board.DrawHorizontalLine(Shape.Line(board.XLength, '=', '#'), 0, board.YLength - 1);
-            board.DrawVerticalLine(Shape.Line(board.YLength, '|', '#'), 0, 0);
-            board.DrawVerticalLine(Shape.Line(board.YLength, '|', '#'), board.XLength - 1, 0);
+            // board.DrawVerticalLine(Shape.Line(board.YLength, '|', '#'), 0, 0);
+            // board.DrawVerticalLine(Shape.Line(board.YLength, '|', '#'), board.XLength - 1, 0);
 
             // BallFondler ballFondler = new(board, ball);
             FrameBallFondler frameBallFondler = new(board, ball);
+            PaddlePaddler leftPaddler = new(board, paddleLeft, ball);
+            PaddlePaddler rightPaddler = new(board, paddleRight, ball);
             Console.CursorVisible = false;
 
             // while (true)
@@ -53,6 +69,8 @@ namespace Pong
             {
                 // Console.SetCursorPosition(0, 0);
                 frameBallFondler.FondleBall();
+                leftPaddler.PaddlePaddle();
+                rightPaddler.PaddlePaddle();
 
                 board.PrintUpdated();
                 // board.Print();

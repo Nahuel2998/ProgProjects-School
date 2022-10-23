@@ -12,7 +12,7 @@ namespace Pong
             Board = board;
             Ball = ball;
 
-            Board.BoardMatrix[Ball.Y, Ball.X] = Ball.Texture;
+            Board.EditAt(Ball.X, Ball.Y, Ball.Texture);
         }
 
         public void FondleBall()
