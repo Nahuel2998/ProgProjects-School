@@ -42,10 +42,7 @@ namespace Pong
             }
 
             if (Board.GetAt(Ball.X, Ball.Y) != Ball.Texture)
-            {
-                Board.EditAt(previousPos, ' ');
-                Board.EditAt(Ball.X, Ball.Y, Ball.Texture);
-            }
+            { Board.Move(previousPos, (Ball.X, Ball.Y)); }
         }
     }
 }

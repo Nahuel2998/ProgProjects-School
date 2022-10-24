@@ -41,8 +41,8 @@ namespace Pong
                 direction: -1
             );
 
-            board.DrawHorizontalLine(Shape.Line(board.XLength, '=', '#'), 0, 0);
-            board.DrawHorizontalLine(Shape.Line(board.XLength, '=', '#'), 0, board.YLength - 1);
+            board.DrawHorizontalLine(Shape.Line(board.XLength, '=', '#'), board.TopLeftXY);
+            board.DrawHorizontalLine(Shape.Line(board.XLength, '=', '#'), board.BottomLeftXY);
             // board.DrawVerticalLine(Shape.Line(board.YLength, '|', '#'), 0, 0);
             // board.DrawVerticalLine(Shape.Line(board.YLength, '|', '#'), board.XLength - 1, 0);
 

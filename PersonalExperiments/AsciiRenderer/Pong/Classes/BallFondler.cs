@@ -38,8 +38,7 @@ namespace Pong
                     realNewPos = newPos.AsIntTuple();
                 }
 
-                Board.EditAt(realPrevPos, ' ');
-                Board.EditAt(realNewPos, Ball.Texture);
+                Board.Move(realPrevPos, realNewPos);
             }
 
             Ball.X = newPos.Item1;

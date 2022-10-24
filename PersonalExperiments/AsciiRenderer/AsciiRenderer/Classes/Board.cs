@@ -5,20 +5,33 @@ namespace AsciiRenderer
 {
     public class Board
     {
+        public const char EMPTY = ' ';
         public readonly char[,] BoardMatrix;
 
-        // Props returning each corner's coordinates?
         public int XLength => BoardMatrix.GetLength(1);
         public int YLength => BoardMatrix.GetLength(0);
+
+        // This is assuming you won't have a dimension start in anything other than 0 
+        // Because why the fuck would you want that
+        public (int, int) TopLeftXY => (0, 0);
+        public (int, int) BottomLeftXY => (0, YLength - 1);
+        public (int, int) TopRightXY => (XLength - 1, 0);
+        public (int, int) BottomRightXY => (XLength - 1, YLength - 1);
 
         public Board(int width, int height)
         {
             BoardMatrix = new char[height, width];
-            BoardMatrix.SpanFill(' ');
+            BoardMatrix.SpanFill(EMPTY);
         }
 
         public Board(char[,] board)
         { BoardMatrix = board; }
+
+        public void DrawHorizontalLine(char[] data, (int, int) xy)
+        { DrawHorizontalLine(data, xy.Item1, xy.Item2); }
+
+        public void DrawHorizontalLine(string data, (int, int) xy)
+        { DrawHorizontalLine(data, xy.Item1, xy.Item2); }
 
         public void DrawHorizontalLine(char[] data, int x, int y)
         {
@@ -30,6 +43,12 @@ namespace AsciiRenderer
 
         public void DrawHorizontalLine(string data, int x, int y)
         { DrawHorizontalLine(data.ToCharArray(), x, y); }
+
+        public void DrawVerticalLine(char[] data, (int, int) xy)
+        { DrawVerticalLine(data, xy.Item1, xy.Item2); }
+
+        public void DrawVerticalLine(string data, (int, int) xy)
+        { DrawVerticalLine(data, xy.Item1, xy.Item2); }
 
         public void DrawVerticalLine(char[] data, int x, int y)
         {
@@ -50,7 +69,7 @@ namespace AsciiRenderer
         { return Occupied(fXfYtXtY.Item1, fXfYtXtY.Item2, fXfYtXtY.Item3, fXfYtXtY.Item4); }
 
         public bool Occupied(int x, int y)
-        { return BoardMatrix[y, x] != ' '; }
+        { return BoardMatrix[y, x] != EMPTY; }
 
         public bool Occupied(int fromX, int fromY, int toX, int toY)
         {
@@ -71,6 +90,15 @@ namespace AsciiRenderer
 
         public virtual void EditAt(int x, int y, char character)
         { BoardMatrix[y, x] = character; }
+
+        public void Move(int fromX, int fromY, int toX, int toY)
+        {
+            EditAt(toX, toY, GetAt(fromX, fromY));
+            EditAt(fromX, fromY, EMPTY);
+        }
+
+        public void Move((int, int) fromXY, (int, int) toXY)
+        { Move(fromXY.Item1, fromXY.Item2, toXY.Item1, toXY.Item2); }
 
         public char GetAt(int x, int y)
         { return BoardMatrix[y, x]; }

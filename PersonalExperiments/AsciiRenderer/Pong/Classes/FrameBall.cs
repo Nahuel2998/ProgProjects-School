@@ -1,6 +1,6 @@
 namespace Pong
 {
-    public class FrameBall
+    public class FrameBall : IBall
     {
         public char Texture { get; set; }
         public int X { get; set; }
@@ -11,6 +11,9 @@ namespace Pong
         public int MoveEveryY { get; set; }
         public int CountX { get; set; }
         public int CountY { get; set; }
+
+        public int RealX => X;
+        public int RealY => Y;
 
         public FrameBall(char texture = '#', int x = 0, int y = 0, int directionX = 0, int directionY = 0, int moveEveryX = -1, int moveEveryY = -1)
         {

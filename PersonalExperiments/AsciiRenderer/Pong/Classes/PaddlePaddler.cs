@@ -7,9 +7,9 @@ namespace Pong
     {
         public readonly Board Board;
         public readonly Paddle Paddle;
-        public readonly FrameBall Ball; // TODO: Maybe use an interface for this?
+        public readonly IBall Ball;
 
-        public PaddlePaddler(Board board, Paddle paddle, FrameBall ball)
+        public PaddlePaddler(Board board, Paddle paddle, IBall ball)
         {
             Board = board;
             Paddle = paddle;
@@ -23,13 +23,10 @@ namespace Pong
             (int, int) previousPos = (Paddle.X, Paddle.Y);
 
             if (Ball.DirectionX != Paddle.Direction)
-            { Paddle.Y += Math.Sign(Ball.Y - Paddle.Y); }
+            { Paddle.Y += Math.Sign(Ball.RealY - Paddle.Y); }
 
             if (Board.GetAt(Paddle.X, Paddle.Y) != Paddle.Texture)
-            {
-                Board.EditAt(previousPos, ' ');
-                Board.EditAt(Paddle.X, Paddle.Y, Paddle.Texture);
-            }
+            { Board.Move(previousPos, (Paddle.X, Paddle.Y)); }
         }
     }
 }
