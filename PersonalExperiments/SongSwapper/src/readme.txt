@@ -20,7 +20,9 @@ Inside that folder will be the songs each participant got
 
 The program downloads each song, strips the metadata, and renames them to a "Receiver_number" format, keeping the original order
 For youtube songs, it uses yt-dlp to download the vid and take out the audio only (these don't ever have metadata)
-For newgrounds links and direct links, it downloads them directly then strips the metadata
+For newgrounds links and direct links, it still uses yt-dlp but then strips the metadata
+For any other links, same as above
+If yt-dlp fails, it tries to download stuff directly then strips the metadata
 If either downloading or stripping the metadata fails, it instead creates a text file with the link inside
 (Stripping the metadata only ever fails if the downloaded file wasn't an mp3 file and you didn't tell it it wasn't an mp3 file, so it works as a verification)
 
