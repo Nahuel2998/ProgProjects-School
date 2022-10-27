@@ -16,6 +16,19 @@ my %rigged;
 my %do_not;
 my @pairs;
 
+my $ffmpeg = "ffmpeg";
+my $yt_dlp = "yt-dlp";
+my $begone = "/dev/null";
+my $ffmpeg_location = "";
+
+if ($WINFAG)
+{
+  $ffmpeg = '..\\..\\libs\\ffmpeg.exe';
+  $yt_dlp = '..\\..\\libs\\yt-dlp.exe';
+  $begone = 'NUL';
+  $ffmpeg_location = '--ffmpeg-location ..\\..\\libs\\';
+}
+
 local $| = 1;
 ## Check for restrictions
 print "Calculating restrictions... ";
@@ -295,21 +308,6 @@ say "done.";
 
 sub CreateResults
 {
-  local $| = 1;
-
-  my $ffmpeg = "ffmpeg";
-  my $yt_dlp = "yt-dlp";
-  my $begone = "/dev/null";
-  my $ffmpeg_location = "";
-
-  if ($WINFAG)
-  {
-    $ffmpeg = '..\\..\\libs\\ffmpeg.exe';
-    $yt_dlp = '..\\..\\libs\\yt-dlp.exe';
-    $begone = 'NUL';
-    $ffmpeg_location = '--ffmpeg-location ..\\..\\libs\\';
-  }
-
   ## Download files and save in individual folders
   for my $i (reverse 0 .. $#_)
   {
@@ -335,56 +333,55 @@ sub CreateResults
         s/\s.*//;
       }
 
+      my $filename = "$_[$i]_$index";
+
       my $args = "-f ba -x --no-embed-metadata $ffmpeg_location";
       $args .= qq| --audio-format mp3 --audio-quality 0| unless $flags{'!'};
       $args .= qq| --downloader ffmpeg --downloader-args "ffmpeg_i:$flags{'trim'}"| if $flags{'trim'};
 
-      qx|$yt_dlp -q --no-warnings $args $_ -o "$_[$i]_$index.%(ext)s" 2>$begone|; 
+      qx|$yt_dlp -q --no-warnings $args $_ -o "$filename.%(ext)s" 2>$begone|;
 
+      my $extension = "mp3";
+      my $already_trimmed = !$?;
+
+      # If it didn't succeed, fallback to old method
       if ($?)
       {
         s/listen/download/ if /newgrounds/;
 
-        my $extension = "mp3";
         my $ff = File::Fetch->new(uri => "$_");
         if (defined $ff)
         {
           $? = ($ff->fetch()) ? 0 : 1;
           ( $extension ) = $ff->output_file =~ /.*\.([^\.]*)/ if $flags{'!'};
-          rename $ff->output_file, "temp.$extension";
+          rename $ff->output_file, "$filename.$extension";
         }
         else
         { $? = 1; }
+      }
 
-        # FIXME: Make it strip the metadata when yt-dlp succeeds on a non-yt link
-        unless ($?)
-        { 
-          my $args; 
-          my $target_extension; 
-          if ($flags{'re'})
-          {
-            $args = '-q:a 0 -map 0:a -map_metadata -1';
-            $target_extension = 'mp3';
-          }
-          else
-          {
-            $args = '-map 0:a -c:a copy -map_metadata -1 -fflags +bitexact -flags:a +bitexact';
-            $target_extension = $extension;
-          }
-          $args .= qq| $flags{'trim'}| if exists $flags{'trim'};
+      # If we got a file and it isn't from youtube, strip the metadata
+      unless (/youtu\.?be/ || $?)
+      { 
+        # what the fuCK Larry
+        my $realfile = +( <"$filename.*"> )[-1];
+        ( $extension ) = $realfile =~ /.*\.([^\.]*)/ if $flags{'!'};
 
-          qx|$ffmpeg -hide_banner -loglevel panic -i temp.$extension $args "$_[$i]_$index.$target_extension"| 
-        }
+        rename $realfile, "temp.$extension";
 
-        if ($?)
-        {
-          unlink "$_[$i]_$index.mp3";
-          open my $file, '>', "$_[$i]_$index.txt" or die ":(\n$!";
-          print $file "$_";
-          close $file;
-        }
+        StripMetadata($filename, $extension, $already_trimmed, %flags); 
 
         unlink "temp.$extension";
+      }
+
+      # If we couldn't save it, give up
+      if ($?)
+      {
+        unlink "$filename.$extension";
+        open my $file, '>', "$filename.txt" or die ":(\n$!";
+        print $file "$_";
+        print $file " $flags{'trim'}" if exists $flags{'trim'};
+        close $file;
       }
 
       say $? ? 'fuck' : 'did';
@@ -400,6 +397,27 @@ sub CreateResults
     chdir '..';
   }
   ## end
+}
+
+sub StripMetadata
+{
+  my ($filename, $extension, $already_trimmed, %flags) = @_;
+
+  my $args; 
+  my $target_extension; 
+  if ($flags{'re'})
+  {
+    $args = '-q:a 0 -map 0:a -map_metadata -1';
+    $target_extension = 'mp3';
+  }
+  else
+  {
+    $args = '-map 0:a -c:a copy -map_metadata -1 -fflags +bitexact -flags:a +bitexact';
+    $target_extension = $extension;
+  }
+  $args .= qq| $flags{'trim'}| if exists $flags{'trim'} and !$already_trimmed;
+
+  qx|$ffmpeg -hide_banner -loglevel panic -i temp.$extension $args "$filename.$target_extension"| ;
 }
 
 # Does @$a - @b
