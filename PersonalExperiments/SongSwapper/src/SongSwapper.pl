@@ -299,12 +299,14 @@ sub CreateResults
 
   my $ffmpeg = "ffmpeg";
   my $yt_dlp = "yt-dlp";
+  my $begone = "/dev/null";
   my $ffmpeg_location = "";
 
   if ($WINFAG)
   {
     $ffmpeg = '..\\..\\libs\\ffmpeg.exe';
     $yt_dlp = '..\\..\\libs\\yt-dlp.exe';
+    $begone = 'NUL';
     $ffmpeg_location = '--ffmpeg-location ..\\..\\libs\\';
   }
 
@@ -333,14 +335,13 @@ sub CreateResults
         s/\s.*//;
       }
 
-      if (/youtu\.?be/)
-      { 
-        my $args = "-f ba -x --audio-format mp3 --audio-quality 0 $ffmpeg_location";
-        $args .= qq| --downloader ffmpeg --downloader-args "ffmpeg_i:$flags{'trim'}"| if $flags{'trim'};
+      my $args = "-f ba -x --no-embed-metadata $ffmpeg_location";
+      $args .= qq| --audio-format mp3 --audio-quality 0| unless $flags{'!'};
+      $args .= qq| --downloader ffmpeg --downloader-args "ffmpeg_i:$flags{'trim'}"| if $flags{'trim'};
 
-        qx|$yt_dlp -q --no-warnings $args $_ -o "$_[$i]_$index.%(ext)s"|; 
-      }
-      else
+      qx|$yt_dlp -q --no-warnings $args $_ -o "$_[$i]_$index.%(ext)s" 2>$begone|; 
+
+      if ($?)
       {
         s/listen/download/ if /newgrounds/;
 
@@ -355,6 +356,7 @@ sub CreateResults
         else
         { $? = 1; }
 
+        # FIXME: Make it strip the metadata when yt-dlp succeeds on a non-yt link
         unless ($?)
         { 
           my $args; 
