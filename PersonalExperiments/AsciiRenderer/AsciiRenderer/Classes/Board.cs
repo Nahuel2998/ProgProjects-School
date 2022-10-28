@@ -17,6 +17,7 @@ namespace AsciiRenderer
         public (int, int) BottomLeftXY => (0, YLength - 1);
         public (int, int) TopRightXY => (XLength - 1, 0);
         public (int, int) BottomRightXY => (XLength - 1, YLength - 1);
+        public (int, int) CenterXY => (XLength / 2, YLength / 2);
 
         public Board(int width, int height)
         {
@@ -62,6 +63,9 @@ namespace AsciiRenderer
         public void DrawVerticalLine(string data, int x, int y)
         { DrawVerticalLine(data.ToCharArray(), x, y); }
 
+        public void DrawLine(char data, (int, int) fromXY, (int, int) toXY)
+        { DrawLine(data, fromXY.Item1, fromXY.Item2, toXY.Item1, toXY.Item2); }
+
         // Okay I did get this from the internet
         // Maybe I'll change it later
         public void DrawLine(char data, int fromX, int fromY, int toX, int toY)
@@ -97,11 +101,44 @@ namespace AsciiRenderer
             }
         }
 
+        public void DrawCircle(char data, (int, int) centerXY, int radius)
+        { DrawCircle(data, centerXY.Item1, centerXY.Item2, radius); }
+
+        public void DrawCircle(char data, int centerX, int centerY, int radius)
+        {
+            (int x, int y) = (0, radius);
+            int d = 3 - (radius * 2);
+
+            while (true)
+            {
+                EditAt(x + centerX, y + centerY, data);
+                EditAt(y + centerX, x + centerY, data);
+                EditAt(-y + centerX, x + centerY, data);
+                EditAt(-x + centerX, y + centerY, data);
+                EditAt(-x + centerX, -y + centerY, data);
+                EditAt(-y + centerX, -x + centerY, data);
+                EditAt(y + centerX, -x + centerY, data);
+                EditAt(x + centerX, -y + centerY, data);
+
+                if (x >= y)
+                { break; }
+
+                if (d < 0)
+                { d += (4 * x) + 6; }
+                else
+                { d += (4 * (x - y--)) + 10; }
+                x++;
+            }
+        }
+
         public bool Occupied((int, int) xy)
         { return Occupied(xy.Item1, xy.Item2); }
 
         public bool Occupied((int, int, int, int) fXfYtXtY)
         { return Occupied(fXfYtXtY.Item1, fXfYtXtY.Item2, fXfYtXtY.Item3, fXfYtXtY.Item4); }
+
+        public bool Occupied((int, int) fromXY, (int, int) toXY)
+        { return Occupied(fromXY.Item1, fromXY.Item2, toXY.Item1, toXY.Item2); }
 
         public bool Occupied(int x, int y)
         { return BoardMatrix[y, x] != EMPTY; }
