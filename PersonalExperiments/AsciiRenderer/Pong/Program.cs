@@ -43,6 +43,7 @@ namespace Pong
 
             board.DrawHorizontalLine(Shape.Line(board.XLength, '=', '#'), board.TopLeftXY);
             board.DrawHorizontalLine(Shape.Line(board.XLength, '=', '#'), board.BottomLeftXY);
+            // board.DrawLine('/', 9, board.YLength - 3, board.XLength - 10, 2);
             // board.DrawVerticalLine(Shape.Line(board.YLength, '|', '#'), 0, 0);
             // board.DrawVerticalLine(Shape.Line(board.YLength, '|', '#'), board.XLength - 1, 0);
 

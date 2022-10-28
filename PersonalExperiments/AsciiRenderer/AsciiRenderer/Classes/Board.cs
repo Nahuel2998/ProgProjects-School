@@ -62,6 +62,41 @@ namespace AsciiRenderer
         public void DrawVerticalLine(string data, int x, int y)
         { DrawVerticalLine(data.ToCharArray(), x, y); }
 
+        // Okay I did get this from the internet
+        // Maybe I'll change it later
+        public void DrawLine(char data, int fromX, int fromY, int toX, int toY)
+        {
+            (int distX, int signX) = (Math.Abs(toX - fromX), fromX < toX ? 1 : -1);
+            (int distY, int signY) = (-Math.Abs(toY - fromY), fromY < toY ? 1 : -1);
+            int error = distX + distY;
+
+            while (true)
+            {
+                EditAt(fromX, fromY, data);
+
+                if (fromX == toX && fromY == toY)
+                { break; }
+
+                int err2 = error * 2;
+                if (err2 >= distY)
+                {
+                    if (fromX == toX)
+                    { break; }
+
+                    error += distY;
+                    fromX += signX;
+                }
+                if (err2 <= distX)
+                {
+                    if (fromY == toY)
+                    { break; }
+
+                    error += distX;
+                    fromY += signY;
+                }
+            }
+        }
+
         public bool Occupied((int, int) xy)
         { return Occupied(xy.Item1, xy.Item2); }
 
