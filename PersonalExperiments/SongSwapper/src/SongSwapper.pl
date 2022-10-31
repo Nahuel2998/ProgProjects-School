@@ -36,9 +36,15 @@ while (<>)
 {
   next if /^#/;
   last unless (/Restrict/i .. /^$/);
+  next if /Restrict/ || /^$/;
   chomp;
 
-  if (/ <!> /)
+  # This adds totally necessary anticipation
+  say "Restriction '$_' looks too ugly. I'm out." and <STDIN> and die ">:(" if /\S<|>\S|\S!|\S\||\|\S/;
+
+  s/^\s+|\s+$//g;
+
+  if (/\s*<!>\s*/)
   {
     my @pair = ( $`, $' );
     # @do_not{$pair[0], $pair[1]} = ($pair[1], $pair[0]);
@@ -52,11 +58,11 @@ while (<>)
     }
   }
 
-  elsif (/ !> /)
+  elsif (/\s*!>\s*/)
   {
-    for my $key (split ' | ', $`)
+    for my $key (split /\s*\|\s*/, $`)
     {
-      my @bans = split ' | ', $';
+      my @bans = split /\s*\|\s*/, $';
 
       if (defined $do_not{$key})
       { push @{ $do_not{$key} }, @bans; }
@@ -65,15 +71,15 @@ while (<>)
     }
   }
 
-  elsif (/ <-> /)
+  elsif (/\s*<->\s*/)
   { push @pairs, ( $`, $' ); }
 
-  elsif (/ -> /)
+  elsif (/\s*->\s*/)
   {
     # Look at how simple this was before, the good old times
     # $rigged{$1} = $2;
 
-    my @chain = split ' -> ';
+    my @chain = split /\s*->\s*/;
 
     for my $i (0 .. $#chain - 1)
     { $rigged{$chain[$i]} = $chain[$i + 1]; }
@@ -91,6 +97,7 @@ while (<>)
 {
   chomp;
   my ($name, @songs) = split "\n";
+  $name =~ s/^\s+|\s+$//g;
 
   $allSongs{$name} = [ @songs ];
 }
@@ -103,7 +110,7 @@ my @participants;
 my @closedCircles;
 
 if ($ONLY_PAIRS && @temp_participants % 2 != 0)
-{ say "Odd number of participants (Can't make all pairs.)" and readline and die ":(" }
+{ say "Odd number of participants (Can't make all pairs.)" and <STDIN> and die ":(" }
 
 # Remove forced pairs from main circle
 @temp_participants = Difference(\@temp_participants, @pairs);
@@ -112,7 +119,7 @@ if (%rigged || %do_not)
 {
   # Fix a bug
   if ($ONLY_PAIRS && %rigged)
-  { say "dude I told you to not use ' -> ' if you want only pairs go fix that shit I ain't handling this" and readline and die ":("; }
+  { say "dude I told you to not use ' -> ' if you want only pairs go fix that shit I ain't handling this" and <STDIN> and die ":("; }
 
   ## Remove invalid riggings
   while (my ($key, $value) = each %rigged)
@@ -144,7 +151,7 @@ if (%rigged || %do_not)
     # Rigged pairings take priority over bans
     next if exists $rigged{$key};
 
-    my @possible = Difference(\@temp_participants, ($do_not{$key}->@*, $key)) or say "No one can get $key\'s songs" and readline and die ":(";
+    my @possible = Difference(\@temp_participants, ($do_not{$key}->@*, $key)) or say "No one can get $key\'s songs" and <STDIN> and die ":(";
     my $res = $possible[int rand @possible];
 
     my $temp = $res;
@@ -249,7 +256,7 @@ if (%rigged || %do_not)
 }
 else
 { @participants = shuffle @temp_participants; }
-say "No one can get $participants[0]\'s songs" and readline and die ":(" if @participants == 1;
+say "No one can get $participants[0]\'s songs" and <STDIN> and die ":(" if @participants == 1;
 if ($ONLY_PAIRS || @participants == 2)
 {
   push @pairs, @participants;

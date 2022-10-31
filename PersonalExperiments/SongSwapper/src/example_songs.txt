@@ -1,15 +1,16 @@
 # This is a comment
 Restrictions:
 # Star can only ever get Bio
-Nome | Nar !> Star
+Nome | Nar !> Star 
 # Uncomment the line below for a pairs-only round
 #Pairs
 #
 # Also kinda don't leave any spaces before or after any name or link gracias
+# (It's fixed now but still don't)
 # Remember you need at least two empty lines between restrictions and the participants
 
 
-Nar
+Nar 
 https://www.youtube.com/watch?v=p6p7LMBnC0s
 https://www.youtube.com/watch?v=x1Lbfw5BlHI
 https://www.youtube.com/watch?v=KyLqUf4cdwc
