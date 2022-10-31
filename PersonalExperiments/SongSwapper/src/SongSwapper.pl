@@ -39,7 +39,7 @@ while (<>)
   chomp;
 
   # This adds totally necessary anticipation
-  say "Restriction '$_' looks too ugly. I'm out." and <STDIN> and die ">:(" if /\S<|>\S|\S!|\S\||\|\S/;
+  say "Restriction '$_' looks too ugly. I'm out." and <STDIN> and die ">:(" if /\S<|>\S|[^<\s]!|\S\||\|\S/;
 
   s/^\s+|\s+$//g;
 
