@@ -36,7 +36,6 @@ while (<>)
 {
   next if /^#/;
   last unless (/Restrict/i .. /^$/);
-  next if /Restrict/ || /^$/;
   chomp;
 
   # This adds totally necessary anticipation
