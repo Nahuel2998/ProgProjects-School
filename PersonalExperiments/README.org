@@ -50,3 +50,6 @@ genial I had forgotten about this.
 Unfinished thing that probably doesn't do much.
 
 Wanted to do a Star-Battle game for console but learnt monospaced fonts are a lie.
+
+*** Mini
+Folder for projects so small they don't really need to be in individual folders
