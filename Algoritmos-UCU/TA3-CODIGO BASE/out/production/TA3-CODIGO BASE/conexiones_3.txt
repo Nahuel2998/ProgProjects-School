@@ -1,0 +1,15 @@
+Asuncion->Buenos_Aires
+Asuncion->Curitiba
+Asuncion->Porto_Alegre
+Buenos_Aires->Montevideo
+Buenos_Aires->Porto_Alegre
+Curitiba-> Montevideo
+Florianopolis->Rio_de_Janeiro
+Florianopolis->San_Pablo
+Porto_Alegre->Montevideo
+Rio_de_Janeiro->San_Pablo
+Rio_de_Janeiro->Santos
+San_Pablo->Florianopolis
+San_Pablo->Rio_de_Janeiro
+San_Pablo->Santos
+Santos->San_Pablo
