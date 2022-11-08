@@ -1,11 +1,13 @@
-public class TAdyacencia implements IAdyacencia
+import org.jetbrains.annotations.NotNull;
+
+public class TAdyacencia<C extends Comparable<C>, T> implements IAdyacencia
 {
-    private Comparable etiqueta;
-    private double costo;
-    private TVertice destino;
+    private final C etiqueta;
+    private final double costo;
+    private final TVertice<C, T> destino;
 
     @Override
-    public Comparable getEtiqueta()
+    public C getEtiqueta()
     { return etiqueta; }
 
     @Override
@@ -13,10 +15,10 @@ public class TAdyacencia implements IAdyacencia
     { return costo; }
 
     @Override
-    public TVertice getDestino()
+    public TVertice<C, T> getDestino()
     { return destino; }
 
-    public TAdyacencia(double costo, TVertice destino)
+    public TAdyacencia(double costo, @NotNull TVertice<C, T> destino)
     {
         this.etiqueta = destino.getEtiqueta();
         this.costo = costo;

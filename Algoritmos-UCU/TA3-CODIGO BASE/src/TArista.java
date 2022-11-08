@@ -1,11 +1,11 @@
 
-public class TArista implements IArista
+public class TArista<C extends Comparable<C>> implements IArista<C>
 {
-    protected Comparable etiquetaOrigen;
-    protected Comparable etiquetaDestino;
+    protected C etiquetaOrigen;
+    protected C etiquetaDestino;
     protected double costo;
 
-    public TArista(Comparable etiquetaOrigen, Comparable etiquetaDestino, double costo)
+    public TArista(C etiquetaOrigen, C etiquetaDestino, double costo)
     {
         this.etiquetaOrigen = etiquetaOrigen;
         this.etiquetaDestino = etiquetaDestino;
@@ -13,19 +13,19 @@ public class TArista implements IArista
     }
 
     @Override
-    public Comparable getEtiquetaOrigen()
+    public C getEtiquetaOrigen()
     { return etiquetaOrigen; }
 
     @Override
-    public void setEtiquetaOrigen(Comparable etiquetaOrigen)
+    public void setEtiquetaOrigen(C etiquetaOrigen)
     { this.etiquetaOrigen = etiquetaOrigen; }
 
     @Override
-    public Comparable getEtiquetaDestino()
+    public C getEtiquetaDestino()
     { return etiquetaDestino; }
 
     @Override
-    public void setEtiquetaDestino(Comparable etiquetaDestino)
+    public void setEtiquetaDestino(C etiquetaDestino)
     { this.etiquetaDestino = etiquetaDestino; }
 
     @Override

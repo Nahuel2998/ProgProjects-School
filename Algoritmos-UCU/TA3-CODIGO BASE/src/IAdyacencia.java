@@ -8,11 +8,11 @@
  *
  * @author Ernesto
  */
-public interface IAdyacencia
+public interface IAdyacencia<C extends Comparable<C>, T>
 {
     double getCosto();
 
-    TVertice getDestino();
+    TVertice<C, T> getDestino();
 
-    Comparable getEtiqueta();
+    C getEtiqueta();
 }

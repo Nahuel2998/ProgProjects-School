@@ -10,21 +10,21 @@ import java.util.LinkedList;
  *
  * @author Ernesto
  */
-public interface IVertice
+public interface IVertice<C extends Comparable<C>, T>
 {
-    TAdyacencia buscarAdyacencia(TVertice verticeDestino);
+    TAdyacencia<C, T> buscarAdyacencia(TVertice<C, T> verticeDestino);
 
-    TAdyacencia buscarAdyacencia(Comparable etiquetaDestino);
+    TAdyacencia<C, T> buscarAdyacencia(C etiquetaDestino);
 
-    boolean eliminarAdyacencia(Comparable nomVerticeDestino);
+    boolean eliminarAdyacencia(C nomVerticeDestino);
 
-    LinkedList<TAdyacencia> getAdyacentes();
+    LinkedList<TAdyacencia<C, T>> getAdyacentes();
 
-    boolean insertarAdyacencia(Double costo, TVertice verticeDestino);
+    boolean insertarAdyacencia(Double costo, TVertice<C, T> verticeDestino);
 
-    Double obtenerCostoAdyacencia(TVertice verticeDestino);
+    Double obtenerCostoAdyacencia(TVertice<C, T> verticeDestino);
 
-    TVertice primerAdyacente();
+    TVertice<C, T> primerAdyacente();
 
-    TVertice siguienteAdyacente(TVertice w);
+    TVertice<C, T> siguienteAdyacente(TVertice<C, T> w);
 }

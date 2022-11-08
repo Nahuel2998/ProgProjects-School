@@ -1,11 +1,11 @@
 import java.util.Map;
 
-public interface IGrafoDirigido
+public interface IGrafoDirigido<C extends Comparable<C>, T>
 {
     /**
      * @return Etiqueta del centro del grafo
      */
-    Comparable centroDelGrafo();
+    C centroDelGrafo();
 
     /**
      * Metodo encargado de eliminar una arista dada por un origen y destino.
@@ -15,7 +15,7 @@ public interface IGrafoDirigido
      * @param nomVerticeDestino
      * @return
      */
-    boolean eliminarArista(Comparable nomVerticeOrigen, Comparable nomVerticeDestino);
+    boolean eliminarArista(C nomVerticeOrigen, C nomVerticeDestino);
 
     /**
      * Metodo encargado de eliminar un vertice en el grafo. En caso de no
@@ -25,7 +25,7 @@ public interface IGrafoDirigido
      * @param nombreVertice
      * @return
      */
-    boolean eliminarVertice(Comparable nombreVertice);
+    boolean eliminarVertice(C nombreVertice);
 
     /**
      * Metodo encargado de verificar la existencia de una arista. Las
@@ -33,19 +33,19 @@ public interface IGrafoDirigido
      *
      * @return True si existe la arista, false en caso contrario
      */
-    boolean existeArista(Comparable etiquetaOrigen, Comparable etiquetaDestino);
+    boolean existeArista(C etiquetaOrigen, C etiquetaDestino);
 
     /**
      * Metodo encargado de verificar la existencia de un vertice dentro del
      * grafo.-
-     *
+     * <p>
      * La etiqueta especificada como parametro debe ser valida.
      *
      * @param unaEtiqueta Etiqueta del vertice a buscar.-
      * @return True si existe el vertice con la etiqueta indicada, false en caso
      * contrario
      */
-    boolean existeVertice(Comparable unaEtiqueta);
+    boolean existeVertice(C unaEtiqueta);
 
     /**
      *ejecuta el algoritmo de Floyd en el grafo, para hallar los caminos mínimos entre todos los pares de vértices. 
@@ -62,23 +62,21 @@ public interface IGrafoDirigido
      * (miso origen y mismo destino, aunque el costo sea diferente).- 4) El
      * costo debe ser mayor que 0.
      *
-     * @param etiquetaOrigen
      * @return True si se pudo insertar la arista, false en caso contrario
      */
-    boolean insertarArista(TArista arista);
+    boolean insertarArista(TArista<C> arista);
 
     /**
      * Metodo encargado de insertar un vertice en el grafo.
-     *
+     * <p>
      * No pueden ingresarse vertices con la misma etiqueta. La etiqueta
      * especificada como parametro debe ser valida.
      *
-     * @param unaEtiqueta Etiqueta del vertice a ingresar.
      * @return True si se pudo insertar el vertice, false en caso contrario
      */
-    boolean insertarVertice(TVertice vertice);
+    boolean insertarVertice(TVertice<C, T> vertice);
 
-    Comparable obtenerExcentricidad(Comparable etiquetaVertice);
+    C obtenerExcentricidad(C etiquetaVertice);
 
     /**
      *ejecuta el algoritmo de Warshall para halla la cerradura transitiva del grafo. 
@@ -86,5 +84,5 @@ public interface IGrafoDirigido
      */
     boolean[][] warshall();
 
-    public Map<Comparable, TVertice> getVertices();
+    public Map<C, TVertice<C, T>> getVertices();
 }

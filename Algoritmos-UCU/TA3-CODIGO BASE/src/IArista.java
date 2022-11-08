@@ -8,17 +8,17 @@
  *
  * @author Ernesto
  */
-public interface IArista
+public interface IArista<C extends Comparable<C>>
 {
     double getCosto();
 
-    Comparable getEtiquetaDestino();
+    C getEtiquetaDestino();
 
-    Comparable getEtiquetaOrigen();
+    C getEtiquetaOrigen();
 
     void setCosto(double costo);
 
-    void setEtiquetaDestino(Comparable etiquetaDestino);
+    void setEtiquetaDestino(C etiquetaDestino);
 
-    void setEtiquetaOrigen(Comparable etiquetaOrigen);
+    void setEtiquetaOrigen(C etiquetaOrigen);
 }
