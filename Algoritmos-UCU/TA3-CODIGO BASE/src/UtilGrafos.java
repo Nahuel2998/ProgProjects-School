@@ -1,14 +1,13 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UtilGrafos
 {
-    public static Double[][] obtenerMatrizCostos(Map<Comparable, TVertice> vertices)
+    public static <C extends Comparable<C>, T> Double[] @NotNull [] obtenerMatrizCostos(@NotNull Map<C, TVertice<C, T>> vertices)
     {
         int cantidadVertices = vertices.size();
         Double[][] matrizCostos = new Double[cantidadVertices][cantidadVertices];
@@ -26,7 +25,7 @@ public class UtilGrafos
 
         int i = 0;
 
-        Set<Comparable> etiquetasVertices = vertices.keySet();
+        Set<C> etiquetasVertices = vertices.keySet();
         Object[] VerticesIArr = etiquetasVertices.toArray();
         Object[] VerticesJArr = etiquetasVertices.toArray();
 
@@ -35,14 +34,12 @@ public class UtilGrafos
             int j = 0;
             while (j < cantidadVertices)
             {
-                TVertice elemVerticeI = vertices.get(VerticesIArr[i]);
-                TVertice elemVerticeJ = vertices.get(VerticesJArr[j]);
+                TVertice<C, T> elemVerticeI = vertices.get((C)VerticesIArr[i]);
+                TVertice<C, T> elemVerticeJ = vertices.get((C)VerticesJArr[j]);
 
                 if (!elemVerticeI.getEtiqueta().equals(elemVerticeJ.getEtiqueta()))
                 {
-                    TVertice verticeI = (TVertice) elemVerticeI;
-                    TVertice verticeJ = (TVertice) elemVerticeJ;
-                    Double costoAdyacencia = verticeI.obtenerCostoAdyacencia(verticeJ);
+                    Double costoAdyacencia = (elemVerticeI).obtenerCostoAdyacencia(elemVerticeJ);
                     matrizCostos[i][j] = costoAdyacencia;
                 }
                 j++;
@@ -52,7 +49,7 @@ public class UtilGrafos
         return matrizCostos;
     }
 
-    public static void imprimirMatriz(Comparable[][] matriz, Map<Comparable, TVertice> vertices)
+    public static <C extends Comparable<C>, T> void imprimirMatriz(C[][] matriz, Map<C, TVertice<C, T>> vertices)
     {
         Object[] etiquetas = vertices.keySet().toArray();
         System.out.print("  ");
@@ -64,7 +61,7 @@ public class UtilGrafos
             System.out.print(etiquetas[i] + " ");
             for (int j = 0; j < matriz.length; j++)
             {
-                if (matriz[i][j].compareTo(Double.MAX_VALUE) == 0)
+                if (((Double)matriz[i][j]).compareTo(Double.MAX_VALUE) == 0)
                 { System.out.print(" INF "); }
                 else
                 { System.out.print(matriz[i][j] + " "); }
@@ -73,7 +70,7 @@ public class UtilGrafos
         }
     }
 
-    public static void imprimirMatrizCsv(Comparable[][] matriz, Map<Comparable, TVertice> vertices)
+    public static <C extends Comparable<C>, T> void imprimirMatrizCsv(C[][] matriz, Map<C, TVertice<C, T>> vertices)
     {
         Object[] etiquetas = vertices.keySet().toArray();
         System.out.print("Vertice/Vertice,");
@@ -89,7 +86,7 @@ public class UtilGrafos
             System.out.print(etiquetas[i] + ", ");
             for (int j = 0; j < matriz.length; j++)
             {
-                if (matriz[i][j].compareTo(Double.MAX_VALUE) == 0)
+                if (((Double)matriz[i][j]).compareTo(Double.MAX_VALUE) == 0)
                 { System.out.print(" INF "); }
                 else
                 { System.out.print(matriz[i][j]); }
@@ -100,30 +97,29 @@ public class UtilGrafos
         }
     }
 
-    public static void imprimirMatrizMejorado(Comparable[][] matriz, Map<Comparable, TVertice> vertices, String titulo)
+    public static <C extends Comparable<C>, T> void imprimirMatrizMejorado(C[][] matriz, Map<C, TVertice<C, T>> vertices, String titulo)
     {
         if (vertices != null && matriz.length == vertices.keySet().size())
         {
-
-            Comparable[] etiquetas = vertices.keySet().toArray(new Comparable[vertices.keySet().size()]);
+            Object[] etiquetas = Arrays.stream(vertices.keySet().toArray()).map(Object::toString).toArray();
             int etiquetaMasLarga = stringMasLargo(etiquetas);
             int datoMasLargo = 0;
             String infinito = "Inf";
             String nulo = "Nulo";
             int separacionEntreColumnas = 3;
 
-            Comparable[] datos = new Comparable[matriz.length];
+            String[] datos = new String[matriz.length];
 
-            for (int i = 0; i < matriz.length; i++)
+            for (C[] cs : matriz)
             {
                 for (int j = 0; j < matriz.length; j++)
                 {
-                    if (matriz[i][j] == null)
+                    if (cs[j] == null)
                     { datos[j] = nulo; }
-                    else if (matriz[i][j].compareTo(Double.MAX_VALUE) == 0)
+                    else if (((Double)cs[j]).compareTo(Double.MAX_VALUE) == 0)
                     { datos[j] = infinito; }
                     else
-                    { datos[j] = matriz[i][j]; }
+                    { datos[j] = String.valueOf(cs[j]); }
                 }
                 if (stringMasLargo(datos) > datoMasLargo)
                 { datoMasLargo = stringMasLargo(datos); }
@@ -157,10 +153,9 @@ public class UtilGrafos
                 System.out.print(etiquetas[i]);
                 for (int j = 0; j < matriz.length; j++)
                 {
-
                     if (matriz[i][j] == null)
                     { System.out.print(rellenar(nulo, largo, ' ')); }
-                    else if (matriz[i][j].compareTo(Double.MAX_VALUE) == 0)
+                    else if (((Double)matriz[i][j]).compareTo(Double.MAX_VALUE) == 0)
                     { System.out.print(rellenar(infinito, largo, ' ')); }
                     else
                     { System.out.print(rellenar(matriz[i][j].toString(), largo, ' ')); }
@@ -172,14 +167,16 @@ public class UtilGrafos
         System.out.println();
     }
 
-    public static String rellenar(String textoARellenar, int largoTotal, char relleno)
+    public static @NotNull String rellenar(String textoARellenar, int largoTotal, char relleno)
     {
-        while (textoARellenar.length() < largoTotal)
-        { textoARellenar += relleno; }
+        StringBuilder textoARellenarBuilder = new StringBuilder(textoARellenar);
+        while (textoARellenarBuilder.length() < largoTotal)
+        { textoARellenarBuilder.append(relleno); }
+        textoARellenar = textoARellenarBuilder.toString();
         return textoARellenar;
     }
 
-    public static int stringMasLargo(Comparable[] etiquetas)
+    public static <C> int stringMasLargo(C[] etiquetas)
     {
         int mayor = etiquetas[0].toString().length();
         for (int i = 1; i < etiquetas.length; i++)
@@ -190,55 +187,55 @@ public class UtilGrafos
         return mayor;
     }
 
-    public static String devolverCentrado(String texto, int largo)
+    public static @NotNull String devolverCentrado(String texto, int largo)
     {
         boolean pos = false;
-        while (texto.length() < largo)
+        StringBuilder textoBuilder = new StringBuilder(texto);
+        while (textoBuilder.length() < largo)
         {
-            if (pos == false)
+            if (!pos)
             {
-                texto += " ";
+                textoBuilder.append(" ");
                 pos = true;
             }
             else
             {
-                texto = " " + texto;
+                textoBuilder.insert(0, " ");
                 pos = false;
             }
         }
+        texto = textoBuilder.toString();
         return texto;
     }
 
-    public static <T extends IGrafoDirigido> T cargarGrafo(String nomArchVert, String nomArchAdy,
-                                                           boolean ignoreHeader, Class t  )
+    public static <C extends Comparable<C>, T, G extends IGrafoDirigido<C, T>> @Nullable G cargarGrafo(String nomArchVert, String nomArchAdy, boolean ignoreHeader, Class<G> t)
     {
-
         String[] vertices = ManejadorArchivosGenerico.leerArchivo(nomArchVert, ignoreHeader);
         String[] aristas = ManejadorArchivosGenerico.leerArchivo(nomArchAdy, ignoreHeader);
 
-        List<TVertice> verticesList = new ArrayList<TVertice>(vertices.length);
-        List<TArista> aristasList = new ArrayList<TArista>(aristas.length);
+        List<TVertice<C, T>> verticesList = new ArrayList<>(vertices.length);
+        List<TArista<C>> aristasList = new ArrayList<>(aristas.length);
 
         for (String verticeString : vertices)
         {
-            if ((verticeString != null) && (verticeString.trim() != ""))
+            if ((verticeString != null) && (!verticeString.trim().equals("")))
             {
                 verticeString = verticeString.split(",")[0];
-                verticesList.add(new TVertice(verticeString));
+                verticesList.add(new TVertice<>((C) verticeString));
             }
         }
         for (String aristaString : aristas)
         {
-            if ((aristaString != null) && (aristaString.trim() != ""))
+            if ((aristaString != null) && (!aristaString.trim().equals("")))
             {
                 String[] datos = aristaString.split(",");
-                aristasList.add(new TArista(datos[0], datos[1], Double.parseDouble(datos[2])));
+                aristasList.add(new TArista<>((C) datos[0], (C) datos[1], Double.parseDouble(datos[2])));
             }
         }
         try
         {
             t.getConstructor(Collection.class, Collection.class);
-            return (T) (t.getConstructor(Collection.class, Collection.class).newInstance(verticesList, aristasList));
+            return t.getConstructor(Collection.class, Collection.class).newInstance(verticesList, aristasList);
         }
         catch (Exception ex)
         { Logger.getLogger(UtilGrafos.class.getName()).log(Level.SEVERE, null, ex); }

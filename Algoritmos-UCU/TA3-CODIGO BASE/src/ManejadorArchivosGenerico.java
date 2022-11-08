@@ -1,10 +1,10 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ManejadorArchivosGenerico
 {
@@ -40,8 +40,8 @@ public class ManejadorArchivosGenerico
 
     public static String[] leerArchivoRutaRelativa(String nombreCompletoArchivo, boolean ignoreHeader)
     {
-        String path = ManejadorArchivosGenerico.class
-                .getResource(nombreCompletoArchivo).getPath();
+        String path = Objects.requireNonNull(ManejadorArchivosGenerico.class
+                .getResource(nombreCompletoArchivo)).getPath();
         return leerArchivo(path, ignoreHeader);
     }
 
@@ -62,12 +62,6 @@ public class ManejadorArchivosGenerico
             }
             br.close();
             fr.close();
-        }
-        catch (FileNotFoundException e)
-        {
-            System.out.println("Error al leer el archivo "
-                    + nombreCompletoArchivo);
-            e.printStackTrace();
         }
         catch (IOException e)
         {
