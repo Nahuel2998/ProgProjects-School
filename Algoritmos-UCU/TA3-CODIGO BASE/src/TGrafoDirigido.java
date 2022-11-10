@@ -1,9 +1,6 @@
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigido<C, T>
 {
@@ -143,9 +140,7 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
      * @return the vertices
      */
     public Map<C, TVertice<C, T>> getVertices()
-    {
-        return vertices;
-    }
+    { return vertices; }
 
     @Override
     public C centroDelGrafo()
@@ -156,7 +151,29 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
     @Override
     public Double[][] floyd()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int cantidadVertices = vertices.size();
+        Object[] keys = vertices.keySet().toArray();
+        Double[][] res = new Double[cantidadVertices][cantidadVertices];
+
+        for (int i = 0; i < cantidadVertices; i++)
+        {
+            for (int j = 0; j < cantidadVertices; j++)
+            { res[i][j] = vertices.get((C)keys[i]).obtenerCostoAdyacencia(vertices.get((C)keys[j])); }
+        }
+        for (int i = 0; i < cantidadVertices; i++)
+        { res[i][i] = 0.0; }
+        for (int k = 0; k < cantidadVertices; k++)
+        {
+            for (int i = 0; i < cantidadVertices; i++)
+            {
+                for (int j = 0; j < cantidadVertices; j++)
+                {
+                    if (res[i][k] + res[k][j] < res[i][j])
+                    { res[i][j] = res[i][k] + res[k][j]; }
+                }
+            }
+        }
+        return res;
     }
 
     @Override

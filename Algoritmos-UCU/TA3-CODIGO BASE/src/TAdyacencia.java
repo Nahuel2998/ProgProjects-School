@@ -1,6 +1,6 @@
 import org.jetbrains.annotations.NotNull;
 
-public class TAdyacencia<C extends Comparable<C>, T> implements IAdyacencia
+public class TAdyacencia<C extends Comparable<C>, T> implements IAdyacencia<C, T>
 {
     private final C etiqueta;
     private final double costo;
