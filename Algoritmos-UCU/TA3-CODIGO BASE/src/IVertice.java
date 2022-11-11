@@ -27,4 +27,8 @@ public interface IVertice<C extends Comparable<C>, T>
     TVertice<C, T> primerAdyacente();
 
     TVertice<C, T> siguienteAdyacente(TVertice<C, T> w);
+
+    boolean existeAdyacencia(C etiquetaDestino);
+
+    boolean existeAdyacencia(TVertice<C, T> verticeDestino);
 }

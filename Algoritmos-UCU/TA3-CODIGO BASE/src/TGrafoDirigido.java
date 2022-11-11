@@ -185,7 +185,27 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
     @Override
     public boolean[][] warshall()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int cantidadVertices = vertices.size();
+        Object[] keys = vertices.keySet().toArray();
+        boolean[][] res = new boolean[cantidadVertices][cantidadVertices];
+
+        for (int i = 0; i < cantidadVertices; i++)
+        {
+            for (int j = 0; j < cantidadVertices; j++)
+            { res[i][j] = vertices.get((C)keys[i]).existeAdyacencia((C)keys[j]); }
+        }
+        for (int k = 0; k < cantidadVertices; k++)
+        {
+            for (int i = 0; i < cantidadVertices; i++)
+            {
+                for (int j = 0; j < cantidadVertices; j++)
+                {
+                    if (!res[i][j])
+                    { res[i][j] = res[i][k] && res[k][j]; }
+                }
+            }
+        }
+        return res;
     }
 
     @Override

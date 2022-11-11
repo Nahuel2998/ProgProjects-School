@@ -96,6 +96,14 @@ public class TVertice<C extends Comparable<C>, T> implements IVertice<C, T>
         return null;
     }
 
+    @Override
+    public boolean existeAdyacencia(C etiquetaDestino)
+    { return buscarAdyacencia(etiquetaDestino) != null; }
+
+    @Override
+    public boolean existeAdyacencia(TVertice<C, T> verticeDestino)
+    { return buscarAdyacencia(verticeDestino) != null ; }
+
     public T getDatos()
     { return datos; }
 }
