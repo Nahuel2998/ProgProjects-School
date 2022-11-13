@@ -14,6 +14,8 @@ use feature 'say';
 
 say 'what where' and <STDIN> and die unless -e "config.toml";
 
+my $WINFAG = $^O eq 'MSWin32';
+
 my $config = from_toml(do { local(@ARGV, $/) = "config.toml"; <> });
 
 my $API_KEY = $config->{Auth}->{api_key};
@@ -47,8 +49,12 @@ my $options = {
 };
 
 my $json = encode_json($options->{content});
-my $curl_resp = qx|curl -s --request POST 'https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&key=$API_KEY' --header 'Authorization: $options->{headers}->{Authorization}' --header 'Accept: $options->{headers}->{Accept}' --header 'Content-Type: $options->{headers}->{'Content-Type'}' --data '$json' --compressed|;
-my $resp = decode_json($curl_resp);
+my $curl_cmd = qq|curl -s --request POST 'https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&key=$API_KEY' --header 'Authorization: $options->{headers}->{Authorization}' --header 'Accept: $options->{headers}->{Accept}' --header 'Content-Type: $options->{headers}->{'Content-Type'}' --data '$json' --compressed|;
+{
+  no warnings 'uninitialized';
+  $curl_cmd = $curl_cmd =~ s/^curl/curl.exe/r =~ s/"/\\"/gr =~ s/'({)|(})'/$1$2/gr =~ s/'/"/gr =~ s/--compressed//r if $WINFAG;
+}
+my $resp = decode_json(qx|$curl_cmd|);
 
 binmode STDOUT, ':utf8';
 say exists $resp->{error} 
