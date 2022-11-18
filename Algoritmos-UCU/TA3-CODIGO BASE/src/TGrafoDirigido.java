@@ -136,6 +136,12 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
         return mapOrdenado.keySet().toArray();
     }
 
+    public C[] getEtiquetasOrdenado(C[] arr)
+    {
+        TreeMap<C, TVertice<C, T>> mapOrdenado = new TreeMap<>(this.getVertices());
+        return mapOrdenado.keySet().toArray(arr);
+    }
+
     /**
      * @return the vertices
      */
@@ -145,23 +151,27 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
     @Override
     public C centroDelGrafo()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Double[][] floyd = floyd();
+        HashMap<Double, C> res = new HashMap<>();
+
+        for (C key : vertices.keySet())
+        { res.put(obtenerExcentricidad(key, floyd), key); }
+
+        return res.keySet().stream()
+                  .min(Double::compareTo)
+                  .map(res::get)
+                  .orElse(null);
     }
 
     @Override
     public Double[][] floyd()
+    { return floyd(null); }
+
+    public Double[][] floyd(Integer[][] camino)
     {
         int cantidadVertices = vertices.size();
-        Object[] keys = vertices.keySet().toArray();
-        Double[][] res = new Double[cantidadVertices][cantidadVertices];
+        Double[][] res = UtilGrafos.obtenerMatrizCostos(vertices);
 
-        for (int i = 0; i < cantidadVertices; i++)
-        {
-            for (int j = 0; j < cantidadVertices; j++)
-            { res[i][j] = vertices.get((C)keys[i]).obtenerCostoAdyacencia(vertices.get((C)keys[j])); }
-        }
-        for (int i = 0; i < cantidadVertices; i++)
-        { res[i][i] = 0.0; }
         for (int k = 0; k < cantidadVertices; k++)
         {
             for (int i = 0; i < cantidadVertices; i++)
@@ -169,7 +179,11 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
                 for (int j = 0; j < cantidadVertices; j++)
                 {
                     if (res[i][k] + res[k][j] < res[i][j])
-                    { res[i][j] = res[i][k] + res[k][j]; }
+                    {
+                        res[i][j] = res[i][k] + res[k][j];
+                        if (camino != null)
+                        { camino[i][j] = k; }
+                    }
                 }
             }
         }
@@ -177,10 +191,17 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
     }
 
     @Override
-    public C obtenerExcentricidad(C etiquetaVertice)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Double obtenerExcentricidad(C etiquetaVertice)
+    { return obtenerExcentricidad(etiquetaVertice, floyd()); }
+
+    // Para no tener que calcular floyd multiples veces
+    public Double obtenerExcentricidad(C etiquetaVertice, Double[][] floyd)
+    { return Arrays.stream(
+                floyd[ vertices.keySet().stream()
+                               .toList()
+                               .indexOf(etiquetaVertice) ])
+                .max(Double::compareTo)
+                .orElse(Double.MAX_VALUE); }
 
     @Override
     public boolean[][] warshall()
@@ -206,6 +227,33 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
             }
         }
         return res;
+    }
+
+    public LinkedList<C> camino(C desde, C hasta)
+    {
+        List<C> keys  = vertices.keySet().stream().toList();
+        Integer index = keys.indexOf(desde);
+        int     end   = keys.indexOf(hasta);
+
+        Integer[][] caminos = new Integer[vertices.size()][vertices.size()];
+        floyd(caminos);
+
+        LinkedList<C> res = new LinkedList<>();
+
+        while (index != null)
+        {
+            res.add(keys.get(index));
+            index = caminos[index][end];
+        }
+        res.add(keys.get(end));
+
+        return res;
+    }
+
+    public String caminoString(C desde, C hasta)
+    {
+        LinkedList<C> list = camino(desde, hasta);
+        return String.join(" -> ", list.stream().map(Object::toString).toList());
     }
 
     @Override

@@ -76,7 +76,7 @@ public interface IGrafoDirigido<C extends Comparable<C>, T>
      */
     boolean insertarVertice(TVertice<C, T> vertice);
 
-    C obtenerExcentricidad(C etiquetaVertice);
+    Double obtenerExcentricidad(C etiquetaVertice);
 
     /**
      *ejecuta el algoritmo de Warshall para halla la cerradura transitiva del grafo. 
@@ -84,5 +84,5 @@ public interface IGrafoDirigido<C extends Comparable<C>, T>
      */
     boolean[][] warshall();
 
-    public Map<C, TVertice<C, T>> getVertices();
+    Map<C, TVertice<C, T>> getVertices();
 }

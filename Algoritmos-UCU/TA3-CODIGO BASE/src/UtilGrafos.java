@@ -97,7 +97,7 @@ public class UtilGrafos
         }
     }
 
-    public static <C extends Comparable<C>, T> void imprimirMatrizMejorado(C[][] matriz, Map<C, TVertice<C, T>> vertices, String titulo)
+    public static <C extends Comparable<C>, T, C1 extends Comparable<C1>> void imprimirMatrizMejorado(C[][] matriz, Map<C1, TVertice<C1, T>> vertices, String titulo)
     {
         if (vertices != null && matriz.length == vertices.keySet().size())
         {
