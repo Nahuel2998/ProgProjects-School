@@ -22,7 +22,9 @@ public class PruebaGrafo
         Double[][] matriz = UtilGrafos.obtenerMatrizCostos(gd.getVertices());
         UtilGrafos.imprimirMatrizMejorado(matriz, gd.getVertices(), "Matriz");
 
-        Double[][] mfloyd = gd.floyd();
+        Integer[][] caminos = new Integer[gd.getVertices().size()][gd.getVertices().size()];
+
+        Double[][] mfloyd = gd.floyd(caminos);
         UtilGrafos.imprimirMatrizMejorado(mfloyd, gd.getVertices(), "Matriz luego de FLOYD");
 
         boolean[][] warshall = gd.warshall();
@@ -70,7 +72,7 @@ public class PruebaGrafo
                         break;
                     case "camino":
                     case "camino_mas_corto":
-                        System.out.println(gd.caminoString(input[1], input[2]));
+                        System.out.println(gd.caminoString(input[1], input[2], caminos));
                         break;
                 }
             }

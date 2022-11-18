@@ -229,14 +229,11 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
         return res;
     }
 
-    public LinkedList<C> camino(C desde, C hasta)
+    public LinkedList<C> camino(C desde, C hasta, Integer[][] caminos)
     {
         List<C> keys  = vertices.keySet().stream().toList();
         Integer index = keys.indexOf(desde);
         int     end   = keys.indexOf(hasta);
-
-        Integer[][] caminos = new Integer[vertices.size()][vertices.size()];
-        floyd(caminos);
 
         LinkedList<C> res = new LinkedList<>();
 
@@ -250,9 +247,25 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
         return res;
     }
 
+    public LinkedList<C> camino(C desde, C hasta)
+    {
+        Integer[][] caminos = new Integer[vertices.size()][vertices.size()];
+        floyd(caminos);
+
+        return camino(desde, hasta, caminos);
+    }
+
     public String caminoString(C desde, C hasta)
     {
-        LinkedList<C> list = camino(desde, hasta);
+        Integer[][] caminos = new Integer[vertices.size()][vertices.size()];
+        floyd(caminos);
+
+        return caminoString(desde, hasta, caminos);
+    }
+
+    public String caminoString(C desde, C hasta, Integer[][] caminos)
+    {
+        LinkedList<C> list = camino(desde, hasta, caminos);
         return String.join(" -> ", list.stream().map(Object::toString).toList());
     }
 
