@@ -18,16 +18,6 @@ public interface IGrafoDirigido<C extends Comparable<C>, T>
     boolean eliminarArista(C nomVerticeOrigen, C nomVerticeDestino);
 
     /**
-     * Metodo encargado de eliminar un vertice en el grafo. En caso de no
-     * existir el vertice, retorna falso. En caso de que la etiqueta sea
-     * invalida, retorna false.
-     *
-     * @param nombreVertice
-     * @return
-     */
-    boolean eliminarVertice(C nombreVertice);
-
-    /**
      * Metodo encargado de verificar la existencia de una arista. Las
      * etiquetas pasadas por parametro deben ser validas (o sea, los vértices origen y destino deben existir en el grafo).
      *

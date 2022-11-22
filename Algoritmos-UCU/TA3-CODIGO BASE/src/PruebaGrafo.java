@@ -74,6 +74,67 @@ public class PruebaGrafo
                     case "camino_mas_corto":
                         System.out.println(gd.caminoString(input[1], input[2], caminos));
                         break;
+                    case "bpf":
+                    case "busqueda_en_profundidad":
+                        System.out.println(gd.bpfString());
+                        break;
+                    case "help":
+                    case "what":
+                    case "que":
+                    case "?":
+                        System.out.println("""
+                        [Lista de Comandos]
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        help                |   Mostrar esta pantalla.
+                                            |   Aliases:
+                                            |       help
+                                            |       what
+                                            |       que
+                                            |       ?
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        dist <E1> <E2>      |   Obtener la distancia de un vertice <E1> a otro <E2>.
+                                            |   Ejemplo:
+                                            |       > dist San_Pablo Curitiba
+                                            |       San_Pablo -[600.0]> Curitiba
+                                            |   Aliases:
+                                            |       dist
+                                            |       distancia
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        posible <E1> <E2>   |   Contesta si es posible viajar de un vertice <E1> a otro <E2>.
+                                            |   -> Significa que es posible.
+                                            |   !> Significa que no es posible.
+                                            |   Ejemplo:
+                                            |       > posible San_Pablo Curitiba
+                                            |       San_Pablo -> Curitiba
+                                            |   Aliases:
+                                            |       posible
+                                            |       es_posible
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        camino <E1> <E2>    |   Obtener el camino mas corto de un vertice <E1> a otro <E2>.
+                                            |   Ejemplo:
+                                            |       > camino San_Pablo Curitiba
+                                            |       San_Pablo -> Curitiba
+                                            |   Aliases:
+                                            |       camino
+                                            |       camino_mas_corto
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        bpf                 |   Realizar una busqueda en profundidad y obtener vertices.
+                                            |   Ejemplo:
+                                            |       > bpf
+                                            |       Porto_Alegre, Santos, San_Pablo, Rio_de_Janeiro, Asunc...
+                                            |   Aliases:
+                                            |       bpf
+                                            |       busqueda_en_profundidad
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        exit                |   Salir del programa.
+                                            |   Ejemplo:
+                                            |       > exit
+                                            |   Aliases:
+                                            |       exit
+                                            |       :q
+                                            |       salir
+                                            |       nosvem
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -""");
                 }
             }
             catch (ArrayIndexOutOfBoundsException e)

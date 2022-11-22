@@ -1,3 +1,7 @@
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public class TVertice<C extends Comparable<C>, T> implements IVertice<C, T>
@@ -106,4 +110,14 @@ public class TVertice<C extends Comparable<C>, T> implements IVertice<C, T>
 
     public T getDatos()
     { return datos; }
+
+    public void bpf(@NotNull HashSet<TVertice<C, T>> setVisitados)
+    {
+        setVisitados.add(this);
+        for (TVertice<C, T> vertice : adyacentes.stream().map(TAdyacencia::getDestino).toList())
+        {
+            if (!setVisitados.contains(vertice))
+            { vertice.bpf(setVisitados); }
+        }
+    }
 }

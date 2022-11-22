@@ -196,10 +196,16 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
 
     // Para no tener que calcular floyd multiples veces
     public Double obtenerExcentricidad(C etiquetaVertice, Double[][] floyd)
-    { return Arrays.stream(
-                floyd[ vertices.keySet().stream()
-                               .toList()
-                               .indexOf(etiquetaVertice) ])
+//    { return Arrays.stream(
+//                floyd[ vertices.keySet().stream()
+//                               .toList()
+//                               .indexOf(etiquetaVertice) ])
+//                .max(Double::compareTo)
+//                .orElse(Double.MAX_VALUE); }
+    { return Arrays.stream(floyd)
+                .map(r -> r[vertices.keySet().stream()
+                                    .toList()
+                                    .indexOf(etiquetaVertice)])
                 .max(Double::compareTo)
                 .orElse(Double.MAX_VALUE); }
 
@@ -269,9 +275,22 @@ public class TGrafoDirigido<C extends Comparable<C>, T> implements IGrafoDirigid
         return String.join(" -> ", list.stream().map(Object::toString).toList());
     }
 
-    @Override
-    public boolean eliminarVertice(C nombreVertice)
+    public Collection<TVertice<C, T>> bpf()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HashSet<TVertice<C, T>> setVisitados = new HashSet<>(vertices.size(), 1);
+
+        for (TVertice<C, T> vertice : vertices.values())
+        {
+            if (!setVisitados.contains(vertice))
+            { vertice.bpf(setVisitados); }
+        }
+
+        return setVisitados.stream().toList();
+    }
+
+    public String bpfString()
+    {
+        Collection<TVertice<C,T>> visitados = bpf();
+        return String.join(", ", visitados.stream().map(v -> v.getEtiqueta().toString()).toList());
     }
 }
