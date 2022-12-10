@@ -28,38 +28,40 @@ my $http = HTTP::Tiny->new;
 my $access_token = refresh_access();
 # say $access_token;
 
-my $video_id = extract_youtube_video_id(shift);
-# say $video_id;
+for (split /[\n ]/, shift) {
+  my $video_id = extract_youtube_video_id($_);
+  # say $video_id;
 
-my $options = {
-  headers => {
-    Authorization  => "Bearer $access_token",
-    Accept         => "application/json",
-    'Content-Type' => "application/json",
-  },
-  content => {
-    snippet => {
-      playlistId => $PLAYLIST,
-      resourceId => {
-        kind    => 'youtube#video',
-        videoId => $video_id,
+  my $options = {
+    headers => {
+      Authorization  => "Bearer $access_token",
+      Accept         => "application/json",
+      'Content-Type' => "application/json",
+    },
+    content => {
+      snippet => {
+        playlistId => $PLAYLIST,
+        resourceId => {
+          kind    => 'youtube#video',
+          videoId => $video_id,
+        }
       }
-    }
-  },
-};
+    },
+  };
 
-my $json = encode_json($options->{content});
-my $curl_cmd = qq|curl -s --request POST 'https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&key=$API_KEY' --header 'Authorization: $options->{headers}->{Authorization}' --header 'Accept: $options->{headers}->{Accept}' --header 'Content-Type: $options->{headers}->{'Content-Type'}' --data '$json' --compressed|;
-{
-  no warnings 'uninitialized';
-  $curl_cmd = $curl_cmd =~ s/^curl/curl.exe/r =~ s/"/\\"/gr =~ s/'({)|(})'/$1$2/gr =~ s/'/"/gr =~ s/--compressed//r if $WINFAG;
-}
-my $resp = decode_json(qx|$curl_cmd|);
+  my $json = encode_json($options->{content});
+  my $curl_cmd = qq|curl --ssl-no-revoke --request POST 'https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&key=$API_KEY' --header 'Authorization: $options->{headers}->{Authorization}' --header 'Accept: $options->{headers}->{Accept}' --header 'Content-Type: $options->{headers}->{'Content-Type'}' --data '$json' --compressed|;
+  {
+    no warnings 'uninitialized';
+    $curl_cmd = $curl_cmd =~ s/^curl/curl.exe/r =~ s/"/\\"/gr =~ s/'({)|(})'/$1$2/gr =~ s/'/"/gr =~ s/--compressed//r if $WINFAG;
+  }
+  my $resp = decode_json(qx|$curl_cmd|);
 
-binmode STDOUT, ':utf8';
-say exists $resp->{error} 
+  binmode STDOUT, ':utf8';
+  say exists $resp->{error} 
   ? "fuck. $resp->{error}->{message}" 
   : "did. Added: $resp->{snippet}->{title}";
+}
 <STDIN>;
 
 sub refresh_access {
