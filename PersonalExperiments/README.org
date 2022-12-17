@@ -42,7 +42,7 @@ A project started for fun as a personal challenge.
 
 Trying to make some kind of drawing engine with ascii.
 
-Not using other renderers as practice so it might be terribly slow, but I can say I came up with all of its bad ideas.
+Not using other renderers as reference so it might be terribly slow, but I can say I came up with all of its bad ideas.
 
 *** StarBattle
 genial I had forgotten about this.
