@@ -1,5 +1,6 @@
 set number
 set relativenumber
+set clipboard=
 
 " [Colemak-DH Remappings]
 
