@@ -228,7 +228,7 @@ You can't use -> if you use this option, use <-> instead to define forced pairs
 Both <!> and !> work well with this option
 
 # This is a comment
-You an add comments by starting your line with #
+You can add comments by starting your line with #
 Only works in the restriction section specifically
 I added this so you can comment out some restrictions without deleting the line
 
