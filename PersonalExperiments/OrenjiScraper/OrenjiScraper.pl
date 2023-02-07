@@ -6,15 +6,38 @@ use URI;
 use Web::Scraper;
 use Array::Transpose::Ragged 'transpose_ragged';
 use Term::Table;
+use Text::Wrap;
 use feature 'say';
 use Data::Dumper;
 
-my $url = 'https://100orangejuice.fandom.com/wiki/Tomomo';
+binmode STDOUT, ':utf8';
+
+if (@ARGV < 2) {
+  die 'yeah no';
+}
+
+my $wanttable = 0;
+my $section = "Overview";
+my $kind = "p";
+
+# TODO: +Add support for tips (may need another scraper)
+#       +Add support for voicelines (definetely needs another scraper)
+#       +Add support for hyper (yeah fix your scraper lma)
+my %commands = (
+  'cards'    => sub { $section = "Recommended_Cards"; $wanttable = 1; },
+  'counter'  => sub { $section = "Counter_Cards"    ; $wanttable = 1; },
+  'overview' => sub { $section = "Overview"         ;                 },
+);
+
+# TODO: +Maybe error handling of some sort?
+my $command = lc shift;
+$commands{$command}->();
+
+my $char = shift;
+my $url = "https://100orangejuice.fandom.com/wiki/$char";
 my $uri = URI->new($url);
 
-my $section = "Recommended_Cards";
-my $kind = "*";
-
+# FIXME: =yeah later, works for now
 my $scraper = scraper {
   process qq{//span[\@id="$section"]/../following-sibling::$kind\[(preceding-sibling::h2[1]/span)[\@id="$section"]]}, 'section_text[]' => 'TEXT';
 };
@@ -27,12 +50,16 @@ my $table_scraper = scraper {
   };
 };
 
-# my $result = $scraper->scrape($uri);
-# say for $result->{section_text}->@*;
+my $res = ($wanttable ? $table_scraper : $scraper)->scrape($uri);
 
-my $res = $table_scraper->scrape($uri);
-my @columns = map { [ grep { defined } $_->{cards}->@* ] } grep { %$_ } $res->{table}->{columns}->@*;
-say $_ for get_table(\@columns)->render;
+if ($wanttable) {
+  # This is ugly as fuck but it works anyway
+  # Needed to filter out undefs since my scraper sucks
+  my @columns = map { [ grep { defined } $_->{cards}->@* ] } grep { %$_ } $res->{table}->{columns}->@*;
+  if (@columns) { say $_ for get_table(\@columns)->render; } else { say 'no sale' };
+} else {
+  say wrap('] ', '| ', $_), "\n" for $res->{section_text}->@*;
+}
 
 sub get_table {
   my @rows = transpose_ragged( shift );
