@@ -1,3 +1,4 @@
+#!/usr/bin/env perl
 use strict;
 use warnings;
 
@@ -34,7 +35,6 @@ my @columns = map { [ grep { defined } $_->{cards}->@* ] } grep { %$_ } $res->{t
 say $_ for get_table(\@columns)->render;
 
 sub get_table {
-
   my @rows = transpose_ragged( shift );
   my @headers = qw( Viable Recommended Standard );
 
