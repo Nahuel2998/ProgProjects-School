@@ -1,0 +1,22 @@
+#+title:  Mini
+#+author: Na_P
+
+** Description
+Very small projects, Mini even.
+
+** Projects
+*** Hanoi
+My math teacher asked for this.
+
+He still rewrote it in Python.
+
+*** PlaylistAdder
+My fren asked for this.
+
+OAuth2 is pure pain.
+
+*** OrenjiScraper
+I asked for this.
+
+The wiki page uses so much cpu it triggers my oomkiller.
+I made this so I can check for recommended strategies in-game.
