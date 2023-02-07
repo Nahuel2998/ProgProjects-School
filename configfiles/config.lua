@@ -166,10 +166,10 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- Additional Plugins
 lvim.plugins = {
---     {
---       "folke/trouble.nvim",
---       cmd = "TroubleToggle",
---     },
+  --     {
+  --       "folke/trouble.nvim",
+  --       cmd = "TroubleToggle",
+  --     },
   { "sainnhe/gruvbox-material" },
   { "tpope/vim-surround" },
   { "justinmk/vim-sneak" },
