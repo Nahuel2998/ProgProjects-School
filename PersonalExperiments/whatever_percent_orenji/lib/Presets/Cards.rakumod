@@ -49,7 +49,7 @@ our %cards is export = %(
                   ),
   "Nice Jingle" => 
     CardPreset.new( :name( "Nice Jingle" ), 
-                    :description( "Stock effect.\n The next bonus panel gives you twice as many stars." ), 
+                    :description( "Stock effect.\nThe next bonus panel gives you twice as many stars." ), 
                     :level-req( 1 ),
                     :star-cost( 0 ),
                     :actions( %(
@@ -63,7 +63,7 @@ our %cards is export = %(
                   ),
   "Flip Out" => 
     CardPreset.new( :name( "Flip Out" ), 
-                    :description( "Stock effect.\n Next time you land on a drop panel, the player(s) with the highest number of stars will lose the same number of stars as you." ), 
+                    :description( "Stock effect.\nNext time you land on a drop panel, the player(s) with the highest number of stars will lose the same number of stars as you." ), 
                     :level-req( 1 ),
                     :star-cost( 0 ),
                     :actions( %(
