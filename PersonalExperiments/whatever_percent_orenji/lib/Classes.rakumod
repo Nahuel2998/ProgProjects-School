@@ -1,5 +1,7 @@
 #! /usr/bin/env raku
 
+use Log;
+
 ### Class declarations
 class Card   { ... }
 class Panel  { ... }
@@ -31,7 +33,7 @@ class CardPreset does Descriptable is export {
   has Int $.star-cost is required;
   has Int $.level-req is required;
   has     %.actions   of Code is required;
-  has Set $.tags .= new;     # Card-specific tags. Example: pudding, sweet
+  has Set $.tags .= new; # Card-specific tags. Example: pudding, sweet
 }
 
 class Card is export {
@@ -60,7 +62,7 @@ class Panel is export {
   has @.next     of Panel;
   has @.previous of Panel;
 
-  has @.players  of Player;
+  has SetHash[Player] $.players .= new;
 
   method action { $!preset.action }
   method repr   { $!preset.repr   }
@@ -88,6 +90,8 @@ class Character does Descriptable is export {
 class Player is export {
   has Int  $.number is required;
   has Game $.board  is required;
+  
+  has Supply $.log = $!board.log.sup({ .<player> === self });
 
   has Int $.level  is rw = 1;
   has Int $.stars  is rw = 0;
@@ -97,6 +101,8 @@ class Player is export {
 
   has Int $.hp  is rw = $!char.hp;
   has Int $.rec is rw = $!char.rec;
+
+  has Int $.max-hp is rw = $!char.hp;
 
   has Int $.atk is rw = $!char.atk;
   has Int $.def is rw = $!char.def;
@@ -108,7 +114,16 @@ class Player is export {
   has SetHash[Effect] $.effects .= new;
 
   has Range $.dice-range is rw = 1..6;
-  has Int   $.dice-count is rw = 1;
+  has %.dice-count is rw = %(
+    DEFAULT => 1,
+    BONUS   => 1,
+    DROP    => 1,
+    MOVE    => 1,
+    ATTACK  => 1,
+    DEFEND  => 1,
+    EVADE   => 1,
+    REVIVE  => 1,
+  );
   has Int   $.direction  is rw = 0; # Even number is forwards, odd is backwards
 
   method x(--> Int:D) { $!position.x }
@@ -119,14 +134,25 @@ class Player is export {
     $!atk = $!char.atk;
     $!def = $!char.def;
     $!evd = $!char.evd;
+    $!max-hp = $!char.hp;
     $!dice-range = 1..6;
-    $!dice-count = 1;
+    %!dice-count = %(
+      DEFAULT => 1,
+      BONUS   => 1,
+      DROP    => 1,
+      MOVE    => 1,
+      ATTACK  => 1,
+      DEFEND  => 1,
+      EVADE   => 1,
+      REVIVE  => 1,
+    );
     $!direction  = 0;
 
-    for $.effects.keys {
-      $_.action(:player(self));
-      $_.uses-left--;
-    }
+    # for $.effects.keys {
+    #   $.effects.unset($_) and next unless .uses-left;
+
+    #   .action(:player(self));
+    # }
   }
 
   method gain-stars(Int $amount where * >= 0) {
@@ -137,16 +163,18 @@ class Player is export {
     $!stars = max($!stars - $amount, 0);
   }
 
-  method heal(Int $amount) {
-    $!hp = min($!hp + $amount, $!char.hp);
+  method heal(Int $amount = 1) {
+    $!hp = min($!hp + $amount, max($!max-hp, $!hp));
   }
 
-  method hurt(Int $amount) {
+  method hurt(Int $amount = 1) {
     $!hp = max($!hp - $amount, 0);
   }
 
-  method draw {
-    @!deck.push( $!board.draw-pile.pop ) if $!board.draw-pile;
+  method draw(Int $times where * > 0 = 1) {
+    for ^$times {
+      @!deck.push( $!board.draw-pile.pop ) if $!board.draw-pile;
+    }
   }
 
   method discard(Int $index) {
@@ -156,7 +184,9 @@ class Player is export {
   }
 
   method warp-to(Panel $panel) {
+    $!position.players.unset(self);
     $!position = $panel;
+    $!position.players.set(self);
   }
 
   method revive {
@@ -164,20 +194,23 @@ class Player is export {
     $!rec = $!char.rec;
   }
 
-  method walk(Int $times where * > 0) {
+  method walk(Int $times where * > 0 = 1) {
+    $!position.players.unset(self);
+
     for ^$times {
       my @next = $!direction %% 2 ?? $!position.next !! $!position.previous;
 
       $!position = @next == 1 ?? @next[0] !! @next[self.ask-nextpanel(@next)];
     }
 
+    $!position.players.set(self);
     $!position.action.(:player(self), :board($!board));
   }
 
-  method ask-rolldice(--> Int:D) {
+  method ask-rolldice(Str $event = "DEFAULT" --> Int:D) {
     prompt "Enter to roll!";
 
-    my $res = [+] $!dice-range.roll($!dice-count);
+    my $res = [+] $!dice-range.roll(%!dice-count{$event});
     say "Rolled: $res";
 
     $res
@@ -213,13 +246,15 @@ class Player is export {
 class Game is export {
   has @.players[4]   of Player;
   has @.board        is required;
+  
+  has Log $.log .= new;
 
   has @.draw-pile    of Card;
   has @.discard-pile of Card;
 
   has Int $.chapter = 1;
   
-  has SetHash[Effect] $.events .= new;
+  has SetHash[Effect] $.effects .= new;
 
   method panels { @!board.List.flat.grep({ $_ ~~ Panel }) }
   method board  { @!board>>.map({ $_ ~~ Panel ?? .repr !! ' ' }).join: "\n" }

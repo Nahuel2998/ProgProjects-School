@@ -30,8 +30,11 @@ our %panels is export = %(
                           :name( "Bonus" ), 
                           :description( "Gives the player diceroll * level(max 3) stars." ),
                           :action( 
-                            -> :$player!, *%_ {
-                              $player.gain-stars: $player.ask-rolldice * min($player.level, 3);
+                            -> :$player!, :$board!, *%_ {
+                              my $amount = $player.ask-rolldice('BONUS') * min($player.level, 3);
+
+                              $player.gain-stars: $amount;
+                              $board.log.(:event('BONUS_PANEL'), :$amount, :$player);
                             } 
                           ),
                         ),
@@ -39,8 +42,11 @@ our %panels is export = %(
                           :name( "Drop" ), 
                           :description( "Drops diceroll * level player stars." ),
                           :action(
-                            -> :$player!, *%_ {
-                              $player.lose-stars: $player.ask-rolldice * $player.level;
+                            -> :$player!, :$board!, *%_ {
+                              my $amount = $player.ask-rolldice('DROP') * $player.level;
+
+                              $player.lose-stars: $amount;
+                              $board.log.(:event('DROP_PANEL'), :$amount, :$player);
                             } 
                           ),
                         ),
