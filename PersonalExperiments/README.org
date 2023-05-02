@@ -51,5 +51,13 @@ Unfinished thing that probably doesn't do much.
 
 Wanted to do a Star-Battle game for console but learnt monospaced fonts are a lie.
 
+*** *%Orenji
+An extremely flexible 100% Orange Juice clone for the terminal. \\
+If Phle doesn't like it I'll take it down immediately.
+
+Making this to practice Raku!
+
+I have neither GameDev experience or Raku experience, so beware of =is rw=.
+
 *** Mini
 Folder for projects so small they don't really need to be in individual folders
