@@ -175,7 +175,7 @@ lvim.plugins = {
   { "justinmk/vim-sneak" },
   -- { "elkowar/yuck.vim" },
   { "axvr/org.vim" },
-  -- { "Raku/vim-raku" },
+  { "Raku/vim-raku" },
   -- { "OmniSharp/omnisharp-vim" },
 }
 
