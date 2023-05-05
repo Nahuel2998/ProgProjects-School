@@ -40,6 +40,7 @@ my $char = Character.new( :name( "Enrique" ),
 my @cards = %cards.values.map({ Card.new(:preset($_)) });
 
 my $board = Game.new( :board(@panels), 
+                      :board-str(printable-board(@panels)),
                       :draw-pile(@cards),
                     );
 
@@ -67,7 +68,7 @@ my $player = $board.players[0];
 
 say "====[ Board ]====";
 
-say $board.board;
+say $board.board-str;
 
 # Logger
 # $board.log.sup.tap(-> $_ { .put });

@@ -1,6 +1,7 @@
 #! /usr/bin/env raku
 
 use Classes;
+use Terminal::ANSIColor;
 
 our %panels is export = %(
   '_' => PanelPreset.new( :repr( '_' ), 
@@ -8,7 +9,7 @@ our %panels is export = %(
                           :description( "It's boring." ),
                           :action( -> *%_ { } ),
                         ),
-  'W' => PanelPreset.new( :repr( 'W' ), 
+  'W' => PanelPreset.new( :repr( colored('W', 'bold magenta') ), 
                           :name( "Warp" ), 
                           :description( "Warps the player to another warpy panel." ),
                           :action( 
@@ -17,7 +18,7 @@ our %panels is export = %(
                             } ),
                           :tags( <warpy>.Set ),
                         ),
-  'D' => PanelPreset.new( :repr( 'D' ), 
+  'D' => PanelPreset.new( :repr( colored('D', 'bold green') ), 
                           :name( "Draw" ), 
                           :description( "Draws one card." ),
                           :action(
@@ -26,7 +27,7 @@ our %panels is export = %(
                             }
                           ),
                         ),
-  '+' => PanelPreset.new( :repr( '+' ), 
+  '+' => PanelPreset.new( :repr( colored('+', 'bold yellow') ), 
                           :name( "Bonus" ), 
                           :description( "Gives the player diceroll * level(max 3) stars." ),
                           :action( 
@@ -38,7 +39,7 @@ our %panels is export = %(
                             } 
                           ),
                         ),
-  '-' => PanelPreset.new( :repr( '-' ), 
+  '-' => PanelPreset.new( :repr( colored('-', 'bold blue') ), 
                           :name( "Drop" ), 
                           :description( "Drops diceroll * level player stars." ),
                           :action(
@@ -50,12 +51,12 @@ our %panels is export = %(
                             } 
                           ),
                         ),
-  'E' => PanelPreset.new( :repr( 'E' ), 
+  'E' => PanelPreset.new( :repr( colored('E', 'bold red') ), 
                           :name( "Blank" ), 
                           :description( "It's boring." ),
                           :action( -> *%_ { } ),
                         ),
-  '1' => PanelPreset.new( :repr( '1' ), 
+  '1' => PanelPreset.new( :repr( colored('1', 'bold white') ), 
                           :name( "Home[1]" ), 
                           :description( "Home of Player 1." ),
                           :action(
@@ -69,7 +70,7 @@ our %panels is export = %(
                           ),
                           :tags( <home1>.Set ),
                         ),
-  '2' => PanelPreset.new( :repr( '2' ), 
+  '2' => PanelPreset.new( :repr( colored('2', 'bold white') ), 
                           :name( "Home[2]" ), 
                           :description( "Home of Player 2." ),
                           :action(
@@ -83,7 +84,7 @@ our %panels is export = %(
                           ),
                           :tags( <home2>.Set ),
                         ),
-  '3' => PanelPreset.new( :repr( '3' ), 
+  '3' => PanelPreset.new( :repr( colored('3', 'bold white') ), 
                           :name( "Home[3]" ), 
                           :description( "Home of Player 3." ),
                           :action(
@@ -97,7 +98,7 @@ our %panels is export = %(
                           ),
                           :tags( <home3>.Set ),
                         ),
-  '4' => PanelPreset.new( :repr( '4' ), 
+  '4' => PanelPreset.new( :repr( colored('4', 'bold white') ), 
                           :name( "Home[4]" ), 
                           :description( "Home of Player 4." ),
                           :action(

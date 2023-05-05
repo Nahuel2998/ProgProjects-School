@@ -64,9 +64,9 @@ class Panel is export {
 
   has SetHash[Player] $.players .= new;
 
-  method action { $!preset.action }
-  method repr   { $!preset.repr   }
-  method tags   { $!preset.tags   }
+  method action {    $!preset.action  }
+  method repr   { " {$!preset.repr} " }
+  method tags   {    $!preset.tags    }
 
   has SetHash[Effect] $.effects .= new;
 }
@@ -246,6 +246,7 @@ class Player is export {
 class Game is export {
   has @.players[4]   of Player;
   has @.board        is required;
+  has $.board-str    is required; # FIXME: ugly
   
   has Log $.log .= new;
 
@@ -257,5 +258,4 @@ class Game is export {
   has SetHash[Effect] $.effects .= new;
 
   method panels { @!board.List.flat.grep({ $_ ~~ Panel }) }
-  method board  { @!board>>.map({ $_ ~~ Panel ?? .repr !! ' ' }).join: "\n" }
 }

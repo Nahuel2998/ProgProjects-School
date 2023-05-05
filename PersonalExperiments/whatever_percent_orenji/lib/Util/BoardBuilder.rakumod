@@ -2,6 +2,7 @@
 
 use Classes;
 use Panels;
+use Terminal::ANSIColor;
 
 sub make-board(Str $board-str) is export {
   my @auxboard = $board-str.lines>>.comb;
@@ -48,4 +49,40 @@ sub make-board(Str $board-str) is export {
 sub make-connection(Panel $from, Panel $to) {
   $from.next.push: $to;
   $to.previous.push: $from;
+}
+
+# Hey I wanted to try this gather take thing
+sub printable-board(@board) is export {
+  gather {
+    for ^@board -> $i {
+      take '', gather {
+        for ^@board[$i] -> $j {
+          next if $i - 1 < 0;
+          my $curr = @board[$i][$j];
+          if $curr ~~ Panel {
+            take (given @board[$i - 1][$j] {
+              when * (elem) $curr.next     { '↑' }
+              when * (elem) $curr.previous { '↓' }
+              default { ' ' }
+            });
+          } else { take ' ' }
+        }
+      }.join: '   ';
+      take gather {
+        given @board[$i][0] { take $_ ~~ Panel ?? .repr !! '   ' }
+        for ^@board[$i] -> $j {
+          next if $j - 1 < 0;
+          my $curr = @board[$i][$j];
+          if $curr ~~ Panel {
+            take (given @board[$i][$j - 1] {
+              when * (elem) $curr.next     { '←' }
+              when * (elem) $curr.previous { '→' }
+              default { ' ' }
+            });
+            take @board[$i][$j].repr;
+          } else { take '    ' }
+        }
+      }.join;
+    }
+  }.join: "\n"
 }
