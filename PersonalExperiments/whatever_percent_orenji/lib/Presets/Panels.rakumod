@@ -4,7 +4,7 @@ use Classes;
 use Terminal::ANSIColor;
 
 our %panels is export = %(
-  '_' => PanelPreset.new( :repr( '_' ), 
+  '_' => PanelPreset.new( :repr( colored('_', 'bold') ), 
                           :name( "Blank" ), 
                           :description( "It's boring." ),
                           :action( -> *%_ { } ),

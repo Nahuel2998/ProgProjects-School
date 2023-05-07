@@ -25,7 +25,7 @@ my $card = Card.new( :preset( $card-preset ) );
 # say $card.raku;
 # $card.actions<Boost>();
 
-my @panels = make-board(%boards{'Clover'});
+my @panels = make-board(%boards{'Christmas Miracle'});
 
 my $char = Character.new( :name( "Enrique" ),
                           :description( "el ta" ),
