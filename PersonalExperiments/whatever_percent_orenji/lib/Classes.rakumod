@@ -207,10 +207,10 @@ class Player is export {
     $!position.action.(:player(self), :board($!board));
   }
 
-  method ask-rolldice(Str $event = "DEFAULT" --> Int:D) {
+  method ask-rolldice(Str $event = "DEFAULT", Int $dice-multiplier where * > 0 = 1 --> Int:D) {
     prompt "Enter to roll!";
 
-    my $res = [+] $!dice-range.roll(%!dice-count{$event});
+    my $res = [+] $!dice-range.roll(%!dice-count{$event} * $dice-multiplier);
     say "Rolled: $res";
 
     $res
