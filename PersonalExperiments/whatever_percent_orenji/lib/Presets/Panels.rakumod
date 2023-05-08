@@ -7,7 +7,6 @@ our %panels is export = %(
   '_' => PanelPreset.new( :repr( colored('_', 'bold') ), 
                           :name( "Blank" ), 
                           :description( "It's boring." ),
-                          :action( -> *%_ { } ),
                         ),
   'W' => PanelPreset.new( :repr( colored('W', 'bold magenta') ), 
                           :name( "Warp" ), 
@@ -45,7 +44,6 @@ our %panels is export = %(
                             -> :$player!, :$board!, *%_ {
                               # TODO: Make the player roll the dice to move
                             } ),
-                          :tags( <warpy>.Set ),
                         ),
   'm' => PanelPreset.new( :repr( colored('M', 'bold underline cyan') ), 
                           :name( "Move (x2)" ), 
@@ -54,7 +52,6 @@ our %panels is export = %(
                             -> :$player!, :$board!, *%_ {
                               # TODO: Make the player roll the dice to move, twice
                             } ),
-                          :tags( <warpy>.Set ),
                         ),
   'D' => PanelPreset.new( :repr( colored('D', 'bold green') ), 
                           :name( "Draw" ), 
@@ -139,6 +136,11 @@ our %panels is export = %(
                               # TODO: Trigger an Encounter. Give twice the wins.
                             } 
                           ),
+                        ),
+  'I' => PanelPreset.new( :repr( colored('I', 'bold white') ), 
+                          :name( "Ice" ), 
+                          :description( "When stepping on it, mov does not decrease." ),
+                          :step( -> *%_ { $_++ })
                         ),
   '1' => PanelPreset.new( :repr( colored('1', 'bold white') ), 
                           :name( "Home[1]" ), 

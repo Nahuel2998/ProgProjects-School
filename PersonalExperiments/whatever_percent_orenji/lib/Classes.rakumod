@@ -48,8 +48,9 @@ class Card is export {
 
 ### PanelStuff
 class PanelPreset does Descriptable is export {
-  has Str  $.repr; # Character representation
-  has Code $.action;
+  has Str  $.repr   is required; # Character representation
+  has Code $.action = -> *%_ { }; 
+  has Code $.step   = -> *%_ { };
 
   has Set  $.tags .= new;
 }
@@ -65,6 +66,7 @@ class Panel is export {
   has SetHash[Player] $.players .= new;
 
   method action {    $!preset.action  }
+  method step   {    $!preset.step    }
   method repr   { " {$!preset.repr} " }
   method tags   {    $!preset.tags    }
 
@@ -79,6 +81,7 @@ class Character does Descriptable is export {
   has Int $.rec is required;
   has Int $.hp  is required;
 
+  has Int $.mov        = 0;
   has Int $.card-limit = 3;
 
   has CardPreset $.hyper is required;
@@ -108,7 +111,10 @@ class Player is export {
   has Int $.def is rw = $!char.def;
   has Int $.evd is rw = $!char.evd;
 
-  has Panel $.position is rw = $!board.panels.List.flat.grep({ $_ ~~ Panel && $_.tags{"home$!number"} })[0];
+  has Int $.mov        is rw = $!char.mov; 
+  has Int $.card-limit is rw = $!char.card-limit;
+
+  has Panel $.position is rw = $!board.panels.grep({ $_.tags{"home$!number"} })[0];
 
   has @.deck of Card;
   has SetHash[Effect] $.effects .= new;
@@ -131,10 +137,12 @@ class Player is export {
   method dead(--> Bool:D) { !$!hp }
 
   method turn-start {
-    $!atk = $!char.atk;
-    $!def = $!char.def;
-    $!evd = $!char.evd;
-    $!max-hp = $!char.hp;
+    $!atk        = $!char.atk;
+    $!def        = $!char.def;
+    $!evd        = $!char.evd;
+    $!mov        = $!char.mov;
+    $!card-limit = $!char.card-limit;
+    $!max-hp     = $!char.hp;
     $!dice-range = 1..6;
     %!dice-count = %(
       DEFAULT => 1,
@@ -155,35 +163,35 @@ class Player is export {
     # }
   }
 
-  method gain-stars(Int $amount where * >= 0) {
+  method gain-stars(Int:D $amount where * >= 0) {
     $!stars += $amount;
   }
 
-  method lose-stars(Int $amount where * >= 0) {
+  method lose-stars(Int:D $amount where * >= 0) {
     $!stars = max($!stars - $amount, 0);
   }
 
-  method heal(Int $amount = 1) {
+  method heal(Int:D $amount = 1) {
     $!hp = min($!hp + $amount, max($!max-hp, $!hp));
   }
 
-  method hurt(Int $amount = 1) {
+  method hurt(Int:D $amount = 1) {
     $!hp = max($!hp - $amount, 0);
   }
 
-  method draw(Int $times where * > 0 = 1) {
+  method draw(Int:D $times where * > 0 = 1) {
     for ^$times {
       @!deck.push( $!board.draw-pile.pop ) if $!board.draw-pile;
     }
   }
 
-  method discard(Int $index) {
+  method discard(Int:D $index) {
     my $card = @!deck.splice: $index, 1;
 
     $!board.discard-pile.push( $card ) unless $card.tags<deletable>;
   }
 
-  method warp-to(Panel $panel) {
+  method warp-to(Panel:D $panel) {
     $!position.players.unset(self);
     $!position = $panel;
     $!position.players.set(self);
@@ -194,20 +202,25 @@ class Player is export {
     $!rec = $!char.rec;
   }
 
-  method walk(Int $times where * > 0 = 1) {
+  method walk(Int:D $times is copy where * > 0 = 1) {
     $!position.players.unset(self);
 
-    for ^$times {
+    while $times <-> $_ {
       my @next = $!direction %% 2 ?? $!position.next !! $!position.previous;
 
+      last unless @next;
+
       $!position = @next == 1 ?? @next[0] !! @next[self.ask-nextpanel(@next)];
+      
+      $!position.step.(:player(self), :$!board);
+      $_--;
     }
 
     $!position.players.set(self);
-    $!position.action.(:player(self), :board($!board));
+    $!position.action.(:player(self), :$!board);
   }
 
-  method ask-rolldice(Str $event = "DEFAULT", Int $dice-multiplier where * > 0 = 1 --> Int:D) {
+  method ask-rolldice(Str:D $event = "DEFAULT", Int:D $dice-multiplier where * > 0 = 1 --> Int:D) {
     prompt "Enter to roll!";
 
     my $res = [+] $!dice-range.roll(%!dice-count{$event} * $dice-multiplier);
@@ -223,7 +236,7 @@ class Player is export {
     (^@!deck).pick
   }
 
-  # TODO: Actually implement this
+  # FIXME: Make this more friendly?
   method ask-nextpanel(@next --> Int:D) {
     my @choices = @next.map({ 
       .x > self.x ?? "Right" !!

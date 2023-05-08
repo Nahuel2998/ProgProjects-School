@@ -152,4 +152,27 @@ v   v           ^   ^
   v   ^       v   ^
   W>->+       +>->W 
 END
+  'Icy Hideout' => q:to/END/,
+    +>E>1 
+    ^   v
+    I   V 
+    ^
+    D     W   +>D>I>+ 
+    ^     v   ^     v
+    +<E<I<D</<E     E 
+      v       ^     v
+      /       I   V<4 
+      v       ^
+    W>D       D<W 
+      v       ^
+2>V   I       / 
+^     v       ^
+E     E>/>D>I>E>+ 
+^     v   ^     v
++<I<D<+   W     D 
+                v
+            V   I 
+            ^   v
+            3<E<+ 
+END
 );
