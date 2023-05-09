@@ -75,14 +75,14 @@ class Panel is export {
 
 ### CharacterStuff
 class Character does Descriptable is export {
-  has Int $.atk is required;
-  has Int $.def is required;
-  has Int $.evd is required;
-  has Int $.rec is required;
-  has Int $.hp  is required;
+  has  Int $.atk is required;
+  has  Int $.def is required;
+  has  Int $.evd is required;
+  has  Int $.rec is required;
+  has UInt $.hp  is required;
 
-  has Int $.mov        = 0;
-  has Int $.card-limit = 3;
+  has  Int $.mov         = 0;
+  has UInt $.card-limit  = 3;
 
   has CardPreset $.hyper is required;
 
@@ -91,28 +91,28 @@ class Character does Descriptable is export {
 
 ### PlayerStuff
 class Player is export {
-  has Int  $.number is required;
+  has UInt $.number is required;
   has Game $.board  is required;
   
   has Supply $.log = $!board.log.sup({ .<player> === self });
 
-  has Int $.level  is rw = 1;
-  has Int $.stars  is rw = 0;
-  has Int $.wins   is rw = 0;
+  has UInt $.level  is rw = 1;
+  has UInt $.stars  is rw = 0;
+  has UInt $.wins   is rw = 0;
 
   has Character $.char is required;
 
-  has Int $.hp  is rw = $!char.hp;
-  has Int $.rec is rw = $!char.rec;
+  has  Int $.hp  is rw = $!char.hp;
+  has  Int $.rec is rw = $!char.rec;
 
-  has Int $.max-hp is rw = $!char.hp;
+  has UInt $.max-hp is rw = $!char.hp;
 
-  has Int $.atk is rw = $!char.atk;
-  has Int $.def is rw = $!char.def;
-  has Int $.evd is rw = $!char.evd;
+  has  Int $.atk is rw = $!char.atk;
+  has  Int $.def is rw = $!char.def;
+  has  Int $.evd is rw = $!char.evd;
 
-  has Int $.mov        is rw = $!char.mov; 
-  has Int $.card-limit is rw = $!char.card-limit;
+  has  Int $.mov        is rw = $!char.mov; 
+  has UInt $.card-limit is rw = $!char.card-limit;
 
   has Panel $.position is rw = $!board.panels.grep({ $_.tags{"home$!number"} })[0];
 
@@ -163,29 +163,29 @@ class Player is export {
     # }
   }
 
-  method gain-stars(Int:D $amount where * >= 0) {
+  method gain-stars(UInt:D $amount) {
     $!stars += $amount;
   }
 
-  method lose-stars(Int:D $amount where * >= 0) {
+  method lose-stars(UInt:D $amount) {
     $!stars = max($!stars - $amount, 0);
   }
 
-  method heal(Int:D $amount = 1) {
+  method heal(UInt:D $amount = 1) {
     $!hp = min($!hp + $amount, max($!max-hp, $!hp));
   }
 
-  method hurt(Int:D $amount = 1) {
+  method hurt(UInt:D $amount = 1) {
     $!hp = max($!hp - $amount, 0);
   }
 
-  method draw(Int:D $times where * > 0 = 1) {
+  method draw(UInt:D $times where * > 0 = 1) {
     for ^$times {
       @!deck.push( $!board.draw-pile.pop ) if $!board.draw-pile;
     }
   }
 
-  method discard(Int:D $index) {
+  method discard(UInt:D $index) {
     my $card = @!deck.splice: $index, 1;
 
     $!board.discard-pile.push( $card ) unless $card.tags<deletable>;
@@ -202,7 +202,7 @@ class Player is export {
     $!rec = $!char.rec;
   }
 
-  method walk(Int:D $times is copy where * > 0 = 1) {
+  method walk(UInt:D $times is copy where * > 0 = 1) {
     $!position.players.unset(self);
 
     while $times <-> $steps-left {
@@ -220,7 +220,7 @@ class Player is export {
     $!position.action.(:player(self), :$!board);
   }
 
-  method ask-rolldice(Str:D $event = "DEFAULT", Int:D $dice-multiplier where * > 0 = 1 --> Int:D) {
+  method ask-rolldice(Str:D $event = "DEFAULT", UInt:D $dice-multiplier where * > 0 = 1 --> Int:D) {
     prompt "Enter to roll!";
 
     my $res = [+] $!dice-range.roll(%!dice-count{$event} * $dice-multiplier);
