@@ -140,7 +140,7 @@ our %panels is export = %(
   'I' => PanelPreset.new( :repr( colored('I', 'bold white') ), 
                           :name( "Ice" ), 
                           :description( "When stepping on it, mov does not decrease." ),
-                          :step( -> *%_ { $*steps-left++ })
+                          :step( -> :$steps-left! is rw, *%_ { $steps-left++ })
                         ),
   '1' => PanelPreset.new( :repr( colored('1', 'bold white') ), 
                           :name( "Home[1]" ), 

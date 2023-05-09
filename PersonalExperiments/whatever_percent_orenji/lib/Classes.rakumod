@@ -205,15 +205,15 @@ class Player is export {
   method walk(Int:D $times is copy where * > 0 = 1) {
     $!position.players.unset(self);
 
-    while $times <-> $*steps-left {
+    while $times <-> $steps-left {
       my @next = $!direction %% 2 ?? $!position.next !! $!position.previous;
 
       last unless @next;
 
       $!position = @next == 1 ?? @next[0] !! @next[self.ask-nextpanel(@next)];
       
-      $!position.step.(:player(self), :$!board);
-      $*steps-left--;
+      $!position.step.(:player(self), :$!board, :$steps-left);
+      $steps-left--;
     }
 
     $!position.players.set(self);
