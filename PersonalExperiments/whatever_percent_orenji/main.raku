@@ -45,10 +45,10 @@ my $board = Game.new( :board(@panels),
                     );
 
 my @players = gather { 
-  take Player.new( :number( $_ + 1 ), 
-                   :board( $board ),
+  take Player.new( :number( $_ + 1 ),
+                   :$board,
                    :$char, 
-                   :dice-range( 0..40 ),
+#                   :dice-range( ^40 ),
                    :stars( 500 ),
                  ) for ^4 };
 
@@ -77,9 +77,7 @@ say "\n====[ Player ]====";
 
 %cards{'Flip Out'}.actions<Boost>(:$player, :$board);
 
-$player.walk(1);
-$player.walk(3);
-$player.walk(1);
+$player.do-move;
 
 # say "Stars: {$_.stars}" for $board.players;
 say "Stars: {$player.stars}";

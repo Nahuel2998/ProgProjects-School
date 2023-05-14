@@ -21,7 +21,7 @@ v   v       ^   ^
       ->W>+
 END
   'Sweet Heaven' => q:to/END/,
-    V     V<+ 
+    V     V<+
     v       ^
     M       D<-<+ 
     v       v   ^
@@ -44,7 +44,7 @@ V>M>-   E>3>+>D>->+
         +>V     V 
 END
   'Clover' => q:to/END/,
-    /<+<E<D 
+    /<+<E<D
     v     ^
     1     M 
     v     ^
@@ -63,7 +63,7 @@ v   v       ^
       D>E>+>/ 
 END
   'Training Program' => q:to/END/,
-  M<-<+<M 
+  M<-<+<M
   v     ^
   D     _<+<4<D<M 
   v     v   ^   ^
@@ -82,7 +82,7 @@ M>D>2>+>_     D
         M>+>->M 
 END
   'Witch Forest' => q:to/END/,
-                  V 
+                  V
                   ^
             M>d>/>* 
             ^
@@ -107,7 +107,7 @@ W   e<m<-<W   E
         D>3>W>+ 
 END
   'Sealed Archive' => q:to/END/,
-  D<E<W       W<+<D 
+  D<E<W       W<+<D
   v   ^       v   ^
 D<-   +   +<D<4   -<D 
 v     ^   v   ^     ^
@@ -130,7 +130,7 @@ D>-   2>D>+   +   ->D
   D>+>W       W>E>D 
 END
   'Christmas Miracle' => q:to/END/,
-        +<W<+ 
+        +<W<+
         v   ^
         E   E 
         v   ^

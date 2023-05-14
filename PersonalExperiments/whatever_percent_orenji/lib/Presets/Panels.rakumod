@@ -23,7 +23,7 @@ our %panels is export = %(
                           :action( 
                             -> :$player!, :$board!, *%_ {
                               $player.warp-to: $board.panels.grep({ $_.tags<warpy> && $_ !=== $player.position }).roll;
-                              # TODO: Make the player roll the dice to move
+                              $player.do-move;
                             } ),
                           :tags( <warpy>.Set ),
                         ),
@@ -33,7 +33,7 @@ our %panels is export = %(
                           :action( 
                             -> :$player!, :$board!, *%_ {
                               $player.warp-to: $board.panels.grep({ $_.tags<warpy> && $_ !=== $player.position }).roll;
-                              # TODO: Make the player roll the dice to move, twice
+                              $player.do-move(2);
                             } ),
                           :tags( <warpy>.Set ),
                         ),
@@ -41,16 +41,16 @@ our %panels is export = %(
                           :name( "Move" ), 
                           :description( "Player rolls the dice to move again." ),
                           :action( 
-                            -> :$player!, :$board!, *%_ {
-                              # TODO: Make the player roll the dice to move
+                            -> :$player!, *%_ {
+                              $player.do-move;
                             } ),
                         ),
   'm' => PanelPreset.new( :repr( colored('M', 'bold underline cyan') ), 
                           :name( "Move (x2)" ), 
                           :description( "Player rolls two dice to move again." ),
                           :action( 
-                            -> :$player!, :$board!, *%_ {
-                              # TODO: Make the player roll the dice to move, twice
+                            -> :$player!, *%_ {
+                              $player.do-move(2);
                             } ),
                         ),
   'D' => PanelPreset.new( :repr( colored('D', 'bold green') ), 
@@ -76,7 +76,7 @@ our %panels is export = %(
                           :description( "Gives the player diceroll * level(max 3) stars." ),
                           :action( 
                             -> :$player!, :$board!, *%_ {
-                              my $amount = $player.ask-rolldice('BONUS') * min($player.level, 3);
+                              my $amount = $player.ask-rolldice('BONUS', :prompt("Roll for bonus!")) * min($player.level, 3);
 
                               $player.gain-stars: $amount;
                               $board.log.(:event('BONUS_PANEL'), :$amount, :$player);
@@ -88,7 +88,7 @@ our %panels is export = %(
                           :description( "Gives the player diceroll * level(max 3) stars. Player rolls twice the dice." ),
                           :action( 
                             -> :$player!, :$board!, *%_ {
-                              my $amount = $player.ask-rolldice('BONUS', 2) * min($player.level, 3);
+                              my $amount = $player.ask-rolldice('BONUS', 2, :prompt("Roll for bonus!")) * min($player.level, 3);
 
                               $player.gain-stars: $amount;
                               $board.log.(:event('BONUS_PANEL'), :$amount, :$player);
@@ -100,7 +100,7 @@ our %panels is export = %(
                           :description( "Drops diceroll * level player stars." ),
                           :action(
                             -> :$player!, :$board!, *%_ {
-                              my $amount = $player.ask-rolldice('DROP') * $player.level;
+                              my $amount = $player.ask-rolldice('DROP', :prompt("Roll for drop!")) * $player.level;
 
                               $player.lose-stars: $amount;
                               $board.log.(:event('DROP_PANEL'), :$amount, :$player);
@@ -112,7 +112,7 @@ our %panels is export = %(
                           :description( "Drops diceroll * level player stars. Player rolls twice the dice." ),
                           :action(
                             -> :$player!, :$board!, *%_ {
-                              my $amount = $player.ask-rolldice('DROP', 2) * $player.level;
+                              my $amount = $player.ask-rolldice('DROP', 2, :prompt("Roll for drop!")) * $player.level;
 
                               $player.lose-stars: $amount;
                               $board.log.(:event('DROP_PANEL'), :$amount, :$player);

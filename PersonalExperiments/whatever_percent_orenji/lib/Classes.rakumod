@@ -1,6 +1,8 @@
 #! /usr/bin/env raku
 
 use Log;
+use Misc;
+use Terminal::ANSIColor;
 
 ### Class declarations
 class Card   { ... }
@@ -16,7 +18,7 @@ role Descriptable is export {
 
 #| Executed at the start of every turn.
 class Passive does Descriptable is export {
-  has Code $.action is required; 
+  has Code $.action is required;
   has Int  $.max-stack;
   has Int  $.stack = 1;
 }
@@ -49,7 +51,7 @@ class Card is export {
 ### PanelStuff
 class PanelPreset does Descriptable is export {
   has Str  $.repr   is required; # Character representation
-  has Code $.action = -> *%_ { }; 
+  has Code $.action = -> *%_ { };
   has Code $.step   = -> *%_ { };
 
   has Set  $.tags .= new;
@@ -67,8 +69,13 @@ class Panel is export {
 
   method action {    $!preset.action  }
   method step   {    $!preset.step    }
-  method repr   { " {$!preset.repr} " }
   method tags   {    $!preset.tags    }
+
+  method repr(Bool :$no-color --> Str:D) {
+    my $repr = " {$!preset.repr} ";
+
+    $no-color ?? colored(colorstrip($repr), 'black') !! $repr
+  }
 
   has SetHash[Effect] $.effects .= new;
 }
@@ -93,7 +100,7 @@ class Character does Descriptable is export {
 class Player is export {
   has UInt $.number is required;
   has Game $.board  is required;
-  
+
   has Supply $.log = $!board.log.sup({ .<player> === self });
 
   has UInt $.level  is rw = 1;
@@ -111,7 +118,7 @@ class Player is export {
   has  Int $.def is rw = $!char.def;
   has  Int $.evd is rw = $!char.evd;
 
-  has  Int $.mov        is rw = $!char.mov; 
+  has  Int $.mov        is rw = $!char.mov;
   has UInt $.card-limit is rw = $!char.card-limit;
 
   has Panel $.position is rw = $!board.panels.grep({ $_.tags{"home$!number"} })[0];
@@ -120,16 +127,15 @@ class Player is export {
   has SetHash[Effect] $.effects .= new;
 
   has Range $.dice-range is rw = 1..6;
-  has %.dice-count is rw = %(
-    DEFAULT => 1,
-    BONUS   => 1,
-    DROP    => 1,
-    MOVE    => 1,
-    ATTACK  => 1,
-    DEFEND  => 1,
-    EVADE   => 1,
-    REVIVE  => 1,
-  );
+  has %.dice-count is rw = :1DEFAULT;
+#    DEFAULT => 1,
+#    BONUS   => 1,
+#    DROP    => 1,
+#    MOVE    => 1,
+#    ATTACK  => 1,
+#    DEFEND  => 1,
+#    EVADE   => 1,
+#    REVIVE  => 1,
   has Int   $.direction  is rw = 0; # Even number is forwards, odd is backwards
 
   method x(--> Int:D) { $!position.x }
@@ -144,16 +150,7 @@ class Player is export {
     $!card-limit = $!char.card-limit;
     $!max-hp     = $!char.hp;
     $!dice-range = 1..6;
-    %!dice-count = %(
-      DEFAULT => 1,
-      BONUS   => 1,
-      DROP    => 1,
-      MOVE    => 1,
-      ATTACK  => 1,
-      DEFEND  => 1,
-      EVADE   => 1,
-      REVIVE  => 1,
-    );
+    %!dice-count = :1DEFAULT;
     $!direction  = 0;
 
     # for $.effects.keys {
@@ -211,7 +208,7 @@ class Player is export {
       last unless @next;
 
       $!position = @next == 1 ?? @next[0] !! @next[self.ask-nextpanel(@next)];
-      
+
       $!position.step.(:player(self), :$!board, :$steps-left);
       $steps-left--;
     }
@@ -220,10 +217,17 @@ class Player is export {
     $!position.action.(:player(self), :$!board);
   }
 
-  method ask-rolldice(Str:D $event = "DEFAULT", UInt:D $dice-multiplier where * > 0 = 1 --> Int:D) {
-    prompt "Enter to roll!";
+  method do-move(UInt:D $dice-multiplier where * > 0 = 1) {
+    my $roll = self.ask-rolldice("MOVE", $dice-multiplier, :prompt("Roll to move!"));
+    $roll = normalize-roll( $roll + $!mov );
 
-    my $res = [+] $!dice-range.roll(%!dice-count{$event} * $dice-multiplier);
+    self.walk($roll);
+  }
+
+  method ask-rolldice(Str:D $event = "DEFAULT", UInt:D $dice-multiplier where * > 0 = 1, Str:D :$prompt = "Enter to roll!" --> UInt:D) {
+    prompt $prompt;
+
+    my $res = [+] $!dice-range.roll((%!dice-count{$event} // %!dice-count<DEFAULT>) * $dice-multiplier);
     say "Rolled: $res";
 
     $res
@@ -232,20 +236,20 @@ class Player is export {
   # TODO: Actually implement this
   method ask-pickcard(--> Int:D) {
     my Int $pick = prompt "Pick a card: ";
-    
+
     (^@!deck).pick
   }
 
   # FIXME: Make this more friendly?
   method ask-nextpanel(@next --> Int:D) {
-    my @choices = @next.map({ 
+    my @choices = @next.map({
       .x > self.x ?? "Right" !!
       .x < self.x ?? "Left"  !!
       .y > self.y ?? "Down"  !!
                      "Up"
     });
     my Int $pick = prompt "Where to go ($(@choices)): ";
-    
+
     $pick.Int
   }
 
@@ -260,15 +264,19 @@ class Game is export {
   has @.players[4]   of Player;
   has @.board        is required;
   has $.board-str    is required; # FIXME: ugly
-  
+
   has Log $.log .= new;
 
   has @.draw-pile    of Card;
   has @.discard-pile of Card;
 
   has Int $.chapter = 1;
-  
+
   has SetHash[Effect] $.effects .= new;
 
   method panels { @!board.List.flat.grep({ $_ ~~ Panel }) }
+
+  method handle-chapter {
+
+  }
 }
