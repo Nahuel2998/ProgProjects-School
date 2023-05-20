@@ -13,7 +13,7 @@ use Data::Dumper;
 binmode STDOUT, ':utf8';
 
 if (@ARGV < 2) {
-  die 'yeah no';
+  say 'yeah no' and die;
 }
 
 my $wanttable = 0;
@@ -31,11 +31,11 @@ my %commands = (
 
 # TODO: +Maybe error handling of some sort?
 my $command = lc shift;
-$commands{$command}->();
+( $commands{$command} // (say 'pero que me estas contando tio' and die) )->();
 
 my $char = shift;
 my $url = "https://100orangejuice.fandom.com/wiki/$char";
-my $uri = URI->new($url);
+my $uri = URI->new($url) or say 'what who';
 
 # FIXME: =yeah later, works for now
 my $scraper = scraper {
@@ -50,7 +50,9 @@ my $table_scraper = scraper {
   };
 };
 
-my $res = ($wanttable ? $table_scraper : $scraper)->scrape($uri);
+my $res = eval { ($wanttable ? $table_scraper : $scraper)->scrape($uri) };
+
+say 'what who' and die if $@;
 
 if ($wanttable) {
   # This is ugly as fuck but it works anyway
