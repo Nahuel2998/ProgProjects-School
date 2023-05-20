@@ -32,10 +32,12 @@ class Effect is Passive is export {
 enum CardType is export <Battle Boost Event Gift Trap>;
 
 class CardPreset does Descriptable is export {
-  has Int $.star-cost is required;
-  has Int $.level-req is required;
-  has     %.actions   of Code is required;
-  has Set $.tags .= new; # Card-specific tags. Example: pudding, sweet
+  has UInt $.star-cost is required;
+  has UInt $.level-req is required;
+  has Code $.action    is required;
+  has Set  $.tags .= new; # Card-specific tags. Example: pudding, sweet
+
+  has CardType $.type  is required;
 }
 
 class Card is export {
@@ -44,8 +46,9 @@ class Card is export {
 
   method star-cost { $!preset.star-cost }
   method level-req { $!preset.level-req }
-  method actions   { $!preset.actions   }
+  method action    { $!preset.action    }
   method tags      { $!preset.tags      }
+  method type      { $!preset.type      }
 }
 
 ### PanelStuff

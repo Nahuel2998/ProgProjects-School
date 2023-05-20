@@ -12,11 +12,10 @@ use Log;
 
 my $card-preset = CardPreset.new( :name( "Hola" ), 
                                   :description( "yes" ), 
-                                  :star-cost( 4 ), 
+                                  :star-cost( 4 ),
                                   :level-req( 2 ),
-                                  :actions( {
-                                    CardType::<Boost> => { say "hola" }
-                                  } )
+                                  :type( CardType::<Boost> ),
+                                  :action( { say "hola" } )
                                   :tags( <pudding sweet>.Set ),
                                 );
 
@@ -75,7 +74,7 @@ say $board.board-str;
 
 say "\n====[ Player ]====";
 
-%cards{'Flip Out'}.actions<Boost>(:$player, :$board);
+%cards{'Flip Out'}.action(:$player, :$board);
 
 $player.do-move;
 
