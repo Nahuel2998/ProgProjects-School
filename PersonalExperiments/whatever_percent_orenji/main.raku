@@ -1,20 +1,22 @@
 #! /usr/bin/env raku
+use v6.d;
 
 use lib $*PROGRAM.sibling('lib');
-use lib $*PROGRAM.sibling('lib/Presets');
+use lib $*PROGRAM.sibling('lib/Preset');
 use lib $*PROGRAM.sibling('lib/Util');
 use Classes;
-use Panels;
-use BoardBuilder;
-use Boards;
-use Cards;
-use Log;
+use Presetables;
+use Preset::Panels;
+use Preset::Boards;
+use Preset::Cards;
+use Util::BoardBuilder;
+use Util::Log;
 
 my $card-preset = CardPreset.new( :name( "Hola" ), 
                                   :description( "yes" ), 
                                   :star-cost( 4 ),
                                   :level-req( 2 ),
-                                  :type( CardType::<Boost> ),
+                                  :type( CardType::Boost ),
                                   :action( { say "hola" } )
                                   :tags( <pudding sweet>.Set ),
                                 );

@@ -1,4 +1,5 @@
 #! /usr/bin/env raku
+use v6.d;
 
 our %boards is export = %(
   'Pudding Chase' => q:to/END/,

@@ -1,6 +1,7 @@
 #! /usr/bin/env raku
+use v6.d;
 
-use Classes;
+use Presetables;
 
 our %cards is export = %(
   "Pudding" => 
@@ -8,7 +9,7 @@ our %cards is export = %(
                     :description( "Fully restore HP." ), 
                     :level-req( 4 ),
                     :star-cost( 0 ),
-                    :type( CardType::<Boost> ),
+                    :type( CardType::Boost ),
                     :action(
                       -> :$player!, *%_ {
                         $player.heal($player.max-hp);
@@ -20,10 +21,10 @@ our %cards is export = %(
                     :description( "Heals 1 HP." ), 
                     :level-req( 1 ),
                     :star-cost( 0 ),
-                    :type( CardType::<Boost> ),
+                    :type( CardType::Boost ),
                     :action(
                       -> :$player!, *%_ {
-                        $player.heal(1);
+                        $player.heal( 1 );
                       }
                     ),
                   ),
@@ -44,10 +45,10 @@ our %cards is export = %(
                     :description( "Draw 2 cards." ), 
                     :level-req( 2 ),
                     :star-cost( 10 ),
-                    :type( CardType::<Boost> ),
+                    :type( CardType::Boost ),
                     :action(
                       -> :$player!, *%_ {
-                        $player.draw(2);
+                        $player.draw( 2 );
                       }
                     ),
                   ),
@@ -56,7 +57,7 @@ our %cards is export = %(
                     :description( "Stock effect.\nThe next bonus panel gives you twice as many stars." ), 
                     :level-req( 1 ),
                     :star-cost( 0 ),
-                    :type( CardType::<Boost> ),
+                    :type( CardType::Boost ),
                     :action(
                       -> :$player!, *%_ {
                         # TODO: Effect representation for the gui and stuff
@@ -71,7 +72,7 @@ our %cards is export = %(
                     :description( "Stock effect.\nNext time you land on a drop panel, the player(s) with the highest number of stars will lose the same number of stars as you." ), 
                     :level-req( 1 ),
                     :star-cost( 0 ),
-                    :type( CardType::<Boost> ),
+                    :type( CardType::Boost ),
                     :action(
                       -> :$player!, :$board!, *%_ {
                         # TODO: Effect representation for the gui and stuff

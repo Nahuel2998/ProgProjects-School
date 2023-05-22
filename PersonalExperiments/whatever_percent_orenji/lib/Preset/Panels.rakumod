@@ -1,6 +1,7 @@
 #! /usr/bin/env raku
+use v6.d;
 
-use Classes;
+use Presetables;
 use Terminal::ANSIColor;
 
 our %panels is export = %(

@@ -1,7 +1,10 @@
 #! /usr/bin/env raku
+use v6.d;
 
-use Log;
-use Misc;
+use General;
+use Presetables;
+use Util::Log;
+use Util::Misc;
 use Terminal::ANSIColor;
 
 ### Class declarations
@@ -10,36 +13,7 @@ class Panel  { ... }
 class Player { ... }
 class Game   { ... }
 
-### General roles/classes
-role Descriptable is export {
-  has Str $.name        is required;
-  has Str $.description is required;
-}
-
-#| Executed at the start of every turn.
-class Passive does Descriptable is export {
-  has Code $.action is required;
-  has Int  $.max-stack;
-  has Int  $.stack = 1;
-}
-
-#| A passive with a limited amount of uses.
-class Effect is Passive is export {
-  has Int $.uses-left is rw;
-}
-
 ### CardStuff
-enum CardType is export <Battle Boost Event Gift Trap>;
-
-class CardPreset does Descriptable is export {
-  has UInt $.star-cost is required;
-  has UInt $.level-req is required;
-  has Code $.action    is required;
-  has Set  $.tags .= new; # Card-specific tags. Example: pudding, sweet
-
-  has CardType $.type  is required;
-}
-
 class Card is export {
   has CardPreset $.preset is required;
   has %.flags is rw;  # Card state
@@ -52,14 +26,6 @@ class Card is export {
 }
 
 ### PanelStuff
-class PanelPreset does Descriptable is export {
-  has Str  $.repr   is required; # Character representation
-  has Code $.action = -> *%_ { };
-  has Code $.step   = -> *%_ { };
-
-  has Set  $.tags .= new;
-}
-
 class Panel is export {
   has Int $.x is required;
   has Int $.y is required;
@@ -70,9 +36,9 @@ class Panel is export {
 
   has SetHash[Player] $.players .= new;
 
-  method action {    $!preset.action  }
-  method step   {    $!preset.step    }
-  method tags   {    $!preset.tags    }
+  method action { $!preset.action }
+  method step   { $!preset.step   }
+  method tags   { $!preset.tags   }
 
   method repr(Bool :$no-color --> Str:D) {
     my $repr = " {$!preset.repr} ";
@@ -81,22 +47,6 @@ class Panel is export {
   }
 
   has SetHash[Effect] $.effects .= new;
-}
-
-### CharacterStuff
-class Character does Descriptable is export {
-  has  Int $.atk is required;
-  has  Int $.def is required;
-  has  Int $.evd is required;
-  has  Int $.rec is required;
-  has UInt $.hp  is required;
-
-  has  Int $.mov         = 0;
-  has UInt $.card-limit  = 3;
-
-  has CardPreset $.hyper is required;
-
-  has Passive $.passive;
 }
 
 ### PlayerStuff
@@ -230,7 +180,7 @@ class Player is export {
   method ask-rolldice(Str:D $event = "DEFAULT", UInt:D $dice-multiplier where * > 0 = 1, Str:D :$prompt = "Enter to roll!" --> UInt:D) {
     prompt $prompt;
 
-    my $res = [+] $!dice-range.roll((%!dice-count{$event} // %!dice-count<DEFAULT>) * $dice-multiplier);
+    my $res = [+] $!dice-range.roll( (%!dice-count{$event} // %!dice-count<DEFAULT>) * $dice-multiplier );
     say "Rolled: $res";
 
     $res

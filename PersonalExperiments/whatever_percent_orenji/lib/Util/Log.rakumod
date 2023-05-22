@@ -1,4 +1,5 @@
 #! /usr/bin/env raku
+use v6.d;
 
 enum GameEvent is export <BONUS_PANEL DROP_PANEL DRAW_PANEL CARD_USED BATTLE_START BATTLE_END TURN_START TURN_END>;
 

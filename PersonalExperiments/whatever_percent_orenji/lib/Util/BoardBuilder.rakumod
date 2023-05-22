@@ -1,7 +1,8 @@
 #! /usr/bin/env raku
+use v6.d;
 
 use Classes;
-use Panels;
+use Preset::Panels;
 use Terminal::ANSIColor;
 
 sub make-board(Str $board-str) is export {
